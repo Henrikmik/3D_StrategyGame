@@ -5,7 +5,7 @@ using UnityEngine;
 public class GridCell : MonoBehaviour
 {
     private int posX;
-        private int posY;
+    private int posY;
 
     // Saves a reference to the gameobject that gets placed on this cell
     public GameObject objectInThisGridSpace = null;

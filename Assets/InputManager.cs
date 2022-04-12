@@ -19,11 +19,11 @@ public class InputManager : MonoBehaviour
         GridCell cellMouseIsOver = IsMouseOverAGridSpace();
         if (cellMouseIsOver != null)
         {
-            if (Input.GetMouseButton(0))
-            {
-                cellMouseIsOver.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
-                // Debug.Log(cellMouseIsOver.isOccupied);
-            }
+            cellMouseIsOver.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            Debug.Log("HI");
         }
     }
 
@@ -34,7 +34,7 @@ public class InputManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f, whatIsAGridLayer))
         {
-            return hitInfo.transform.GetComponent<GridCell>();          
+            return hitInfo.transform.GetComponent<GridCell>();
         }
         else
         {

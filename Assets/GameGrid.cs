@@ -35,7 +35,7 @@ public class GameGrid : MonoBehaviour
             for (int x = 0; x < width; x++)
             {
                 // Create a new GridSpace object for each cell
-                gameGrid[x, y] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, y * gridSpaceSize), Quaternion.identity);
+                gameGrid[x, y] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, y * gridSpaceSize), Quaternion.identity);
                 gameGrid[x, y].GetComponent<GridCell>().SetPosistion(x, y);
                 gameGrid[x, y].transform.parent = transform;
                 gameGrid[x, y].gameObject.name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")";
