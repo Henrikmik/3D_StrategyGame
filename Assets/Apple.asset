@@ -16,7 +16,10 @@ MonoBehaviour:
   description: Once he was a happy little apple, but the garlics made fun of him,
     so he decided to fight for his nation.
   ability: 
-  artwork: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  prefab: {fileID: 1580130288240408480, guid: e00b9c219179e6342a1be01a62f3c178, type: 3}
+  visual: {fileID: 0}
+  width: 0
+  height: 0
   attack: 2
   health: 1
   level: 1

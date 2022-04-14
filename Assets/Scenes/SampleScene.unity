@@ -206,6 +206,7 @@ MonoBehaviour:
     m_Bits: 256
   testTransform: {fileID: 4478137891523396087, guid: b3b77ca658fd6724089033e5234a7c83,
     type: 3}
+  unit: {fileID: 11400000, guid: 605101172eda60343b415c36cda499c0, type: 2}
   placementVec: {x: 0, y: 0, z: 0}
 --- !u!4 &486509039
 Transform:

@@ -17,6 +17,6 @@ public class UnitDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(apple.description);
+        //Debug.Log(apple.description);
     }
 }

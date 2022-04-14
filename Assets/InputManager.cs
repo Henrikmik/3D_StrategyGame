@@ -5,8 +5,11 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     GameGrid gameGrid;
+
     [SerializeField] private LayerMask whatIsAGridLayer;
     [SerializeField] private Transform testTransform;
+    [SerializeField] private Unit unit;
+
     private float placementPosx;
     private float placementPosz;
     public Vector3 placementVec;
@@ -29,7 +32,7 @@ public class InputManager : MonoBehaviour
                 if (cellMouseIsOver.CanBuild())
                 {
                     placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 1f, cellMouseIsOver.GetComponent<Transform>().position.z);
-                    Transform builtTransform = Instantiate(testTransform, placementVec, Quaternion.identity);
+                    Transform builtTransform = Instantiate(unit.prefab, placementVec, Quaternion.identity);
                     cellMouseIsOver.SetTransform(builtTransform);
                     //cellMouseIsOver.isOccupied = true;
                 }
