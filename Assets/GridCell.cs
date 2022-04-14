@@ -6,6 +6,7 @@ public class GridCell : MonoBehaviour
 {
     private int posX;
     private int posY;
+    private Transform transforM;
 
     // Saves a reference to the gameobject that gets placed on this cell
     public GameObject objectInThisGridSpace = null;
@@ -24,5 +25,24 @@ public class GridCell : MonoBehaviour
     public Vector2Int GetPosition()
     {
         return new Vector2Int(posX, posY);
+    }
+
+    //
+    public void SetTransform(Transform transform)
+    {
+        this.transforM = transform;
+    }
+
+    // Sets the variable transform to null
+
+    public void ClearTransform()
+    {
+        transforM = null;
+    }
+
+    // Returns transform if it is zero
+    public bool CanBuild()
+    {
+        return transforM == null;
     }
 }

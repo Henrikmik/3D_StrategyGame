@@ -6,6 +6,10 @@ public class InputManager : MonoBehaviour
 {
     GameGrid gameGrid;
     [SerializeField] private LayerMask whatIsAGridLayer;
+    [SerializeField] private Transform testTransform;
+    private float placementPosx;
+    private float placementPosz;
+    public Vector3 placementVec;
 
     // Start is called before the first frame update
     void Start()
@@ -19,11 +23,30 @@ public class InputManager : MonoBehaviour
         GridCell cellMouseIsOver = IsMouseOverAGridSpace();
         if (cellMouseIsOver != null)
         {
-            cellMouseIsOver.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
+            //    cellMouseIsOver.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (cellMouseIsOver.CanBuild())
+                {
+                    placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 1f, cellMouseIsOver.GetComponent<Transform>().position.z);
+                    Transform builtTransform = Instantiate(testTransform, placementVec, Quaternion.identity);
+                    cellMouseIsOver.SetTransform(builtTransform);
+                    //cellMouseIsOver.isOccupied = true;
+                }
+                else
+                {
+                    Debug.Log("Cannot build atm! ");
+                }
+            }
         }
         if (Input.GetKeyDown(KeyCode.U))
         {
-            Debug.Log("HI");
+            Debug.Log(cellMouseIsOver.GetComponent<Transform>().position.x);
+        }
+        
+        else
+        {
+
         }
     }
 
@@ -39,6 +62,21 @@ public class InputManager : MonoBehaviour
         else
         {
             return null;
+        }
+    }
+
+    //public static Vector3 GetMouseWorldPosition() => InputManager.GetMouseWorldPosition_Instance();
+
+    public Vector3 GetMouseWorldPosition_Instance()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 100f, whatIsAGridLayer))
+        {
+            return raycastHit.point;
+        }
+        else
+        {
+            return Vector3.zero;
         }
     }
 }
