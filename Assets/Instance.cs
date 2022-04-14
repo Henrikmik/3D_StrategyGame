@@ -15,17 +15,4 @@ public class Instance : MonoBehaviour
     {
         
     }
-
-    public Vector3 GetMouseWorldPosition_Instance()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, default))
-        {
-            return raycastHit.point;
-        }
-        else
-        {
-            return Vector3.zero;
-        }
-    }
 }
