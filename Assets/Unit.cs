@@ -17,4 +17,24 @@ public class Unit : ScriptableObject
     public int attack;
     public int health;
     public int level;
+
+    public List<Vector2Int> GetGridPositionList(Vector2Int offset)
+    {
+        List<Vector2Int> gridPositionList = new List<Vector2Int>();
+        //switch (dir)
+        {
+            //default:
+            //case Dir.Down:
+            //case Dir.Up:
+                for (int x = 0; x < width; x++)
+                {
+                    for (int y = 0; y < width; y++)
+                    {
+                        gridPositionList.Add(offset + new Vector2Int(x, y));
+                    }
+                }
+                //break;
+        }
+        return gridPositionList;
+    }
 }
