@@ -14,8 +14,6 @@ public class InputManager : MonoBehaviour
 
     private Unit.Dir dir = Unit.Dir.Down;
 
-    private float placementPosx;
-    private float placementPosz;
     public Vector3 placementVec;
 
     // Start is called before the first frame update
@@ -122,4 +120,6 @@ public class InputManager : MonoBehaviour
             return Vector3.zero;
         }
     }
+
+
 }

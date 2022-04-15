@@ -17,6 +17,7 @@ public class Unit : ScriptableObject
     public int attack;
     public int health;
     public int level;
+    public int cost;
 
     // Gets the next Direction
     public static Dir GetNextDir(Dir dir)
