@@ -6,7 +6,7 @@ public class GridCell : MonoBehaviour
 {
     private int posX;
     private int posY;
-    private Transform transforM;
+    private PlacedObject placedObject;
 
     // Saves a reference to the gameobject that gets placed on this cell
     public GameObject objectInThisGridSpace = null;
@@ -28,21 +28,27 @@ public class GridCell : MonoBehaviour
     }
 
     //
-    public void SetTransform(Transform transform)
+    public void SetPlacedObject(PlacedObject placedObject)
     {
-        this.transforM = transform;
+        this.placedObject = placedObject;
+    }
+
+    //
+    public PlacedObject GetPlacedObject()
+    {
+        return placedObject;
     }
 
     // Sets the variable transform to null
 
     public void ClearTransform()
     {
-        transforM = null;
+        placedObject = null;
     }
 
     // Returns transform if it is zero
     public bool CanBuild()
     {
-        return transforM == null;
+        return placedObject == null;
     }
 }

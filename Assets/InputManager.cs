@@ -5,10 +5,14 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     GameGrid gameGrid;
+    GridCell gridCell;
 
     [SerializeField] private LayerMask whatIsAGridLayer;
     [SerializeField] private Transform testTransform;
-    [SerializeField] private Unit unit;
+    [SerializeField] private List<Unit> unitList;
+    private Unit unit;
+
+    private Unit.Dir dir = Unit.Dir.Down;
 
     private float placementPosx;
     private float placementPosz;
@@ -20,20 +24,35 @@ public class InputManager : MonoBehaviour
         gameGrid = FindObjectOfType<GameGrid>();
     }
 
+    private void Awake()
+    {
+        unit = unitList[0];
+    }
+
     // Update is called once per frame
     void Update()
     {
         GridCell cellMouseIsOver = IsMouseOverAGridSpace();
-        if (cellMouseIsOver != null)
+
+        if (Input.GetMouseButtonDown(0))
         {
             //    cellMouseIsOver.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
-            if (Input.GetMouseButtonDown(0))
+            if (cellMouseIsOver != null)
             {
+                int xList = (int)cellMouseIsOver.GetComponent<Transform>().position.x;
+                int zList = (int)cellMouseIsOver.GetComponent<Transform>().position.z;
+                List<Vector2Int> gridPositionList = unit.GetGridPositionList(new Vector2Int(xList, zList), dir);
+
                 if (cellMouseIsOver.CanBuild())
                 {
                     placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 1f, cellMouseIsOver.GetComponent<Transform>().position.z);
-                    Transform builtTransform = Instantiate(unit.prefab, placementVec, Quaternion.identity);
-                    cellMouseIsOver.SetTransform(builtTransform);
+                    PlacedObject placedObject = PlacedObject.Create(placementVec, new Vector2Int(xList, zList), dir, unit);
+
+                    //foreach (Vector2Int gridPosition in gridPositionList)
+                    //{
+                    //    gridCell.GetPosition(gridPosition.x, gridPosition.y).SetTransform(builtTransform);
+                    //}
+                    cellMouseIsOver.SetPlacedObject(placedObject);
                     //cellMouseIsOver.isOccupied = true;
                 }
                 else
@@ -42,15 +61,36 @@ public class InputManager : MonoBehaviour
                 }
             }
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (cellMouseIsOver != null)
+            {
+                GridCell gridCell = cellMouseIsOver;
+                PlacedObject placedObject = gridCell.GetPlacedObject();
+                if (placedObject != null)
+                {
+                    placedObject.DestroySelf();
+                }
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.U))
         {
             Debug.Log(cellMouseIsOver.GetComponent<Transform>().position.x);
         }
         
-        else
+        if (Input.GetKeyDown(KeyCode.R))
         {
-
+            dir = Unit.GetNextDir(dir);
+            Debug.Log("" + dir);
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { unit = unitList[0]; }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) { unit = unitList[1]; }
+        if (Input.GetKeyDown(KeyCode.Alpha3)) { unit = unitList[2]; }
+        if (Input.GetKeyDown(KeyCode.Alpha4)) { unit = unitList[3]; }
+        if (Input.GetKeyDown(KeyCode.Alpha5)) { unit = unitList[4]; }
     }
 
 
