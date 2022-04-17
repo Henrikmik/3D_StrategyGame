@@ -6,6 +6,7 @@ public class InputManager : MonoBehaviour
 {
     GameGrid gameGrid;
     GridCell gridCell;
+    public Camera mainCamera;
 
     [SerializeField] private LayerMask whatIsAGridLayer;
     [SerializeField] private Transform testTransform;
@@ -15,6 +16,7 @@ public class InputManager : MonoBehaviour
     private Unit.Dir dir = Unit.Dir.Down;
 
     public Vector3 placementVec;
+    public GameObject FloatingTextPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +47,7 @@ public class InputManager : MonoBehaviour
                 {
                     placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 1f, cellMouseIsOver.GetComponent<Transform>().position.z);
                     PlacedObject placedObject = PlacedObject.Create(placementVec, new Vector2Int(xList, zList), dir, unit);
+                    ShowFloatingText(placedObject);
 
                     //foreach (Vector2Int gridPosition in gridPositionList)
                     //{
@@ -52,6 +55,7 @@ public class InputManager : MonoBehaviour
                     //}
                     cellMouseIsOver.SetPlacedObject(placedObject);
                     //cellMouseIsOver.isOccupied = true;
+
                 }
                 else
                 {
@@ -121,5 +125,12 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public void ShowFloatingText(PlacedObject placedObject)
+    {
+        float cameraAnglex = mainCamera.GetComponent<Transform>().rotation.x;
 
+        var myNewStats = Instantiate(FloatingTextPrefab, new Vector3 (placementVec.x, placementVec.y, placementVec.z), Quaternion.Euler(cameraAnglex, 0, 0), transform);
+        myNewStats.transform.parent = placedObject.transform;
+        myNewStats.GetComponent<TextMesh>().text = "Attack: " + unit.attack + "\n Health: " + unit.health;
+    }
 }
