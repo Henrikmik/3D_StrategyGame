@@ -427,6 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1dccb20b1a503c4f9ebd3868128165b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 963194227}
   whatIsAGridLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -439,6 +440,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 40e02121a99b8ba4c84422f4c0867084, type: 2}
   - {fileID: 11400000, guid: 4395a173d6d402c46b7eed2e4fc4086a, type: 2}
   placementVec: {x: 0, y: 0, z: 0}
+  FloatingTextPrefab: {fileID: 4204849103947666853, guid: d51795a3636726f4dbeef81ff854ff75,
+    type: 3}
 --- !u!4 &486509039
 Transform:
   m_ObjectHideFlags: 0
@@ -866,13 +869,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
-  m_LocalPosition: {x: 1, y: 5, z: 0}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 1, y: 5, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 70, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!1 &1031240273
 GameObject:
   m_ObjectHideFlags: 0

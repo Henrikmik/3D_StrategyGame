@@ -17,8 +17,9 @@ MonoBehaviour:
   ability: 
   prefab: {fileID: 4478137891523396087, guid: b3b77ca658fd6724089033e5234a7c83, type: 3}
   visual: {fileID: 0}
-  width: 2
-  height: 2
-  attack: 1
-  health: 1
+  width: 1
+  height: 1
+  attack: 4
+  health: 2
   level: 1
+  cost: 0
