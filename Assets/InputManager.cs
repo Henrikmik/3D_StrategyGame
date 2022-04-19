@@ -6,12 +6,16 @@ public class InputManager : MonoBehaviour
 {
     GameGrid gameGrid;
     GridCell gridCell;
+    public GameGridEnemy gameGridEnemyS;
     public Camera mainCamera;
+    public GameObject canvas;
 
     [SerializeField] private LayerMask whatIsAGridLayer;
     [SerializeField] private Transform testTransform;
     [SerializeField] private List<Unit> unitList;
+    [SerializeField] private List<Unit> enemyList;
     private Unit unit;
+    private Unit enemy;
 
     private Unit.Dir dir = Unit.Dir.Down;
 
@@ -77,10 +81,14 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            Debug.Log(cellMouseIsOver.GetComponent<Transform>().position.x);
-        }
+        //if (Input.GetKeyDown(KeyCode.U))
+        //{
+        //    gameGridEnemy.CreateEnemyGrid(0, 0);
+        //    //gameGridEnemy.CreateEnemyGrid(1, 0);
+        //    //gameGridEnemy.CreateEnemyGrid(0, 1);
+        //    //gameGridEnemy.CreateEnemyGrid(1, 1);
+        //    //Debug.Log(cellMouseIsOver.GetComponent<Transform>().position.x);
+        //}
         
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -129,8 +137,27 @@ public class InputManager : MonoBehaviour
     {
         float cameraAnglex = mainCamera.GetComponent<Transform>().rotation.x;
 
-        var myNewStats = Instantiate(FloatingTextPrefab, new Vector3 (placementVec.x, placementVec.y, placementVec.z), Quaternion.Euler(cameraAnglex, 0, 0), transform);
+        var myNewStats = Instantiate(FloatingTextPrefab, new Vector3 (placementVec.x, placementVec.y, placementVec.z), Quaternion.Euler(cameraAnglex + 20f, 0, 0), transform);
         myNewStats.transform.parent = placedObject.transform;
         myNewStats.GetComponent<TextMesh>().text = "Attack: " + unit.attack + "\n Health: " + unit.health;
     }
+
+    public void StartBattlePhase()
+    {
+        // Creates Enemy Grid
+        gameGridEnemyS.CreateEnemyGrid(0, 0);
+
+        // Sets Shop in Canvas inactive
+        canvas.transform.GetChild(0).gameObject.SetActive(false);
+
+        enemy = enemyList[0];
+        Vector2Int enemyPos = gameGridEnemyS.transform.GetChild(0).GetComponent<GridCell>().GetPosition();
+        Vector3 enemyPos3 = gameGridEnemyS.GetWorldPosFromGridPos(enemyPos);
+        Debug.Log(enemy);
+        //placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 1f, cellMouseIsOver.GetComponent<Transform>().position.z);
+        PlacedObject placedEnemy = PlacedObject.Create(new Vector3(1, 1, 1), new Vector2Int(1, 1), dir, enemy);
+        //ShowFloatingText(placedEnemy);
+
+    }
 }
+
