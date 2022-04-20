@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7219243717328452042}
   - component: {fileID: 7296597258184427424}
   - component: {fileID: 11183698887264548}
+  - component: {fileID: 4748456699641164635}
+  - component: {fileID: -4768133715601652801}
   m_Layer: 0
   m_Name: Garlic
   m_TagString: Untagged
@@ -95,3 +97,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4748456699641164635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161725906890836492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7bf25a07acfb44e8f0b332bfef1cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &-4768133715601652801
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161725906890836492}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8c7e977beb86b85448f133fd44ffc6eb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

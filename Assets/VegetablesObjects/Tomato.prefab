@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8863742536914199889}
   - component: {fileID: 799281706462158733}
   - component: {fileID: 4934249330644577452}
+  - component: {fileID: -1199218808021664504}
+  - component: {fileID: -5363111963860994035}
   m_Layer: 0
   m_Name: Tomato
   m_TagString: Untagged
@@ -95,3 +97,34 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-1199218808021664504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8764011379908446787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7bf25a07acfb44e8f0b332bfef1cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &-5363111963860994035
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8764011379908446787}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d528686a2b5e324fa67db3a5e5c8eb0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5b361af279c534ba59bca4785cf132, type: 3}
   m_Name: Garlic
   m_EditorClassIdentifier: 
-  name: 
+  name: Garlic
   description: 
   ability: 
   prefab: {fileID: 7105608279199947559, guid: 63d88e4d109fba84fb22a5db8b60cba9, type: 3}
