@@ -9,7 +9,7 @@ public class GridCell : MonoBehaviour
     private PlacedObject placedObject;
 
     // Saves a reference to the gameobject that gets placed on this cell
-    public GameObject objectInThisGridSpace = null;
+    public PlacedObject objectInThisGridSpace = null;
 
     // Saves if the grid space is occupied or not
     public bool isOccupied = false;
@@ -50,5 +50,12 @@ public class GridCell : MonoBehaviour
     public bool CanBuild()
     {
         return placedObject == null;
+    }
+
+    // Stores placed object in this grid cell
+    public void StoreObject(PlacedObject placedObject)
+    {
+        isOccupied = true;
+        objectInThisGridSpace = placedObject;
     }
 }

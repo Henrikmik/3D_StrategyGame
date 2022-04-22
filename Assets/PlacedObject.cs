@@ -17,12 +17,38 @@ public class PlacedObject : MonoBehaviour
         return placedObject;
     }
 
+
     private Unit unit;
     private Vector2Int origin;
     private Unit.Dir dir;
 
+    public int attack;
+    public int health;
+    public int level;
+    public string nameA;
+    public string ability;
+
     public void DestroySelf()
     {
         Destroy(gameObject);
+    }
+
+    public void GettingDamaged(int damage)
+    {
+        health += -damage;
+    }
+
+    public void Print()
+    {
+        Debug.Log(health);
+    }
+
+    public void SettingStats()
+    {
+        attack = unit.attack;
+        health = unit.health;
+        level = unit.level;
+        nameA = unit.name;
+        ability = unit.ability;
     }
 }

@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
     public GameObject FloatingTextPrefab;
 
     private bool battleOn = false;
+    private bool hallo = true;
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +56,7 @@ public class InputManager : MonoBehaviour
                     {
                         placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 1f, cellMouseIsOver.GetComponent<Transform>().position.z);
                         PlacedObject placedObject = PlacedObject.Create(placementVec, new Vector2Int(xList, zList), dir, unit);
-                        ShowFloatingText(placedObject, placementVec, unit);
+                        cellMouseIsOver.StoreObject(placedObject);
 
                         //foreach (Vector2Int gridPosition in gridPositionList)
                         //{
@@ -63,6 +64,8 @@ public class InputManager : MonoBehaviour
                         //}
                         cellMouseIsOver.SetPlacedObject(placedObject);
                         //cellMouseIsOver.isOccupied = true;
+                        placedObject.SettingStats();
+                        ShowFloatingText(placedObject, placementVec, unit);
 
                     }
                     else
@@ -85,15 +88,6 @@ public class InputManager : MonoBehaviour
                 }
             }
 
-            //if (Input.GetKeyDown(KeyCode.U))
-            //{
-            //    gameGridEnemy.CreateEnemyGrid(0, 0);
-            //    //gameGridEnemy.CreateEnemyGrid(1, 0);
-            //    //gameGridEnemy.CreateEnemyGrid(0, 1);
-            //    //gameGridEnemy.CreateEnemyGrid(1, 1);
-            //    //Debug.Log(cellMouseIsOver.GetComponent<Transform>().position.x);
-            //}
-
             if (Input.GetKeyDown(KeyCode.R))
             {
                 dir = Unit.GetNextDir(dir);
@@ -105,6 +99,43 @@ public class InputManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha3)) { unit = unitList[2]; }
             if (Input.GetKeyDown(KeyCode.Alpha4)) { unit = unitList[3]; }
             if (Input.GetKeyDown(KeyCode.Alpha5)) { unit = unitList[4]; }
+        }
+
+        if (battleOn == true)
+        {
+            GameObject gridCellTeam1 = GetGridCell(0);
+            GameObject gridCellEnemy1 = GetEnemyCell(0);
+
+            // Verloren
+            if (gridCellTeam1.GetComponent<GridCell>().isOccupied == false)
+            {
+                Debug.Log("Verloren");
+                Debug.Log(gridCellTeam1.GetComponent<GridCell>().GetPlacedObject());
+                hallo = false;
+            }
+
+            // Gewonnen
+            if (gridCellEnemy1.GetComponent<GridCell>().isOccupied && hallo == true)
+            {
+                Debug.Log("Gewonnen");
+                Debug.Log(gridCellEnemy1.GetComponent<GridCell>().GetPlacedObject());
+                hallo = false;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            if (GetCellObject(0) != null)
+            {
+                GetCellObject(0).GettingDamaged(2);
+                UpdateFloatingText(GetCellObject(0));
+                //Debug.Log(GetCellObject(0).health);
+                //Debug.Log(GetCellObject(0).health);
+                if (GetCellObject(0).health == 0)
+                {
+                    GetCellObject(0).DestroySelf();
+                }
+            }
         }
     }
 
@@ -145,9 +176,24 @@ public class InputManager : MonoBehaviour
 
         var myNewStats = Instantiate(FloatingTextPrefab, objectPos, Quaternion.Euler(cameraAnglex + 20f, cameraAngley - 20f, 0), transform);
         myNewStats.transform.parent = placedObject.transform;
-        myNewStats.GetComponent<TextMesh>().text = ue.name + "\n Attack: " + ue.attack + "\n Health: " + ue.health;
+        myNewStats.GetComponent<TextMesh>().text = myNewStats.GetComponentInParent<PlacedObject>().nameA + "\n Attack: " + myNewStats.GetComponentInParent<PlacedObject>().attack +"\n Health: " + myNewStats.GetComponentInParent<PlacedObject>().health;
     }
 
+    public void ShowFloatingTextEnemy(PlacedObject placedObject, Vector3 objectPos, Unit ue, int posInGrid)
+    {
+        float cameraAnglex = mainCamera.GetComponent<Transform>().rotation.x;
+        float cameraAngley = mainCamera.GetComponent<Transform>().rotation.y;
+        float cameraAnglez = mainCamera.GetComponent<Transform>().rotation.z;
+
+        var myNewStats = Instantiate(FloatingTextPrefab, objectPos, Quaternion.Euler(cameraAnglex + 20f, cameraAngley - 20f, 0), transform);
+        myNewStats.transform.parent = placedObject.transform;
+        myNewStats.GetComponent<TextMesh>().text = myNewStats.GetComponentInParent<PlacedObject>().nameA + "\n Attack: " + myNewStats.GetComponentInParent<PlacedObject>().attack + "\n Health: " + myNewStats.GetComponentInParent<PlacedObject>().health;
+    }
+
+    public void UpdateFloatingText(PlacedObject placedObject)
+    {
+        placedObject.GetComponentInChildren<TextMesh>().text = placedObject.GetComponentInParent<PlacedObject>().nameA + "\n Attack: " + placedObject.GetComponentInParent<PlacedObject>().attack + "\n Health: " + placedObject.GetComponentInParent<PlacedObject>().health;
+    }
     public void StartBattlePhase()
     {
         // Sets battle variable to true
@@ -169,7 +215,32 @@ public class InputManager : MonoBehaviour
 
         PlacedObject placedEnemy = PlacedObject.Create(enemyPos3, enemyPos, Unit.Dir.Down, enemy);
         enemyGridCell.SetPlacedObject(placedEnemy);
-        ShowFloatingText(placedEnemy, enemyPos3, enemy);
+        ShowFloatingTextEnemy(placedEnemy, enemyPos3, enemy, 0);
+        enemyGridCell.StoreObject(placedEnemy);
+    }
+
+    // Gets grid cell
+    public GameObject GetGridCell(int pos)
+    {
+        return gameGrid.transform.GetChild(pos).gameObject;
+    }
+
+    // Gets placed object in grid cell
+    public PlacedObject GetCellObject(int pos)
+    {
+        return GetGridCell(pos).GetComponent<GridCell>().GetPlacedObject();
+    }
+
+    // Gets enemy grid cell
+    public GameObject GetEnemyCell(int pos)
+    {
+        return gameGridEnemyS.transform.GetChild(pos).gameObject;
+    }
+
+    // Gets placed object in enemy grid cell
+    public PlacedObject GetEnemyObject(int pos)
+    {
+        return GetEnemyCell(pos).GetComponent<GridCell>().GetPlacedObject();
     }
 
     public void UpdateCanvas()
@@ -181,5 +252,11 @@ public class InputManager : MonoBehaviour
         // Sets start battle button active
         canvas.transform.GetChild(2).gameObject.SetActive(true);
     }
+
+    //private IEnumerator BattleRound()
+    //{
+    //    GetCellObject(0).gameObject
+    //    yield return new WaitForSeconds(5f);
+    //}
 }
 
