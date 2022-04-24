@@ -10,7 +10,7 @@ public class GameGridEnemy : MonoBehaviour
     private int gridOffset = 2;
 
     [SerializeField] private GameObject gridCellPrefab;
-    private GameObject[,] gameGridEnemy;
+    private GameObject gameGridEnemy;
 
     // Gets the grid position from world position
     public Vector2Int GetGridPosFromWorld(Vector3 worldPosition)
@@ -35,7 +35,7 @@ public class GameGridEnemy : MonoBehaviour
 
     public void CreateEnemyGrid(int x, int y)
     {
-        gameGridEnemy = new GameObject[height, width];
+        gameGridEnemy = new GameObject();
 
         if (gridCellPrefab == null)
         {
@@ -43,10 +43,10 @@ public class GameGridEnemy : MonoBehaviour
             //yield return null;
         }
 
-        gameGridEnemy[x, y] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, (y + gridOffset) * gridSpaceSize), Quaternion.identity); //ändern auf 3
-        gameGridEnemy[x, y].GetComponent<GridCell>().SetPosistion(x, y);
-        gameGridEnemy[x, y].transform.parent = transform;
-        gameGridEnemy[x, y].gameObject.name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")";
+        gameGridEnemy = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, (y + gridOffset) * gridSpaceSize), Quaternion.identity); //ändern auf 3
+        gameGridEnemy.GetComponent<GridCell>().SetPosistion(x, y);
+        gameGridEnemy.transform.parent = transform;
+        gameGridEnemy.gameObject.name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")";
 
         //yield return new WaitForSeconds(.1f);
     }

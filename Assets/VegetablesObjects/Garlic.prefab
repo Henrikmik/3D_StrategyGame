@@ -109,11 +109,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7bf25a07acfb44e8f0b332bfef1cc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: 2
-  health: 8
+  attack: 0
+  health: 0
   level: 0
-  nameA: Marvin
-  ability: Kann Nichts
+  nameA: 
+  ability: 
 --- !u!95 &-4768133715601652801
 Animator:
   serializedVersion: 3

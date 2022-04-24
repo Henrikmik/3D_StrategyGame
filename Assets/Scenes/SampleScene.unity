@@ -606,6 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1dccb20b1a503c4f9ebd3868128165b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleStart: {fileID: 1089988294}
   gameGridEnemyS: {fileID: 225948465}
   mainCamera: {fileID: 963194227}
   canvas: {fileID: 1748904019}
@@ -620,12 +621,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5ced0385fd444614eb830b1abc87d49d, type: 2}
   - {fileID: 11400000, guid: 40e02121a99b8ba4c84422f4c0867084, type: 2}
   - {fileID: 11400000, guid: 4395a173d6d402c46b7eed2e4fc4086a, type: 2}
-  enemyList:
   - {fileID: 11400000, guid: 2a91e2169e3293f4f91f85647330add2, type: 2}
   - {fileID: 11400000, guid: 89c30408611e3644db0f0768da17b82f, type: 2}
   placementVec: {x: 0, y: 0, z: 0}
   FloatingTextPrefab: {fileID: 4204849103947666853, guid: d51795a3636726f4dbeef81ff854ff75,
     type: 3}
+  roundover: 1
+  healthE: 10
+  healthU: 10
 --- !u!4 &486509039
 Transform:
   m_ObjectHideFlags: 0
@@ -1097,6 +1100,52 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 264}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1089988294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1089988296}
+  - component: {fileID: 1089988295}
+  m_Layer: 0
+  m_Name: BattleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1089988295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089988294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ac1610158a0b5b4c9e6ea25cf857e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputManager: {fileID: 486509038}
+  appleAnim: {fileID: 2134392886247568280, guid: e00b9c219179e6342a1be01a62f3c178,
+    type: 3}
+--- !u!4 &1089988296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089988294}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.1595123, y: 0.5968375, z: 1.6267586}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1102277988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,7 +1258,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1147259736}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 486509038}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: SetRoundoverFalse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1147259736
 MonoBehaviour:
   m_ObjectHideFlags: 0

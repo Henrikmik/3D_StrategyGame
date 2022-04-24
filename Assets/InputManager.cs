@@ -6,6 +6,8 @@ public class InputManager : MonoBehaviour
 {
     GameGrid gameGrid;
     GridCell gridCell;
+    BattleRound battleRound;
+    public GameObject battleStart;
     public GameGridEnemy gameGridEnemyS;
     public Camera mainCamera;
     public GameObject canvas;
@@ -13,9 +15,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private LayerMask whatIsAGridLayer;
     [SerializeField] private Transform testTransform;
     [SerializeField] private List<Unit> unitList;
-    [SerializeField] private List<Unit> enemyList;
     private Unit unit;
-    private Unit enemy;
 
     private Unit.Dir dir = Unit.Dir.Down;
 
@@ -23,7 +23,10 @@ public class InputManager : MonoBehaviour
     public GameObject FloatingTextPrefab;
 
     private bool battleOn = false;
-    private bool hallo = true;
+    public bool roundover = true;
+
+    public int healthE = 10;
+    public int healthU = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +68,7 @@ public class InputManager : MonoBehaviour
                         cellMouseIsOver.SetPlacedObject(placedObject);
                         //cellMouseIsOver.isOccupied = true;
                         placedObject.SettingStats();
-                        ShowFloatingText(placedObject, placementVec, unit);
+                        ShowFloatingText(placedObject, placementVec);
 
                     }
                     else
@@ -101,27 +104,7 @@ public class InputManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha5)) { unit = unitList[4]; }
         }
 
-        if (battleOn == true)
-        {
-            GameObject gridCellTeam1 = GetGridCell(0);
-            GameObject gridCellEnemy1 = GetEnemyCell(0);
 
-            // Verloren
-            if (gridCellTeam1.GetComponent<GridCell>().isOccupied == false)
-            {
-                Debug.Log("Verloren");
-                Debug.Log(gridCellTeam1.GetComponent<GridCell>().GetPlacedObject());
-                hallo = false;
-            }
-
-            // Gewonnen
-            if (gridCellEnemy1.GetComponent<GridCell>().isOccupied && hallo == true)
-            {
-                Debug.Log("Gewonnen");
-                Debug.Log(gridCellEnemy1.GetComponent<GridCell>().GetPlacedObject());
-                hallo = false;
-            }
-        }
 
         if (Input.GetKeyDown(KeyCode.U))
         {
@@ -168,7 +151,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public void ShowFloatingText(PlacedObject placedObject, Vector3 objectPos, Unit ue)
+    public void ShowFloatingText(PlacedObject placedObject, Vector3 objectPos)
     {
         float cameraAnglex = mainCamera.GetComponent<Transform>().rotation.x;
         float cameraAngley = mainCamera.GetComponent<Transform>().rotation.y;
@@ -179,16 +162,6 @@ public class InputManager : MonoBehaviour
         myNewStats.GetComponent<TextMesh>().text = myNewStats.GetComponentInParent<PlacedObject>().nameA + "\n Attack: " + myNewStats.GetComponentInParent<PlacedObject>().attack +"\n Health: " + myNewStats.GetComponentInParent<PlacedObject>().health;
     }
 
-    public void ShowFloatingTextEnemy(PlacedObject placedObject, Vector3 objectPos, Unit ue, int posInGrid)
-    {
-        float cameraAnglex = mainCamera.GetComponent<Transform>().rotation.x;
-        float cameraAngley = mainCamera.GetComponent<Transform>().rotation.y;
-        float cameraAnglez = mainCamera.GetComponent<Transform>().rotation.z;
-
-        var myNewStats = Instantiate(FloatingTextPrefab, objectPos, Quaternion.Euler(cameraAnglex + 20f, cameraAngley - 20f, 0), transform);
-        myNewStats.transform.parent = placedObject.transform;
-        myNewStats.GetComponent<TextMesh>().text = myNewStats.GetComponentInParent<PlacedObject>().nameA + "\n Attack: " + myNewStats.GetComponentInParent<PlacedObject>().attack + "\n Health: " + myNewStats.GetComponentInParent<PlacedObject>().health;
-    }
 
     public void UpdateFloatingText(PlacedObject placedObject)
     {
@@ -201,6 +174,8 @@ public class InputManager : MonoBehaviour
 
         // Creates Enemy Grid
         gameGridEnemyS.CreateEnemyGrid(0, 0);
+        gameGridEnemyS.CreateEnemyGrid(0, 1);
+        gameGridEnemyS.CreateEnemyGrid(0, 2);
 
         // Gets the first enemy grid cell
         GridCell enemyGridCell = gameGridEnemyS.transform.GetChild(0).GetComponent<GridCell>();
@@ -209,14 +184,15 @@ public class InputManager : MonoBehaviour
         UpdateCanvas();
 
         // Creates enemy on the first grid cell
-        enemy = enemyList[0];
+        Unit enemy = unitList[5];
         Vector2Int enemyPos = enemyGridCell.GetPosition();
         Vector3 enemyPos3 = new Vector3(enemyGridCell.transform.position.x, 1f, enemyGridCell.transform.position.z);
 
         PlacedObject placedEnemy = PlacedObject.Create(enemyPos3, enemyPos, Unit.Dir.Down, enemy);
         enemyGridCell.SetPlacedObject(placedEnemy);
-        ShowFloatingTextEnemy(placedEnemy, enemyPos3, enemy, 0);
         enemyGridCell.StoreObject(placedEnemy);
+        placedEnemy.SettingStats();
+        ShowFloatingText(placedEnemy, enemyPos3);
     }
 
     // Gets grid cell
@@ -243,6 +219,7 @@ public class InputManager : MonoBehaviour
         return GetEnemyCell(pos).GetComponent<GridCell>().GetPlacedObject();
     }
 
+    // Sets Canvas to Battle Canvas
     public void UpdateCanvas()
     {
         // Sets Shop in Canvas inactive
@@ -253,10 +230,49 @@ public class InputManager : MonoBehaviour
         canvas.transform.GetChild(2).gameObject.SetActive(true);
     }
 
-    //private IEnumerator BattleRound()
+    //public void BattleRound()
     //{
-    //    GetCellObject(0).gameObject
-    //    yield return new WaitForSeconds(5f);
+    //    PlacedObject enemyBattle = GetEnemyObject(0);
+    //    PlacedObject unitBattle = GetCellObject(0);
+    //    int healthE = 10;
+    //    int healthU = 10;
+
+    //    if (enemyBattle && unitBattle != null)
+    //    {
+    //        healthE = enemyBattle.health;
+    //        healthU = unitBattle.health;
+    //    }
+
+    //    //if (roundover == false)
+    //    //{
+    //    //    //while ((healthU > 0) && (healthE > 0))
+    //    //    //{
+    //    //    //    if (enemyBattle && unitBattle != null)
+    //    //    //    {
+    //    //    //        HealthManager(5.0f);
+    //    //    //    }
+    //    //    //}
+
+    //    //    //if (enemyBattle.health <= 0)
+    //    //    //{
+    //    //    //    Debug.Log("GEWONNEN");
+    //    //    //    //enemyBattle.DestroySelf();
+    //    //    //    roundover = true;
+    //    //    //}
+
+    //    //    //if (unitBattle.health <= 0)
+    //    //    //{
+    //    //    //    Debug.Log("VERLOREN");
+    //    //    //    //unitBattle.DestroySelf();
+    //    //    //    roundover = true;
+    //    //    //}
+    //    //}
     //}
+
+    public void SetRoundoverFalse()
+    {
+        roundover = false;
+        battleStart.SetActive(true);
+    }
 }
 
