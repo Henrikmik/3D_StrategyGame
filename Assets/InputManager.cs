@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
     public GameGridEnemy gameGridEnemyS;
     public Camera mainCamera;
     public GameObject canvas;
+    public Shop shop;
 
     [SerializeField] private LayerMask whatIsAGridLayer;
     [SerializeField] private Transform testTransform;
@@ -108,17 +109,7 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-            if (GetCellObject(0) != null)
-            {
-                GetCellObject(0).GettingDamaged(2);
-                UpdateFloatingText(GetCellObject(0));
-                //Debug.Log(GetCellObject(0).health);
-                //Debug.Log(GetCellObject(0).health);
-                if (GetCellObject(0).health == 0)
-                {
-                    GetCellObject(0).DestroySelf();
-                }
-            }
+            shop.SetShoppingSpace();
         }
     }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1580130288240408482}
   - component: {fileID: 1580130288240408477}
   - component: {fileID: -5001206808918114785}
-  - component: {fileID: 2134392886247568280}
+  - component: {fileID: 6138252282875362760}
   m_Layer: 0
   m_Name: apple
   m_TagString: Untagged
@@ -114,22 +114,15 @@ MonoBehaviour:
   level: 0
   nameA: 
   ability: 
---- !u!95 &2134392886247568280
-Animator:
-  serializedVersion: 3
+--- !u!114 &6138252282875362760
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1580130288240408476}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 96d8a81e61a358e46837410d698fee1a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e1c4f2e6298494cb5a29a00588891b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

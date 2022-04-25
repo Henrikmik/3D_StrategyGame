@@ -26,8 +26,8 @@ public class BattleRound : MonoBehaviour
 
             inputManager.GetCellObject(0).health -= inputManager.GetEnemyObject(0).attack;
             inputManager.UpdateFloatingText(inputManager.GetCellObject(0));
-            appleAnim.SetBool("Hit", true);
-
+            //appleAnim.enabled = true;
+            
             if (inputManager.GetEnemyObject(0).health <= 0)
             {
                 Debug.Log("GEWONNEN");
