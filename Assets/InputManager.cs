@@ -108,7 +108,7 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-            battleRound.UnitMove(1, 0);
+
         }
     }
 
@@ -170,6 +170,9 @@ public class InputManager : MonoBehaviour
         // Gets the first enemy grid cell
         GridCell enemyGridCell = gameGridEnemyS.transform.GetChild(0).GetComponent<GridCell>();
 
+        // Gets the second enemy grid cell
+        GridCell enemyGridCell2 = gameGridEnemyS.transform.GetChild(1).GetComponent<GridCell>();
+
         // Updates Canvas
         UpdateCanvas();
 
@@ -183,6 +186,17 @@ public class InputManager : MonoBehaviour
         enemyGridCell.StoreObject(placedEnemy);
         placedEnemy.SettingStats();
         ShowFloatingText(placedEnemy, enemyPos3);
+
+        // Creates enemy on second grid cell
+        Unit enemy2 = unitList[6];
+        Vector2Int enemy2Pos = enemyGridCell2.GetPosition();
+        Vector3 enemy2Pos3 = new Vector3(enemyGridCell2.transform.position.x, 1f, enemyGridCell2.transform.position.z);
+
+        PlacedObject placedEnemy2 = PlacedObject.Create(enemy2Pos3, enemy2Pos, Unit.Dir.Down, enemy2);
+        enemyGridCell2.SetPlacedObject(placedEnemy2);
+        enemyGridCell2.StoreObject(placedEnemy2);
+        placedEnemy2.SettingStats();
+        ShowFloatingText(placedEnemy2, enemy2Pos3);
     }
 
     // Gets grid cell
