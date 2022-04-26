@@ -58,4 +58,11 @@ public class GridCell : MonoBehaviour
         isOccupied = true;
         objectInThisGridSpace = placedObject;
     }
+
+    // Unstores placed object in this grid cell
+    public void UnstoreObject(PlacedObject placedObject)
+    {
+        isOccupied = false;
+        objectInThisGridSpace = null;
+    }
 }

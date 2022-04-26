@@ -6,7 +6,7 @@ public class InputManager : MonoBehaviour
 {
     GameGrid gameGrid;
     GridCell gridCell;
-    BattleRound battleRound;
+    public BattleRound battleRound;
     public GameObject battleStart;
     public GameGridEnemy gameGridEnemyS;
     public Camera mainCamera;
@@ -61,15 +61,14 @@ public class InputManager : MonoBehaviour
                         placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 1f, cellMouseIsOver.GetComponent<Transform>().position.z);
                         PlacedObject placedObject = PlacedObject.Create(placementVec, new Vector2Int(xList, zList), dir, unit);
                         cellMouseIsOver.StoreObject(placedObject);
-
+                        cellMouseIsOver.SetPlacedObject(placedObject);
+                        placedObject.SettingStats();
+                        ShowFloatingText(placedObject, placementVec);
                         //foreach (Vector2Int gridPosition in gridPositionList)
                         //{
                         //    gridCell.GetPosition(gridPosition.x, gridPosition.y).SetTransform(builtTransform);
                         //}
-                        cellMouseIsOver.SetPlacedObject(placedObject);
                         //cellMouseIsOver.isOccupied = true;
-                        placedObject.SettingStats();
-                        ShowFloatingText(placedObject, placementVec);
 
                     }
                     else
@@ -109,7 +108,7 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-            shop.SetShoppingSpace();
+            battleRound.UnitMove(1, 0);
         }
     }
 
@@ -148,7 +147,7 @@ public class InputManager : MonoBehaviour
         float cameraAngley = mainCamera.GetComponent<Transform>().rotation.y;
         float cameraAnglez = mainCamera.GetComponent<Transform>().rotation.z;
 
-        var myNewStats = Instantiate(FloatingTextPrefab, objectPos, Quaternion.Euler(cameraAnglex + 20f, cameraAngley - 20f, 0), transform);
+        var myNewStats = Instantiate(FloatingTextPrefab, objectPos, Quaternion.Euler(cameraAnglex + 20f, cameraAngley - 50f, 0), transform);
         myNewStats.transform.parent = placedObject.transform;
         myNewStats.GetComponent<TextMesh>().text = myNewStats.GetComponentInParent<PlacedObject>().nameA + "\n Attack: " + myNewStats.GetComponentInParent<PlacedObject>().attack +"\n Health: " + myNewStats.GetComponentInParent<PlacedObject>().health;
     }
@@ -164,9 +163,9 @@ public class InputManager : MonoBehaviour
         battleOn = true;
 
         // Creates Enemy Grid
-        gameGridEnemyS.CreateEnemyGrid(0, 0);
         gameGridEnemyS.CreateEnemyGrid(0, 1);
         gameGridEnemyS.CreateEnemyGrid(0, 2);
+        gameGridEnemyS.CreateEnemyGrid(0, 3);
 
         // Gets the first enemy grid cell
         GridCell enemyGridCell = gameGridEnemyS.transform.GetChild(0).GetComponent<GridCell>();

@@ -43,7 +43,7 @@ public class GameGridEnemy : MonoBehaviour
             //yield return null;
         }
 
-        gameGridEnemy = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, (y + gridOffset) * gridSpaceSize), Quaternion.identity); //ändern auf 3
+        gameGridEnemy = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, (y + gridOffset) * gridSpaceSize), Quaternion.identity);
         gameGridEnemy.GetComponent<GridCell>().SetPosistion(x, y);
         gameGridEnemy.transform.parent = transform;
         gameGridEnemy.gameObject.name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")";

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BattleRound : MonoBehaviour
 {
     public InputManager inputManager;
-    public Animator appleAnim;
+    public string gameState = null;
 
     void Start()
     {
@@ -15,70 +15,119 @@ public class BattleRound : MonoBehaviour
     public void HealthManager(float delayTime)
     {
         StartCoroutine(DelayAction(delayTime));
+        //if (inputManager.GetCellObject(0) != null)
+        //{
+        //    StartCoroutine(DelayAction(delayTime));
+        //}
+        //else
+        //{
+        //    if (inputManager.GetCellObject(1) != null)
+        //    {
+        //        // Unit move
+        //        // StartCoroutine
+        //    }
+        //    else if(inputManager.GetCellObject(2) != null)
+        //    {
+        //        // Unit move
+        //        // StartCoroutine
+        //    }
+        //}
     }
 
     IEnumerator DelayAction(float delayTime)
     {
         while (true)
         {
-            inputManager.GetEnemyObject(0).health -= inputManager.GetCellObject(0).attack;
-            inputManager.UpdateFloatingText(inputManager.GetEnemyObject(0));
+            PlacedObject enemy = inputManager.GetEnemyObject(0);
+            PlacedObject teamObject = inputManager.GetCellObject(0);
 
-            inputManager.GetCellObject(0).health -= inputManager.GetEnemyObject(0).attack;
-            inputManager.UpdateFloatingText(inputManager.GetCellObject(0));
-            //appleAnim.enabled = true;
-            
-            if (inputManager.GetEnemyObject(0).health <= 0)
+            CheckingGameState();
+            if (gameState == "Win" || gameState == "Lose" || gameState == "Lose")
             {
-                Debug.Log("GEWONNEN");
-                //enemyBattle.DestroySelf();
                 break;
             }
 
-            if (inputManager.GetCellObject(0).health <= 0)
+            if (teamObject && enemy != null)
             {
-                Debug.Log("VERLOREN");
-                //unitBattle.DestroySelf();
-                break;
+                enemy.health -= teamObject.attack;
+                inputManager.UpdateFloatingText(enemy);
+
+                teamObject.health -= enemy.attack;
+                inputManager.UpdateFloatingText(teamObject);
+
+                if (enemy.health <= 0)
+                {
+                    enemy.DestroySelf();
+                }
+
+                if (teamObject.health <= 0)
+                {
+                    teamObject.DestroySelf();
+                }
             }
             yield return new WaitForSeconds(delayTime);
         }
     }
 
-    public void ManageBattle()
+    public void UnitMove(int oldPos, int newPos)
     {
-        if (inputManager.roundover == false)
+        PlacedObject movingPlacedObject = inputManager.GetCellObject(oldPos);
+        GameObject newGridCell = inputManager.GetGridCell(newPos);
+        GameObject oldGridCell = inputManager.GetGridCell(oldPos);
+
+        oldGridCell.GetComponent<GridCell>().UnstoreObject(movingPlacedObject);
+
+        newGridCell.GetComponent<GridCell>().StoreObject(movingPlacedObject);
+        movingPlacedObject.transform.position = new Vector3(newGridCell.transform.position.x, 1f, newGridCell.transform.position.z);
+        //cellMouseIsOver.StoreObject(placedObject);
+        //cellMouseIsOver.SetPlacedObject(placedObject);
+    }
+
+    public void CheckingGameState()
+    {
+        Debug.Log("CheckingState"); // Klammer drum machen
+        if (CheckObjectInGridCell(0, false) && CheckObjectInGridCell(1, false) && CheckObjectInGridCell(2, false) == null)
         {
-            PlacedObject enemyBattle = inputManager.GetEnemyObject(0);
-            PlacedObject unitBattle = inputManager.GetCellObject(0);
-
-            if (enemyBattle && unitBattle != null)
+            if (CheckObjectInGridCell(0, true) && CheckObjectInGridCell(1, true) && CheckObjectInGridCell(2, true) == null)
             {
-                inputManager.healthE = enemyBattle.health;
-                inputManager.healthU = unitBattle.health;
+                Debug.Log("Draft");
+                gameState = "Draft";
             }
 
-            if ((inputManager.healthU > 0) && (inputManager.healthE > 0))
+            else
             {
-                if (enemyBattle && unitBattle != null)
-                {
-                    HealthManager(1f);
-                }
+                Debug.Log("Win");
+                Debug.Log(inputManager.GetCellObject(0));
+                gameState = "Win";
+            }
+        }
+        else if(CheckObjectInGridCell(0, false) && CheckObjectInGridCell(1, false) && CheckObjectInGridCell(2, false) == null)
+        {
+            if (CheckObjectInGridCell(0, true) && CheckObjectInGridCell(1, true) && CheckObjectInGridCell(2, true) == null)
+            {
+                Debug.Log("Draft");
+                gameState = "Draft";
             }
 
-            if (enemyBattle.health <= 0)
+            else
             {
-                Debug.Log("GEWONNEN");
-                //enemyBattle.DestroySelf();
-                inputManager.roundover = true;
+                Debug.Log("Lose");
+                gameState = "Lose";
             }
+        }
+    }
 
-            if (unitBattle.health <= 0)
-            {
-                Debug.Log("VERLOREN");
-                //unitBattle.DestroySelf();
-                inputManager.roundover = true;
-            }
+    public PlacedObject CheckObjectInGridCell(int pos, bool enemy)
+    {
+        if (enemy == false)
+        {
+            PlacedObject objectInThisGridSpace = inputManager.GetGridCell(pos).GetComponent<GridCell>().objectInThisGridSpace;
+            return objectInThisGridSpace;
+        }
+        else
+        {
+            PlacedObject objectInThisGridSpace = inputManager.GetEnemyCell(pos).GetComponent<GridCell>().objectInThisGridSpace;
+            return objectInThisGridSpace;
         }
     }
 }

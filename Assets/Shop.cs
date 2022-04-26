@@ -45,7 +45,8 @@ public class Shop : MonoBehaviour
         PlacedObject placedEnemy = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
         placedEnemy.SettingStats();
         placedEnemy.transform.parent = e.transform;
-        placedEnemy.transform.localScale += new Vector3(70, 70, 70);
+        placedEnemy.transform.localScale += new Vector3 (70, 70, 70);
+        placedEnemy.transform.rotation = new Quaternion (0, 0, 0, 0);
         inputManager.ShowFloatingText(placedEnemy, pos3);
     }
 

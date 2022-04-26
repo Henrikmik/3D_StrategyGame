@@ -5,14 +5,14 @@ using UnityEngine;
 public class GameGrid : MonoBehaviour
 {
 
-    private int height = 1;
+    private int height = -2;
     private int width = 1;
     private float gridSpaceSize = 1.3f;
     private int gridCreateX;
     private int gridCreateY;
 
     [SerializeField] private GameObject gridCellPrefab;
-    private GameObject[,] gameGrid;
+    private GameObject gameGrid;
 
 
     void Start()
@@ -23,7 +23,8 @@ public class GameGrid : MonoBehaviour
     // Creates the grid when the game starts
     private IEnumerator CreateGrid()
     {
-        gameGrid = new GameObject[height, width];
+        gameGrid = new GameObject();
+        int x = 0;
 
         if (gridCellPrefab == null)
         {
@@ -32,18 +33,18 @@ public class GameGrid : MonoBehaviour
         }
 
         // Make the grid
-        for (int y = 0; y < height; y++)
+        for (int y = 1; y > height; y--)
         {
-            for (int x = 0; x < width; x++)
-            {
+            //for (int x = 0; x < width; x++)
+            //{
                 // Create a new GridSpace object for each cell
-                gameGrid[x, y] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, y * gridSpaceSize), Quaternion.identity);
-                gameGrid[x, y].GetComponent<GridCell>().SetPosistion(x, y);
-                gameGrid[x, y].transform.parent = transform;
-                gameGrid[x, y].gameObject.name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")";
+                gameGrid = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, y * gridSpaceSize), Quaternion.identity);
+                gameGrid.GetComponent<GridCell>().SetPosistion(x, y);
+                gameGrid.transform.parent = transform;
+                gameGrid.gameObject.name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")";
 
                 yield return new WaitForSeconds(.1f);
-            }
+            //}
         }
     }
 
