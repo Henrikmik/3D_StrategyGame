@@ -28,7 +28,7 @@ public class BattleRound : MonoBehaviour
             PlacedObject teamObject = inputManager.GetCellObject(0);
             Debug.Log(teamObject);
 
-            if (gameState == "Win" || gameState == "Lose" || gameState == "Lose")
+            if (gameState == "Win" || gameState == "Lose" || gameState == "Draw")
             {
                 break;
             }
@@ -46,24 +46,20 @@ public class BattleRound : MonoBehaviour
                 {
                     enemy.DestroySelf();
                     inputManager.GetEnemyCell(0).GetComponent<GridCell>().UnstoreObject(enemy);
-                    CheckingGridBattle();
-                    CheckingGameState();
-                    if (gameState == "Win" || gameState == "Lose" || gameState == "Lose")
-                    {
-                        break;
-                    }
+
                 }
 
                 if (teamObject.health <= 0)
                 {
                     teamObject.DestroySelf();
                     inputManager.GetGridCell(0).GetComponent<GridCell>().UnstoreObject(teamObject);
-                    CheckingGridBattle();
-                    CheckingGameState();
-                    if (gameState == "Win" || gameState == "Lose" || gameState == "Lose")
-                    {
-                        break;
-                    }
+                }
+
+                CheckingGridBattle();
+                CheckingGameState();
+                if (gameState == "Win" || gameState == "Lose" || gameState == "Draw")
+                {
+                    break;
                 }
             }
             yield return new WaitForSeconds(delayTime);
@@ -104,8 +100,8 @@ public class BattleRound : MonoBehaviour
         {
             if (CheckObjectInGridCell(0, false) == null && CheckObjectInGridCell(1, false) == null && CheckObjectInGridCell(2, false) == null)
             {
-                Debug.Log("Draft");
-                gameState = "Draft";
+                Debug.Log("Draw");
+                gameState = "Draw";
             }
 
             else
