@@ -35,16 +35,12 @@ public class GameGrid : MonoBehaviour
         // Make the grid
         for (int y = 1; y > height; y--)
         {
-            //for (int x = 0; x < width; x++)
-            //{
-                // Create a new GridSpace object for each cell
-                gameGrid = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, y * gridSpaceSize), Quaternion.identity);
-                gameGrid.GetComponent<GridCell>().SetPosistion(x, y);
-                gameGrid.transform.parent = transform;
-                gameGrid.gameObject.name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")";
+            gameGrid = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, y * gridSpaceSize), Quaternion.identity);
+            gameGrid.GetComponent<GridCell>().SetPosistion(x, y);
+            gameGrid.transform.parent = transform;
+            gameGrid.gameObject.name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")";
 
-                yield return new WaitForSeconds(.1f);
-            //}
+            yield return new WaitForSeconds(.1f);
         }
     }
 

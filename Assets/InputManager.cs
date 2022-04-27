@@ -23,11 +23,12 @@ public class InputManager : MonoBehaviour
     public Vector3 placementVec;
     public GameObject FloatingTextPrefab;
 
-    private bool battleOn = false;
+    public bool battleOn = false;
     public bool roundover = true;
 
     public int healthE = 10;
     public int healthU = 10;
+    public int roundCounter = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -174,7 +175,7 @@ public class InputManager : MonoBehaviour
         GridCell enemyGridCell2 = gameGridEnemyS.transform.GetChild(1).GetComponent<GridCell>();
 
         // Updates Canvas
-        UpdateCanvas();
+        UpdateCanvas(1);
 
         // Creates enemy on the first grid cell
         Unit enemy = unitList[5];
@@ -224,59 +225,47 @@ public class InputManager : MonoBehaviour
     }
 
     // Sets Canvas to Battle Canvas
-    public void UpdateCanvas()
+    public void UpdateCanvas(int scene)
     {
-        // Sets Shop in Canvas inactive
-        canvas.transform.GetChild(0).gameObject.SetActive(false);
-        // Sets battle phase button inactive
-        canvas.transform.GetChild(1).gameObject.SetActive(false);
-        // Sets start battle button active
-        canvas.transform.GetChild(2).gameObject.SetActive(true);
+        if (scene == 1)
+        {
+            // Sets Shop in Canvas inactive
+            canvas.transform.GetChild(0).gameObject.SetActive(false);
+            // Sets battle phase button inactive
+            canvas.transform.GetChild(1).gameObject.SetActive(false);
+            // Sets start battle button active
+            canvas.transform.GetChild(2).gameObject.SetActive(true);
+        }
+
+        if (scene == 2)
+        {
+            // Sets Shop in Canvas inactive
+            canvas.transform.GetChild(0).gameObject.SetActive(true);
+            // Sets battle phase button inactive
+            canvas.transform.GetChild(1).gameObject.SetActive(true);
+            // Sets start battle button active
+            canvas.transform.GetChild(2).gameObject.SetActive(false);
+        }
     }
-
-    //public void BattleRound()
-    //{
-    //    PlacedObject enemyBattle = GetEnemyObject(0);
-    //    PlacedObject unitBattle = GetCellObject(0);
-    //    int healthE = 10;
-    //    int healthU = 10;
-
-    //    if (enemyBattle && unitBattle != null)
-    //    {
-    //        healthE = enemyBattle.health;
-    //        healthU = unitBattle.health;
-    //    }
-
-    //    //if (roundover == false)
-    //    //{
-    //    //    //while ((healthU > 0) && (healthE > 0))
-    //    //    //{
-    //    //    //    if (enemyBattle && unitBattle != null)
-    //    //    //    {
-    //    //    //        HealthManager(5.0f);
-    //    //    //    }
-    //    //    //}
-
-    //    //    //if (enemyBattle.health <= 0)
-    //    //    //{
-    //    //    //    Debug.Log("GEWONNEN");
-    //    //    //    //enemyBattle.DestroySelf();
-    //    //    //    roundover = true;
-    //    //    //}
-
-    //    //    //if (unitBattle.health <= 0)
-    //    //    //{
-    //    //    //    Debug.Log("VERLOREN");
-    //    //    //    //unitBattle.DestroySelf();
-    //    //    //    roundover = true;
-    //    //    //}
-    //    //}
-    //}
 
     public void SetRoundoverFalse()
     {
         roundover = false;
-        battleStart.SetActive(true);
+        battleRound.StartBattle();
+    }
+
+    public void DestroyField()
+    {
+        GameObject gridEins = gameGridEnemyS.transform.GetChild(0).gameObject;
+        GameObject gridZwei = gameGridEnemyS.transform.GetChild(1).gameObject;
+        GameObject gridDrei = gameGridEnemyS.transform.GetChild(2).gameObject;
+
+        Destroy(gridEins.GetComponent<GridCell>().GetPlacedObject().gameObject);
+        Destroy(gridZwei.GetComponent<GridCell>().GetPlacedObject().gameObject);
+        Destroy(gridZwei.GetComponent<GridCell>().GetPlacedObject().gameObject);
+        Destroy(gridEins);
+        Destroy(gridZwei);
+        Destroy(gridDrei);
     }
 }
 

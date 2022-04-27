@@ -6,14 +6,17 @@ public class BattleRound : MonoBehaviour
 {
     public InputManager inputManager;
     public string gameState = null;
+    public GameObject gameGridEnemy;
 
-    void Start()
+    public void StartBattle()
     {
         HealthManager(3f);
+        gameState = null;
     }
 
     public void HealthManager(float delayTime)
     {
+        Debug.Log("Battle Start");
         StartCoroutine(DelayAction(delayTime));
     }
 
@@ -23,19 +26,21 @@ public class BattleRound : MonoBehaviour
         {
             CheckingGridBattle();
             CheckingGameState();
+            Debug.Log("In while");
+
 
             PlacedObject enemy = inputManager.GetEnemyObject(0);
             PlacedObject teamObject = inputManager.GetCellObject(0);
-            Debug.Log(teamObject);
 
             if (gameState == "Win" || gameState == "Lose" || gameState == "Draw")
             {
+                inputManager.battleOn = false;
+                inputManager.UpdateCanvas(2);
                 break;
             }
 
             if (teamObject != null && enemy != null)
             {
-                Debug.Log("Attack");
                 enemy.health -= teamObject.attack;
                 inputManager.UpdateFloatingText(enemy);
 
@@ -57,8 +62,13 @@ public class BattleRound : MonoBehaviour
 
                 CheckingGridBattle();
                 CheckingGameState();
+
                 if (gameState == "Win" || gameState == "Lose" || gameState == "Draw")
                 {
+                    inputManager.battleOn = false;
+                    inputManager.UpdateCanvas(2);
+                    inputManager.roundCounter += 1;
+                    inputManager.DestroyField();
                     break;
                 }
             }

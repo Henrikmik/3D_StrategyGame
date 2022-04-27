@@ -430,7 +430,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &245819543
 GameObject:
@@ -650,9 +650,11 @@ MonoBehaviour:
   placementVec: {x: 0, y: 0, z: 0}
   FloatingTextPrefab: {fileID: 4204849103947666853, guid: d51795a3636726f4dbeef81ff854ff75,
     type: 3}
+  battleOn: 0
   roundover: 1
   healthE: 10
   healthU: 10
+  roundCounter: 1
 --- !u!4 &486509039
 Transform:
   m_ObjectHideFlags: 0
@@ -1140,7 +1142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1089988295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1155,6 +1157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputManager: {fileID: 486509038}
   gameState: 
+  gameGridEnemy: {fileID: 225948464}
 --- !u!4 &1089988296
 Transform:
   m_ObjectHideFlags: 0
@@ -1167,7 +1170,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1102277988
 GameObject:
@@ -2099,7 +2102,7 @@ RectTransform:
   - {fileID: 2045455624}
   - {fileID: 1147259734}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
