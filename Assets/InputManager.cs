@@ -168,6 +168,10 @@ public class InputManager : MonoBehaviour
         gameGridEnemyS.CreateEnemyGrid(0, 2);
         gameGridEnemyS.CreateEnemyGrid(0, 3);
 
+        gameGridEnemyS.CreateEnemyGrid(2, 1);
+        gameGridEnemyS.CreateEnemyGrid(2, 2);
+        gameGridEnemyS.CreateEnemyGrid(2, 3);
+
         // Gets the first enemy grid cell
         GridCell enemyGridCell = gameGridEnemyS.transform.GetChild(0).GetComponent<GridCell>();
 
