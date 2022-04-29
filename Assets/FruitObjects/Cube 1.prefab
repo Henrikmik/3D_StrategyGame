@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2109768391789188942}
   - component: {fileID: 431692676410241595}
   - component: {fileID: -5507562072072547105}
-  - component: {fileID: 2554653633263623362}
+  - component: {fileID: -2586299040842700459}
   m_Layer: 0
   m_Name: Cube 1
   m_TagString: Untagged
@@ -114,7 +114,7 @@ MonoBehaviour:
   level: 0
   nameA: 
   ability: 
---- !u!114 &2554653633263623362
+--- !u!114 &-2586299040842700459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,6 +123,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3398115164871102353}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1e1c4f2e6298494cb5a29a00588891b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2736062cc948e994fb9ee96bf618e270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
