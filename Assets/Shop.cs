@@ -55,15 +55,24 @@ public class Shop : MonoBehaviour
         // Deleting shop objects
         foreach (GameObject g in shopSpace)
         {
-            if (g.transform.GetChild(2))
+            if (g.transform.childCount >= 3)
             {
-                Destroy(g.transform.GetChild(2).gameObject);
+                if (g.transform.GetChild(2))
+                {
+                    Destroy(g.transform.GetChild(2).gameObject);
+                    Debug.Log("Löschung");
+                }
+            }
+            else
+            {
+                Debug.Log("Keine Löschung");
             }
         }
 
         // Generating new shop objects
         foreach (GameObject e in shopSpace)
         {
+            Debug.Log("Neue Unit");
             Unit unit = RandomOption();
             PlaceUnitInShop(e, unit);
         }

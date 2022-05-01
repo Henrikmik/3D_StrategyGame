@@ -48,36 +48,10 @@ public class InputManager : MonoBehaviour
 
         if (battleOn != true)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                //    cellMouseIsOver.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
-                if (cellMouseIsOver != null)
-                {
-                    int xList = (int)cellMouseIsOver.GetComponent<Transform>().position.x;
-                    int zList = (int)cellMouseIsOver.GetComponent<Transform>().position.z;
-                    List<Vector2Int> gridPositionList = unit.GetGridPositionList(new Vector2Int(xList, zList), dir);
-
-                    if (cellMouseIsOver.CanBuild())
-                    {
-                        placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 1f, cellMouseIsOver.GetComponent<Transform>().position.z);
-                        PlacedObject placedObject = PlacedObject.Create(placementVec, new Vector2Int(xList, zList), dir, unit);
-                        cellMouseIsOver.StoreObject(placedObject);
-                        cellMouseIsOver.SetPlacedObject(placedObject);
-                        placedObject.SettingStats();
-                        ShowFloatingText(placedObject, placementVec);
-                        //foreach (Vector2Int gridPosition in gridPositionList)
-                        //{
-                        //    gridCell.GetPosition(gridPosition.x, gridPosition.y).SetTransform(builtTransform);
-                        //}
-                        //cellMouseIsOver.isOccupied = true;
-
-                    }
-                    else
-                    {
-                        Debug.Log("Cannot build atm! ");
-                    }
-                }
-            }
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    PlaceOnGridCell(cellMouseIsOver);
+            //}
 
             if (Input.GetMouseButtonDown(1))
             {
@@ -114,7 +88,7 @@ public class InputManager : MonoBehaviour
     }
 
     // Returns the grid cell if mouse is over grid cell and returns null if it is not
-    private GridCell IsMouseOverAGridSpace()
+    public GridCell IsMouseOverAGridSpace()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f, whatIsAGridLayer))
@@ -270,6 +244,50 @@ public class InputManager : MonoBehaviour
         Destroy(gridEins);
         Destroy(gridZwei);
         Destroy(gridDrei);
+    }   // Fixxen
+
+    public void PlaceOnGridCell(GridCell cellMouseIsOver)
+    {
+        //    cellMouseIsOver.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
+        if (cellMouseIsOver != null)
+        {
+            int xList = (int)cellMouseIsOver.GetComponent<Transform>().position.x;
+            int zList = (int)cellMouseIsOver.GetComponent<Transform>().position.z;
+            List<Vector2Int> gridPositionList = unit.GetGridPositionList(new Vector2Int(xList, zList), dir);
+
+            if (cellMouseIsOver.CanBuild())
+            {
+                placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 1f, cellMouseIsOver.GetComponent<Transform>().position.z);
+                PlacedObject placedObject = PlacedObject.Create(placementVec, new Vector2Int(xList, zList), dir, unit);
+                cellMouseIsOver.StoreObject(placedObject);
+                cellMouseIsOver.SetPlacedObject(placedObject);
+                placedObject.SettingStats();
+                ShowFloatingText(placedObject, placementVec);
+                //foreach (Vector2Int gridPosition in gridPositionList)
+                //{
+                //    gridCell.GetPosition(gridPosition.x, gridPosition.y).SetTransform(builtTransform);
+                //}
+                //cellMouseIsOver.isOccupied = true;
+
+            }
+            else
+            {
+                Debug.Log("Cannot build atm! ");
+            }
+        }
+    }   //Unnötig
+
+    public void DragOnGridCell(GridCell cellMouseIsOver, PlacedObject placedObject)
+    {
+        placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 1f, cellMouseIsOver.GetComponent<Transform>().position.z);
+        placedObject.transform.position = placementVec;
+        placedObject.transform.SetParent(null);
+        placedObject.transform.localScale = new Vector3 (1, 1, 1);
+        placedObject.transform.rotation = new Quaternion (0, 0, 0, 0);
+        cellMouseIsOver.StoreObject(placedObject);
+        cellMouseIsOver.SetPlacedObject(placedObject);
+        placedObject.transform.GetChild(0).transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
+        placedObject.transform.GetChild(0).transform.rotation = Quaternion.Euler (40, -55, 0);
     }
 }
 

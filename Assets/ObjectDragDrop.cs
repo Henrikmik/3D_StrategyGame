@@ -9,7 +9,10 @@ using UnityEngine.EventSystems;
 public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     Camera m_cam;
+    InputManager inputManager;
+
     private Vector3 origin;
+    private GridCell oldGridCell;
     void Start()
     {
         if (Camera.main.GetComponent<PhysicsRaycaster>() == null)
@@ -18,6 +21,8 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         }
 
         m_cam = Camera.main;
+        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+
         origin = transform.position;
     }
 
@@ -30,19 +35,58 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         Vector3 P = R.origin + R.direction * t; // Find the new point;
 
         transform.position = P;
-        Debug.Log("OnDrag");
+        //Debug.Log("OnDrag");
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         // Do stuff when dragging begins.
         //Debug.Log("OnBeginDrag");
+       
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        transform.position = origin;
         // Do stuff when draggin ends.
-        Debug.Log("OnEndDrag");
+        //Debug.Log("OnEndDrag");
+        
+        GridCell cellMouseIsOver = inputManager.IsMouseOverAGridSpace();
+        PlacedObject placedObject = transform.GetComponent<PlacedObject>();
+
+        if (cellMouseIsOver != null)
+        {
+            if (cellMouseIsOver.CanBuild())
+            {
+                if (oldGridCell != null)
+                {
+                    inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
+                    origin = transform.position;
+                    oldGridCell.UnstoreObject(placedObject);
+                    oldGridCell.ClearTransform();
+
+                    oldGridCell = cellMouseIsOver;
+                    Debug.Log(oldGridCell);
+                }
+                
+                else
+                {
+                    inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
+                    origin = transform.position;
+                    oldGridCell = cellMouseIsOver;
+                    Debug.Log(oldGridCell);
+                }
+            }
+
+            else
+            {
+                transform.position = origin;
+                Debug.Log("Cannot build atm! ");
+            }
+        }
+
+        else
+        {
+            transform.position = origin;
+        }
     }
 }
