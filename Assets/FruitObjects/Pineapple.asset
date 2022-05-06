@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea5b361af279c534ba59bca4785cf132, type: 3}
-  m_Name: Tree
+  m_Name: Pineapple
   m_EditorClassIdentifier: 
-  name: Tree
+  name: Pineapple
   description: 
-  ability: 
-  prefab: {fileID: 3563076698561551986, guid: 656482c8bc01ce644978324ac4809096, type: 3}
+  ability: pineapple
+  prefab: {fileID: 2964301075626184737, guid: bce2eeda06623c544b498efbdc9dd134, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0
   attack: 3
   health: 1
-  level: 0
-  cost: 0
+  level: 1
+  cost: 3

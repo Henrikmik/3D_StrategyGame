@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea5b361af279c534ba59bca4785cf132, type: 3}
-  m_Name: Capsule
+  m_Name: Lemon
   m_EditorClassIdentifier: 
-  name: Capsule
+  name: Lemon
   description: 
-  ability: 
-  prefab: {fileID: 2964301075626184737, guid: bce2eeda06623c544b498efbdc9dd134, type: 3}
+  ability: lemon
+  prefab: {fileID: 5715541570762819977, guid: 477815f177ca963448f0acf04e9727ad, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0
-  attack: 2
+  attack: 1
   health: 2
-  level: 0
-  cost: 0
+  level: 1
+  cost: 3

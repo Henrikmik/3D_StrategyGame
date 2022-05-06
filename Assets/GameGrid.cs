@@ -23,7 +23,7 @@ public class GameGrid : MonoBehaviour
     // Creates the grid when the game starts
     private IEnumerator CreateGrid()
     {
-        gameGrid = new GameObject();
+        //gameGrid = new GameObject();
         int x = 0;
 
         if (gridCellPrefab == null)

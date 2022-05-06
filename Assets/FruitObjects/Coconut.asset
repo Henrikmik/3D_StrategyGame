@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea5b361af279c534ba59bca4785cf132, type: 3}
-  m_Name: Cube
+  m_Name: Coconut
   m_EditorClassIdentifier: 
-  name: Cube
+  name: Coconut
   description: 
-  ability: 
+  ability: coconut
   prefab: {fileID: 2551564352595502732, guid: 2d51aedf40e886a428849e8d19194680, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0
-  attack: 4
-  health: 1
-  level: 0
-  cost: 0
+  attack: 1
+  health: 3
+  level: 1
+  cost: 3

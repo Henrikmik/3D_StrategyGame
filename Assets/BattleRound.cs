@@ -8,6 +8,7 @@ public class BattleRound : MonoBehaviour
     public string gameState = null;
     public GameObject gameGridEnemy;
     public GameObject unitManager;
+    public GameObject enemyManager;
     //public Animator animatorUnit;
 
     public void StartBattle()
@@ -242,5 +243,135 @@ public class BattleRound : MonoBehaviour
         gameState = null;
         SetUpBuyingPhase();
         inputManager.shop.ShopReroll();
+    }
+
+    public string GetAbility(PlacedObject placedObject)
+    {
+        return placedObject.ability;
+    }
+
+    public void CheckAbility(PlacedObject placedObject)
+    {
+        string ability = GetAbility(placedObject);
+        Debug.Log("Check Ability");
+
+        if (ability == "apple")
+        {
+            Debug.Log("Apple");
+
+            if (placedObject.health <= 0)
+            {
+                GameObject nextUnit = unitManager.transform.GetChild(placedObject.transform.GetSiblingIndex() + 1).gameObject;
+                nextUnit.GetComponent<PlacedObject>().baseAttack += 2;
+                nextUnit.GetComponent<PlacedObject>().baseHealth += 1;
+                nextUnit.GetComponent<PlacedObject>().attack += 2;
+                nextUnit.GetComponent<PlacedObject>().health += 1;
+                inputManager.UpdateFloatingText(nextUnit.GetComponent<PlacedObject>());
+                Debug.Log(nextUnit);
+            }
+        }
+        else if (ability == "cherry")
+        {
+            Debug.Log("Cherry");
+
+            if (enemyManager.transform.GetChild(1) != null)
+            {
+                enemyManager.transform.GetChild(1).GetComponent<PlacedObject>().health -= 2;
+                inputManager.UpdateFloatingText(enemyManager.transform.GetChild(1).GetComponent<PlacedObject>());
+            }
+
+        }
+        else if (ability == "pineapple")
+        {
+            // stage 3
+        }
+        else if (ability == "grapes")
+        {
+            Debug.Log("Grapes");
+
+            if (placedObject.health <= 0)
+            {
+                Unit unit = inputManager.unitList[6];
+
+                if (inputManager.GetCellObject(0) == null)
+                {
+                    GridCell gridCell = inputManager.GetGridCell(0).GetComponent<GridCell>();
+                    Vector2Int pos2 = gridCell.GetPosition();
+                    Vector3 pos3 = new Vector3(inputManager.GetGridCell(0).transform.position.x, 1f, inputManager.GetGridCell(0).transform.position.z);
+
+                    PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
+                    gridCell.SetPlacedObject(placedO);
+                    gridCell.StoreObject(placedO);
+                    placedO.transform.SetParent(unitManager.transform);
+                    placedO.SettingStats();
+                    inputManager.ShowFloatingText(placedO, pos3);
+                }
+                else if (inputManager.GetCellObject(1) == null)
+                {
+                    GridCell gridCell = inputManager.GetGridCell(1).GetComponent<GridCell>();
+                    Vector2Int pos2 = gridCell.GetPosition();
+                    Vector3 pos3 = new Vector3(inputManager.GetGridCell(1).transform.position.x, 1f, inputManager.GetGridCell(1).transform.position.z);
+
+                    PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
+                    gridCell.SetPlacedObject(placedO);
+                    gridCell.StoreObject(placedO);
+                    placedO.transform.SetParent(unitManager.transform);
+                    placedO.SettingStats();
+                    inputManager.ShowFloatingText(placedO, pos3);
+                }
+                else if(inputManager.GetCellObject(2) == null)
+                {
+                    GridCell gridCell = inputManager.GetGridCell(2).GetComponent<GridCell>();
+                    Vector2Int pos2 = gridCell.GetPosition();
+                    Vector3 pos3 = new Vector3(inputManager.GetGridCell(2).transform.position.x, 1f, inputManager.GetGridCell(2).transform.position.z);
+
+                    PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
+                    gridCell.SetPlacedObject(placedO);
+                    gridCell.StoreObject(placedO);
+                    placedO.transform.SetParent(unitManager.transform);
+                    placedO.SettingStats();
+                    inputManager.ShowFloatingText(placedO, pos3);
+                }
+                else
+                {
+                    Debug.Log("No free grid");
+                }
+            }
+        }
+        else if (ability == "coconut")
+        {
+            Debug.Log("Coconut");
+
+            if (placedObject.armor == true)
+            {
+                placedObject.health = placedObject.baseHealth;
+                placedObject.armor = false;
+                inputManager.UpdateFloatingText(placedObject);
+            }
+        }
+        else if (ability == "lemon")
+        {
+            Debug.Log("Lemon");
+
+            if ((placedObject.health != placedObject.baseHealth) && (placedObject.health > 0))
+            {
+                int randomOption = Random.Range(0, unitManager.transform.childCount - 1);   // -1 da childCount bei 1 anfängt zu zählen und GetChild bei 0
+                while (randomOption == placedObject.transform.GetSiblingIndex())
+                {
+                    randomOption = Random.Range(0, unitManager.transform.childCount - 1);
+                }
+                GameObject buffedUnit = unitManager.transform.GetChild(randomOption).gameObject;
+                buffedUnit.GetComponent<PlacedObject>().baseAttack += 1;
+                buffedUnit.GetComponent<PlacedObject>().baseHealth += 1;
+                buffedUnit.GetComponent<PlacedObject>().attack += 1;
+                buffedUnit.GetComponent<PlacedObject>().health += 1;
+                inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
+                Debug.Log(buffedUnit);
+            }
+        }
+        else
+        {
+            Debug.Log("No ability");
+        }
     }
 }

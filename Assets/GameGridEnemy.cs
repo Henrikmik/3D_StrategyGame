@@ -35,7 +35,7 @@ public class GameGridEnemy : MonoBehaviour
 
     public void CreateEnemyGrid(int x, int y)
     {
-        gameGridEnemy = new GameObject();
+        //gameGridEnemy = new GameObject();
 
         if (gridCellPrefab == null)
         {

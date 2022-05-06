@@ -36,6 +36,9 @@ public class PlacedObject : MonoBehaviour
     public int baseHealth;
     public int baseLevel;
 
+    // special abilitiy
+    public bool armor;
+
     public void DestroySelf()
     {
         Destroy(gameObject);
@@ -62,6 +65,15 @@ public class PlacedObject : MonoBehaviour
         baseAttack = unit.attack;
         baseHealth = unit.health;
         baseLevel = unit.level;
+
+        if (ability == "coconut")
+        {
+            armor = true;
+        }
+        else
+        {
+            armor = false;
+        }
     }
 
     public void SetStats()
@@ -69,5 +81,15 @@ public class PlacedObject : MonoBehaviour
         attack = baseAttack;
         health = baseHealth;
         level = baseLevel;
+        armor = true;
+
+        if (ability == "coconut")
+        {
+            armor = true;
+        }
+        else
+        {
+            armor = false;
+        }
     }
 }

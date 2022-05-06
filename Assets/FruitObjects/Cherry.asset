@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea5b361af279c534ba59bca4785cf132, type: 3}
-  m_Name: Apple
+  m_Name: Cherry
   m_EditorClassIdentifier: 
-  name: Apple
+  name: Cherry
   description: 
-  ability: apple
-  prefab: {fileID: 1580130288240408480, guid: e00b9c219179e6342a1be01a62f3c178, type: 3}
+  ability: cherry
+  prefab: {fileID: 1558777792486104257, guid: acc4d1180b5733442b7fdada2c95c9ab, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0
-  attack: 2
+  attack: 1
   health: 1
   level: 1
   cost: 3

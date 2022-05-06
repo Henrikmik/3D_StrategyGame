@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public GameGrid gameGrid;
     GridCell gridCell;
-    public GameObject UnitManager;
+
+    public GameGrid gameGrid;
+    public GameObject enemyManager;
+    public GameObject unitManager;
     public BattleRound battleRound;
     public GameObject battleStart;
     public GameGridEnemy gameGridEnemyS;
@@ -16,7 +18,7 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private LayerMask whatIsAGridLayer;
     [SerializeField] private Transform testTransform;
-    [SerializeField] private List<Unit> unitList;
+    [SerializeField] public List<Unit> unitList;
     private Unit unit;
 
     private Unit.Dir dir = Unit.Dir.Down;
@@ -47,6 +49,8 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateHierarchie();
+
         GridCell cellMouseIsOver = IsMouseOverAGridSpace();
 
         if (battleOn != true)
@@ -86,7 +90,9 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-
+            GetCellObject(0).health -= 1;
+            UpdateFloatingText(GetCellObject(0));
+            battleRound.CheckAbility(GetCellObject(0));
         }
     }
 
@@ -145,9 +151,9 @@ public class InputManager : MonoBehaviour
         gameGridEnemyS.CreateEnemyGrid(0, 2);
         gameGridEnemyS.CreateEnemyGrid(0, 3);
 
-        //gameGridEnemyS.CreateEnemyGrid(2, 1);
-        //gameGridEnemyS.CreateEnemyGrid(2, 2);
-        //gameGridEnemyS.CreateEnemyGrid(2, 3);
+        ////gameGridEnemyS.CreateEnemyGrid(2, 1);
+        ////gameGridEnemyS.CreateEnemyGrid(2, 2);
+        ////gameGridEnemyS.CreateEnemyGrid(2, 3);
 
         // Gets the first enemy grid cell
         GridCell enemyGridCell = gameGridEnemyS.transform.GetChild(0).GetComponent<GridCell>();
@@ -159,24 +165,26 @@ public class InputManager : MonoBehaviour
         UpdateCanvas(1);
 
         // Creates enemy on the first grid cell
-        Unit enemy = unitList[5];
+        Unit enemy = unitList[7];
         Vector2Int enemyPos = enemyGridCell.GetPosition();
         Vector3 enemyPos3 = new Vector3(enemyGridCell.transform.position.x, 1f, enemyGridCell.transform.position.z);
 
         PlacedObject placedEnemy = PlacedObject.Create(enemyPos3, enemyPos, Unit.Dir.Down, enemy);
         enemyGridCell.SetPlacedObject(placedEnemy);
         enemyGridCell.StoreObject(placedEnemy);
+        placedEnemy.transform.SetParent(enemyManager.transform);
         placedEnemy.SettingStats();
         ShowFloatingText(placedEnemy, enemyPos3);
 
         // Creates enemy on second grid cell
-        Unit enemy2 = unitList[6];
+        Unit enemy2 = unitList[8];
         Vector2Int enemy2Pos = enemyGridCell2.GetPosition();
         Vector3 enemy2Pos3 = new Vector3(enemyGridCell2.transform.position.x, 1f, enemyGridCell2.transform.position.z);
 
         PlacedObject placedEnemy2 = PlacedObject.Create(enemy2Pos3, enemy2Pos, Unit.Dir.Down, enemy2);
         enemyGridCell2.SetPlacedObject(placedEnemy2);
         enemyGridCell2.StoreObject(placedEnemy2);
+        placedEnemy2.transform.SetParent(enemyManager.transform);
         placedEnemy2.SettingStats();
         ShowFloatingText(placedEnemy2, enemy2Pos3);
     }
@@ -285,7 +293,7 @@ public class InputManager : MonoBehaviour
         placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 1f, cellMouseIsOver.GetComponent<Transform>().position.z);
         placedObject.transform.position = placementVec;
         placedObject.transform.SetParent(null);
-        placedObject.transform.SetParent(UnitManager.transform);
+        placedObject.transform.SetParent(unitManager.transform);
         placedObject.transform.localScale = new Vector3 (1, 1, 1);
         placedObject.transform.rotation = new Quaternion (0, 0, 0, 0);
         cellMouseIsOver.StoreObject(placedObject);
@@ -294,6 +302,23 @@ public class InputManager : MonoBehaviour
         placedObject.transform.GetChild(0).transform.rotation = Quaternion.Euler (40, -55, 0);
     }
 
-
+    public void UpdateHierarchie()
+    {
+        if (gameGrid.transform.childCount > 2)
+        {
+            if (GetCellObject(0) != null)
+            {
+                GetCellObject(0).transform.SetSiblingIndex(0);
+            }
+            if (GetCellObject(1) != null)
+            {
+                GetCellObject(1).transform.SetSiblingIndex(1);
+            }
+            if (GetCellObject(2) != null)
+            {
+                GetCellObject(2).transform.SetSiblingIndex(2);
+            }
+        }
+    }
 }
 
