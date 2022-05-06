@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    GameGrid gameGrid;
+    public GameGrid gameGrid;
     GridCell gridCell;
+    public GameObject UnitManager;
     public BattleRound battleRound;
     public GameObject battleStart;
     public GameGridEnemy gameGridEnemyS;
@@ -29,6 +30,8 @@ public class InputManager : MonoBehaviour
     public int healthE = 10;
     public int healthU = 10;
     public int roundCounter = 1;
+    public int gold = 10;
+    public int draws = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -83,7 +86,7 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-
+            battleRound.SetUpBuyingPhase();
         }
     }
 
@@ -282,6 +285,7 @@ public class InputManager : MonoBehaviour
         placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 1f, cellMouseIsOver.GetComponent<Transform>().position.z);
         placedObject.transform.position = placementVec;
         placedObject.transform.SetParent(null);
+        placedObject.transform.SetParent(UnitManager.transform);
         placedObject.transform.localScale = new Vector3 (1, 1, 1);
         placedObject.transform.rotation = new Quaternion (0, 0, 0, 0);
         cellMouseIsOver.StoreObject(placedObject);
@@ -289,5 +293,7 @@ public class InputManager : MonoBehaviour
         placedObject.transform.GetChild(0).transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
         placedObject.transform.GetChild(0).transform.rotation = Quaternion.Euler (40, -55, 0);
     }
+
+
 }
 

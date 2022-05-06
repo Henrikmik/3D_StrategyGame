@@ -114,6 +114,9 @@ MonoBehaviour:
   level: 0
   nameA: 
   ability: 
+  baseAttack: 0
+  baseHealth: 0
+  baseLevel: 0
 --- !u!114 &1044724814730304482
 MonoBehaviour:
   m_ObjectHideFlags: 0

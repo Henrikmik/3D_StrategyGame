@@ -22,11 +22,19 @@ public class PlacedObject : MonoBehaviour
     private Vector2Int origin;
     private Unit.Dir dir;
 
+    // stats that can be changed during the battle
     public int attack;
     public int health;
     public int level;
+
+    // stats that dont get changed
     public string nameA;
     public string ability;
+
+    // base values that can increase through buffs and level
+    public int baseAttack;
+    public int baseHealth;
+    public int baseLevel;
 
     public void DestroySelf()
     {
@@ -50,5 +58,16 @@ public class PlacedObject : MonoBehaviour
         level = unit.level;
         nameA = unit.name;
         ability = unit.ability;
+
+        baseAttack = unit.attack;
+        baseHealth = unit.health;
+        baseLevel = unit.level;
+    }
+
+    public void SetStats()
+    {
+        attack = baseAttack;
+        health = baseHealth;
+        level = baseLevel;
     }
 }

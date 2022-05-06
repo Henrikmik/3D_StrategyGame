@@ -65,7 +65,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                     oldGridCell.ClearTransform();
 
                     oldGridCell = cellMouseIsOver;
-                    Debug.Log(oldGridCell);
+                    //Debug.Log("Vom Feld");
                 }
                 
                 else
@@ -73,14 +73,14 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                     inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
                     origin = transform.position;
                     oldGridCell = cellMouseIsOver;
-                    Debug.Log(oldGridCell);
+                    //Debug.Log("Aus Shop");
                 }
             }
 
             else
             {
                 transform.position = origin;
-                Debug.Log("Cannot build atm! ");
+                //Debug.Log("Cannot build atm! ");
             }
         }
 

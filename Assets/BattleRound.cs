@@ -7,6 +7,8 @@ public class BattleRound : MonoBehaviour
     public InputManager inputManager;
     public string gameState = null;
     public GameObject gameGridEnemy;
+    public GameObject unitManager;
+    //public Animator animatorUnit;
 
     public void StartBattle()
     {
@@ -16,7 +18,7 @@ public class BattleRound : MonoBehaviour
 
     public void HealthManager(float delayTime)
     {
-        Debug.Log("Battle Start");
+        //Debug.Log("Battle Start");
         StartCoroutine(DelayAction(delayTime));
     }
 
@@ -26,8 +28,7 @@ public class BattleRound : MonoBehaviour
         {
             CheckingGridBattle();
             CheckingGameState();
-            Debug.Log("In while");
-
+            //Debug.Log("In while");
 
             PlacedObject enemy = inputManager.GetEnemyObject(0);
             PlacedObject teamObject = inputManager.GetCellObject(0);
@@ -36,15 +37,17 @@ public class BattleRound : MonoBehaviour
             {
                 inputManager.battleOn = false;
                 inputManager.UpdateCanvas(2);
+                gameState = null;
                 break;
             }
 
             if (teamObject != null && enemy != null)
             {
-                enemy.health -= teamObject.attack;
+                enemy.GettingDamaged(teamObject.attack);
                 inputManager.UpdateFloatingText(enemy);
+                //animatorUnit.SetTrigger("HitTrigger");
 
-                teamObject.health -= enemy.attack;
+                teamObject.GettingDamaged(enemy.attack);
                 inputManager.UpdateFloatingText(teamObject);
 
                 if (enemy.health <= 0)
@@ -56,20 +59,57 @@ public class BattleRound : MonoBehaviour
 
                 if (teamObject.health <= 0)
                 {
-                    teamObject.DestroySelf();
+                    //teamObject.DestroySelf();
+                    teamObject.gameObject.SetActive(false);
                     inputManager.GetGridCell(0).GetComponent<GridCell>().UnstoreObject(teamObject);
+                    Debug.Log(inputManager.GetGridCell(0).GetComponent<GridCell>().GetPlacedObject());
                 }
 
                 CheckingGridBattle();
                 CheckingGameState();
 
-                if (gameState == "Win" || gameState == "Lose" || gameState == "Draw")
+                if (gameState == "Win")
                 {
                     inputManager.battleOn = false;
                     inputManager.UpdateCanvas(2);
                     inputManager.roundCounter += 1;
                     inputManager.DestroyField();
+                    gameState = null;
                     break;
+                }
+
+                else if (gameState == "Lose")
+                {
+                    inputManager.battleOn = false;
+                    inputManager.UpdateCanvas(2);
+                    inputManager.roundCounter = 1;
+                    inputManager.DestroyField();
+                    gameState = null;
+                    break;
+                }
+
+                else if (gameState == "Draw")
+                {
+                    inputManager.draws -= 1;
+
+                    if (inputManager.draws > 0)
+                    {
+                        inputManager.battleOn = false;
+                        inputManager.UpdateCanvas(2);
+                        //inputManager.roundCounter += 1;
+                        inputManager.DestroyField();
+                        gameState = null;
+                        break;
+                    }
+                    else
+                    {
+                        inputManager.battleOn = false;
+                        inputManager.UpdateCanvas(2);
+                        inputManager.roundCounter = 1;
+                        inputManager.DestroyField();
+                        gameState = null;
+                        break;
+                    }
                 }
             }
             yield return new WaitForSeconds(delayTime);
@@ -185,6 +225,25 @@ public class BattleRound : MonoBehaviour
             {
                 UnitMove(2, 1, true);
             }
+        }
+    }
+
+    public void SetUpBuyingPhase()
+    {
+        int childNumber = unitManager.transform.childCount;
+        for (int i = 0; i < childNumber; i++)
+        {
+            PlacedObject placedTeam = unitManager.transform.GetChild(i).GetComponent<PlacedObject>();
+            GridCell gridCell = inputManager.GetGridCell(i).GetComponent<GridCell>();
+
+            placedTeam.gameObject.SetActive(true);
+            placedTeam.SetStats();
+            inputManager.UpdateFloatingText(placedTeam);
+            placedTeam.transform.position = new Vector3(gridCell.transform.position.x, 1f, gridCell.transform.position.z);
+            gridCell.StoreObject(placedTeam);
+            gridCell.SetPlacedObject(placedTeam);
+
+            Debug.Log(i);
         }
     }
 }
