@@ -35,9 +35,8 @@ public class BattleRound : MonoBehaviour
 
             if (gameState == "Win" || gameState == "Lose" || gameState == "Draw")
             {
-                inputManager.battleOn = false;
-                inputManager.UpdateCanvas(2);
-                gameState = null;
+                EndOfRound();
+                inputManager.roundCounter = 10;
                 break;
             }
 
@@ -62,7 +61,7 @@ public class BattleRound : MonoBehaviour
                     //teamObject.DestroySelf();
                     teamObject.gameObject.SetActive(false);
                     inputManager.GetGridCell(0).GetComponent<GridCell>().UnstoreObject(teamObject);
-                    Debug.Log(inputManager.GetGridCell(0).GetComponent<GridCell>().GetPlacedObject());
+                    //Debug.Log(inputManager.GetGridCell(0).GetComponent<GridCell>().GetPlacedObject());
                 }
 
                 CheckingGridBattle();
@@ -70,21 +69,15 @@ public class BattleRound : MonoBehaviour
 
                 if (gameState == "Win")
                 {
-                    inputManager.battleOn = false;
-                    inputManager.UpdateCanvas(2);
+                    EndOfRound();
                     inputManager.roundCounter += 1;
-                    inputManager.DestroyField();
-                    gameState = null;
                     break;
                 }
 
                 else if (gameState == "Lose")
                 {
-                    inputManager.battleOn = false;
-                    inputManager.UpdateCanvas(2);
+                    EndOfRound();
                     inputManager.roundCounter = 1;
-                    inputManager.DestroyField();
-                    gameState = null;
                     break;
                 }
 
@@ -94,20 +87,14 @@ public class BattleRound : MonoBehaviour
 
                     if (inputManager.draws > 0)
                     {
-                        inputManager.battleOn = false;
-                        inputManager.UpdateCanvas(2);
-                        //inputManager.roundCounter += 1;
-                        inputManager.DestroyField();
-                        gameState = null;
+                        EndOfRound();
+                        inputManager.roundCounter += 0;
                         break;
                     }
                     else
                     {
-                        inputManager.battleOn = false;
-                        inputManager.UpdateCanvas(2);
+                        EndOfRound();
                         inputManager.roundCounter = 1;
-                        inputManager.DestroyField();
-                        gameState = null;
                         break;
                     }
                 }
@@ -243,7 +230,17 @@ public class BattleRound : MonoBehaviour
             gridCell.StoreObject(placedTeam);
             gridCell.SetPlacedObject(placedTeam);
 
-            Debug.Log(i);
+            //Debug.Log(i);
         }
+    }
+
+    public void EndOfRound()
+    {
+        inputManager.battleOn = false;
+        inputManager.UpdateCanvas(2);
+        inputManager.DestroyField();
+        gameState = null;
+        SetUpBuyingPhase();
+        inputManager.shop.ShopReroll();
     }
 }

@@ -86,7 +86,7 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-            battleRound.SetUpBuyingPhase();
+
         }
     }
 
