@@ -355,11 +355,13 @@ public class BattleRound : MonoBehaviour
 
             if ((placedObject.health != placedObject.baseHealth) && (placedObject.health > 0))
             {
-                int randomOption = Random.Range(0, unitManager.transform.childCount - 1);   // -1 da childCount bei 1 anfängt zu zählen und GetChild bei 0
+                int randomOption = Random.Range(0, unitManager.transform.childCount);
+                
                 while (randomOption == placedObject.transform.GetSiblingIndex())
                 {
                     randomOption = Random.Range(0, unitManager.transform.childCount - 1);
                 }
+
                 GameObject buffedUnit = unitManager.transform.GetChild(randomOption).gameObject;
                 buffedUnit.GetComponent<PlacedObject>().baseAttack += 1;
                 buffedUnit.GetComponent<PlacedObject>().baseHealth += 1;

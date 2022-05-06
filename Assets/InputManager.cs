@@ -136,11 +136,11 @@ public class InputManager : MonoBehaviour
         myNewStats.GetComponent<TextMesh>().text = myNewStats.GetComponentInParent<PlacedObject>().nameA + "\n Attack: " + myNewStats.GetComponentInParent<PlacedObject>().attack +"\n Health: " + myNewStats.GetComponentInParent<PlacedObject>().health;
     }
 
-
     public void UpdateFloatingText(PlacedObject placedObject)
     {
         placedObject.GetComponentInChildren<TextMesh>().text = placedObject.GetComponentInParent<PlacedObject>().nameA + "\n Attack: " + placedObject.GetComponentInParent<PlacedObject>().attack + "\n Health: " + placedObject.GetComponentInParent<PlacedObject>().health;
     }
+
     public void StartBattlePhase()
     {
         // Sets battle variable to true
