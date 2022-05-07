@@ -92,7 +92,7 @@ public class InputManager : MonoBehaviour
         {
             GetCellObject(0).health -= 1;
             UpdateFloatingText(GetCellObject(0));
-            battleRound.CheckAbility(GetCellObject(0));
+            battleRound.CheckAbilityDefense(GetCellObject(0));
         }
     }
 

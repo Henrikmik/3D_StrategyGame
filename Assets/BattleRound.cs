@@ -45,6 +45,7 @@ public class BattleRound : MonoBehaviour
             {
                 enemy.GettingDamaged(teamObject.attack);
                 inputManager.UpdateFloatingText(enemy);
+                CheckAbilityAttack(teamObject, enemyManager);   // überprüft ability vom angreifer
                 //animatorUnit.SetTrigger("HitTrigger");
 
                 teamObject.GettingDamaged(enemy.attack);
@@ -250,7 +251,7 @@ public class BattleRound : MonoBehaviour
         return placedObject.ability;
     }
 
-    public void CheckAbility(PlacedObject placedObject)
+    public void CheckAbilityDefense(PlacedObject placedObject)
     {
         string ability = GetAbility(placedObject);
         Debug.Log("Check Ability");
@@ -269,17 +270,6 @@ public class BattleRound : MonoBehaviour
                 inputManager.UpdateFloatingText(nextUnit.GetComponent<PlacedObject>());
                 Debug.Log(nextUnit);
             }
-        }
-        else if (ability == "cherry")
-        {
-            Debug.Log("Cherry");
-
-            if (enemyManager.transform.GetChild(1) != null)
-            {
-                enemyManager.transform.GetChild(1).GetComponent<PlacedObject>().health -= 2;
-                inputManager.UpdateFloatingText(enemyManager.transform.GetChild(1).GetComponent<PlacedObject>());
-            }
-
         }
         else if (ability == "pineapple")
         {
@@ -369,6 +359,27 @@ public class BattleRound : MonoBehaviour
                 buffedUnit.GetComponent<PlacedObject>().health += 1;
                 inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
                 Debug.Log(buffedUnit);
+            }
+        }
+        else
+        {
+            Debug.Log("No ability");
+        }
+    }
+
+    public void CheckAbilityAttack(PlacedObject placedObject, GameObject manager)   // enemyManager bei cherry und unitManager bei garlic
+    {
+        string ability = GetAbility(placedObject);
+        Debug.Log("Check Ability");
+
+        if (ability == "cherry")
+        {
+            Debug.Log("Cherry");
+
+            if (manager.transform.GetChild(1) != null)
+            {
+                manager.transform.GetChild(1).GetComponent<PlacedObject>().health -= 2;
+                inputManager.UpdateFloatingText(manager.transform.GetChild(1).GetComponent<PlacedObject>());
             }
         }
         else
