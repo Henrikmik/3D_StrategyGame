@@ -90,9 +90,9 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-            GetCellObject(0).health -= 1;
-            UpdateFloatingText(GetCellObject(0));
-            battleRound.CheckAbilityDefense(GetCellObject(0));
+            //GetCellObject(0).health -= 1;
+            //UpdateFloatingText(GetCellObject(0));
+            //battleRound.CheckAbilityDefense(GetCellObject(0));
         }
     }
 

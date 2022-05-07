@@ -23,6 +23,37 @@ public class BattleRound : MonoBehaviour
         StartCoroutine(DelayAction(delayTime));
     }
 
+    IEnumerator DelayBattle(float delayTime, PlacedObject enemy, PlacedObject teamObject)
+    {
+        Debug.Log("Test 1");
+        yield return new WaitForSeconds(1f);
+        Debug.Log("Test 2");
+        enemy.GettingDamaged(teamObject.attack);
+        inputManager.UpdateFloatingText(enemy);
+        CheckAbilityAttack(teamObject, enemyManager);   // überprüft ability vom angreifer
+
+        teamObject.GettingDamaged(enemy.attack);
+        inputManager.UpdateFloatingText(teamObject);
+
+        if (enemy.health <= 0)
+        {
+            enemy.DestroySelf();
+            inputManager.GetEnemyCell(0).GetComponent<GridCell>().UnstoreObject(enemy);
+
+        }
+
+        if (teamObject.health <= 0)
+        {
+            //teamObject.DestroySelf();
+            teamObject.gameObject.SetActive(false);
+            inputManager.GetGridCell(0).GetComponent<GridCell>().UnstoreObject(teamObject);
+            //Debug.Log(inputManager.GetGridCell(0).GetComponent<GridCell>().GetPlacedObject());
+        }
+
+        CheckingGridBattle();
+        CheckingGameState();
+    }
+
     IEnumerator DelayAction(float delayTime)
     {
         while (true)
@@ -43,31 +74,7 @@ public class BattleRound : MonoBehaviour
 
             if (teamObject != null && enemy != null)
             {
-                enemy.GettingDamaged(teamObject.attack);
-                inputManager.UpdateFloatingText(enemy);
-                CheckAbilityAttack(teamObject, enemyManager);   // überprüft ability vom angreifer
-                //animatorUnit.SetTrigger("HitTrigger");
-
-                teamObject.GettingDamaged(enemy.attack);
-                inputManager.UpdateFloatingText(teamObject);
-
-                if (enemy.health <= 0)
-                {
-                    enemy.DestroySelf();
-                    inputManager.GetEnemyCell(0).GetComponent<GridCell>().UnstoreObject(enemy);
-
-                }
-
-                if (teamObject.health <= 0)
-                {
-                    //teamObject.DestroySelf();
-                    teamObject.gameObject.SetActive(false);
-                    inputManager.GetGridCell(0).GetComponent<GridCell>().UnstoreObject(teamObject);
-                    //Debug.Log(inputManager.GetGridCell(0).GetComponent<GridCell>().GetPlacedObject());
-                }
-
-                CheckingGridBattle();
-                CheckingGameState();
+                StartCoroutine(DelayBattle(1f, enemy, teamObject));
 
                 if (gameState == "Win")
                 {
@@ -101,7 +108,7 @@ public class BattleRound : MonoBehaviour
                     }
                 }
             }
-            yield return new WaitForSeconds(delayTime);
+            yield return new WaitForSeconds(delayTime); // letzter change
         }
     }
 
