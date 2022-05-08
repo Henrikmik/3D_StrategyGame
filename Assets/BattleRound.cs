@@ -23,37 +23,6 @@ public class BattleRound : MonoBehaviour
         StartCoroutine(DelayAction(delayTime));
     }
 
-    IEnumerator DelayBattle(float delayTime, PlacedObject enemy, PlacedObject teamObject)
-    {
-        Debug.Log("Test 1");
-        yield return new WaitForSeconds(1f);
-        Debug.Log("Test 2");
-        enemy.GettingDamaged(teamObject.attack);
-        inputManager.UpdateFloatingText(enemy);
-        CheckAbilityAttack(teamObject, enemyManager);   // überprüft ability vom angreifer
-
-        teamObject.GettingDamaged(enemy.attack);
-        inputManager.UpdateFloatingText(teamObject);
-
-        if (enemy.health <= 0)
-        {
-            enemy.DestroySelf();
-            inputManager.GetEnemyCell(0).GetComponent<GridCell>().UnstoreObject(enemy);
-
-        }
-
-        if (teamObject.health <= 0)
-        {
-            //teamObject.DestroySelf();
-            teamObject.gameObject.SetActive(false);
-            inputManager.GetGridCell(0).GetComponent<GridCell>().UnstoreObject(teamObject);
-            //Debug.Log(inputManager.GetGridCell(0).GetComponent<GridCell>().GetPlacedObject());
-        }
-
-        CheckingGridBattle();
-        CheckingGameState();
-    }
-
     IEnumerator DelayAction(float delayTime)
     {
         while (true)
@@ -74,7 +43,57 @@ public class BattleRound : MonoBehaviour
 
             if (teamObject != null && enemy != null)
             {
-                StartCoroutine(DelayBattle(1f, enemy, teamObject));
+                yield return new WaitForSeconds(1f);
+                enemy.GettingDamaged(teamObject.attack);
+                inputManager.UpdateFloatingText(enemy);
+                CheckAbilityAttack(teamObject, enemyManager);   // überprüft ability vom Angreifer
+                CheckAbilityDefense(enemy, enemyManager);
+
+                teamObject.GettingDamaged(enemy.attack);
+                inputManager.UpdateFloatingText(teamObject);
+                CheckAbilityAttack(enemy, unitManager);   // überprüft ability vom Angreifer
+                CheckAbilityDefense(teamObject, unitManager);
+
+                if ((enemy != null) && (enemy.health <= 0))
+                {
+                    enemy.DestroySelf();
+                    inputManager.GetEnemyCell(0).GetComponent<GridCell>().UnstoreObject(enemy);
+                }
+
+                if ((inputManager.GetEnemyObject(1) != null) && (inputManager.GetEnemyObject(1).health <= 0))
+                {
+                    inputManager.GetEnemyObject(1).DestroySelf();
+                    inputManager.GetEnemyCell(1).GetComponent<GridCell>().UnstoreObject(enemy);
+                }
+
+                if ((inputManager.GetEnemyObject(2) != null) && (inputManager.GetEnemyObject(2).health <= 0))
+                {
+                    inputManager.GetEnemyObject(2).DestroySelf();
+                    inputManager.GetEnemyCell(2).GetComponent<GridCell>().UnstoreObject(enemy);
+                }
+
+                if ((teamObject != null) && (teamObject.health <= 0))
+                {
+                    //teamObject.DestroySelf();
+                    teamObject.gameObject.SetActive(false);
+                    inputManager.GetGridCell(0).GetComponent<GridCell>().UnstoreObject(teamObject);
+                    //Debug.Log(inputManager.GetGridCell(0).GetComponent<GridCell>().GetPlacedObject());
+                }
+
+                if ((inputManager.GetCellObject(1) != null) && (inputManager.GetCellObject(1).health <= 0))
+                {
+                    inputManager.GetCellObject(1).gameObject.SetActive(false);
+                    inputManager.GetGridCell(1).GetComponent<GridCell>().UnstoreObject(inputManager.GetCellObject(1));
+                }
+
+                if ((inputManager.GetCellObject(2) != null) && (inputManager.GetCellObject(2).health <= 0))
+                {
+                    inputManager.GetCellObject(2).gameObject.SetActive(false);
+                    inputManager.GetGridCell(2).GetComponent<GridCell>().UnstoreObject(inputManager.GetCellObject(2));
+                }
+
+                CheckingGridBattle();
+                CheckingGameState();
 
                 if (gameState == "Win")
                 {
@@ -258,7 +277,7 @@ public class BattleRound : MonoBehaviour
         return placedObject.ability;
     }
 
-    public void CheckAbilityDefense(PlacedObject placedObject)
+    public void CheckAbilityDefense(PlacedObject placedObject, GameObject manager)  // unitManager/enemyManager
     {
         string ability = GetAbility(placedObject);
         Debug.Log("Check Ability");
@@ -269,7 +288,7 @@ public class BattleRound : MonoBehaviour
 
             if (placedObject.health <= 0)
             {
-                GameObject nextUnit = unitManager.transform.GetChild(placedObject.transform.GetSiblingIndex() + 1).gameObject;
+                GameObject nextUnit = manager.transform.GetChild(placedObject.transform.GetSiblingIndex() + 1).gameObject;
                 nextUnit.GetComponent<PlacedObject>().baseAttack += 2;
                 nextUnit.GetComponent<PlacedObject>().baseHealth += 1;
                 nextUnit.GetComponent<PlacedObject>().attack += 2;
@@ -288,50 +307,107 @@ public class BattleRound : MonoBehaviour
 
             if (placedObject.health <= 0)
             {
-                Unit unit = inputManager.unitList[6];
-
-                if (inputManager.GetCellObject(0) == null)
+                if (manager == unitManager) // unit grape
                 {
-                    GridCell gridCell = inputManager.GetGridCell(0).GetComponent<GridCell>();
-                    Vector2Int pos2 = gridCell.GetPosition();
-                    Vector3 pos3 = new Vector3(inputManager.GetGridCell(0).transform.position.x, 1f, inputManager.GetGridCell(0).transform.position.z);
+                    Unit unit = inputManager.unitList[6];
 
-                    PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
-                    gridCell.SetPlacedObject(placedO);
-                    gridCell.StoreObject(placedO);
-                    placedO.transform.SetParent(unitManager.transform);
-                    placedO.SettingStats();
-                    inputManager.ShowFloatingText(placedO, pos3);
+                    if (inputManager.GetCellObject(0) == null)
+                    {
+                        GridCell gridCell = inputManager.GetGridCell(0).GetComponent<GridCell>();
+                        Vector2Int pos2 = gridCell.GetPosition();
+                        Vector3 pos3 = new Vector3(inputManager.GetGridCell(0).transform.position.x, 1f, inputManager.GetGridCell(0).transform.position.z);
+
+                        PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
+                        gridCell.SetPlacedObject(placedO);
+                        gridCell.StoreObject(placedO);
+                        placedO.transform.SetParent(manager.transform);
+                        placedO.SettingStats();
+                        inputManager.ShowFloatingText(placedO, pos3);
+                    }
+                    else if (inputManager.GetCellObject(1) == null)
+                    {
+                        GridCell gridCell = inputManager.GetGridCell(1).GetComponent<GridCell>();
+                        Vector2Int pos2 = gridCell.GetPosition();
+                        Vector3 pos3 = new Vector3(inputManager.GetGridCell(1).transform.position.x, 1f, inputManager.GetGridCell(1).transform.position.z);
+
+                        PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
+                        gridCell.SetPlacedObject(placedO);
+                        gridCell.StoreObject(placedO);
+                        placedO.transform.SetParent(manager.transform);
+                        placedO.SettingStats();
+                        inputManager.ShowFloatingText(placedO, pos3);
+                    }
+                    else if (inputManager.GetCellObject(2) == null)
+                    {
+                        GridCell gridCell = inputManager.GetGridCell(2).GetComponent<GridCell>();
+                        Vector2Int pos2 = gridCell.GetPosition();
+                        Vector3 pos3 = new Vector3(inputManager.GetGridCell(2).transform.position.x, 1f, inputManager.GetGridCell(2).transform.position.z);
+
+                        PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
+                        gridCell.SetPlacedObject(placedO);
+                        gridCell.StoreObject(placedO);
+                        placedO.transform.SetParent(manager.transform);
+                        placedO.SettingStats();
+                        inputManager.ShowFloatingText(placedO, pos3);
+                    }
+                    else
+                    {
+                        Debug.Log("No free grid");
+                    }
                 }
-                else if (inputManager.GetCellObject(1) == null)
+                
+                else if (manager == enemyManager)   // enemy garlic
                 {
-                    GridCell gridCell = inputManager.GetGridCell(1).GetComponent<GridCell>();
-                    Vector2Int pos2 = gridCell.GetPosition();
-                    Vector3 pos3 = new Vector3(inputManager.GetGridCell(1).transform.position.x, 1f, inputManager.GetGridCell(1).transform.position.z);
+                    Unit unit = inputManager.unitList[6];   // GetCellObject zu GetEnemyObject  GetGridCell zu GetEnemyCell
 
-                    PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
-                    gridCell.SetPlacedObject(placedO);
-                    gridCell.StoreObject(placedO);
-                    placedO.transform.SetParent(unitManager.transform);
-                    placedO.SettingStats();
-                    inputManager.ShowFloatingText(placedO, pos3);
-                }
-                else if(inputManager.GetCellObject(2) == null)
-                {
-                    GridCell gridCell = inputManager.GetGridCell(2).GetComponent<GridCell>();
-                    Vector2Int pos2 = gridCell.GetPosition();
-                    Vector3 pos3 = new Vector3(inputManager.GetGridCell(2).transform.position.x, 1f, inputManager.GetGridCell(2).transform.position.z);
+                    if (inputManager.GetEnemyObject(0) == null)
+                    {
+                        GridCell gridCell = inputManager.GetEnemyCell(0).GetComponent<GridCell>();
+                        Vector2Int pos2 = gridCell.GetPosition();
+                        Vector3 pos3 = new Vector3(inputManager.GetEnemyCell(0).transform.position.x, 1f, inputManager.GetEnemyCell(0).transform.position.z);
 
-                    PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
-                    gridCell.SetPlacedObject(placedO);
-                    gridCell.StoreObject(placedO);
-                    placedO.transform.SetParent(unitManager.transform);
-                    placedO.SettingStats();
-                    inputManager.ShowFloatingText(placedO, pos3);
+                        PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
+                        gridCell.SetPlacedObject(placedO);
+                        gridCell.StoreObject(placedO);
+                        placedO.transform.SetParent(manager.transform);
+                        placedO.SettingStats();
+                        inputManager.ShowFloatingText(placedO, pos3);
+                    }
+                    else if (inputManager.GetEnemyObject(1) == null)
+                    {
+                        GridCell gridCell = inputManager.GetEnemyCell(1).GetComponent<GridCell>();
+                        Vector2Int pos2 = gridCell.GetPosition();
+                        Vector3 pos3 = new Vector3(inputManager.GetEnemyCell(1).transform.position.x, 1f, inputManager.GetEnemyCell(1).transform.position.z);
+
+                        PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
+                        gridCell.SetPlacedObject(placedO);
+                        gridCell.StoreObject(placedO);
+                        placedO.transform.SetParent(manager.transform);
+                        placedO.SettingStats();
+                        inputManager.ShowFloatingText(placedO, pos3);
+                    }
+                    else if (inputManager.GetCellObject(2) == null)
+                    {
+                        GridCell gridCell = inputManager.GetEnemyCell(2).GetComponent<GridCell>();
+                        Vector2Int pos2 = gridCell.GetPosition();
+                        Vector3 pos3 = new Vector3(inputManager.GetEnemyCell(2).transform.position.x, 1f, inputManager.GetEnemyCell(2).transform.position.z);
+
+                        PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
+                        gridCell.SetPlacedObject(placedO);
+                        gridCell.StoreObject(placedO);
+                        placedO.transform.SetParent(manager.transform);
+                        placedO.SettingStats();
+                        inputManager.ShowFloatingText(placedO, pos3);
+                    }
+                    else
+                    {
+                        Debug.Log("No free grid");
+                    }
                 }
+
                 else
                 {
-                    Debug.Log("No free grid");
+                    Debug.Log("No Mangager found");
                 }
             }
         }
@@ -385,8 +461,9 @@ public class BattleRound : MonoBehaviour
 
             if (manager.transform.GetChild(1) != null)
             {
-                manager.transform.GetChild(1).GetComponent<PlacedObject>().health -= 2;
-                inputManager.UpdateFloatingText(manager.transform.GetChild(1).GetComponent<PlacedObject>());
+                    manager.transform.GetChild(1).GetComponent<PlacedObject>().health -= 2;
+                    //CheckAbilityDefense(manager.transform.GetChild(1).GetComponent<PlacedObject>(), manager);
+                    inputManager.UpdateFloatingText(manager.transform.GetChild(1).GetComponent<PlacedObject>());
             }
         }
         else
