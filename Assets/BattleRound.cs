@@ -44,15 +44,18 @@ public class BattleRound : MonoBehaviour
             if (teamObject != null && enemy != null)
             {
                 yield return new WaitForSeconds(1f);
+
+                // Unit greift Enemy an
                 enemy.GettingDamaged(teamObject.attack);
                 inputManager.UpdateFloatingText(enemy);
-                CheckAbilityAttack(teamObject, enemyManager);   // überprüft ability vom Angreifer
-                CheckAbilityDefense(enemy, enemyManager);
+                CheckAbilityAttack(teamObject, enemyManager, true);   // überprüft ability vom Angreifer
+                CheckAbilityDefense(enemy, enemyManager, true);
 
+                // Enemy greift Unit an
                 teamObject.GettingDamaged(enemy.attack);
                 inputManager.UpdateFloatingText(teamObject);
-                CheckAbilityAttack(enemy, unitManager);   // überprüft ability vom Angreifer
-                CheckAbilityDefense(teamObject, unitManager);
+                CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
+                CheckAbilityDefense(teamObject, unitManager, false);
 
                 if ((enemy != null) && (enemy.health <= 0))
                 {
@@ -277,10 +280,10 @@ public class BattleRound : MonoBehaviour
         return placedObject.ability;
     }
 
-    public void CheckAbilityDefense(PlacedObject placedObject, GameObject manager)  // unitManager/enemyManager
+    public void CheckAbilityDefense(PlacedObject placedObject, GameObject manager, bool enemy)  // unitManager/enemyManager : wenn enemy, dann true, wenn unit, dann false
     {
         string ability = GetAbility(placedObject);
-        Debug.Log("Check Ability");
+        //Debug.Log("Check Ability");
 
         if (ability == "apple")
         {
@@ -288,13 +291,22 @@ public class BattleRound : MonoBehaviour
 
             if (placedObject.health <= 0)
             {
-                GameObject nextUnit = manager.transform.GetChild(placedObject.transform.GetSiblingIndex() + 1).gameObject;
-                nextUnit.GetComponent<PlacedObject>().baseAttack += 2;
-                nextUnit.GetComponent<PlacedObject>().baseHealth += 1;
-                nextUnit.GetComponent<PlacedObject>().attack += 2;
-                nextUnit.GetComponent<PlacedObject>().health += 1;
-                inputManager.UpdateFloatingText(nextUnit.GetComponent<PlacedObject>());
-                Debug.Log(nextUnit);
+                int index = placedObject.transform.GetSiblingIndex() + 1;
+                Debug.Log(index);
+
+                if (inputManager.GetCellObject(index) == null)
+                {
+                    Debug.Log("No unit to buff");
+                }
+                else
+                {
+                    inputManager.GetCellObject(index).baseAttack += 2;
+                    inputManager.GetCellObject(index).baseHealth += 1;
+                    inputManager.GetCellObject(index).attack += 2;
+                    inputManager.GetCellObject(index).health += 1;
+                    inputManager.UpdateFloatingText(inputManager.GetCellObject(index));
+                    Debug.Log(inputManager.GetCellObject(index));
+                }
             }
         }
         else if (ability == "pineapple")
@@ -428,20 +440,31 @@ public class BattleRound : MonoBehaviour
 
             if ((placedObject.health != placedObject.baseHealth) && (placedObject.health > 0))
             {
-                int randomOption = Random.Range(0, unitManager.transform.childCount);
-                
-                while (randomOption == placedObject.transform.GetSiblingIndex())
-                {
-                    randomOption = Random.Range(0, unitManager.transform.childCount - 1);
-                }
-
+                int randomOption = Random.Range(0, unitManager.transform.childCount);   // 0 dabei, max childcount ( in dem fall 3) nicht dabei
                 GameObject buffedUnit = unitManager.transform.GetChild(randomOption).gameObject;
-                buffedUnit.GetComponent<PlacedObject>().baseAttack += 1;
-                buffedUnit.GetComponent<PlacedObject>().baseHealth += 1;
-                buffedUnit.GetComponent<PlacedObject>().attack += 1;
-                buffedUnit.GetComponent<PlacedObject>().health += 1;
-                inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
-                Debug.Log(buffedUnit);
+                int numberOfUnitsOnField = NumberOfUnitsOnField(enemy);
+
+                Debug.Log(placedObject.transform.GetSiblingIndex());
+
+                if (numberOfUnitsOnField <= 1)
+                {
+                    Debug.Log("No unit to buff");
+                }
+                else
+                {
+                    while ((randomOption == placedObject.transform.GetSiblingIndex()) || (buffedUnit.activeInHierarchy == false))
+                    {
+                        randomOption = Random.Range(0, unitManager.transform.childCount);
+                        buffedUnit = unitManager.transform.GetChild(randomOption).gameObject;
+                    }
+
+                    buffedUnit.GetComponent<PlacedObject>().baseAttack += 1;
+                    buffedUnit.GetComponent<PlacedObject>().baseHealth += 1;
+                    buffedUnit.GetComponent<PlacedObject>().attack += 1;
+                    buffedUnit.GetComponent<PlacedObject>().health += 1;
+                    inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
+                    Debug.Log(buffedUnit);
+                }
             }
         }
         else
@@ -450,7 +473,7 @@ public class BattleRound : MonoBehaviour
         }
     }
 
-    public void CheckAbilityAttack(PlacedObject placedObject, GameObject manager)   // enemyManager bei cherry und unitManager bei garlic
+    public void CheckAbilityAttack(PlacedObject placedObject, GameObject manager, bool enemy)   // enemyManager bei cherry und unitManager bei garlic : enemy bei cherry true und bei garlic false
     {
         string ability = GetAbility(placedObject);
         Debug.Log("Check Ability");
@@ -458,17 +481,42 @@ public class BattleRound : MonoBehaviour
         if (ability == "cherry")
         {
             Debug.Log("Cherry");
-
-            if (manager.transform.GetChild(1) != null)
+            int numberOfUnitsOnField = NumberOfUnitsOnField(true);
+            Debug.Log(numberOfUnitsOnField);
+            //if (manager.transform.GetChild(1) != null)
+            if (numberOfUnitsOnField > 1)
             {
-                    manager.transform.GetChild(1).GetComponent<PlacedObject>().health -= 2;
-                    //CheckAbilityDefense(manager.transform.GetChild(1).GetComponent<PlacedObject>(), manager);
-                    inputManager.UpdateFloatingText(manager.transform.GetChild(1).GetComponent<PlacedObject>());
+                manager.transform.GetChild(1).GetComponent<PlacedObject>().health -= 2;
+                CheckAbilityDefense(manager.transform.GetChild(1).GetComponent<PlacedObject>(), manager, enemy);
+                inputManager.UpdateFloatingText(manager.transform.GetChild(1).GetComponent<PlacedObject>());
+            }
+            else
+            {
+                Debug.Log("No Target");
             }
         }
         else
         {
             Debug.Log("No ability");
         }
+    }
+
+    public int NumberOfUnitsOnField(bool enemy)
+    {
+        int numberOfUnitsOnField = 0;
+
+        if (CheckObjectInGridCell(0, enemy) != null)
+        {
+            numberOfUnitsOnField += 1;
+        }
+        if (CheckObjectInGridCell(1, enemy) != null)
+        {
+            numberOfUnitsOnField += 1;
+        }
+        if (CheckObjectInGridCell(2, enemy) != null)
+        {
+            numberOfUnitsOnField += 1;
+        }
+        return numberOfUnitsOnField;
     }
 }
