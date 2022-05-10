@@ -51,6 +51,8 @@ public class BattleRound : MonoBehaviour
                 CheckAbilityAttack(teamObject, enemyManager, true);   // überprüft ability vom Angreifer
                 CheckAbilityDefense(enemy, enemyManager, true);
 
+                //yield return new WaitForSeconds(1f);  // für tests
+
                 // Enemy greift Unit an
                 teamObject.GettingDamaged(enemy.attack);
                 inputManager.UpdateFloatingText(teamObject);
@@ -249,6 +251,7 @@ public class BattleRound : MonoBehaviour
     public void SetUpBuyingPhase()
     {
         int childNumber = unitManager.transform.childCount;
+
         for (int i = 0; i < childNumber; i++)
         {
             PlacedObject placedTeam = unitManager.transform.GetChild(i).GetComponent<PlacedObject>();
@@ -287,7 +290,7 @@ public class BattleRound : MonoBehaviour
 
         if (ability == "apple")
         {
-            Debug.Log("Apple");
+            //Debug.Log("Apple");
 
             if (placedObject.health <= 0)
             {
@@ -296,7 +299,7 @@ public class BattleRound : MonoBehaviour
 
                 if (inputManager.GetCellObject(index) == null)
                 {
-                    Debug.Log("No unit to buff");
+                    //Debug.Log("No unit to buff");
                 }
                 else
                 {
@@ -305,7 +308,7 @@ public class BattleRound : MonoBehaviour
                     inputManager.GetCellObject(index).attack += 2;
                     inputManager.GetCellObject(index).health += 1;
                     inputManager.UpdateFloatingText(inputManager.GetCellObject(index));
-                    Debug.Log(inputManager.GetCellObject(index));
+                    Debug.Log("apple: " + inputManager.GetCellObject(index));
                 }
             }
         }
@@ -315,7 +318,7 @@ public class BattleRound : MonoBehaviour
         }
         else if (ability == "grapes")
         {
-            Debug.Log("Grapes");
+            //Debug.Log("Grapes");
 
             if (placedObject.health <= 0)
             {
@@ -335,6 +338,7 @@ public class BattleRound : MonoBehaviour
                         placedO.transform.SetParent(manager.transform);
                         placedO.SettingStats();
                         inputManager.ShowFloatingText(placedO, pos3);
+                        Debug.Log("spawned mini Grape");
                     }
                     else if (inputManager.GetCellObject(1) == null)
                     {
@@ -348,6 +352,7 @@ public class BattleRound : MonoBehaviour
                         placedO.transform.SetParent(manager.transform);
                         placedO.SettingStats();
                         inputManager.ShowFloatingText(placedO, pos3);
+                        Debug.Log("spawned mini Grape");
                     }
                     else if (inputManager.GetCellObject(2) == null)
                     {
@@ -361,10 +366,11 @@ public class BattleRound : MonoBehaviour
                         placedO.transform.SetParent(manager.transform);
                         placedO.SettingStats();
                         inputManager.ShowFloatingText(placedO, pos3);
+                        Debug.Log("spawned mini Grape");
                     }
                     else
                     {
-                        Debug.Log("No free grid");
+                        //Debug.Log("No free grid");
                     }
                 }
                 
@@ -419,24 +425,25 @@ public class BattleRound : MonoBehaviour
 
                 else
                 {
-                    Debug.Log("No Mangager found");
+                    Debug.Log("No Manager found");
                 }
             }
         }
         else if (ability == "coconut")
         {
-            Debug.Log("Coconut");
+            //Debug.Log("Coconut");
 
             if (placedObject.armor == true)
             {
                 placedObject.health = placedObject.baseHealth;
                 placedObject.armor = false;
                 inputManager.UpdateFloatingText(placedObject);
+                Debug.Log("coconut armor");
             }
         }
         else if (ability == "lemon")
         {
-            Debug.Log("Lemon");
+            //Debug.Log("Lemon");
 
             if ((placedObject.health != placedObject.baseHealth) && (placedObject.health > 0))
             {
@@ -448,7 +455,7 @@ public class BattleRound : MonoBehaviour
 
                 if (numberOfUnitsOnField <= 1)
                 {
-                    Debug.Log("No unit to buff");
+                    //Debug.Log("No unit to buff");
                 }
                 else
                 {
@@ -463,41 +470,52 @@ public class BattleRound : MonoBehaviour
                     buffedUnit.GetComponent<PlacedObject>().attack += 1;
                     buffedUnit.GetComponent<PlacedObject>().health += 1;
                     inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
-                    Debug.Log(buffedUnit);
+                    Debug.Log("lemon ability: " + buffedUnit);
                 }
             }
         }
         else
         {
-            Debug.Log("No ability");
+            //Debug.Log("No ability");
         }
     }
 
     public void CheckAbilityAttack(PlacedObject placedObject, GameObject manager, bool enemy)   // enemyManager bei cherry und unitManager bei garlic : enemy bei cherry true und bei garlic false
     {
         string ability = GetAbility(placedObject);
-        Debug.Log("Check Ability");
+        //Debug.Log("Check Ability");
 
         if (ability == "cherry")
         {
-            Debug.Log("Cherry");
-            int numberOfUnitsOnField = NumberOfUnitsOnField(true);
+            //Debug.Log("Cherry");
+            int numberOfUnitsOnField = NumberOfUnitsOnField(enemy);
             Debug.Log(numberOfUnitsOnField);
             //if (manager.transform.GetChild(1) != null)
             if (numberOfUnitsOnField > 1)
             {
-                manager.transform.GetChild(1).GetComponent<PlacedObject>().health -= 2;
-                CheckAbilityDefense(manager.transform.GetChild(1).GetComponent<PlacedObject>(), manager, enemy);
-                inputManager.UpdateFloatingText(manager.transform.GetChild(1).GetComponent<PlacedObject>());
+                PlacedObject affectedUnit = null;
+
+                if (manager == unitManager)
+                {
+                    affectedUnit = inputManager.GetCellObject(1).GetComponent<PlacedObject>();
+                }
+                else if (manager == enemyManager)
+                {
+                    affectedUnit = inputManager.GetEnemyObject(1).GetComponent<PlacedObject>();
+                }
+                affectedUnit.health -= 2;
+                CheckAbilityDefense(affectedUnit, manager, enemy);
+                inputManager.UpdateFloatingText(affectedUnit);
+                Debug.Log("Cherry eingesetzt");
             }
             else
             {
-                Debug.Log("No Target");
+                //Debug.Log("No Target");
             }
         }
         else
         {
-            Debug.Log("No ability");
+            //Debug.Log("No ability");
         }
     }
 
@@ -505,15 +523,15 @@ public class BattleRound : MonoBehaviour
     {
         int numberOfUnitsOnField = 0;
 
-        if (CheckObjectInGridCell(0, enemy) != null)
+        if ((CheckObjectInGridCell(0, enemy) != null) && (CheckObjectInGridCell(0, enemy).gameObject.activeInHierarchy == true))
         {
             numberOfUnitsOnField += 1;
         }
-        if (CheckObjectInGridCell(1, enemy) != null)
+        if ((CheckObjectInGridCell(1, enemy) != null) && (CheckObjectInGridCell(1, enemy).gameObject.activeInHierarchy == true))
         {
             numberOfUnitsOnField += 1;
         }
-        if (CheckObjectInGridCell(2, enemy) != null)
+        if ((CheckObjectInGridCell(2, enemy) != null) && (CheckObjectInGridCell(1, enemy).gameObject.activeInHierarchy == true))
         {
             numberOfUnitsOnField += 1;
         }

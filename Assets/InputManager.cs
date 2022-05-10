@@ -49,12 +49,11 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateHierarchie();
-
         GridCell cellMouseIsOver = IsMouseOverAGridSpace();
 
         if (battleOn != true)
         {
+            UpdateHierarchie();
             //if (Input.GetMouseButtonDown(0))
             //{
             //    PlaceOnGridCell(cellMouseIsOver);
@@ -250,13 +249,23 @@ public class InputManager : MonoBehaviour
         GameObject gridZwei = gameGridEnemyS.transform.GetChild(1).gameObject;
         GameObject gridDrei = gameGridEnemyS.transform.GetChild(2).gameObject;
 
-        Destroy(gridEins.GetComponent<GridCell>().GetPlacedObject().gameObject);
-        Destroy(gridZwei.GetComponent<GridCell>().GetPlacedObject().gameObject);
-        Destroy(gridZwei.GetComponent<GridCell>().GetPlacedObject().gameObject);
+        if (gridEins.GetComponent<GridCell>().GetPlacedObject() != null)
+        {
+            Destroy(gridEins.GetComponent<GridCell>().GetPlacedObject().gameObject);
+        }
+        if (gridZwei.GetComponent<GridCell>().GetPlacedObject() != null)
+        {
+            Destroy(gridZwei.GetComponent<GridCell>().GetPlacedObject().gameObject);
+        }
+        if (gridZwei.GetComponent<GridCell>().GetPlacedObject() != null)
+        {
+            Destroy(gridZwei.GetComponent<GridCell>().GetPlacedObject().gameObject);
+        }
+
         Destroy(gridEins);
         Destroy(gridZwei);
         Destroy(gridDrei);
-    }   // Fixxen
+    }
 
     public void PlaceOnGridCell(GridCell cellMouseIsOver)
     {
@@ -305,7 +314,7 @@ public class InputManager : MonoBehaviour
 
     public void UpdateHierarchie()
     {
-        if (gameGrid.transform.childCount > 2)
+        if ((gameGrid.transform.childCount > 2) && (gameGrid.transform.GetChild(1).gameObject.activeInHierarchy == true) && (gameGrid.transform.GetChild(2).gameObject.activeInHierarchy == true))
         {
             if (GetCellObject(0) != null)
             {
