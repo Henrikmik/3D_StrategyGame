@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8567476910332273359}
   - component: {fileID: 4005462834734205068}
   - component: {fileID: 3005932224415046029}
-  - component: {fileID: 1342793807651892714}
   - component: {fileID: 1707768290409198012}
+  - component: {fileID: 1342793807651892714}
   m_Layer: 0
   m_Name: Mini Grape
   m_TagString: Untagged
@@ -97,18 +97,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1342793807651892714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5691197169057365967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2736062cc948e994fb9ee96bf618e270, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1707768290409198012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,3 +118,15 @@ MonoBehaviour:
   baseHealth: 0
   baseLevel: 0
   armor: 0
+--- !u!114 &1342793807651892714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5691197169057365967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2736062cc948e994fb9ee96bf618e270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

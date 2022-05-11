@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Tomatoe
   description: 
-  ability: coconut
+  ability: cherry
   prefab: {fileID: 1410393195492449281, guid: 5719b400a49f30243b700cb81a879c7f, type: 3}
   visual: {fileID: 0}
   width: 0

@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Garlic
   description: 
-  ability: cherry
+  ability: grapes
   prefab: {fileID: 7105608279199947559, guid: 63d88e4d109fba84fb22a5db8b60cba9, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0
-  attack: 2
+  attack: 1
   health: 4
   level: 1
   cost: 0

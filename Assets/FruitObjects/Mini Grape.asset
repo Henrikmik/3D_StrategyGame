@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Mini Grape
   description: 
-  ability: 
+  ability: mini grapes
   prefab: {fileID: 3711021491077570838, guid: e29563a171e824b4a89879b0ed8dc614, type: 3}
   visual: {fileID: 0}
   width: 0
