@@ -21,6 +21,7 @@ public class PlacedObject : MonoBehaviour
     private Unit unit;
     private Vector2Int origin;
     private Unit.Dir dir;
+    InputManager inputManager;
 
     // stats that can be changed during the battle
     public int attack;
@@ -90,6 +91,53 @@ public class PlacedObject : MonoBehaviour
         else
         {
             armor = false;
+        }
+    }
+
+    public GameObject AttachedGridCell(bool enemy)  // true -> enemy, false -> unit
+    {
+        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+        Debug.Log("Test 99");
+
+        if (enemy == false)
+        {
+            if (gameObject.GetComponent<PlacedObject>() == inputManager.GetCellObject(0).GetComponent<PlacedObject>())
+            {
+                Debug.Log("erste Zelle");
+                return inputManager.GetGridCell(0);
+            }
+            else if (gameObject.GetComponent<PlacedObject>() == inputManager.GetCellObject(1).GetComponent<PlacedObject>())
+            {
+                Debug.Log("zweite Zelle");
+                return inputManager.GetGridCell(1);
+            }
+            else
+            {
+                Debug.Log("Test 00");
+                return null;
+            }
+        }
+        else if (enemy == true)
+        {
+            if (gameObject.GetComponent<PlacedObject>() == inputManager.GetEnemyObject(0).GetComponent<PlacedObject>())
+            {
+                Debug.Log("erste Zelle");
+                return inputManager.GetEnemyCell(0);
+            }
+            else if (gameObject.GetComponent<PlacedObject>() == inputManager.GetEnemyObject(1).GetComponent<PlacedObject>())
+            {
+                Debug.Log("zweite Zelle");
+                return inputManager.GetEnemyCell(1);
+            }
+            else
+            {
+                Debug.Log("Test 00");
+                return null;
+            }
+        }
+        else
+        {
+            return null;
         }
     }
 }

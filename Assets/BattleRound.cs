@@ -60,45 +60,13 @@ public class BattleRound : MonoBehaviour
                 CheckAbilityDefense(teamObject, unitManager, false);
 
                 //yield return new WaitForSeconds(10f);
-
-                if ((inputManager.GetEnemyObject(0) != null) && (inputManager.GetEnemyObject(0).health <= 0))
-                {
-                    inputManager.GetEnemyObject(0).DestroySelf();
-                    inputManager.GetEnemyCell(0).GetComponent<GridCell>().UnstoreObject(inputManager.GetEnemyObject(0));
-                }
-
-                if ((inputManager.GetEnemyObject(1) != null) && (inputManager.GetEnemyObject(1).health <= 0))
-                {
-                    inputManager.GetEnemyObject(1).DestroySelf();
-                    inputManager.GetEnemyCell(1).GetComponent<GridCell>().UnstoreObject(inputManager.GetEnemyObject(1));
-                }
-
-                if ((inputManager.GetEnemyObject(2) != null) && (inputManager.GetEnemyObject(2).health <= 0))
-                {
-                    inputManager.GetEnemyObject(2).DestroySelf();
-                    inputManager.GetEnemyCell(2).GetComponent<GridCell>().UnstoreObject(inputManager.GetEnemyObject(2));
-                }
-
-                if ((inputManager.GetCellObject(0) != null) && (inputManager.GetCellObject(0).health <= 0))
-                {
-                    inputManager.GetCellObject(0).gameObject.SetActive(false);
-                    inputManager.GetGridCell(0).GetComponent<GridCell>().UnstoreObject(inputManager.GetCellObject(0));
-                }
-
-                if ((inputManager.GetCellObject(1) != null) && (inputManager.GetCellObject(1).health <= 0))
-                {
-                    inputManager.GetCellObject(1).gameObject.SetActive(false);
-                    inputManager.GetGridCell(1).GetComponent<GridCell>().UnstoreObject(inputManager.GetCellObject(1));
-                }
-
-                if ((inputManager.GetCellObject(2) != null) && (inputManager.GetCellObject(2).health <= 0))
-                {
-                    inputManager.GetCellObject(2).gameObject.SetActive(false);
-                    inputManager.GetGridCell(2).GetComponent<GridCell>().UnstoreObject(inputManager.GetCellObject(2));
-                }
-
-                CheckingGridBattle();
+                yield return new WaitForSeconds(5f);
+                CheckAllUnitsOnDefeat();
                 yield return new WaitForSeconds(1f);
+                Debug.Log(inputManager.GetCellObject(1));
+                CheckingGridBattle();
+                Debug.Log("Check");
+                yield return new WaitForSeconds(10f);
                 CheckingGameState();
 
                 if (gameState == "Win")
@@ -213,6 +181,7 @@ public class BattleRound : MonoBehaviour
 
     public void CheckingGridBattle()
     {
+
         if (CheckObjectInGridCell(0, false) == null && CheckObjectInGridCell(1, false) != null)
         {
             UnitMove(1, 0, false);
@@ -230,7 +199,7 @@ public class BattleRound : MonoBehaviour
             }
 
         }
-
+        
         if (CheckObjectInGridCell(0, true) == null && CheckObjectInGridCell(1, true) != null)
         {
             UnitMove(1, 0, true);
@@ -310,21 +279,45 @@ public class BattleRound : MonoBehaviour
 
             if (placedObject.health <= 0)
             {
-                int index = placedObject.transform.GetSiblingIndex() + 1;
-                Debug.Log(index);
+                if (placedObject.transform.GetSiblingIndex() < 2)
+                {
+                    int index = placedObject.transform.GetSiblingIndex() + 1;
+                    //Debug.Log(index);
 
-                if (inputManager.GetCellObject(index) == null)
-                {
-                    //Debug.Log("No unit to buff");
-                }
-                else
-                {
-                    inputManager.GetCellObject(index).baseAttack += 2;
-                    inputManager.GetCellObject(index).baseHealth += 1;
-                    inputManager.GetCellObject(index).attack += 2;
-                    inputManager.GetCellObject(index).health += 1;
-                    inputManager.UpdateFloatingText(inputManager.GetCellObject(index));
-                    Debug.Log("apple: " + inputManager.GetCellObject(index));
+                    if (inputManager.GetCellObject(index) == null)
+                    {
+                        Debug.Log("No unit to buff");
+                    }
+                    else if (inputManager.GetCellObject(index).gameObject.activeInHierarchy == true)
+                    {
+                        inputManager.GetCellObject(index).baseAttack += 2;
+                        inputManager.GetCellObject(index).baseHealth += 1;
+                        inputManager.GetCellObject(index).attack += 2;
+                        inputManager.GetCellObject(index).health += 1;
+                        inputManager.UpdateFloatingText(inputManager.GetCellObject(index));
+                        Debug.Log("apple: " + inputManager.GetCellObject(index));
+                    }
+                    else if (inputManager.GetCellObject(index).gameObject.activeInHierarchy == false)
+                    {
+                        index += 1;
+
+                        if (inputManager.GetCellObject(index) != null)
+                        {
+                            if (inputManager.GetCellObject(index).gameObject.activeInHierarchy == true)
+                            {
+                                inputManager.GetCellObject(index).baseAttack += 2;
+                                inputManager.GetCellObject(index).baseHealth += 1;
+                                inputManager.GetCellObject(index).attack += 2;
+                                inputManager.GetCellObject(index).health += 1;
+                                inputManager.UpdateFloatingText(inputManager.GetCellObject(index));
+                                Debug.Log("apple: " + inputManager.GetCellObject(index));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("No unit to buff");
+                    }
                 }
             }
         }
@@ -341,69 +334,59 @@ public class BattleRound : MonoBehaviour
                 if (manager == unitManager) // unit grape
                 {
                     Unit unit = inputManager.unitList[6];
-                    int childNumber = unitManager.transform.childCount;
+                    GameObject gridCellGameObject = placedObject.AttachedGridCell(false);
+                    Debug.Log(gridCellGameObject);
+                    GridCell gridCell = gridCellGameObject.GetComponent<GridCell>();
+                    Vector2Int pos2 = gridCell.GetPosition();
+                    Debug.Log(pos2);
+                    Vector3 pos3 = new Vector3(gridCellGameObject.transform.position.x, 1f, gridCellGameObject.transform.position.z);
+                    Debug.Log(pos3);
 
-                    for (int i = placedObject.transform.GetSiblingIndex(); i < childNumber; i++)    //auf position auf dem feld zugreifen
-                    {
-                        if (inputManager.GetCellObject(i) == placedObject)
-                        {
-                            GridCell gridCell = inputManager.GetGridCell(i).GetComponent<GridCell>();
-                            Vector2Int pos2 = gridCell.GetPosition();
-                            Vector3 pos3 = new Vector3(inputManager.GetGridCell(i).transform.position.x, 1f, inputManager.GetGridCell(i).transform.position.z);
+                    
+                    // deactivate grape
+                    placedObject.gameObject.SetActive(false);
+                    gridCell.UnstoreObject(placedObject);
 
-                            // deactivate grape
-                            placedObject.gameObject.SetActive(false);
-                            inputManager.GetGridCell(i).GetComponent<GridCell>().UnstoreObject(placedObject);
-
-                            // spawn mini grape
-                            PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
-                            gridCell.SetPlacedObject(placedO);
-                            gridCell.StoreObject(placedO);
-                            placedO.transform.SetParent(manager.transform);
-                            placedO.SettingStats();
-                            inputManager.ShowFloatingText(placedO, pos3);
-                            Debug.Log("spawned mini Grape");
-                            childNumber = 10;
-                        }
-                        else
-                        {
-                            Debug.Log("No free Grid");
-                        }
-                    }
+                    
+                    // spawn mini grape
+                    PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
+                    gridCell.SetPlacedObject(placedO);
+                    gridCell.StoreObject(placedO);
+                    placedO.transform.SetParent(manager.transform);
+                    placedO.SettingStats();
+                    inputManager.ShowFloatingText(placedO, pos3);
+                    Debug.Log("spawned mini grape");
                 }
-                
+
                 else if (manager == enemyManager)   // enemy garlic
                 {
-                    Unit unit = inputManager.unitList[6];   // GetCellObject zu GetEnemyObject  GetGridCell zu GetEnemyCell
-                    int childNumber = enemyManager.transform.childCount;
+                    Debug.Log("HH");
+                    Unit unit = inputManager.unitList[6];
+                    Debug.Log("HHH");
+                    GameObject gridCellGameObject = placedObject.AttachedGridCell(true);
+                    Debug.Log("3H");
+                    Debug.Log(gridCellGameObject);
+                    GridCell gridCell = gridCellGameObject.GetComponent<GridCell>();
+                    Vector2Int pos2 = gridCell.GetPosition();
+                    Debug.Log(pos2);
+                    Vector3 pos3 = new Vector3(gridCellGameObject.transform.position.x, 1f, gridCellGameObject.transform.position.z);
+                    Debug.Log(pos3);
 
-                    for (int i = 0; i < childNumber; i++)
-                    {
-                        if (inputManager.GetEnemyObject(i) == placedObject)
-                        {
-                            GridCell gridCell = inputManager.GetEnemyCell(i).GetComponent<GridCell>();
-                            Vector2Int pos2 = gridCell.GetPosition();
-                            Vector3 pos3 = new Vector3(inputManager.GetEnemyCell(i).transform.position.x, 1f, inputManager.GetEnemyCell(i).transform.position.z);
 
-                            // deactivate unit
-                            Destroy(placedObject.gameObject);
+                    // deactivate grape
+                    placedObject.gameObject.SetActive(false);
+                    gridCell.UnstoreObject(placedObject);
 
-                            // spawn mini grape
-                            PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
-                            gridCell.SetPlacedObject(placedO);
-                            gridCell.StoreObject(placedO);
-                            placedO.transform.SetParent(manager.transform);
-                            placedO.SettingStats();
-                            inputManager.ShowFloatingText(placedO, pos3);
-                            Debug.Log("spawned mini");
-                        }
-                        else
-                        {
-                            Debug.Log("No free grid");
-                        }
-                    }
+
+                    // spawn mini grape
+                    PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
+                    gridCell.SetPlacedObject(placedO);
+                    gridCell.StoreObject(placedO);
+                    placedO.transform.SetParent(manager.transform);
+                    placedO.SettingStats();
+                    inputManager.ShowFloatingText(placedO, pos3);
+                    Debug.Log("spawned mini grape");
                 }
-
                 else
                 {
                     Debug.Log("No Manager found");
@@ -496,6 +479,20 @@ public class BattleRound : MonoBehaviour
                 inputManager.UpdateFloatingText(affectedUnit);
                 CheckAbilityDefense(affectedUnit, manager, enemy);
                 Debug.Log("Cherry eingesetzt");
+
+                if ((affectedUnit != null) && (affectedUnit.health <= 0))
+                {
+                    if (manager == unitManager)
+                    {
+                        affectedUnit.gameObject.SetActive(false);
+                        //inputManager.GetGridCell(1).GetComponent<GridCell>().UnstoreObject(affectedUnit); ----- wenn objekt unstored wird entsteht bugg mit mini grape
+                    }
+                    else if (manager == enemyManager)
+                    {
+                        affectedUnit.DestroySelf();
+                        //inputManager.GetEnemyCell(1).GetComponent<GridCell>().UnstoreObject(affectedUnit);
+                    }
+                }
             }
             else
             {
@@ -525,5 +522,44 @@ public class BattleRound : MonoBehaviour
             numberOfUnitsOnField += 1;
         }
         return numberOfUnitsOnField;
+    }
+
+    public void CheckAllUnitsOnDefeat()
+    {
+        if ((inputManager.GetEnemyObject(0) != null) && (inputManager.GetEnemyObject(0).health <= 0))
+        {
+            inputManager.GetEnemyObject(0).DestroySelf();
+            inputManager.GetEnemyCell(0).GetComponent<GridCell>().UnstoreObject(inputManager.GetEnemyObject(0));
+        }
+
+        if ((inputManager.GetEnemyObject(1) != null) && (inputManager.GetEnemyObject(1).health <= 0))
+        {
+            inputManager.GetEnemyObject(1).DestroySelf();
+            inputManager.GetEnemyCell(1).GetComponent<GridCell>().UnstoreObject(inputManager.GetEnemyObject(1));
+        }
+
+        if ((inputManager.GetEnemyObject(2) != null) && (inputManager.GetEnemyObject(2).health <= 0))
+        {
+            inputManager.GetEnemyObject(2).DestroySelf();
+            inputManager.GetEnemyCell(2).GetComponent<GridCell>().UnstoreObject(inputManager.GetEnemyObject(2));
+        }
+
+        if ((inputManager.GetCellObject(0) != null) && (inputManager.GetCellObject(0).health <= 0))
+        {
+            inputManager.GetCellObject(0).gameObject.SetActive(false);
+            inputManager.GetGridCell(0).GetComponent<GridCell>().UnstoreObject(inputManager.GetCellObject(0));
+        }
+
+        if ((inputManager.GetCellObject(1) != null) && (inputManager.GetCellObject(1).health <= 0))
+        {
+            inputManager.GetCellObject(1).gameObject.SetActive(false);
+            inputManager.GetGridCell(1).GetComponent<GridCell>().UnstoreObject(inputManager.GetCellObject(1));
+        }
+
+        if ((inputManager.GetCellObject(2) != null) && (inputManager.GetCellObject(2).health <= 0))
+        {
+            inputManager.GetCellObject(2).gameObject.SetActive(false);
+            inputManager.GetGridCell(2).GetComponent<GridCell>().UnstoreObject(inputManager.GetCellObject(2));
+        }
     }
 }

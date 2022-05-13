@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5b361af279c534ba59bca4785cf132, type: 3}
   m_Name: Tomato
   m_EditorClassIdentifier: 
-  name: Tomatoe
+  name: Tomato
   description: 
-  ability: cherry
+  ability: coconut
   prefab: {fileID: 1410393195492449281, guid: 5719b400a49f30243b700cb81a879c7f, type: 3}
   visual: {fileID: 0}
   width: 0
