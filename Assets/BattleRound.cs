@@ -43,7 +43,7 @@ public class BattleRound : MonoBehaviour
 
             if (teamObject != null && enemy != null)
             {
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(.2f);
 
                 // Unit greift Enemy an
                 enemy.GettingDamaged(teamObject.attack);
@@ -60,13 +60,13 @@ public class BattleRound : MonoBehaviour
                 CheckAbilityDefense(teamObject, unitManager, false);
 
                 //yield return new WaitForSeconds(10f);
-                yield return new WaitForSeconds(5f);
+                yield return new WaitForSeconds(.2f);
                 CheckAllUnitsOnDefeat();
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(.2f);
                 Debug.Log(inputManager.GetCellObject(1));
                 CheckingGridBattle();
                 Debug.Log("Check");
-                yield return new WaitForSeconds(10f);
+                yield return new WaitForSeconds(.2f);
                 CheckingGameState();
 
                 if (gameState == "Win")
