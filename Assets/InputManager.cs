@@ -133,12 +133,18 @@ public class InputManager : MonoBehaviour
 
         var myNewStats = Instantiate(FloatingTextPrefab, objectPos, Quaternion.Euler(cameraAnglex + 20f, cameraAngley - 50f, 0), transform);
         myNewStats.transform.parent = placedObject.transform;
-        myNewStats.GetComponent<TextMesh>().text = myNewStats.GetComponentInParent<PlacedObject>().nameA + "\n Attack: " + myNewStats.GetComponentInParent<PlacedObject>().attack +"\n Health: " + myNewStats.GetComponentInParent<PlacedObject>().health;
+        myNewStats.GetComponent<TextMesh>().text = myNewStats.GetComponentInParent<PlacedObject>().nameA
+            + "\n Attack: " + myNewStats.GetComponentInParent<PlacedObject>().attack 
+            + "\n Health: " + myNewStats.GetComponentInParent<PlacedObject>().health 
+            + "\n Level: " + myNewStats.GetComponentInParent<PlacedObject>().level;
     }
 
     public void UpdateFloatingText(PlacedObject placedObject)
     {
-        placedObject.GetComponentInChildren<TextMesh>().text = placedObject.GetComponentInParent<PlacedObject>().nameA + "\n Attack: " + placedObject.GetComponentInParent<PlacedObject>().attack + "\n Health: " + placedObject.GetComponentInParent<PlacedObject>().health;
+        placedObject.GetComponentInChildren<TextMesh>().text = placedObject.GetComponentInParent<PlacedObject>().nameA
+            + "\n Attack: " + placedObject.GetComponentInParent<PlacedObject>().attack
+            + "\n Health: " + placedObject.GetComponentInParent<PlacedObject>().health
+            + "\n Level: " + placedObject.GetComponentInParent<PlacedObject>().level;
     }
 
     public void StartBattlePhase()

@@ -81,7 +81,7 @@ public class PlacedObject : MonoBehaviour
     {
         attack = baseAttack;
         health = baseHealth;
-        level = baseLevel;
+        //level = baseLevel;
         armor = true;
 
         if (ability == "coconut")

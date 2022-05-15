@@ -40,6 +40,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        oldGridCell = inputManager.IsMouseOverAGridSpace();
         // Do stuff when dragging begins.
         //Debug.Log("OnBeginDrag");
        
@@ -66,8 +67,9 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
                     oldGridCell = cellMouseIsOver;
                     //Debug.Log("Vom Feld");
+
                 }
-                
+
                 else
                 {
                     inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
@@ -77,13 +79,70 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                 }
             }
 
+            else if (cellMouseIsOver.CanBuild() == false)
+            {
+                
+                if (oldGridCell != null)
+                {
+                    PlacedObject swappedPlacedObject = cellMouseIsOver.objectInThisGridSpace;
+
+
+                    if (swappedPlacedObject.nameA == placedObject.nameA)
+                    {
+                        //Debug.Log("LEVEL");
+                        // object gains a level
+                        swappedPlacedObject.level += 1;
+                        inputManager.UpdateFloatingText(swappedPlacedObject);
+
+                        // old object gets deleted
+                        placedObject.DestroySelf();
+                    }
+                    else
+                    {
+                        // place selected object
+                        inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
+                        origin = transform.position;
+
+                        // switch other object
+                        inputManager.DragOnGridCell(oldGridCell, swappedPlacedObject);
+                        swappedPlacedObject.GetComponent<ObjectDragDrop>().origin = swappedPlacedObject.transform.position;
+
+                        oldGridCell = cellMouseIsOver;
+                    }
+                }
+                else if ((oldGridCell == null) && (cellMouseIsOver.objectInThisGridSpace == null))
+                {
+                    inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
+                    origin = transform.position;
+                    oldGridCell = cellMouseIsOver;
+                }
+                else
+                {
+                    PlacedObject swappedPlacedObject = cellMouseIsOver.objectInThisGridSpace;   // unit on targeted grid
+
+                    if ((oldGridCell == null) && (cellMouseIsOver.objectInThisGridSpace.nameA == placedObject.nameA))
+                    {
+                        //Debug.Log("LEVEL");
+                        // object gains a level
+                        swappedPlacedObject.level += 1;
+                        inputManager.UpdateFloatingText(swappedPlacedObject);
+
+                        // old object gets deleted
+                        placedObject.DestroySelf();
+                    }
+                    else
+                    {
+                        transform.position = origin;
+                        //Debug.Log("Cannot build atm! ");
+                    }
+                }
+            }
             else
             {
                 transform.position = origin;
                 //Debug.Log("Cannot build atm! ");
             }
         }
-
         else
         {
             transform.position = origin;
