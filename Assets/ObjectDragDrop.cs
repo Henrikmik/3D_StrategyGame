@@ -122,13 +122,22 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
                     if ((oldGridCell == null) && (cellMouseIsOver.objectInThisGridSpace.nameA == placedObject.nameA))
                     {
-                        //Debug.Log("LEVEL");
-                        // object gains a level
-                        swappedPlacedObject.level += 1;
-                        inputManager.UpdateFloatingText(swappedPlacedObject);
+                        if (swappedPlacedObject.level < 7)
+                        {
+                            //Debug.Log("LEVEL");
+                            // object gains a level
+                            swappedPlacedObject.level += 1;
+                            swappedPlacedObject.LevelupStats();
+                            inputManager.UpdateFloatingText(swappedPlacedObject);
 
-                        // old object gets deleted
-                        placedObject.DestroySelf();
+                            // old object gets deleted
+                            placedObject.DestroySelf();
+                        }
+                        else
+                        {
+                            transform.position = origin;
+                            //Debug.Log("Cannot build atm! ");
+                        }
                     }
                     else
                     {

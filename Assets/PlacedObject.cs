@@ -39,6 +39,8 @@ public class PlacedObject : MonoBehaviour
 
     // special abilitiy
     public bool armor;
+    public bool firstLvlUp = false;
+    public bool secondLvlUp = false;
 
     public void DestroySelf()
     {
@@ -75,7 +77,7 @@ public class PlacedObject : MonoBehaviour
         {
             armor = false;
         }
-    }
+    }   // initialize base stats --> permanent
 
     public void SetStats()
     {
@@ -92,7 +94,7 @@ public class PlacedObject : MonoBehaviour
         {
             armor = false;
         }
-    }
+    }   // initialize stats per round -->
 
     public GameObject AttachedGridCell(bool enemy)  // true -> enemy, false -> unit
     {
@@ -138,6 +140,32 @@ public class PlacedObject : MonoBehaviour
         else
         {
             return null;
+        }
+    }
+
+    public void LevelupStats()
+    {
+        if ((level == 4) && (firstLvlUp == false))
+        {
+            health += 1;
+            baseHealth += 1;
+            attack += 1;
+            baseAttack += 1;
+
+            firstLvlUp = true;
+
+            transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        }
+        else if ((level == 7) && (secondLvlUp == false))
+        {
+            health += 1;
+            baseHealth += 1;
+            attack += 1;
+            baseAttack += 1;
+
+            secondLvlUp = true;
+
+            transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         }
     }
 }

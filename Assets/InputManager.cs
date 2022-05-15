@@ -310,7 +310,20 @@ public class InputManager : MonoBehaviour
         placedObject.transform.position = placementVec;
         placedObject.transform.SetParent(null);
         placedObject.transform.SetParent(unitManager.transform);
-        placedObject.transform.localScale = new Vector3 (1, 1, 1);
+
+        if (placedObject.level < 4)
+        {
+            placedObject.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (placedObject.level < 7)
+        {
+            placedObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        }
+        else
+        {
+            placedObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        }
+
         placedObject.transform.rotation = new Quaternion (0, 0, 0, 0);
         cellMouseIsOver.StoreObject(placedObject);
         cellMouseIsOver.SetPlacedObject(placedObject);

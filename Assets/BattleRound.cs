@@ -360,11 +360,8 @@ public class BattleRound : MonoBehaviour
 
                 else if (manager == enemyManager)   // enemy garlic
                 {
-                    Debug.Log("HH");
                     Unit unit = inputManager.unitList[6];
-                    Debug.Log("HHH");
                     GameObject gridCellGameObject = placedObject.AttachedGridCell(true);
-                    Debug.Log("3H");
                     Debug.Log(gridCellGameObject);
                     GridCell gridCell = gridCellGameObject.GetComponent<GridCell>();
                     Vector2Int pos2 = gridCell.GetPosition();
