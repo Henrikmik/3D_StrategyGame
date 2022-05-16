@@ -87,7 +87,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                     PlacedObject swappedPlacedObject = cellMouseIsOver.objectInThisGridSpace;
 
 
-                    if (swappedPlacedObject.nameA == placedObject.nameA)
+                    if ((swappedPlacedObject.nameA == placedObject.nameA) && (swappedPlacedObject != placedObject))
                     {
                         //Debug.Log("LEVEL");
                         // object gains a level
@@ -96,6 +96,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
                         // old object gets deleted
                         placedObject.DestroySelf();
+                        Debug.Log("Deleted");
                     }
                     else
                     {
@@ -132,6 +133,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
                             // old object gets deleted
                             placedObject.DestroySelf();
+                            Debug.Log("Deleted 2"); // unit auf neuer grid cell wurde nicht unstored, deswegen combined sich da objekt
                         }
                         else
                         {

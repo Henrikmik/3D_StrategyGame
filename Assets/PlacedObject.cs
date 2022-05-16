@@ -145,25 +145,24 @@ public class PlacedObject : MonoBehaviour
 
     public void LevelupStats()
     {
+        health += 1;
+        baseHealth += 1;
+        attack += 1;
+        baseAttack += 1;
+
         if ((level == 4) && (firstLvlUp == false))
         {
-            health += 1;
-            baseHealth += 1;
-            attack += 1;
-            baseAttack += 1;
-
             firstLvlUp = true;
+
+            // Do things when reaching rank 2
 
             transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         }
         else if ((level == 7) && (secondLvlUp == false))
         {
-            health += 1;
-            baseHealth += 1;
-            attack += 1;
-            baseAttack += 1;
-
             secondLvlUp = true;
+
+            // Do things when reaching rank 3
 
             transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         }
