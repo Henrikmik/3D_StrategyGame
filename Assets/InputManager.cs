@@ -59,18 +59,18 @@ public class InputManager : MonoBehaviour
             //    PlaceOnGridCell(cellMouseIsOver);
             //}
 
-            if (Input.GetMouseButtonDown(1))
-            {
-                if (cellMouseIsOver != null)
-                {
-                    GridCell gridCell = cellMouseIsOver;
-                    PlacedObject placedObject = gridCell.GetPlacedObject();
-                    if (placedObject != null)
-                    {
-                        placedObject.DestroySelf();
-                    }
-                }
-            }
+            //if (Input.GetMouseButtonDown(1))
+            //{
+            //    if (cellMouseIsOver != null)
+            //    {
+            //        GridCell gridCell = cellMouseIsOver;
+            //        PlacedObject placedObject = gridCell.GetPlacedObject();
+            //        if (placedObject != null)
+            //        {
+            //            placedObject.DestroySelf();
+            //        }
+            //    }
+            //}
 
             if (Input.GetKeyDown(KeyCode.R))
             {

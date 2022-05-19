@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 
 [RequireComponent(typeof(Collider))]
-public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
 {
     Camera m_cam;
     InputManager inputManager;
@@ -43,7 +43,10 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         oldGridCell = inputManager.IsMouseOverAGridSpace();
         // Do stuff when dragging begins.
         //Debug.Log("OnBeginDrag");
-       
+       if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            Debug.Log("RIGHT");
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -54,11 +57,11 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         GridCell cellMouseIsOver = inputManager.IsMouseOverAGridSpace();
         PlacedObject placedObject = transform.GetComponent<PlacedObject>();
 
-        if (cellMouseIsOver != null)
+        if (cellMouseIsOver != null)    // mouse is over a grid cell
         {
-            if (cellMouseIsOver.CanBuild())
+            if (cellMouseIsOver.CanBuild()) // grid cell is empty
             {
-                if (oldGridCell != null)
+                if (oldGridCell != null)    // was already on the field
                 {
                     inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
                     origin = transform.position;
@@ -70,7 +73,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
                 }
 
-                else
+                else    // objects origin is in the shop
                 {
                     inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
                     origin = transform.position;
@@ -79,26 +82,45 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                 }
             }
 
-            else if (cellMouseIsOver.CanBuild() == false)
+            else if (cellMouseIsOver.CanBuild() == false)   // grid cell is occupied
             {
                 
-                if (oldGridCell != null)
+                if (oldGridCell != null)    // object was already on the field
                 {
                     PlacedObject swappedPlacedObject = cellMouseIsOver.objectInThisGridSpace;
 
 
-                    if ((swappedPlacedObject.nameA == placedObject.nameA) && (swappedPlacedObject != placedObject))
+                    if ((swappedPlacedObject.nameA == placedObject.nameA) && (swappedPlacedObject != placedObject)) // same type but not the same object
                     {
-                        //Debug.Log("LEVEL");
-                        // object gains a level
-                        swappedPlacedObject.level += 1;
-                        inputManager.UpdateFloatingText(swappedPlacedObject);
+                        if (eventData.button == PointerEventData.InputButton.Right)
+                        {
+                            if (swappedPlacedObject.level < 7)  // object level is lower than 7
+                            {
+                                swappedPlacedObject.level += 1;
+                                swappedPlacedObject.LevelupStats();
+                                inputManager.UpdateFloatingText(swappedPlacedObject);
 
-                        // old object gets deleted
-                        placedObject.DestroySelf();
-                        Debug.Log("Deleted");
+                                placedObject.DestroySelf();
+                            }
+                            else    // object level is higher than 6
+                            {
+                                ResetPosition();
+                            }
+                        }
+                        if (eventData.button == PointerEventData.InputButton.Left)
+                        {
+                            // place selected object
+                            inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
+                            origin = transform.position;
+
+                            // switch other object
+                            inputManager.DragOnGridCell(oldGridCell, swappedPlacedObject);
+                            swappedPlacedObject.GetComponent<ObjectDragDrop>().origin = swappedPlacedObject.transform.position;
+
+                            oldGridCell = cellMouseIsOver;
+                        }
                     }
-                    else
+                    else    // not the same type -> switch positions
                     {
                         // place selected object
                         inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
@@ -111,52 +133,71 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                         oldGridCell = cellMouseIsOver;
                     }
                 }
-                else if ((oldGridCell == null) && (cellMouseIsOver.objectInThisGridSpace == null))
+                else if ((oldGridCell == null) && (cellMouseIsOver.objectInThisGridSpace == null))  // object from shop and grid cell empty
                 {
                     inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
                     origin = transform.position;
                     oldGridCell = cellMouseIsOver;
                 }
-                else
+                else    // object from shop and grid cell occupied
                 {
                     PlacedObject swappedPlacedObject = cellMouseIsOver.objectInThisGridSpace;   // unit on targeted grid
 
-                    if ((oldGridCell == null) && (cellMouseIsOver.objectInThisGridSpace.nameA == placedObject.nameA))
+                    if ((oldGridCell == null) && (cellMouseIsOver.objectInThisGridSpace.nameA == placedObject.nameA))   // objects have the same type
                     {
-                        if (swappedPlacedObject.level < 7)
+                        if (eventData.button == PointerEventData.InputButton.Right)
                         {
-                            //Debug.Log("LEVEL");
-                            // object gains a level
-                            swappedPlacedObject.level += 1;
-                            swappedPlacedObject.LevelupStats();
-                            inputManager.UpdateFloatingText(swappedPlacedObject);
+                            if (swappedPlacedObject.level < 7)  // object level is lower than 7
+                            {
+                                swappedPlacedObject.level += 1;
+                                swappedPlacedObject.LevelupStats();
+                                inputManager.UpdateFloatingText(swappedPlacedObject);
 
-                            // old object gets deleted
-                            placedObject.DestroySelf();
-                            Debug.Log("Deleted 2"); // unit auf neuer grid cell wurde nicht unstored, deswegen combined sich da objekt
+                                placedObject.DestroySelf();
+                            }
+                            else    // object level is higher than 6
+                            {
+                                ResetPosition();
+                            }
                         }
-                        else
+                        if (eventData.button == PointerEventData.InputButton.Left)
                         {
-                            transform.position = origin;
-                            //Debug.Log("Cannot build atm! ");
+                            ResetPosition();
                         }
                     }
                     else
                     {
-                        transform.position = origin;
-                        //Debug.Log("Cannot build atm! ");
+                        ResetPosition();
                     }
                 }
             }
             else
             {
-                transform.position = origin;
-                //Debug.Log("Cannot build atm! ");
+                ResetPosition();
             }
         }
         else
         {
-            transform.position = origin;
+            ResetPosition();
+        }
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = origin;
+        //Debug.Log("Cannot build atm! ");
+    }
+
+    // Detect if a click occurs
+    public void OnPointerClick(PointerEventData pointerEventData)
+    {
+        if (pointerEventData.button == PointerEventData.InputButton.Right)
+        {
+            Debug.Log("Rechts");
+        }
+        if (pointerEventData.button == PointerEventData.InputButton.Left)
+        {
+            Debug.Log("Links");
         }
     }
 }
