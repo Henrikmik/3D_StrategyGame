@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 
 [RequireComponent(typeof(Collider))]
-public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
+public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     Camera m_cam;
     InputManager inputManager;
@@ -43,10 +43,6 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         oldGridCell = inputManager.IsMouseOverAGridSpace();
         // Do stuff when dragging begins.
         //Debug.Log("OnBeginDrag");
-       if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            Debug.Log("RIGHT");
-        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -112,7 +108,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                             // place selected object
                             inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
                             origin = transform.position;
-
+                             
                             // switch other object
                             inputManager.DragOnGridCell(oldGridCell, swappedPlacedObject);
                             swappedPlacedObject.GetComponent<ObjectDragDrop>().origin = swappedPlacedObject.transform.position;
@@ -186,18 +182,5 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     {
         transform.position = origin;
         //Debug.Log("Cannot build atm! ");
-    }
-
-    // Detect if a click occurs
-    public void OnPointerClick(PointerEventData pointerEventData)
-    {
-        if (pointerEventData.button == PointerEventData.InputButton.Right)
-        {
-            Debug.Log("Rechts");
-        }
-        if (pointerEventData.button == PointerEventData.InputButton.Left)
-        {
-            Debug.Log("Links");
-        }
     }
 }

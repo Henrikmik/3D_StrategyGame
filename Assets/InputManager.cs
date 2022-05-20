@@ -72,6 +72,19 @@ public class InputManager : MonoBehaviour
             //    }
             //}
 
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                if (cellMouseIsOver != null)
+                {
+                    GridCell gridCell = cellMouseIsOver;
+                    PlacedObject placedObject = gridCell.GetPlacedObject();
+                    if (placedObject != null)
+                    {
+                        placedObject.DestroySelf();
+                    }
+                }
+            }
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 dir = Unit.GetNextDir(dir);

@@ -41,6 +41,7 @@ public class PlacedObject : MonoBehaviour
     public bool armor;
     public bool firstLvlUp = false;
     public bool secondLvlUp = false;
+    public int armorTriggerCounter = 0;
 
     public void DestroySelf()
     {
@@ -85,6 +86,7 @@ public class PlacedObject : MonoBehaviour
         health = baseHealth;
         //level = baseLevel;
         armor = true;
+        armorTriggerCounter = 0;
 
         if (ability == "coconut")
         {

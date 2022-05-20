@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Tomato
   description: 
-  ability: coconut
+  ability: 
   prefab: {fileID: 1410393195492449281, guid: 5719b400a49f30243b700cb81a879c7f, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0
   attack: 1
-  health: 3
+  health: 6
   level: 0
   cost: 0

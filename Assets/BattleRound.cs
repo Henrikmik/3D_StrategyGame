@@ -404,10 +404,31 @@ public class BattleRound : MonoBehaviour
 
             if (placedObject.armor == true)
             {
-                placedObject.health = placedObject.baseHealth;
-                placedObject.armor = false;
-                inputManager.UpdateFloatingText(placedObject);
-                Debug.Log("coconut armor");
+                if (placedObject.level < 7)
+                {
+                    placedObject.health = placedObject.baseHealth;
+                    placedObject.armor = false;
+                    inputManager.UpdateFloatingText(placedObject);
+                    Debug.Log("coconut armor");
+                }
+                if (placedObject.level >= 7)
+                {
+                    if (placedObject.armorTriggerCounter < 1)
+                    {
+                        placedObject.health = placedObject.baseHealth;
+                        inputManager.UpdateFloatingText(placedObject);
+                        placedObject.armorTriggerCounter += 1;
+                        Debug.Log("coconut armor");
+                    }
+                    else if (placedObject.armorTriggerCounter >= 1)
+                    {
+                        placedObject.health = placedObject.baseHealth;
+                        placedObject.armor = false;
+                        placedObject.armorTriggerCounter += 1;
+                        inputManager.UpdateFloatingText(placedObject);
+                        Debug.Log("coconut armor");
+                    }
+                }
             }
         }
         else if (ability == "lemon")
@@ -417,7 +438,9 @@ public class BattleRound : MonoBehaviour
             if ((placedObject.health != placedObject.baseHealth) && (placedObject.health > 0))
             {
                 int randomOption = Random.Range(0, unitManager.transform.childCount);   // 0 dabei, max childcount ( in dem fall 3) nicht dabei
+                int randomOption2 = Random.Range(0, unitManager.transform.childCount);
                 GameObject buffedUnit = unitManager.transform.GetChild(randomOption).gameObject;
+                GameObject buffedUnit2 = unitManager.transform.GetChild(randomOption2).gameObject;
                 int numberOfUnitsOnField = NumberOfUnitsOnField(enemy);
 
                 Debug.Log(placedObject.transform.GetSiblingIndex());
@@ -433,13 +456,46 @@ public class BattleRound : MonoBehaviour
                         randomOption = Random.Range(0, unitManager.transform.childCount);
                         buffedUnit = unitManager.transform.GetChild(randomOption).gameObject;
                     }
+                    while ((randomOption2 == placedObject.transform.GetSiblingIndex()) || (buffedUnit.activeInHierarchy == false))
+                    {
+                        randomOption2 = Random.Range(0, unitManager.transform.childCount);
+                        buffedUnit2 = unitManager.transform.GetChild(randomOption2).gameObject;
+                    }
 
-                    buffedUnit.GetComponent<PlacedObject>().baseAttack += 1;
-                    buffedUnit.GetComponent<PlacedObject>().baseHealth += 1;
-                    buffedUnit.GetComponent<PlacedObject>().attack += 1;
-                    buffedUnit.GetComponent<PlacedObject>().health += 1;
-                    inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
-                    Debug.Log("lemon ability: " + buffedUnit);
+                    if (placedObject.level < 4)
+                    {
+                        buffedUnit.GetComponent<PlacedObject>().baseAttack += 1;
+                        buffedUnit.GetComponent<PlacedObject>().baseHealth += 1;
+                        buffedUnit.GetComponent<PlacedObject>().attack += 1;
+                        buffedUnit.GetComponent<PlacedObject>().health += 1;
+                        inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
+                        Debug.Log("lemon ability: " + buffedUnit);
+                    }
+                    if ((placedObject.level >= 4) && (placedObject.level < 7))
+                    {
+                        buffedUnit.GetComponent<PlacedObject>().baseAttack += 2;
+                        buffedUnit.GetComponent<PlacedObject>().baseHealth += 2;
+                        buffedUnit.GetComponent<PlacedObject>().attack += 2;
+                        buffedUnit.GetComponent<PlacedObject>().health += 2;
+                        inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
+                        Debug.Log("lemon ability: " + buffedUnit);
+                    }
+                    if (placedObject.level >= 7)
+                    {
+                        buffedUnit.GetComponent<PlacedObject>().baseAttack += 4;
+                        buffedUnit.GetComponent<PlacedObject>().baseHealth += 4;
+                        buffedUnit.GetComponent<PlacedObject>().attack += 4;
+                        buffedUnit.GetComponent<PlacedObject>().health += 4;
+                        inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
+                        Debug.Log("lemon ability: " + buffedUnit);
+
+                        buffedUnit2.GetComponent<PlacedObject>().baseAttack += 4;
+                        buffedUnit2.GetComponent<PlacedObject>().baseHealth += 4;
+                        buffedUnit2.GetComponent<PlacedObject>().attack += 4;
+                        buffedUnit2.GetComponent<PlacedObject>().health += 4;
+                        inputManager.UpdateFloatingText(buffedUnit2.GetComponent<PlacedObject>());
+                        Debug.Log("lemon ability: " + buffedUnit2);
+                    }
                 }
             }
         }
@@ -472,9 +528,29 @@ public class BattleRound : MonoBehaviour
                 {
                     affectedUnit = inputManager.GetEnemyObject(1).GetComponent<PlacedObject>();
                 }
-                affectedUnit.health -= 2;
-                inputManager.UpdateFloatingText(affectedUnit);
-                CheckAbilityDefense(affectedUnit, manager, enemy);
+                if (placedObject.level < 4)
+                {
+                    affectedUnit.health -= 2;
+                    inputManager.UpdateFloatingText(affectedUnit);
+                    CheckAbilityDefense(affectedUnit, manager, enemy);
+                    Debug.Log("LEVEL 1 " + affectedUnit);
+                    Debug.Log(affectedUnit.health);
+                }
+                if ((placedObject.level >= 4) && (placedObject.level < 7))
+                {
+                    affectedUnit.health -= 6;
+                    inputManager.UpdateFloatingText(affectedUnit);
+                    CheckAbilityDefense(affectedUnit, manager, enemy);
+                    Debug.Log("LEVEL 4");
+                }
+                if (placedObject.level >= 7)
+                {
+                    affectedUnit.health -= 12;
+                    inputManager.UpdateFloatingText(affectedUnit);
+                    CheckAbilityDefense(affectedUnit, manager, enemy);
+                    Debug.Log("LEVEL 7");
+                }
+
                 Debug.Log("Cherry eingesetzt");
 
                 if ((affectedUnit != null) && (affectedUnit.health <= 0))
