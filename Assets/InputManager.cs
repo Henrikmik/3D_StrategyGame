@@ -102,10 +102,7 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-            //GetCellObject(0).health -= 1;
-            //UpdateFloatingText(GetCellObject(0));
-            //battleRound.CheckAbilityDefense(GetCellObject(0));
-            Debug.Log(unitManager.transform.childCount);
+            roundCounter = 3;
         }
     }
 
@@ -170,15 +167,22 @@ public class InputManager : MonoBehaviour
         gameGridEnemyS.CreateEnemyGrid(0, 2);
         gameGridEnemyS.CreateEnemyGrid(0, 3);
 
-        ////gameGridEnemyS.CreateEnemyGrid(2, 1);
-        ////gameGridEnemyS.CreateEnemyGrid(2, 2);
-        ////gameGridEnemyS.CreateEnemyGrid(2, 3);
+        // Creates extenden enemy Grid
+        if (roundCounter >= 3)
+        {
+            gameGridEnemyS.CreateEnemyGrid(2, 1);
+            gameGridEnemyS.CreateEnemyGrid(2, 2);
+            gameGridEnemyS.CreateEnemyGrid(2, 3);
+        }
 
         // Gets the first enemy grid cell
         GridCell enemyGridCell = gameGridEnemyS.transform.GetChild(0).GetComponent<GridCell>();
 
         // Gets the second enemy grid cell
         GridCell enemyGridCell2 = gameGridEnemyS.transform.GetChild(1).GetComponent<GridCell>();
+
+        // Gets the first Gric Cell of the second lane
+        GridCell enemyGridCell4 = gameGridEnemyS.transform.GetChild(3).GetComponent<GridCell>();
 
         // Updates Canvas
         UpdateCanvas(1);
@@ -206,6 +210,18 @@ public class InputManager : MonoBehaviour
         placedEnemy2.transform.SetParent(enemyManager.transform);
         placedEnemy2.SettingStats();
         ShowFloatingText(placedEnemy2, enemy2Pos3);
+
+        // Creates enemy on second grid cell
+        Unit enemy3 = unitList[3];
+        Vector2Int enemy4Pos = enemyGridCell4.GetPosition();
+        Vector3 enemy4Pos3 = new Vector3(enemyGridCell4.transform.position.x, 1f, enemyGridCell4.transform.position.z);
+
+        PlacedObject placedEnemy3 = PlacedObject.Create(enemy4Pos3, enemy4Pos, Unit.Dir.Down, enemy3);
+        enemyGridCell4.SetPlacedObject(placedEnemy3);
+        enemyGridCell4.StoreObject(placedEnemy3);
+        placedEnemy3.transform.SetParent(enemyManager.transform);
+        placedEnemy3.SettingStats();
+        ShowFloatingText(placedEnemy3, enemy4Pos3);
     }
 
     // Gets grid cell

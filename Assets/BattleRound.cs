@@ -6,6 +6,7 @@ public class BattleRound : MonoBehaviour
 {
     public InputManager inputManager;
     public string gameState = null;
+    public string gameState2 = null;
     public GameObject gameGridEnemy;
     public GameObject unitManager;
     public GameObject enemyManager;
@@ -13,77 +14,154 @@ public class BattleRound : MonoBehaviour
 
     public void StartBattle()
     {
-        HealthManager(3f);
+        HealthManager(3f, 1);
         gameState = null;
     }
 
-    public void HealthManager(float delayTime)
+    public void HealthManager(float delayTime, int lane)
     {
         //Debug.Log("Battle Start");
-        StartCoroutine(DelayAction(delayTime));
+        StartCoroutine(DelayAction(delayTime, lane));
     }
 
-    IEnumerator DelayAction(float delayTime)
+    IEnumerator DelayAction(float delayTime, int lane)
     {
         while (true)
         {
-            CheckingGridBattle();
-            CheckingGameState();
+            CheckingGridBattle(lane);
+            CheckingGameState(lane);
             //Debug.Log("In while");
 
-            PlacedObject enemy = inputManager.GetEnemyObject(0);
-            PlacedObject teamObject = inputManager.GetCellObject(0);
-
-            if (gameState == "Win" || gameState == "Lose" || gameState == "Draw")
+            if (lane == 1)
             {
-                EndOfRound();
-                inputManager.roundCounter = 10;
-                break;
+                PlacedObject enemy = inputManager.GetEnemyObject(0);
+                PlacedObject teamObject = inputManager.GetCellObject(0);
+
+                if (teamObject != null && enemy != null)
+                {
+                    yield return new WaitForSeconds(.2f);
+
+                    // Unit greift Enemy an
+                    enemy.GettingDamaged(teamObject.attack);
+                    inputManager.UpdateFloatingText(enemy);
+                    CheckAbilityAttack(teamObject, enemyManager, true);   // überprüft ability vom Angreifer
+                    CheckAbilityDefense(enemy, enemyManager, true);
+
+                    //yield return new WaitForSeconds(1f);  // für tests
+
+                    // Enemy greift Unit an
+                    teamObject.GettingDamaged(enemy.attack);
+                    inputManager.UpdateFloatingText(teamObject);
+                    CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
+                    CheckAbilityDefense(teamObject, unitManager, false);
+
+                    //yield return new WaitForSeconds(10f);
+                    yield return new WaitForSeconds(.2f);
+                    CheckAllUnitsOnDefeat();
+                    yield return new WaitForSeconds(.2f);
+                    Debug.Log(inputManager.GetCellObject(1));
+                    CheckingGridBattle(lane);
+                    Debug.Log("Check");
+                    yield return new WaitForSeconds(.2f);
+                    CheckingGameState(lane);
+                }
             }
-
-            if (teamObject != null && enemy != null)
+            else if (lane == 2)
             {
-                yield return new WaitForSeconds(.2f);
+                PlacedObject enemy = inputManager.GetEnemyObject(4);
+                PlacedObject teamObject = inputManager.GetCellObject(4);
 
-                // Unit greift Enemy an
-                enemy.GettingDamaged(teamObject.attack);
-                inputManager.UpdateFloatingText(enemy);
-                CheckAbilityAttack(teamObject, enemyManager, true);   // überprüft ability vom Angreifer
-                CheckAbilityDefense(enemy, enemyManager, true);
+                if (gameState2 == "Win" || gameState2 == "Lose" || gameState2 == "Draw")
+                {
+                    EndOfRound();
+                    inputManager.roundCounter = 10;
+                    break;
+                }
 
-                //yield return new WaitForSeconds(1f);  // für tests
+                if (teamObject != null && enemy != null)
+                {
+                    yield return new WaitForSeconds(.2f);
 
-                // Enemy greift Unit an
-                teamObject.GettingDamaged(enemy.attack);
-                inputManager.UpdateFloatingText(teamObject);
-                CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
-                CheckAbilityDefense(teamObject, unitManager, false);
+                    // Unit greift Enemy an
+                    enemy.GettingDamaged(teamObject.attack);
+                    inputManager.UpdateFloatingText(enemy);
+                    CheckAbilityAttack(teamObject, enemyManager, true);   // überprüft ability vom Angreifer
+                    CheckAbilityDefense(enemy, enemyManager, true);
 
-                //yield return new WaitForSeconds(10f);
-                yield return new WaitForSeconds(.2f);
-                CheckAllUnitsOnDefeat();
-                yield return new WaitForSeconds(.2f);
-                Debug.Log(inputManager.GetCellObject(1));
-                CheckingGridBattle();
-                Debug.Log("Check");
-                yield return new WaitForSeconds(.2f);
-                CheckingGameState();
+                    //yield return new WaitForSeconds(1f);  // für tests
 
+                    // Enemy greift Unit an
+                    teamObject.GettingDamaged(enemy.attack);
+                    inputManager.UpdateFloatingText(teamObject);
+                    CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
+                    CheckAbilityDefense(teamObject, unitManager, false);
+
+                    //yield return new WaitForSeconds(10f);
+                    yield return new WaitForSeconds(.2f);
+                    CheckAllUnitsOnDefeat();
+                    yield return new WaitForSeconds(.2f);
+                    Debug.Log(inputManager.GetCellObject(1));
+                    CheckingGridBattle(lane);
+                    Debug.Log("Check");
+                    yield return new WaitForSeconds(.2f);
+                    CheckingGameState(lane);
+                }
+            }
+            if (lane == 1)
+            {
                 if (gameState == "Win")
+                {
+                    //EndOfRound();
+                    inputManager.roundCounter += 1;
+                    HealthManager(3f, 1);
+                    break;
+                }
+
+                else if (gameState == "Lose")
+                {
+                    //EndOfRound();
+                    inputManager.roundCounter = 1;
+                    HealthManager(3f, 1);
+                    break;
+                }
+
+                else if (gameState == "Draw")
+                {
+                    inputManager.draws -= 1;
+
+                    if (inputManager.draws > 0)
+                    {
+                        //EndOfRound();
+                        inputManager.roundCounter += 0;
+                        HealthManager(3f, 1);
+                        break;
+                    }
+                    else
+                    {
+                        //EndOfRound();
+                        inputManager.roundCounter = 1;
+                        HealthManager(3f, 1);
+                        break;
+                    }
+                }
+            }
+            if (lane== 2)
+            {
+                if (gameState2 == "Win")
                 {
                     EndOfRound();
                     inputManager.roundCounter += 1;
                     break;
                 }
 
-                else if (gameState == "Lose")
+                else if (gameState2 == "Lose")
                 {
                     EndOfRound();
                     inputManager.roundCounter = 1;
                     break;
                 }
 
-                else if (gameState == "Draw")
+                else if (gameState2 == "Draw")
                 {
                     inputManager.draws -= 1;
 
@@ -101,8 +179,8 @@ public class BattleRound : MonoBehaviour
                     }
                 }
             }
-            yield return new WaitForSeconds(delayTime); // letzter change
         }
+        yield return new WaitForSeconds(delayTime); // letzter change
     }
 
     public void UnitMove(int oldPos, int newPos, bool enemy)
@@ -133,34 +211,68 @@ public class BattleRound : MonoBehaviour
         }
     }
 
-    public void CheckingGameState()
+    public void CheckingGameState(int lane) // lane 1: toplane - lane 2: botlane - lane 3: final battle
     {
-        if (CheckObjectInGridCell(0, true) == null && CheckObjectInGridCell(1, true) == null && CheckObjectInGridCell(2, true) == null)
-        {
-            if (CheckObjectInGridCell(0, false) == null && CheckObjectInGridCell(1, false) == null && CheckObjectInGridCell(2, false) == null)
-            {
-                Debug.Log("Draw");
-                gameState = "Draw";
-            }
-
-            else
-            {
-                Debug.Log("Win");
-                gameState = "Win";
-            }
-        }
-        else if(CheckObjectInGridCell(0, false) == null && CheckObjectInGridCell(1, false) == null && CheckObjectInGridCell(2, false) == null)
+        if (lane == 1)
         {
             if (CheckObjectInGridCell(0, true) == null && CheckObjectInGridCell(1, true) == null && CheckObjectInGridCell(2, true) == null)
             {
-                Debug.Log("Draw");
-                gameState = "Draw";
-            }
+                if (CheckObjectInGridCell(0, false) == null && CheckObjectInGridCell(1, false) == null && CheckObjectInGridCell(2, false) == null)
+                {
+                    Debug.Log("Draw");
+                    gameState = "Draw";
+                }
 
-            else
+                else
+                {
+                    Debug.Log("Win");
+                    gameState = "Win";
+                }
+            }
+            else if (CheckObjectInGridCell(0, false) == null && CheckObjectInGridCell(1, false) == null && CheckObjectInGridCell(2, false) == null)
             {
-                Debug.Log("Lose");
-                gameState = "Lose";
+                if (CheckObjectInGridCell(0, true) == null && CheckObjectInGridCell(1, true) == null && CheckObjectInGridCell(2, true) == null)
+                {
+                    Debug.Log("Draw");
+                    gameState = "Draw";
+                }
+
+                else
+                {
+                    Debug.Log("Lose");
+                    gameState = "Lose";
+                }
+            }
+        }
+        if (lane == 2)  // 0=3, 1=4, 2=5    gamestate=gamestate2
+        {
+            if (CheckObjectInGridCell(3, true) == null && CheckObjectInGridCell(4, true) == null && CheckObjectInGridCell(5, true) == null)
+            {
+                if (CheckObjectInGridCell(3, false) == null && CheckObjectInGridCell(4, false) == null && CheckObjectInGridCell(5, false) == null)
+                {
+                    Debug.Log("Draw");
+                    gameState2 = "Draw";
+                }
+
+                else
+                {
+                    Debug.Log("Win");
+                    gameState2 = "Win";
+                }
+            }
+            else if (CheckObjectInGridCell(3, false) == null && CheckObjectInGridCell(4, false) == null && CheckObjectInGridCell(5, false) == null)
+            {
+                if (CheckObjectInGridCell(3, true) == null && CheckObjectInGridCell(4, true) == null && CheckObjectInGridCell(5, true) == null)
+                {
+                    Debug.Log("Draw");
+                    gameState2 = "Draw";
+                }
+
+                else
+                {
+                    Debug.Log("Lose");
+                    gameState2 = "Lose";
+                }
             }
         }
     }
@@ -179,41 +291,81 @@ public class BattleRound : MonoBehaviour
         }
     }
 
-    public void CheckingGridBattle()
+    public void CheckingGridBattle(int lane)    // lane 1: toplane - lane 2: botlane - lane 3: final battle
     {
-
-        if (CheckObjectInGridCell(0, false) == null && CheckObjectInGridCell(1, false) != null)
+        // lane 1
+        if (lane == 1)
         {
-            UnitMove(1, 0, false);
-        }
-        
-        if (CheckObjectInGridCell(1, false) == null && CheckObjectInGridCell(2, false) != null)
-        {
-            if (CheckObjectInGridCell(0, false) == null)
+            if (CheckObjectInGridCell(0, false) == null && CheckObjectInGridCell(1, false) != null)
             {
-                UnitMove(2, 0, false);
-            }
-            else
-            {
-                UnitMove(2, 1, false);
+                UnitMove(1, 0, false);
             }
 
-        }
-        
-        if (CheckObjectInGridCell(0, true) == null && CheckObjectInGridCell(1, true) != null)
-        {
-            UnitMove(1, 0, true);
-        }
+            if (CheckObjectInGridCell(1, false) == null && CheckObjectInGridCell(2, false) != null)
+            {
+                if (CheckObjectInGridCell(0, false) == null)
+                {
+                    UnitMove(2, 0, false);
+                }
+                else
+                {
+                    UnitMove(2, 1, false);
+                }
 
-        if (CheckObjectInGridCell(1, true) == null && CheckObjectInGridCell(2, true) != null)
-        {
-            if (CheckObjectInGridCell(0, true) == null)
-            {
-                UnitMove(2, 0, true);
             }
-            else
+
+            if (CheckObjectInGridCell(0, true) == null && CheckObjectInGridCell(1, true) != null)
             {
-                UnitMove(2, 1, true);
+                UnitMove(1, 0, true);
+            }
+
+            if (CheckObjectInGridCell(1, true) == null && CheckObjectInGridCell(2, true) != null)
+            {
+                if (CheckObjectInGridCell(0, true) == null)
+                {
+                    UnitMove(2, 0, true);
+                }
+                else
+                {
+                    UnitMove(2, 1, true);
+                }
+            }
+        }
+        if (lane == 2)  // 0=3, 1=4, 2=5
+        {
+            if (CheckObjectInGridCell(3, false) == null && CheckObjectInGridCell(4, false) != null)
+            {
+                UnitMove(4, 3, false);
+            }
+
+            if (CheckObjectInGridCell(4, false) == null && CheckObjectInGridCell(5, false) != null)
+            {
+                if (CheckObjectInGridCell(3, false) == null)
+                {
+                    UnitMove(5, 3, false);
+                }
+                else
+                {
+                    UnitMove(5, 4, false);
+                }
+
+            }
+
+            if (CheckObjectInGridCell(3, true) == null && CheckObjectInGridCell(4, true) != null)
+            {
+                UnitMove(4, 3, true);
+            }
+
+            if (CheckObjectInGridCell(4, true) == null && CheckObjectInGridCell(5, true) != null)
+            {
+                if (CheckObjectInGridCell(3, true) == null)
+                {
+                    UnitMove(5, 3, true);
+                }
+                else
+                {
+                    UnitMove(5, 4, true);
+                }
             }
         }
     }
@@ -633,6 +785,20 @@ public class BattleRound : MonoBehaviour
         {
             inputManager.GetCellObject(2).gameObject.SetActive(false);
             inputManager.GetGridCell(2).GetComponent<GridCell>().UnstoreObject(inputManager.GetCellObject(2));
+        }
+    }
+
+    public void GameState(int lane)
+    {
+        string state;
+
+        if (lane == 1)
+        {
+            state = gameState;   
+        }
+        if (lane == 2)
+        {
+            state = gameState2;
         }
     }
 }

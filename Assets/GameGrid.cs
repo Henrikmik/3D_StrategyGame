@@ -10,22 +10,43 @@ public class GameGrid : MonoBehaviour
     private float gridSpaceSize = 1.3f;
     private int gridCreateX;
     private int gridCreateY;
+    InputManager inputManager;
+    private bool createGrid2 = true;
 
     [SerializeField] private GameObject gridCellPrefab;
     private GameObject gameGrid;
+    private GameObject gameGrid2;
 
 
     void Start()
     {
+        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+        gameGrid2 = GameObject.Find("GameGrid2");
         StartCoroutine(CreateGrid());
+    }
+
+    void Update()
+    {
+        if ((inputManager.roundCounter == 3) && (createGrid2 == true))
+        {
+            StartCoroutine(CreateGrid());
+            createGrid2 = false;
+        }
     }
 
     // Creates the grid when the game starts
     private IEnumerator CreateGrid()
     {
-        //gameGrid = new GameObject();
         int x = 0;
 
+        // Changing variables for building the extended Grid
+        if (inputManager.roundCounter == 3)
+        {
+            x = 2;
+            //gameGrid = gameGrid2;
+        }    
+
+        // checking if there is a Grid Cell Prefab
         if (gridCellPrefab == null)
         {
             Debug.LogError("ERROR: Grid Cell Prefab on the Game grid is not assigned");
