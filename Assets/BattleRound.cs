@@ -21,16 +21,6 @@ public class BattleRound : MonoBehaviour
         gameState2 = null;
     }
 
-    private void Update()
-    {
-        if ((inputManager.roundCounter >= 3) && (round2 == true))
-        {
-            round2 = false;
-            Debug.Log("2222222222222");
-            HealthManager(3f, 2);
-        }
-    }
-
     public void HealthManager(float delayTime, int lane)
     {
         //Debug.Log("Battle Start");
@@ -76,27 +66,24 @@ public class BattleRound : MonoBehaviour
                     yield return new WaitForSeconds(.2f);
                     CheckAllUnitsOnDefeat();
                     yield return new WaitForSeconds(.2f);
-                    Debug.Log(inputManager.GetCellObject(1));
+                    //Debug.Log(inputManager.GetCellObject(1));
                     CheckingGridBattle(lane);
-                    Debug.Log("Check");
+                    //Debug.Log("Check");
                     yield return new WaitForSeconds(.2f);
                     CheckingGameState(lane);
                 }
             }
-            else if (lane == 2)
-            {
-                PlacedObject enemy = inputManager.GetEnemyObject(4);
-                PlacedObject teamObject = inputManager.GetCellObject(4);
 
-                if (gameState2 == "Win" || gameState2 == "Lose" || gameState2 == "Draw")
-                {
-                    EndOfRound();
-                    inputManager.roundCounter = 10;
-                    break;
-                }
+            if (lane == 2)
+            {
+                Debug.Log("--------------");
+                PlacedObject enemy = inputManager.GetEnemyObject(3);
+                Debug.Log("11");
+                PlacedObject teamObject = inputManager.GetCellObject(3);
 
                 if (teamObject != null && enemy != null)
                 {
+                    Debug.Log("22");
                     yield return new WaitForSeconds(.2f);
 
                     // Unit greift Enemy an
@@ -106,84 +93,66 @@ public class BattleRound : MonoBehaviour
                     CheckAbilityDefense(enemy, enemyManager, true);
 
                     //yield return new WaitForSeconds(1f);  // für tests
-
+                    Debug.Log("33");
                     // Enemy greift Unit an
                     teamObject.GettingDamaged(enemy.attack);
                     inputManager.UpdateFloatingText(teamObject);
                     CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
                     CheckAbilityDefense(teamObject, unitManager, false);
-
+                    Debug.Log("44");
                     //yield return new WaitForSeconds(10f);
                     yield return new WaitForSeconds(.2f);
                     CheckAllUnitsOnDefeat();
+                    Debug.Log("55");
                     yield return new WaitForSeconds(.2f);
-                    Debug.Log(inputManager.GetCellObject(1));
+                    //Debug.Log(inputManager.GetCellObject(1));
                     CheckingGridBattle(lane);
-                    Debug.Log("Check");
+                    //Debug.Log("Check");
+                    Debug.Log("66");
                     yield return new WaitForSeconds(.2f);
                     CheckingGameState(lane);
+                    Debug.Log("77");
                 }
             }
+
             if (lane == 1)
             {
-                if (gameState == "Win")
+                if ((gameState == "Win") || (gameState == "Lose") || (gameState == "Draw"))
                 {
-                    //EndOfRound();
-                    //inputManager.roundCounter += 1;
                     Debug.Log("ROUND 2");
-                    round2 = true;
-                    break;
-                }
-
-                else if (gameState == "Lose")
-                {
-                    //EndOfRound();
-                    //inputManager.roundCounter = 1;
-                    Debug.Log("ROUND 2");
-                    round2 = true;
-                    break;
-                }
-
-                else if (gameState == "Draw")
-                {
-                    inputManager.draws -= 1;
-
-                    if (inputManager.draws > 0)
-                    {
-                        //EndOfRound();
-                        //inputManager.roundCounter += 0;
-                        Debug.Log("ROUND 2");
-                        round2 = true;
-                        break;
-                    }
-                    else
-                    {
-                        //EndOfRound();
-                        //inputManager.roundCounter = 1;
-                        Debug.Log("ROUND 2");
-                        round2 = true;
-                        break;
-                    }
+                    lane = 2;
                 }
             }
-            if (lane== 2)
+            if (lane == 2)  // draw resets to same roundCounter // Lose resets to round 1 or main menu
             {
-                if (gameState2 == "Win")
+                if ((gameState == "Win") && (gameState2 == "Win"))
                 {
+                    // WIN
                     EndOfRound();
                     inputManager.roundCounter += 1;
                     break;
                 }
 
-                else if (gameState2 == "Lose")
+                else if ((gameState == "Win") && (gameState2 == "Draw"))
                 {
+                    // WIN
                     EndOfRound();
-                    inputManager.roundCounter = 1;
+                    inputManager.roundCounter += 1;
                     break;
                 }
 
-                else if (gameState2 == "Draw")
+                else if ((gameState == "Draw") && (gameState2 == "Win"))
                 {
+                    // WIN
+                    EndOfRound();
+                    inputManager.roundCounter += 1;
+                    break;
+                }
+
+                else if ((gameState == "Draw") && (gameState2 == "Draw"))
+                {
+                    // Draw
+
                     inputManager.draws -= 1;
 
                     if (inputManager.draws > 0)
@@ -199,9 +168,47 @@ public class BattleRound : MonoBehaviour
                         break;
                     }
                 }
+
+                else if ((gameState == "Win") && (gameState2 == "Lose"))
+                {
+                    // Final Battle
+                    EndOfRound();
+                    break;
+                }
+
+                else if ((gameState == "Lose") && (gameState2 == "Win"))
+                {
+                    // Final Battle
+                    EndOfRound();
+                    break;
+                }
+
+                else if ((gameState == "Lose") && (gameState2 == "Draw"))
+                {
+                    // Lose
+                    EndOfRound();
+                    inputManager.roundCounter = 1;
+                    break;
+                }
+
+                else if ((gameState == "Draw") && (gameState2 == "Lose"))
+                {
+                    // Lose
+                    EndOfRound();
+                    inputManager.roundCounter = 1;
+                    break;
+                }
+
+                else if ((gameState == "Lose") && (gameState2 == "Lose"))
+                {
+                    // Lose
+                    EndOfRound();
+                    inputManager.roundCounter = 1;
+                    break;
+                }
             }
+
         }
-        Debug.Log("TT");
         yield return new WaitForSeconds(delayTime); // letzter change
     }
 
@@ -773,6 +780,8 @@ public class BattleRound : MonoBehaviour
 
     public void CheckAllUnitsOnDefeat()
     {
+
+        //// ENEMY
         if ((inputManager.GetEnemyObject(0) != null) && (inputManager.GetEnemyObject(0).health <= 0))
         {
             inputManager.GetEnemyObject(0).DestroySelf();
@@ -791,6 +800,25 @@ public class BattleRound : MonoBehaviour
             inputManager.GetEnemyCell(2).GetComponent<GridCell>().UnstoreObject(inputManager.GetEnemyObject(2));
         }
 
+        if ((inputManager.GetEnemyObject(3) != null) && (inputManager.GetEnemyObject(3).health <= 0))
+        {
+            inputManager.GetEnemyObject(3).DestroySelf();
+            inputManager.GetEnemyCell(3).GetComponent<GridCell>().UnstoreObject(inputManager.GetEnemyObject(3));
+        }
+
+        if ((inputManager.GetEnemyObject(4) != null) && (inputManager.GetEnemyObject(4).health <= 0))
+        {
+            inputManager.GetEnemyObject(4).DestroySelf();
+            inputManager.GetEnemyCell(4).GetComponent<GridCell>().UnstoreObject(inputManager.GetEnemyObject(4));
+        }
+
+        if ((inputManager.GetEnemyObject(5) != null) && (inputManager.GetEnemyObject(5).health <= 0))
+        {
+            inputManager.GetEnemyObject(5).DestroySelf();
+            inputManager.GetEnemyCell(5).GetComponent<GridCell>().UnstoreObject(inputManager.GetEnemyObject(5));
+        }
+
+        //// UNIT
         if ((inputManager.GetCellObject(0) != null) && (inputManager.GetCellObject(0).health <= 0))
         {
             inputManager.GetCellObject(0).gameObject.SetActive(false);
@@ -807,6 +835,24 @@ public class BattleRound : MonoBehaviour
         {
             inputManager.GetCellObject(2).gameObject.SetActive(false);
             inputManager.GetGridCell(2).GetComponent<GridCell>().UnstoreObject(inputManager.GetCellObject(2));
+        }
+
+        if ((inputManager.GetCellObject(3) != null) && (inputManager.GetCellObject(3).health <= 0))
+        {
+            inputManager.GetCellObject(3).gameObject.SetActive(false);
+            inputManager.GetGridCell(3).GetComponent<GridCell>().UnstoreObject(inputManager.GetCellObject(3));
+        }
+
+        if ((inputManager.GetCellObject(4) != null) && (inputManager.GetCellObject(4).health <= 0))
+        {
+            inputManager.GetCellObject(4).gameObject.SetActive(false);
+            inputManager.GetGridCell(4).GetComponent<GridCell>().UnstoreObject(inputManager.GetCellObject(4));
+        }
+
+        if ((inputManager.GetCellObject(5) != null) && (inputManager.GetCellObject(5).health <= 0))
+        {
+            inputManager.GetCellObject(5).gameObject.SetActive(false);
+            inputManager.GetGridCell(5).GetComponent<GridCell>().UnstoreObject(inputManager.GetCellObject(5));
         }
     }
 
