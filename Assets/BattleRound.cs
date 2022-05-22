@@ -7,6 +7,7 @@ public class BattleRound : MonoBehaviour
     public InputManager inputManager;
     public string gameState = null;
     public string gameState2 = null;
+    public bool round2 = false;
     public GameObject gameGridEnemy;
     public GameObject unitManager;
     public GameObject enemyManager;
@@ -14,21 +15,37 @@ public class BattleRound : MonoBehaviour
 
     public void StartBattle()
     {
+        //Debug.Log("test");
         HealthManager(3f, 1);
         gameState = null;
+        gameState2 = null;
+    }
+
+    private void Update()
+    {
+        if ((inputManager.roundCounter >= 3) && (round2 == true))
+        {
+            round2 = false;
+            Debug.Log("2222222222222");
+            HealthManager(3f, 2);
+        }
     }
 
     public void HealthManager(float delayTime, int lane)
     {
         //Debug.Log("Battle Start");
+        //Debug.Log("test 2");
         StartCoroutine(DelayAction(delayTime, lane));
     }
 
     IEnumerator DelayAction(float delayTime, int lane)
     {
+        //Debug.Log("test 3");
         while (true)
         {
+            //Debug.Log("test 4");
             CheckingGridBattle(lane);
+            //Debug.Log("test 5");
             CheckingGameState(lane);
             //Debug.Log("In while");
 
@@ -112,16 +129,18 @@ public class BattleRound : MonoBehaviour
                 if (gameState == "Win")
                 {
                     //EndOfRound();
-                    inputManager.roundCounter += 1;
-                    HealthManager(3f, 1);
+                    //inputManager.roundCounter += 1;
+                    Debug.Log("ROUND 2");
+                    round2 = true;
                     break;
                 }
 
                 else if (gameState == "Lose")
                 {
                     //EndOfRound();
-                    inputManager.roundCounter = 1;
-                    HealthManager(3f, 1);
+                    //inputManager.roundCounter = 1;
+                    Debug.Log("ROUND 2");
+                    round2 = true;
                     break;
                 }
 
@@ -132,15 +151,17 @@ public class BattleRound : MonoBehaviour
                     if (inputManager.draws > 0)
                     {
                         //EndOfRound();
-                        inputManager.roundCounter += 0;
-                        HealthManager(3f, 1);
+                        //inputManager.roundCounter += 0;
+                        Debug.Log("ROUND 2");
+                        round2 = true;
                         break;
                     }
                     else
                     {
                         //EndOfRound();
-                        inputManager.roundCounter = 1;
-                        HealthManager(3f, 1);
+                        //inputManager.roundCounter = 1;
+                        Debug.Log("ROUND 2");
+                        round2 = true;
                         break;
                     }
                 }
@@ -180,6 +201,7 @@ public class BattleRound : MonoBehaviour
                 }
             }
         }
+        Debug.Log("TT");
         yield return new WaitForSeconds(delayTime); // letzter change
     }
 
