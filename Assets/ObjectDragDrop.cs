@@ -92,7 +92,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                         {
                             if (swappedPlacedObject.level < 7)  // object level is lower than 7
                             {
-                                swappedPlacedObject.level += 1;
+                                swappedPlacedObject.level += placedObject.level;
                                 swappedPlacedObject.LevelupStats();
                                 inputManager.UpdateFloatingText(swappedPlacedObject);
 
@@ -145,7 +145,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                         {
                             if (swappedPlacedObject.level < 7)  // object level is lower than 7
                             {
-                                swappedPlacedObject.level += 1;
+                                swappedPlacedObject.level += placedObject.level;
                                 swappedPlacedObject.LevelupStats();
                                 inputManager.UpdateFloatingText(swappedPlacedObject);
 
