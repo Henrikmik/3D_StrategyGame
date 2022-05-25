@@ -376,6 +376,22 @@ public class InputManager : MonoBehaviour
             {
                 GetCellObject(2).transform.SetSiblingIndex(2);
             }
+            // Update Hierarchy lane 2
+            if (roundCounter >= 3)
+            {
+                if (GetCellObject(3) != null)
+                {
+                    GetCellObject(3).transform.SetSiblingIndex(3);
+                }
+                if (GetCellObject(4) != null)
+                {
+                    GetCellObject(4).transform.SetSiblingIndex(4);
+                }
+                if (GetCellObject(5) != null)
+                {
+                    GetCellObject(5).transform.SetSiblingIndex(5);
+                }
+            }
         }
     }
 }
