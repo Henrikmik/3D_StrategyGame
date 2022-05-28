@@ -101,19 +101,17 @@ public class PlacedObject : MonoBehaviour
     public GameObject AttachedGridCell(bool enemy)  // true -> enemy, false -> unit
     {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
-        Debug.Log("AttachedGridCell");
-        Debug.Log(gameObject.GetComponent<PlacedObject>());
 
         if (enemy == false)     // BUG DARF nicht in die erste zeile kommen -> wenn grape auf zweiter linie stirbt!!!!!!!!!!!!!!!!!!
         {
-            if (inputManager.GetCellObject(0).GetComponent<PlacedObject>() != null)
+            if ((inputManager.GetCellObject(0).GetComponent<PlacedObject>() != null) && (inputManager.GetCellObject(0).isActiveAndEnabled == true))
             {
                 if (gameObject.GetComponent<PlacedObject>() == inputManager.GetCellObject(0).GetComponent<PlacedObject>())
                 {
                     //Debug.Log("erste Zelle");
                     return inputManager.GetGridCell(0);
                 }
-                if (inputManager.GetCellObject(1).GetComponent<PlacedObject>() != null)
+                if ((inputManager.GetCellObject(1).GetComponent<PlacedObject>() != null) && (inputManager.GetCellObject(1).isActiveAndEnabled == true))
                 {
                     if (gameObject.GetComponent<PlacedObject>() == inputManager.GetCellObject(1).GetComponent<PlacedObject>())
                     {
@@ -130,14 +128,14 @@ public class PlacedObject : MonoBehaviour
                     return null;
                 }
             }
-            else if(inputManager.GetCellObject(3).GetComponent<PlacedObject>() != null)
+            else if((inputManager.GetCellObject(3).GetComponent<PlacedObject>() != null) && (inputManager.GetCellObject(3).isActiveAndEnabled == true))
             {
-                if(gameObject.GetComponent<PlacedObject>() == inputManager.GetCellObject(4).GetComponent<PlacedObject>())
+                if(gameObject.GetComponent<PlacedObject>() == inputManager.GetCellObject(3).GetComponent<PlacedObject>())
                 {
-                    Debug.Log("vierte Zelle");
+                    //Debug.Log("vierte Zelle");
                     return inputManager.GetGridCell(3);
                 }
-                if (inputManager.GetCellObject(4).GetComponent<PlacedObject>() != null)
+                if ((inputManager.GetCellObject(4).GetComponent<PlacedObject>() != null) && (inputManager.GetCellObject(4).isActiveAndEnabled == true))
                 {
                     if (gameObject.GetComponent<PlacedObject>() == inputManager.GetCellObject(4).GetComponent<PlacedObject>())
                     {
@@ -160,24 +158,6 @@ public class PlacedObject : MonoBehaviour
                 return null;
             }
         }
-        //else if (enemy == true)
-        //{
-        //    if (gameObject.GetComponent<PlacedObject>() == inputManager.GetEnemyObject(0).GetComponent<PlacedObject>())
-        //    {
-        //        //Debug.Log("erste Zelle");
-        //        return inputManager.GetEnemyCell(0);
-        //    }
-        //    else if (gameObject.GetComponent<PlacedObject>() == inputManager.GetEnemyObject(1).GetComponent<PlacedObject>())
-        //    {
-        //        //Debug.Log("zweite Zelle");
-        //        return inputManager.GetEnemyCell(1);
-        //    }
-        //    else
-        //    {
-        //        //Debug.Log("Test 00");
-        //        return null;
-        //    }
-        //}
         else
         {
             return null;

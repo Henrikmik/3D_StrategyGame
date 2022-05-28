@@ -8,6 +8,7 @@ public class Shop : MonoBehaviour
     public Unit[] buyableShopObjects;
     public Canvas canvas;
     public InputManager inputManager;
+    public bool freezedShop = false;
     public void SetShoppingSpace()
     {
         shopSpace.Add(canvas.transform.GetChild(0).GetChild(0).gameObject);
@@ -52,29 +53,50 @@ public class Shop : MonoBehaviour
 
     public void ShopReroll()
     {
-        // Deleting shop objects
-        foreach (GameObject g in shopSpace)
+        if (freezedShop == false)
         {
-            if (g.transform.childCount >= 3)
+            // Deleting shop objects
+            foreach (GameObject g in shopSpace)
             {
-                if (g.transform.GetChild(2))
+                if (g.transform.childCount >= 3)
                 {
-                    Destroy(g.transform.GetChild(2).gameObject);
-                    //Debug.Log("Löschung");
+                    if (g.transform.GetChild(2))
+                    {
+                        Destroy(g.transform.GetChild(2).gameObject);
+                        //Debug.Log("Löschung");
+                    }
+                }
+                else
+                {
+                    //Debug.Log("Keine Löschung");
                 }
             }
-            else
+
+            // Generating new shop objects
+            foreach (GameObject e in shopSpace)
             {
-                //Debug.Log("Keine Löschung");
+                //Debug.Log("Neue Unit");
+                Unit unit = RandomOption();
+                PlaceUnitInShop(e, unit);
             }
         }
-
-        // Generating new shop objects
-        foreach (GameObject e in shopSpace)
+        else
         {
-            //Debug.Log("Neue Unit");
-            Unit unit = RandomOption();
-            PlaceUnitInShop(e, unit);
+
+        }
+
+    }
+    public void FreezeShop()
+    {
+        if (freezedShop == true)
+        {
+            freezedShop = false;
+            //Debug.Log("Shop is not freezed");
+        }
+        else if (freezedShop == false)
+        {
+            freezedShop = true;
+            //Debug.Log("Shop is freezed");
         }
     }
 }

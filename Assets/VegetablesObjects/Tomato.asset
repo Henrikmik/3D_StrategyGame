@@ -19,7 +19,7 @@ MonoBehaviour:
   visual: {fileID: 0}
   width: 0
   height: 0
-  attack: 1
-  health: 6
+  attack: 4
+  health: 20
   level: 0
   cost: 0
