@@ -7,6 +7,7 @@ public class BattleRound : MonoBehaviour
     public InputManager inputManager;
     public string gameState = null;
     public string gameState2 = null;
+    public string finalGameState = null;
     public bool round2 = false;
     public GameObject gameGridEnemy;
     public GameObject unitManager;
@@ -106,6 +107,44 @@ public class BattleRound : MonoBehaviour
                 }
             }
 
+            if (lane == 3)  // final battle on toplane
+            {
+                PlacedObject enemy = inputManager.GetEnemyObject(0);
+                PlacedObject teamObject = inputManager.GetCellObject(0);
+
+                if (teamObject != null && enemy != null)
+                {
+                    yield return new WaitForSeconds(.2f);
+
+                    // Unit greift Enemy an
+                    enemy.GettingDamaged(teamObject.attack);
+                    inputManager.UpdateFloatingText(enemy);
+                    CheckAbilityAttack(teamObject, enemyManager, true);   // überprüft ability vom Angreifer
+                    CheckAbilityDefense(enemy, enemyManager, true);
+                    //yield return new WaitForSeconds(1f);  // für tests
+
+                    // Enemy greift Unit an
+                    teamObject.GettingDamaged(enemy.attack);
+                    inputManager.UpdateFloatingText(teamObject);
+                    CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
+                    CheckAbilityDefense(teamObject, unitManager, false);
+
+                    yield return new WaitForSeconds(1f);
+                    CheckAllUnitsOnDefeat(lane);
+
+                    yield return new WaitForSeconds(1f);
+                    CheckingGridBattle(lane);
+
+                    yield return new WaitForSeconds(1f);
+                    CheckingGameState(lane);
+                }
+            }
+
+            if (lane == 4)  // final battle on botlane
+            {
+
+            }
+
             yield return new WaitForSeconds(.5f);
 
             if (lane == 1)
@@ -176,16 +215,82 @@ public class BattleRound : MonoBehaviour
 
                 else if ((gameState == "Win") && (gameState2 == "Lose"))
                 {
-                    // Final Battle
-                    EndOfRound();
-                    break;
+                    if (gameState == "Win")
+                    {
+                        // units stay on lane 1
+                        // enemy units go over to lane 1
+                        if (inputManager.GetEnemyCell(3).GetComponent<GridCell>().isOccupied == true)
+                        {
+                            UnitMove(3, 0, true);
+                        }
+                        if (inputManager.GetEnemyCell(4).GetComponent<GridCell>().isOccupied == true)
+                        {
+                            UnitMove(4, 1, true);
+                        }
+                        if (inputManager.GetEnemyCell(5).GetComponent<GridCell>().isOccupied == true)
+                        {
+                            UnitMove(5, 2, true);
+                        }
+                        lane = 3;
+                    }
+                    else if (gameState2 == "Win")
+                    {
+                        // units stay on lane 2
+                        // enemy units go to lane 2
+                        if (inputManager.GetEnemyCell(0).GetComponent<GridCell>().isOccupied == true)
+                        {
+                            UnitMove(0, 3, true);
+                        }
+                        if (inputManager.GetEnemyCell(1).GetComponent<GridCell>().isOccupied == true)
+                        {
+                            UnitMove(1, 4, true);
+                        }
+                        if (inputManager.GetEnemyCell(2).GetComponent<GridCell>().isOccupied == true)
+                        {
+                            UnitMove(2, 5, true);
+                        }
+                        lane = 4;
+                    }
                 }
 
                 else if ((gameState == "Lose") && (gameState2 == "Win"))
                 {
-                    // Final Battle
-                    EndOfRound();
-                    break;
+                    if (gameState == "Win")
+                    {
+                        // units stay on lane 1
+                        // enemy units go over to lane 1
+                        if (inputManager.GetEnemyCell(3).GetComponent<GridCell>().isOccupied == true)
+                        {
+                            UnitMove(3, 0, true);
+                        }
+                        if (inputManager.GetEnemyCell(4).GetComponent<GridCell>().isOccupied == true)
+                        {
+                            UnitMove(4, 1, true);
+                        }
+                        if (inputManager.GetEnemyCell(5).GetComponent<GridCell>().isOccupied == true)
+                        {
+                            UnitMove(5, 2, true);
+                        }
+                        lane = 3;
+                    }
+                    else if (gameState2 == "Win")
+                    {
+                        // units stay on lane 2
+                        // enemy units go to lane 2
+                        if (inputManager.GetEnemyCell(0).GetComponent<GridCell>().isOccupied == true)
+                        {
+                            UnitMove(0, 3, true);
+                        }
+                        if (inputManager.GetEnemyCell(1).GetComponent<GridCell>().isOccupied == true)
+                        {
+                            UnitMove(1, 4, true);
+                        }
+                        if (inputManager.GetEnemyCell(2).GetComponent<GridCell>().isOccupied == true)
+                        {
+                            UnitMove(2, 5, true);
+                        }
+                        lane = 4;
+                    }
                 }
 
                 else if ((gameState == "Lose") && (gameState2 == "Draw"))
@@ -211,6 +316,39 @@ public class BattleRound : MonoBehaviour
                     inputManager.roundCounter = 1;
                     break;
                 }
+            }
+
+            if (finalGameState == "Win")
+            {
+                Debug.Log("Winner Winner");
+                EndOfRound();
+                break;
+            }
+            else if (finalGameState == "Draw")
+            {
+                inputManager.draws -= 1;
+
+                if (inputManager.draws > 0)
+                {
+                    Debug.Log("Draw Draw");
+                    EndOfRound();
+                    inputManager.roundCounter += 0;
+                    break;
+                }
+                else
+                {
+                    Debug.Log("Draw Draw");
+                    EndOfRound();
+                    inputManager.roundCounter = 1;
+                    break;
+                }
+            }
+            else if (finalGameState == "Lose")
+            {
+                Debug.Log("Lose Lose");
+                EndOfRound();
+                inputManager.roundCounter = 1;
+                break;
             }
 
         }
@@ -306,6 +444,68 @@ public class BattleRound : MonoBehaviour
                 {
                     Debug.Log("Lose");
                     gameState2 = "Lose";
+                }
+            }
+        }
+        if (lane == 3)
+        {
+            if (CheckObjectInGridCell(0, true) == null && CheckObjectInGridCell(1, true) == null && CheckObjectInGridCell(2, true) == null)
+            {
+                if (CheckObjectInGridCell(0, false) == null && CheckObjectInGridCell(1, false) == null && CheckObjectInGridCell(2, false) == null)
+                {
+                    Debug.Log("Draw");
+                    finalGameState = "Draw";
+                }
+
+                else
+                {
+                    Debug.Log("Win");
+                    finalGameState = "Win";
+                }
+            }
+            else if (CheckObjectInGridCell(0, false) == null && CheckObjectInGridCell(1, false) == null && CheckObjectInGridCell(2, false) == null)
+            {
+                if (CheckObjectInGridCell(0, true) == null && CheckObjectInGridCell(1, true) == null && CheckObjectInGridCell(2, true) == null)
+                {
+                    Debug.Log("Draw");
+                    finalGameState = "Draw";
+                }
+
+                else
+                {
+                    Debug.Log("Lose");
+                    finalGameState = "Lose";
+                }
+            }
+        }
+        if (lane == 4)
+        {
+            if (CheckObjectInGridCell(3, true) == null && CheckObjectInGridCell(4, true) == null && CheckObjectInGridCell(5, true) == null)
+            {
+                if (CheckObjectInGridCell(3, false) == null && CheckObjectInGridCell(4, false) == null && CheckObjectInGridCell(5, false) == null)
+                {
+                    Debug.Log("Draw");
+                    finalGameState = "Draw";
+                }
+
+                else
+                {
+                    Debug.Log("Win");
+                    finalGameState = "Win";
+                }
+            }
+            else if (CheckObjectInGridCell(3, false) == null && CheckObjectInGridCell(4, false) == null && CheckObjectInGridCell(5, false) == null)
+            {
+                if (CheckObjectInGridCell(3, true) == null && CheckObjectInGridCell(4, true) == null && CheckObjectInGridCell(5, true) == null)
+                {
+                    Debug.Log("Draw");
+                    finalGameState = "Draw";
+                }
+
+                else
+                {
+                    Debug.Log("Lose");
+                    finalGameState = "Lose";
                 }
             }
         }
@@ -450,6 +650,8 @@ public class BattleRound : MonoBehaviour
         inputManager.UpdateCanvas(2);
         inputManager.DestroyField();
         gameState = null;
+        gameState2 = null;
+        finalGameState = null;
         SetUpBuyingPhase();
         inputManager.shop.ShopReroll();
     }
@@ -1123,17 +1325,17 @@ public class BattleRound : MonoBehaviour
         }
     }
 
-    public void GameState(int lane)
-    {
-        string state;
+    //public void GameState(int lane)
+    //{
+    //    string state;
 
-        if (lane == 1)
-        {
-            state = gameState;   
-        }
-        if (lane == 2)
-        {
-            state = gameState2;
-        }
-    }
+    //    if (lane == 1)
+    //    {
+    //        state = gameState;   
+    //    }
+    //    if (lane == 2)
+    //    {
+    //        state = gameState2;
+    //    }
+    //}
 }

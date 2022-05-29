@@ -104,6 +104,11 @@ public class InputManager : MonoBehaviour
         {
             roundCounter = 3;
         }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            DestroyField();
+        }
     }
 
     // Returns the grid cell if mouse is over grid cell and returns null if it is not
@@ -280,26 +285,32 @@ public class InputManager : MonoBehaviour
 
     public void DestroyField()
     {
-        GameObject gridEins = gameGridEnemyS.transform.GetChild(0).gameObject;
-        GameObject gridZwei = gameGridEnemyS.transform.GetChild(1).gameObject;
-        GameObject gridDrei = gameGridEnemyS.transform.GetChild(2).gameObject;
-
-        if (gridEins.GetComponent<GridCell>().GetPlacedObject() != null)
+        for (int i = 0; i < gameGridEnemyS.transform.childCount; i++)
         {
-            Destroy(gridEins.GetComponent<GridCell>().GetPlacedObject().gameObject);
-        }
-        if (gridZwei.GetComponent<GridCell>().GetPlacedObject() != null)
-        {
-            Destroy(gridZwei.GetComponent<GridCell>().GetPlacedObject().gameObject);
-        }
-        if (gridZwei.GetComponent<GridCell>().GetPlacedObject() != null)
-        {
-            Destroy(gridZwei.GetComponent<GridCell>().GetPlacedObject().gameObject);
+            GameObject gridDestroy = gameGridEnemyS.transform.GetChild(i).gameObject;
+            Destroy(gridDestroy);
         }
 
-        Destroy(gridEins);
-        Destroy(gridZwei);
-        Destroy(gridDrei);
+        //GameObject gridEins = gameGridEnemyS.transform.GetChild(0).gameObject;
+        //GameObject gridZwei = gameGridEnemyS.transform.GetChild(1).gameObject;
+        //GameObject gridDrei = gameGridEnemyS.transform.GetChild(2).gameObject;
+
+        //if (gridEins.GetComponent<GridCell>().GetPlacedObject() != null)
+        //{
+        //    Destroy(gridEins.GetComponent<GridCell>().GetPlacedObject().gameObject);
+        //}
+        //if (gridZwei.GetComponent<GridCell>().GetPlacedObject() != null)
+        //{
+        //    Destroy(gridZwei.GetComponent<GridCell>().GetPlacedObject().gameObject);
+        //}
+        //if (gridZwei.GetComponent<GridCell>().GetPlacedObject() != null)
+        //{
+        //    Destroy(gridZwei.GetComponent<GridCell>().GetPlacedObject().gameObject);
+        //}
+
+        //Destroy(gridEins);
+        //Destroy(gridZwei);
+        //Destroy(gridDrei);
     }
 
     public void PlaceOnGridCell(GridCell cellMouseIsOver)
