@@ -20,6 +20,6 @@ MonoBehaviour:
   width: 0
   height: 0
   attack: 3
-  health: 20
+  health: 1
   level: 1
   cost: 0

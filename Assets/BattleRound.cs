@@ -745,7 +745,7 @@ public class BattleRound : MonoBehaviour
                         placedO.name = "Mini Grape(Clone)";
                         placedO.ability = "mini grape";
                         placedO.health = 1;
-                        placedO.attack = (placedObject.attack/2);
+                        placedO.attack = (Mathf.RoundToInt(placedObject.attack * 0.5f));
                         inputManager.ShowFloatingText(placedO, pos3);
                         Debug.Log("Summon Pineapple");
                     }
