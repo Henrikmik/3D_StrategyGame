@@ -514,7 +514,49 @@ public class BattleRound : MonoBehaviour
         }
         else if (ability == "pineapple")
         {
-            // stage 3
+            if (placedObject.health <= 0)
+            {
+                if (manager == unitManager)
+                {
+                    Unit unit = inputManager.unitList[2];
+                    GameObject gridCellGameObject = placedObject.AttachedGridCell(false);
+                    GridCell gridCell;
+                    if (gridCellGameObject.transform.position.x >= 2.6f)
+                    {
+                        gridCell = inputManager.GetGridCell(5).GetComponent<GridCell>();
+                    }
+                    else
+                    {
+                        gridCell = inputManager.GetGridCell(2).GetComponent<GridCell>();
+                    }
+                    Vector2Int pos2 = gridCell.GetPosition();
+                    Vector3 pos3 = new Vector3(gridCell.transform.position.x, 1f, gridCell.transform.position.z);
+
+                    // spawn extra pineapple
+                    if (gridCell.isOccupied == false)
+                    {
+                        PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
+                        gridCell.SetPlacedObject(placedO);
+                        gridCell.StoreObject(placedO);
+                        placedO.transform.SetParent(manager.transform);
+                        placedO.SettingStats();
+                        placedO.name = "Mini Grape(Clone)";
+                        placedO.ability = "mini grape";
+                        placedO.health = 1;
+                        placedO.attack = (placedObject.attack/2);
+                        inputManager.ShowFloatingText(placedO, pos3);
+                        Debug.Log("Summon Pineapple");
+                    }
+                }
+                else if (manager == enemyManager)
+                {
+
+                }
+                else
+                {
+                    Debug.Log("No manager found");
+                }
+            }
         }
         else if (ability == "grapes")
         {
@@ -653,7 +695,6 @@ public class BattleRound : MonoBehaviour
                         }
                     }
                 }
-
                 else if (manager == enemyManager)   // enemy garlic
                 {
                     Unit unit = inputManager.unitList[6];
