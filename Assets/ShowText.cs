@@ -16,8 +16,8 @@ public class ShowText : MonoBehaviour
     }
     void Update()
     {
-        goldText.text = "Gold: " + inputManager.gold.ToString();
-        drawText.text = "Draws left: " + inputManager.draws.ToString();
-        roundText.text = "Round: " + inputManager.roundCounter.ToString();
+        goldText.text = inputManager.gold.ToString();
+        drawText.text = inputManager.draws.ToString();
+        roundText.text = inputManager.roundCounter.ToString();
     }
 }

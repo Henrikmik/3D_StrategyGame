@@ -161,8 +161,8 @@ public class BattleRound : MonoBehaviour
                 {
                     if ((gameState == "Win") || (gameState == "Lose") || (gameState == "Draw"))
                     {
+                        inputManager.roundCounter += 1;
                         EndOfRound();
-                        inputManager.roundCounter = 1;
                         break;
                     }
                 }
@@ -172,24 +172,24 @@ public class BattleRound : MonoBehaviour
                 if ((gameState == "Win") && (gameState2 == "Win"))
                 {
                     // WIN
-                    EndOfRound();
                     inputManager.roundCounter += 1;
+                    EndOfRound();
                     break;
                 }
 
                 else if ((gameState == "Win") && (gameState2 == "Draw"))
                 {
                     // WIN
-                    EndOfRound();
                     inputManager.roundCounter += 1;
+                    EndOfRound();
                     break;
                 }
 
                 else if ((gameState == "Draw") && (gameState2 == "Win"))
                 {
                     // WIN
-                    EndOfRound();
                     inputManager.roundCounter += 1;
+                    EndOfRound();
                     break;
                 }
 
@@ -201,14 +201,14 @@ public class BattleRound : MonoBehaviour
 
                     if (inputManager.draws > 0)
                     {
-                        EndOfRound();
                         inputManager.roundCounter += 0;
+                        EndOfRound();
                         break;
                     }
                     else
                     {
-                        EndOfRound();
                         inputManager.roundCounter = 1;
+                        EndOfRound();
                         break;
                     }
                 }
@@ -296,24 +296,24 @@ public class BattleRound : MonoBehaviour
                 else if ((gameState == "Lose") && (gameState2 == "Draw"))
                 {
                     // Lose
-                    EndOfRound();
                     inputManager.roundCounter = 1;
+                    EndOfRound();
                     break;
                 }
 
                 else if ((gameState == "Draw") && (gameState2 == "Lose"))
                 {
                     // Lose
-                    EndOfRound();
                     inputManager.roundCounter = 1;
+                    EndOfRound();
                     break;
                 }
 
                 else if ((gameState == "Lose") && (gameState2 == "Lose"))
                 {
                     // Lose
-                    EndOfRound();
                     inputManager.roundCounter = 1;
+                    EndOfRound();
                     break;
                 }
             }
@@ -321,6 +321,7 @@ public class BattleRound : MonoBehaviour
             if (finalGameState == "Win")
             {
                 Debug.Log("Winner Winner");
+                inputManager.roundCounter += 1;
                 EndOfRound();
                 break;
             }
@@ -331,23 +332,23 @@ public class BattleRound : MonoBehaviour
                 if (inputManager.draws > 0)
                 {
                     Debug.Log("Draw Draw");
-                    EndOfRound();
                     inputManager.roundCounter += 0;
+                    EndOfRound();
                     break;
                 }
                 else
                 {
                     Debug.Log("Draw Draw");
-                    EndOfRound();
                     inputManager.roundCounter = 1;
+                    EndOfRound();
                     break;
                 }
             }
             else if (finalGameState == "Lose")
             {
                 Debug.Log("Lose Lose");
-                EndOfRound();
                 inputManager.roundCounter = 1;
+                EndOfRound();
                 break;
             }
 

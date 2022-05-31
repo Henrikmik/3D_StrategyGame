@@ -9,20 +9,21 @@ public class Shop : MonoBehaviour
     public Canvas canvas;
     public InputManager inputManager;
     public bool freezedShop = false;
+    public GameObject hudPre3;
+    public GameObject hudPost3;
     public void SetShoppingSpace()
     {
+        hudPre3.SetActive(true);
+        hudPost3.SetActive(false);
+
         shopSpace.Add(canvas.transform.GetChild(0).GetChild(0).gameObject);
         shopSpace.Add(canvas.transform.GetChild(0).GetChild(1).gameObject);
         shopSpace.Add(canvas.transform.GetChild(0).GetChild(2).gameObject);
-        shopSpace.Add(canvas.transform.GetChild(0).GetChild(3).gameObject);
 
         foreach (GameObject e in shopSpace)
         {
             Unit unit = RandomOption();
             PlaceUnitInShop(e, unit);
-            
-            //Debug.Log(e);
-
         }
     }
 
@@ -46,23 +47,51 @@ public class Shop : MonoBehaviour
         PlacedObject placedEnemy = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
         placedEnemy.SettingStats();
         placedEnemy.transform.parent = e.transform;
-        placedEnemy.transform.localScale += new Vector3 (10, 10, 10);
+        placedEnemy.transform.localScale += new Vector3 (40, 40, 40);
         placedEnemy.transform.rotation = new Quaternion (0, 0, 0, 0);
         inputManager.ShowFloatingText(placedEnemy, pos3);
     }
 
     public void ShopReroll()
     {
+        if (inputManager.roundCounter < 3)
+        {
+            hudPre3.SetActive(true);
+            hudPost3.SetActive(false);
+
+            shopSpace.Clear();
+
+            shopSpace.Add(canvas.transform.GetChild(0).GetChild(0).gameObject);
+            shopSpace.Add(canvas.transform.GetChild(0).GetChild(1).gameObject);
+            shopSpace.Add(canvas.transform.GetChild(0).GetChild(2).gameObject);
+        }
+        else if (inputManager.roundCounter >= 3)
+        {
+            hudPre3.SetActive(false);
+            hudPost3.SetActive(true);
+
+            shopSpace.Clear();
+
+            shopSpace.Add(canvas.transform.GetChild(0).GetChild(0).gameObject);
+            shopSpace.Add(canvas.transform.GetChild(0).GetChild(1).gameObject);
+            shopSpace.Add(canvas.transform.GetChild(0).GetChild(2).gameObject);
+            shopSpace.Add(canvas.transform.GetChild(0).GetChild(3).gameObject);
+            shopSpace.Add(canvas.transform.GetChild(0).GetChild(4).gameObject);
+        }
+
+
+
+
         if (freezedShop == false)
         {
             // Deleting shop objects
             foreach (GameObject g in shopSpace)
             {
-                if (g.transform.childCount >= 3)
+                if (g.transform.childCount >= 2)
                 {
-                    if (g.transform.GetChild(2))
+                    if (g.transform.GetChild(1))
                     {
-                        Destroy(g.transform.GetChild(2).gameObject);
+                        Destroy(g.transform.GetChild(1).gameObject);
                         //Debug.Log("Löschung");
                     }
                 }
