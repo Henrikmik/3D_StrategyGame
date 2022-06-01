@@ -35,10 +35,16 @@ public class InputManager : MonoBehaviour
     public int gold = 10;
     public int draws = 1;
 
+    public PlacedObject selectedPlacedObject;
+
+    GameObject FreezeShop;
+    public GameObject Sell;
+
     // Start is called before the first frame update
     void Start()
     {
         gameGrid = FindObjectOfType<GameGrid>();
+        FreezeShop = GameObject.Find("FreezeShop");
     }
 
     private void Awake()
@@ -54,23 +60,39 @@ public class InputManager : MonoBehaviour
         if (battleOn != true)
         {
             UpdateHierarchie();
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    PlaceOnGridCell(cellMouseIsOver);
-            //}
 
-            //if (Input.GetMouseButtonDown(1))
-            //{
-            //    if (cellMouseIsOver != null)
-            //    {
-            //        GridCell gridCell = cellMouseIsOver;
-            //        PlacedObject placedObject = gridCell.GetPlacedObject();
-            //        if (placedObject != null)
-            //        {
-            //            placedObject.DestroySelf();
-            //        }
-            //    }
-            //}
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (cellMouseIsOver != null)
+                {
+                    GridCell gridCell = cellMouseIsOver;
+                    PlacedObject placedObject = gridCell.GetPlacedObject();
+                    if (selectedPlacedObject != null)
+                    {
+                        selectedPlacedObject.gameObject.transform.position = new Vector3
+                            (selectedPlacedObject.gameObject.transform.position.x, 1f, selectedPlacedObject.gameObject.transform.position.z);
+                    }
+
+                    selectedPlacedObject = placedObject;
+                    selectedPlacedObject.gameObject.transform.position = new Vector3
+                        (selectedPlacedObject.gameObject.transform.position.x, 1.1f, selectedPlacedObject.gameObject.transform.position.z);
+                    FreezeShop.SetActive(false);
+                    Sell.SetActive(true);
+                }
+                if (cellMouseIsOver == null)
+                {
+                    if (selectedPlacedObject != null)
+                    {
+                        selectedPlacedObject.gameObject.transform.position = new Vector3
+                            (selectedPlacedObject.gameObject.transform.position.x, 1f, selectedPlacedObject.gameObject.transform.position.z);
+                    }
+                    selectedPlacedObject = null;
+                    FreezeShop.SetActive(true);
+                    Sell.SetActive(false);
+                }
+            }
+
+            // Debug Key Inputs
 
             if (Input.GetKeyDown(KeyCode.I))
             {

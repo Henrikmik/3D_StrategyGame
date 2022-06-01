@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class Shop : MonoBehaviour
     public bool freezedShop = false;
     public GameObject hudPre3;
     public GameObject hudPost3;
+    public Sprite shopFreezed;
+    public Sprite shopUnfreezed;
+    public Image FreezeButton;
     public void SetShoppingSpace()
     {
         hudPre3.SetActive(true);
@@ -30,7 +34,6 @@ public class Shop : MonoBehaviour
     public void Start()
     {
         SetShoppingSpace();
-        //Debug.Log(RandomOption());
     }
 
     public Unit RandomOption()
@@ -120,12 +123,23 @@ public class Shop : MonoBehaviour
         if (freezedShop == true)
         {
             freezedShop = false;
+            FreezeButton.sprite = shopFreezed;
             //Debug.Log("Shop is not freezed");
         }
         else if (freezedShop == false)
         {
             freezedShop = true;
+            FreezeButton.sprite = shopUnfreezed;
             //Debug.Log("Shop is freezed");
+        }
+    }
+
+    public void SellUnit()
+    {
+        if (inputManager.selectedPlacedObject != null)
+        {
+            inputManager.selectedPlacedObject.DestroySelf();
+            inputManager.selectedPlacedObject = null;
         }
     }
 }

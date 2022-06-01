@@ -115,6 +115,13 @@ MonoBehaviour:
   level: 0
   nameA: 
   ability: 
+  baseAttack: 0
+  baseHealth: 0
+  baseLevel: 0
+  armor: 0
+  firstLvlUp: 0
+  secondLvlUp: 0
+  armorTriggerCounter: 0
 --- !u!114 &-7754157745303644667
 MonoBehaviour:
   m_ObjectHideFlags: 0
