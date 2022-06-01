@@ -673,44 +673,193 @@ public class BattleRound : MonoBehaviour
 
             if (placedObject.health <= 0)
             {
-                if (placedObject.transform.GetSiblingIndex() < 2)   // System überarbeiten mit AttachedGridCell anstelle von abarbeiten der unitmanager liste
+                GameObject bufferGridCell = placedObject.AttachedGridCell(enemy);
+                int siblingIndex = placedObject.AttachedGridCell(enemy).transform.GetSiblingIndex();
+
+                if (inputManager.roundCounter < 3)  // only one lane pre round 3
                 {
-                    int index = placedObject.transform.GetSiblingIndex() + 1;
-                    //Debug.Log(index);
-
-                    if (inputManager.GetCellObject(index) == null)
+                    if (placedObject.level < 4)
                     {
-                        Debug.Log("No unit to buff");
-                    }
-                    else if (inputManager.GetCellObject(index).gameObject.activeInHierarchy == true)
-                    {
-                        inputManager.GetCellObject(index).baseAttack += 2;
-                        inputManager.GetCellObject(index).baseHealth += 1;
-                        inputManager.GetCellObject(index).attack += 2;
-                        inputManager.GetCellObject(index).health += 1;
-                        inputManager.UpdateFloatingText(inputManager.GetCellObject(index));
-                        Debug.Log("apple: " + inputManager.GetCellObject(index));
-                    }
-                    else if (inputManager.GetCellObject(index).gameObject.activeInHierarchy == false)
-                    {
-                        index += 1;
-
-                        if (inputManager.GetCellObject(index) != null)
+                        if (inputManager.GetGridCell(siblingIndex + 1).activeInHierarchy == true)   // buffing the unit behind if active
                         {
-                            if (inputManager.GetCellObject(index).gameObject.activeInHierarchy == true)
-                            {
-                                inputManager.GetCellObject(index).baseAttack += 2;
-                                inputManager.GetCellObject(index).baseHealth += 1;
-                                inputManager.GetCellObject(index).attack += 2;
-                                inputManager.GetCellObject(index).health += 1;
-                                inputManager.UpdateFloatingText(inputManager.GetCellObject(index));
-                                Debug.Log("apple: " + inputManager.GetCellObject(index));
-                            }
+                            inputManager.GetCellObject(siblingIndex + 1).baseAttack += 2;
+                            inputManager.GetCellObject(siblingIndex + 1).baseHealth += 1;
+                            inputManager.GetCellObject(siblingIndex + 1).attack += 2;
+                            inputManager.GetCellObject(siblingIndex + 1).health += 1;
+                            inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+                            Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                     }
-                    else
+                    else if (placedObject.level < 7)
                     {
-                        Debug.Log("No unit to buff");
+                        if (inputManager.GetGridCell(siblingIndex + 1).activeInHierarchy == true)   // buffing the unit behind if active
+                        {
+                            inputManager.GetCellObject(siblingIndex + 1).baseAttack += 3;
+                            inputManager.GetCellObject(siblingIndex + 1).baseHealth += 2;
+                            inputManager.GetCellObject(siblingIndex + 1).attack += 3;
+                            inputManager.GetCellObject(siblingIndex + 1).health += 2;
+                            inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+                            Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
+                        }
+                        if (siblingIndex - 1 >= 0)
+                        {
+                            if (inputManager.GetGridCell(siblingIndex - 1).activeInHierarchy == true)   // buffing unit in front
+                            {
+                                inputManager.GetCellObject(siblingIndex - 1).baseAttack += 3;
+                                inputManager.GetCellObject(siblingIndex - 1).baseHealth += 2;
+                                inputManager.GetCellObject(siblingIndex - 1).attack += 3;
+                                inputManager.GetCellObject(siblingIndex - 1).health += 2;
+                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 1));
+                                Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 1));
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log("No sibling in front");
+                        }
+                    }
+                    else if (placedObject.level >= 7)
+                    {
+                        if (inputManager.GetGridCell(siblingIndex + 1).activeInHierarchy == true)   // buffing the unit behind if active
+                        {
+                            inputManager.GetCellObject(siblingIndex + 1).baseAttack += 5;
+                            inputManager.GetCellObject(siblingIndex + 1).baseHealth += 4;
+                            inputManager.GetCellObject(siblingIndex + 1).attack += 5;
+                            inputManager.GetCellObject(siblingIndex + 1).health += 4;
+                            inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+                            Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
+                        }
+                        if (siblingIndex - 1 >= 0)
+                        {
+                            if (inputManager.GetGridCell(siblingIndex - 1).activeInHierarchy == true)   // buffing unit in front
+                            {
+                                inputManager.GetCellObject(siblingIndex - 1).baseAttack += 5;
+                                inputManager.GetCellObject(siblingIndex - 1).baseHealth += 4;
+                                inputManager.GetCellObject(siblingIndex - 1).attack += 5;
+                                inputManager.GetCellObject(siblingIndex - 1).health += 4;
+                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 1));
+                                Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 1));
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log("No sibling in front");
+                        }
+                    }
+                }
+                else if(inputManager.roundCounter >= 3)
+                {
+                    if (placedObject.level < 4)
+                    {
+                        if (inputManager.GetGridCell(siblingIndex + 1).activeInHierarchy == true)   // buffing the unit behind if active
+                        {
+                            inputManager.GetCellObject(siblingIndex + 1).baseAttack += 2;
+                            inputManager.GetCellObject(siblingIndex + 1).baseHealth += 1;
+                            inputManager.GetCellObject(siblingIndex + 1).attack += 2;
+                            inputManager.GetCellObject(siblingIndex + 1).health += 1;
+                            inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+                            Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
+                        }
+                    }
+                    else if (placedObject.level < 7)
+                    {
+                        if (inputManager.GetGridCell(siblingIndex + 1).activeInHierarchy == true)   // buffing the unit behind if active
+                        {
+                            inputManager.GetCellObject(siblingIndex + 1).baseAttack += 3;
+                            inputManager.GetCellObject(siblingIndex + 1).baseHealth += 2;
+                            inputManager.GetCellObject(siblingIndex + 1).attack += 3;
+                            inputManager.GetCellObject(siblingIndex + 1).health += 2;
+                            inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+                            Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1) + " !!!!");
+                        }
+                        if (siblingIndex - 1 >= 0)
+                        {
+                            if (inputManager.GetGridCell(siblingIndex - 1).activeInHierarchy == true)   // buffing unit in front
+                            {
+                                inputManager.GetCellObject(siblingIndex - 1).baseAttack += 3;
+                                inputManager.GetCellObject(siblingIndex - 1).baseHealth += 2;
+                                inputManager.GetCellObject(siblingIndex - 1).attack += 3;
+                                inputManager.GetCellObject(siblingIndex - 1).health += 2;
+                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 1));
+                                Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 1));
+                            }
+                        }
+                        if (siblingIndex - 3 >= 0)
+                        {
+                            if (inputManager.GetGridCell(siblingIndex - 3).activeInHierarchy == true)   // buffing unit in front
+                            {
+                                inputManager.GetCellObject(siblingIndex - 3).baseAttack += 3;
+                                inputManager.GetCellObject(siblingIndex - 3).baseHealth += 2;
+                                inputManager.GetCellObject(siblingIndex - 3).attack += 3;
+                                inputManager.GetCellObject(siblingIndex - 3).health += 2;
+                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 3));
+                                Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 3));
+                            }
+                        }
+                        if (siblingIndex + 3 <= 5)
+                        {
+                            if (inputManager.GetGridCell(siblingIndex + 3).activeInHierarchy == true)   // buffing unit in front
+                            {
+                                inputManager.GetCellObject(siblingIndex + 3).baseAttack += 3;
+                                inputManager.GetCellObject(siblingIndex + 3).baseHealth += 2;
+                                inputManager.GetCellObject(siblingIndex + 3).attack += 3;
+                                inputManager.GetCellObject(siblingIndex + 3).health += 2;
+                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 3));
+                                Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 3));
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log("No sibling in front");
+                        }
+                    }
+                    else if (placedObject.level >= 7)
+                    {
+                        if (inputManager.GetGridCell(siblingIndex + 1).activeInHierarchy == true)   // buffing the unit behind if active
+                        {
+                            inputManager.GetCellObject(siblingIndex + 1).baseAttack += 3;
+                            inputManager.GetCellObject(siblingIndex + 1).baseHealth += 2;
+                            inputManager.GetCellObject(siblingIndex + 1).attack += 3;
+                            inputManager.GetCellObject(siblingIndex + 1).health += 2;
+                            inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+                            Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
+                        }
+                        if (siblingIndex - 1 >= 0)
+                        {
+                            if (inputManager.GetGridCell(siblingIndex - 1).activeInHierarchy == true)   // buffing unit in front
+                            {
+                                inputManager.GetCellObject(siblingIndex - 1).baseAttack += 3;
+                                inputManager.GetCellObject(siblingIndex - 1).baseHealth += 2;
+                                inputManager.GetCellObject(siblingIndex - 1).attack += 3;
+                                inputManager.GetCellObject(siblingIndex - 1).health += 2;
+                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 1));
+                                Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 1));
+                            }
+                        }
+                        if (siblingIndex - 3 >= 0)
+                        {
+                            if (inputManager.GetGridCell(siblingIndex - 3).activeInHierarchy == true)   // buffing unit in front
+                            {
+                                inputManager.GetCellObject(siblingIndex - 3).baseAttack += 5;
+                                inputManager.GetCellObject(siblingIndex - 3).baseHealth += 4;
+                                inputManager.GetCellObject(siblingIndex - 3).attack += 5;
+                                inputManager.GetCellObject(siblingIndex - 3).health += 4;
+                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 3));
+                                Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 3));
+                            }
+                        }
+                        if (siblingIndex + 3 <= 5)
+                        {
+                            if (inputManager.GetGridCell(siblingIndex + 3).activeInHierarchy == true)   // buffing unit in front
+                            {
+                                inputManager.GetCellObject(siblingIndex + 3).baseAttack += 5;
+                                inputManager.GetCellObject(siblingIndex + 3).baseHealth += 4;
+                                inputManager.GetCellObject(siblingIndex + 3).attack += 5;
+                                inputManager.GetCellObject(siblingIndex + 3).health += 4;
+                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 3));
+                                Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 3));
+                            }
+                        }
                     }
                 }
             }
