@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea5b361af279c534ba59bca4785cf132, type: 3}
-  m_Name: Garlic
+  m_Name: Broccoli
   m_EditorClassIdentifier: 
-  name: Garlic
+  name: Broccoli
   description: 
-  ability: cherry
-  prefab: {fileID: 7105608279199947559, guid: 63d88e4d109fba84fb22a5db8b60cba9, type: 3}
+  ability: 
+  prefab: {fileID: 5435623376016496657, guid: 3a9fdd30cab59a348a6b4b98264e39f3, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0
   attack: 1
-  health: 1
-  level: 1
+  health: 2
+  level: 0
   cost: 0

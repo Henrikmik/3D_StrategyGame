@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9156e816d07f55743b72aa19f6cc2953, type: 2}
+  - {fileID: 2100000, guid: 0c46296e20ec64f43b3c165da9793536, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,6 +109,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7bf25a07acfb44e8f0b332bfef1cc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attack: 0
+  health: 0
+  level: 0
+  nameA: 
+  ability: 
+  baseAttack: 0
+  baseHealth: 0
+  baseLevel: 0
+  armor: 0
+  firstLvlUp: 0
+  secondLvlUp: 0
+  armorTriggerCounter: 0
 --- !u!95 &-5363111963860994035
 Animator:
   serializedVersion: 3

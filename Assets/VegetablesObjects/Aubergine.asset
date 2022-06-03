@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea5b361af279c534ba59bca4785cf132, type: 3}
-  m_Name: Garlic
+  m_Name: Aubergine
   m_EditorClassIdentifier: 
-  name: Garlic
+  name: Aubergine
   description: 
-  ability: cherry
-  prefab: {fileID: 7105608279199947559, guid: 63d88e4d109fba84fb22a5db8b60cba9, type: 3}
+  ability: pineapple
+  prefab: {fileID: 4911371570635980507, guid: e8e2ae485ffe5db4d97ddd529247abb7, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0
-  attack: 1
+  attack: 3
   health: 1
-  level: 1
+  level: 0
   cost: 0

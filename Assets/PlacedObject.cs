@@ -158,6 +158,62 @@ public class PlacedObject : MonoBehaviour
                 return null;
             }
         }
+        if (enemy == true)
+        {
+            if ((inputManager.GetEnemyObject(0).GetComponent<PlacedObject>() != null) && (inputManager.GetEnemyObject(0).isActiveAndEnabled == true))
+            {
+                if (gameObject.GetComponent<PlacedObject>() == inputManager.GetEnemyObject(0).GetComponent<PlacedObject>())
+                {
+                    //Debug.Log("erste Zelle");
+                    return inputManager.GetEnemyCell(0);
+                }
+                if ((inputManager.GetEnemyObject(1).GetComponent<PlacedObject>() != null) && (inputManager.GetEnemyObject(1).isActiveAndEnabled == true))
+                {
+                    if (gameObject.GetComponent<PlacedObject>() == inputManager.GetEnemyObject(1).GetComponent<PlacedObject>())
+                    {
+                        //Debug.Log("zweite Zelle");
+                        return inputManager.GetEnemyCell(1);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else if ((inputManager.GetEnemyObject(3).GetComponent<PlacedObject>() != null) && (inputManager.GetEnemyObject(3).isActiveAndEnabled == true))
+            {
+                if (gameObject.GetComponent<PlacedObject>() == inputManager.GetEnemyObject(3).GetComponent<PlacedObject>())
+                {
+                    //Debug.Log("vierte Zelle");
+                    return inputManager.GetEnemyCell(3);
+                }
+                if ((inputManager.GetEnemyObject(4).GetComponent<PlacedObject>() != null) && (inputManager.GetEnemyObject(4).isActiveAndEnabled == true))
+                {
+                    if (gameObject.GetComponent<PlacedObject>() == inputManager.GetEnemyObject(4).GetComponent<PlacedObject>())
+                    {
+                        //Debug.Log("fünfte Zelle");
+                        return inputManager.GetEnemyCell(4);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                Debug.Log("Keine Zelle gefunden");
+                return null;
+            }
+        }
         else
         {
             return null;

@@ -32,7 +32,7 @@ public class InputManager : MonoBehaviour
     public int healthE = 10;
     public int healthU = 10;
     public int roundCounter = 1;
-    public int gold = 10;
+    public int gold = 100;
     public int draws = 1;
 
     public PlacedObject selectedPlacedObject;
@@ -50,6 +50,7 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         unit = unitList[0];
+        gold = 100;
     }
 
     // Update is called once per frame
@@ -125,6 +126,12 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.U))
         {
             roundCounter = 3;
+            shop.ShopReroll();
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            gold += 100;
         }
 
         if (Input.GetKeyDown(KeyCode.O))
@@ -168,7 +175,7 @@ public class InputManager : MonoBehaviour
         float cameraAngley = mainCamera.GetComponent<Transform>().rotation.y;
         float cameraAnglez = mainCamera.GetComponent<Transform>().rotation.z;
 
-        var myNewStats = Instantiate(FloatingTextPrefab, objectPos, Quaternion.Euler(cameraAnglex + 20f, cameraAngley - 50f, 0), transform);
+        var myNewStats = Instantiate(FloatingTextPrefab, objectPos, Quaternion.Euler(cameraAnglex + 40f, cameraAngley - 60f, -20f), transform);
         myNewStats.transform.parent = placedObject.transform;
         myNewStats.GetComponent<TextMesh>().text = myNewStats.GetComponentInParent<PlacedObject>().nameA
             + "\n Attack: " + myNewStats.GetComponentInParent<PlacedObject>().attack 
@@ -204,17 +211,47 @@ public class InputManager : MonoBehaviour
             // Gets the first Gric Cell of the second lane
             GridCell enemyGridCell4 = gameGridEnemyS.transform.GetChild(3).GetComponent<GridCell>();
 
-            // Creates enemy on second grid cell
-            Unit enemy3 = unitList[8];
+            // Gets the second Grid Cell of the second lane
+            GridCell enemyGridCell5 = gameGridEnemyS.transform.GetChild(4).GetComponent<GridCell>();
+
+            // Gets the third Gric Cell of the second lane
+            GridCell enemyGridCell6 = gameGridEnemyS.transform.GetChild(5).GetComponent<GridCell>();
+
+            // Creates enemy on second lane, first grid cell
+            Unit enemy4 = unitList[10];
             Vector2Int enemy4Pos = enemyGridCell4.GetPosition();
             Vector3 enemy4Pos3 = new Vector3(enemyGridCell4.transform.position.x, 1f, enemyGridCell4.transform.position.z);
 
-            PlacedObject placedEnemy3 = PlacedObject.Create(enemy4Pos3, enemy4Pos, Unit.Dir.Down, enemy3);
-            enemyGridCell4.SetPlacedObject(placedEnemy3);
-            enemyGridCell4.StoreObject(placedEnemy3);
-            placedEnemy3.transform.SetParent(enemyManager.transform);
-            placedEnemy3.SettingStats();
-            ShowFloatingText(placedEnemy3, enemy4Pos3);
+            PlacedObject placedEnemy4 = PlacedObject.Create(enemy4Pos3, enemy4Pos, Unit.Dir.Down, enemy4);
+            enemyGridCell4.SetPlacedObject(placedEnemy4);
+            enemyGridCell4.StoreObject(placedEnemy4);
+            placedEnemy4.transform.SetParent(enemyManager.transform);
+            placedEnemy4.SettingStats();
+            ShowFloatingText(placedEnemy4, enemy4Pos3);
+
+            // Creates enemy on second lane, second grid cell
+            Unit enemy5 = unitList[11];
+            Vector2Int enemy5Pos = enemyGridCell5.GetPosition();
+            Vector3 enemy5Pos3 = new Vector3(enemyGridCell5.transform.position.x, 1f, enemyGridCell5.transform.position.z);
+
+            PlacedObject placedEnemy5 = PlacedObject.Create(enemy5Pos3, enemy5Pos, Unit.Dir.Down, enemy5);
+            enemyGridCell5.SetPlacedObject(placedEnemy5);
+            enemyGridCell5.StoreObject(placedEnemy5);
+            placedEnemy5.transform.SetParent(enemyManager.transform);
+            placedEnemy5.SettingStats();
+            ShowFloatingText(placedEnemy5, enemy5Pos3);
+
+            // Creates enemy on second lane, third grid cell
+            Unit enemy6 = unitList[12];
+            Vector2Int enemy6Pos = enemyGridCell6.GetPosition();
+            Vector3 enemy6Pos3 = new Vector3(enemyGridCell6.transform.position.x, 1f, enemyGridCell6.transform.position.z);
+
+            PlacedObject placedEnemy6 = PlacedObject.Create(enemy6Pos3, enemy6Pos, Unit.Dir.Down, enemy6);
+            enemyGridCell6.SetPlacedObject(placedEnemy6);
+            enemyGridCell6.StoreObject(placedEnemy6);
+            placedEnemy6.transform.SetParent(enemyManager.transform);
+            placedEnemy6.SettingStats();
+            ShowFloatingText(placedEnemy6, enemy6Pos3);
         }
 
         // Gets the first enemy grid cell
@@ -222,6 +259,9 @@ public class InputManager : MonoBehaviour
 
         // Gets the second enemy grid cell
         GridCell enemyGridCell2 = gameGridEnemyS.transform.GetChild(1).GetComponent<GridCell>();
+
+        // Gets the third enemy grid cell
+        GridCell enemyGridCell3 = gameGridEnemyS.transform.GetChild(2).GetComponent<GridCell>();
 
         // Updates Canvas
         UpdateCanvas(1);
@@ -249,6 +289,18 @@ public class InputManager : MonoBehaviour
         placedEnemy2.transform.SetParent(enemyManager.transform);
         placedEnemy2.SettingStats();
         ShowFloatingText(placedEnemy2, enemy2Pos3);
+
+        // Creates enemy on third grid cell
+        Unit enemy3 = unitList[9];
+        Vector2Int enemy3Pos = enemyGridCell3.GetPosition();
+        Vector3 enemy3Pos3 = new Vector3(enemyGridCell3.transform.position.x, 1f, enemyGridCell3.transform.position.z);
+
+        PlacedObject placedEnemy3 = PlacedObject.Create(enemy3Pos3, enemy3Pos, Unit.Dir.Down, enemy3);
+        enemyGridCell3.SetPlacedObject(placedEnemy3);
+        enemyGridCell3.StoreObject(placedEnemy3);
+        placedEnemy3.transform.SetParent(enemyManager.transform);
+        placedEnemy3.SettingStats();
+        ShowFloatingText(placedEnemy3, enemy3Pos3);
     }
 
     // Gets grid cell
@@ -290,12 +342,21 @@ public class InputManager : MonoBehaviour
 
         if (scene == 2)
         {
-            // Sets Shop in Canvas inactive
+            // Sets Shop in Canvas active
             canvas.transform.GetChild(0).gameObject.SetActive(true);
-            // Sets battle phase button inactive
+            // Sets battle phase button active
             canvas.transform.GetChild(1).gameObject.SetActive(true);
-            // Sets start battle button active
+            // Sets start battle button inactive
             canvas.transform.GetChild(2).gameObject.SetActive(false);
+            // Sets gold to 100
+            if (roundCounter >= 3)
+            {
+                gold = 200;
+            }
+            else
+            {
+                gold = 100;
+            }
         }
     }
 
@@ -312,27 +373,6 @@ public class InputManager : MonoBehaviour
             GameObject gridDestroy = gameGridEnemyS.transform.GetChild(i).gameObject;
             Destroy(gridDestroy);
         }
-
-        //GameObject gridEins = gameGridEnemyS.transform.GetChild(0).gameObject;
-        //GameObject gridZwei = gameGridEnemyS.transform.GetChild(1).gameObject;
-        //GameObject gridDrei = gameGridEnemyS.transform.GetChild(2).gameObject;
-
-        //if (gridEins.GetComponent<GridCell>().GetPlacedObject() != null)
-        //{
-        //    Destroy(gridEins.GetComponent<GridCell>().GetPlacedObject().gameObject);
-        //}
-        //if (gridZwei.GetComponent<GridCell>().GetPlacedObject() != null)
-        //{
-        //    Destroy(gridZwei.GetComponent<GridCell>().GetPlacedObject().gameObject);
-        //}
-        //if (gridZwei.GetComponent<GridCell>().GetPlacedObject() != null)
-        //{
-        //    Destroy(gridZwei.GetComponent<GridCell>().GetPlacedObject().gameObject);
-        //}
-
-        //Destroy(gridEins);
-        //Destroy(gridZwei);
-        //Destroy(gridDrei);
     }
 
     public void PlaceOnGridCell(GridCell cellMouseIsOver)

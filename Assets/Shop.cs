@@ -57,66 +57,67 @@ public class Shop : MonoBehaviour
 
     public void ShopReroll()
     {
-        if (inputManager.roundCounter < 3)
+        if (inputManager.gold >= 10)
         {
-            hudPre3.SetActive(true);
-            hudPost3.SetActive(false);
-
-            shopSpace.Clear();
-
-            shopSpace.Add(canvas.transform.GetChild(0).GetChild(0).gameObject);
-            shopSpace.Add(canvas.transform.GetChild(0).GetChild(1).gameObject);
-            shopSpace.Add(canvas.transform.GetChild(0).GetChild(2).gameObject);
-        }
-        else if (inputManager.roundCounter >= 3)
-        {
-            hudPre3.SetActive(false);
-            hudPost3.SetActive(true);
-
-            shopSpace.Clear();
-
-            shopSpace.Add(canvas.transform.GetChild(0).GetChild(0).gameObject);
-            shopSpace.Add(canvas.transform.GetChild(0).GetChild(1).gameObject);
-            shopSpace.Add(canvas.transform.GetChild(0).GetChild(2).gameObject);
-            shopSpace.Add(canvas.transform.GetChild(0).GetChild(3).gameObject);
-            shopSpace.Add(canvas.transform.GetChild(0).GetChild(4).gameObject);
-        }
-
-
-
-
-        if (freezedShop == false)
-        {
-            // Deleting shop objects
-            foreach (GameObject g in shopSpace)
+            if (inputManager.roundCounter < 3)
             {
-                if (g.transform.childCount >= 2)
+                hudPre3.SetActive(true);
+                hudPost3.SetActive(false);
+
+                shopSpace.Clear();
+
+                shopSpace.Add(canvas.transform.GetChild(0).GetChild(0).gameObject);
+                shopSpace.Add(canvas.transform.GetChild(0).GetChild(1).gameObject);
+                shopSpace.Add(canvas.transform.GetChild(0).GetChild(2).gameObject);
+            }
+            else if (inputManager.roundCounter >= 3)
+            {
+                hudPre3.SetActive(false);
+                hudPost3.SetActive(true);
+
+                shopSpace.Clear();
+
+                shopSpace.Add(canvas.transform.GetChild(0).GetChild(0).gameObject);
+                shopSpace.Add(canvas.transform.GetChild(0).GetChild(1).gameObject);
+                shopSpace.Add(canvas.transform.GetChild(0).GetChild(2).gameObject);
+                shopSpace.Add(canvas.transform.GetChild(0).GetChild(3).gameObject);
+                shopSpace.Add(canvas.transform.GetChild(0).GetChild(4).gameObject);
+            }
+
+            if (freezedShop == false)
+            {
+                // costs 10 gold
+                inputManager.gold -= 10;
+                // Deleting shop objects
+                foreach (GameObject g in shopSpace)
                 {
-                    if (g.transform.GetChild(1))
+                    if (g.transform.childCount >= 2)
                     {
-                        Destroy(g.transform.GetChild(1).gameObject);
-                        //Debug.Log("Löschung");
+                        if (g.transform.GetChild(1))
+                        {
+                            Destroy(g.transform.GetChild(1).gameObject);
+                            //Debug.Log("Löschung");
+                        }
+                    }
+                    else
+                    {
+                        //Debug.Log("Keine Löschung");
                     }
                 }
-                else
+
+                // Generating new shop objects
+                foreach (GameObject e in shopSpace)
                 {
-                    //Debug.Log("Keine Löschung");
+                    //Debug.Log("Neue Unit");
+                    Unit unit = RandomOption();
+                    PlaceUnitInShop(e, unit);
                 }
             }
-
-            // Generating new shop objects
-            foreach (GameObject e in shopSpace)
+            else
             {
-                //Debug.Log("Neue Unit");
-                Unit unit = RandomOption();
-                PlaceUnitInShop(e, unit);
+
             }
         }
-        else
-        {
-
-        }
-
     }
     public void FreezeShop()
     {
@@ -138,6 +139,15 @@ public class Shop : MonoBehaviour
     {
         if (inputManager.selectedPlacedObject != null)
         {
+            if (inputManager.selectedPlacedObject.level >= 4)
+            {
+                inputManager.gold += 20;
+            }
+            else
+            {
+                inputManager.gold += 10;
+            }
+
             inputManager.selectedPlacedObject.DestroySelf();
             inputManager.selectedPlacedObject = null;
         }

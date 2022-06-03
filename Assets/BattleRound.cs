@@ -902,7 +902,35 @@ public class BattleRound : MonoBehaviour
                 }
                 else if (manager == enemyManager)
                 {
+                    Unit unit = inputManager.unitList[9];
+                    GameObject gridCellGameObject = placedObject.AttachedGridCell(true);
+                    GridCell gridCell;
+                    if (gridCellGameObject.transform.position.x >= 2.6f)
+                    {
+                        gridCell = inputManager.GetEnemyCell(5).GetComponent<GridCell>();
+                    }
+                    else
+                    {
+                        gridCell = inputManager.GetEnemyCell(2).GetComponent<GridCell>();
+                    }
+                    Vector2Int pos2 = gridCell.GetPosition();
+                    Vector3 pos3 = new Vector3(gridCell.transform.position.x, 1f, gridCell.transform.position.z);
 
+                    // spawn extra pineapple
+                    if (gridCell.isOccupied == false)
+                    {
+                        PlacedObject placedO = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);
+                        gridCell.SetPlacedObject(placedO);
+                        gridCell.StoreObject(placedO);
+                        placedO.transform.SetParent(manager.transform);
+                        placedO.SettingStats();
+                        placedO.name = "Mini Grape(Clone)";
+                        placedO.ability = "mini grape";
+                        placedO.health = 1;
+                        placedO.attack = (Mathf.RoundToInt(placedObject.attack * 0.5f));
+                        inputManager.ShowFloatingText(placedO, pos3);
+                        Debug.Log("Summon Aubergine");
+                    }
                 }
                 else
                 {
