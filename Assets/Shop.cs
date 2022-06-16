@@ -137,9 +137,12 @@ public class Shop : MonoBehaviour
 
     public void SellUnit()
     {
-        if (inputManager.selectedPlacedObject != null)
+        PlacedObject pObj = inputManager.selectedPlacedObject;
+        GridCell pGrid = inputManager.selectedPlacedObjectGrid;
+
+        if (pObj != null)
         {
-            if (inputManager.selectedPlacedObject.level >= 4)
+            if (pObj.level >= 4)
             {
                 inputManager.gold += 20;
             }
@@ -148,8 +151,14 @@ public class Shop : MonoBehaviour
                 inputManager.gold += 10;
             }
 
-            inputManager.selectedPlacedObject.DestroySelf();
+            pGrid.ClearTransform();
+            pGrid.UnstoreObject(pObj);
+            pObj.DestroySelf();
+
             inputManager.selectedPlacedObject = null;
+            inputManager.selectedPlacedObjectGrid = null;
+            inputManager.FreezeShop.SetActive(true);
+            inputManager.Sell.SetActive(false);
         }
     }
 }

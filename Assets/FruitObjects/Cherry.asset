@@ -23,3 +23,7 @@ MonoBehaviour:
   health: 1
   level: 1
   cost: 3
+  abilityName: Splash Attack
+  abilityDescription1: Deal 2 additional damage to enemy behind
+  abilityDescription2: Deal 6 additional damage to enemy behind
+  abilityDescription3: Deal 12 additional damage to enemy behind

@@ -8,6 +8,7 @@ public class ShowInfoText : MonoBehaviour
     public InputManager inputManager;
     public static Transform prefab;
     private TMP_Text oName;
+    private TMP_Text abilityName;
     private TMP_Text ability;
     private PlacedObject placedObject;
 
@@ -31,7 +32,8 @@ public class ShowInfoText : MonoBehaviour
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         prefab = inputManager.infoPrefab;
         oName = transform.GetChild(0).GetComponent<TMP_Text>();
-        ability = transform.GetChild(1).GetComponent<TMP_Text>();
+        abilityName = transform.GetChild(1).GetComponent<TMP_Text>();
+        ability = transform.GetChild(2).GetComponent<TMP_Text>();
     }
 
     void Update()
@@ -41,7 +43,8 @@ public class ShowInfoText : MonoBehaviour
         if (placedObject != null)
         {
             oName.text = "Rank: " + placedObject.rank + " " + placedObject.nameA;
-            ability.text = placedObject.ability;
+            abilityName.text = placedObject.abilityName;
+            ability.text = placedObject.abilityDescription;
             //Debug.Log("TextUpdate");
         }
     }

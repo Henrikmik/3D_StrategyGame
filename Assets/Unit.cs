@@ -19,6 +19,12 @@ public class Unit : ScriptableObject
     public int level;
     public int cost;
 
+    // ability
+    public string abilityName;
+    public string abilityDescription1;
+    public string abilityDescription2;
+    public string abilityDescription3;
+
     // Gets the next Direction
     public static Dir GetNextDir(Dir dir)
     {

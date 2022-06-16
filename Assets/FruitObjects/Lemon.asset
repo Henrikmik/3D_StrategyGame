@@ -23,3 +23,7 @@ MonoBehaviour:
   health: 4
   level: 1
   cost: 3
+  abilityName: Got Bitten
+  abilityDescription1: Give random friend +1/+1
+  abilityDescription2: Give random friend +2/+2
+  abilityDescription3: Give 2 random friends +4/+4

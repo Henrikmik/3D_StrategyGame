@@ -4350,6 +4350,8 @@ MonoBehaviour:
   gold: 10
   draws: 1
   selectedPlacedObject: {fileID: 0}
+  selectedPlacedObjectGrid: {fileID: 0}
+  FreezeShop: {fileID: 0}
   Sell: {fileID: 618524943}
   showInfotext: {fileID: 0}
   infoPrefab: {fileID: 938166262039433980, guid: c63c56ba40b9aee438a3af1b103704f2,

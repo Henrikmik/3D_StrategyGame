@@ -36,8 +36,9 @@ public class InputManager : MonoBehaviour
     public int draws = 1;
 
     public PlacedObject selectedPlacedObject;
+    public GridCell selectedPlacedObjectGrid;
 
-    GameObject FreezeShop;
+    public GameObject FreezeShop;
     public GameObject Sell;
 
     public ShowInfoText showInfotext;
@@ -65,19 +66,19 @@ public class InputManager : MonoBehaviour
 
         if (battleOn != true)
         {
-            if ((cellMouseIsOver != null) && (o == 1) && (cellMouseIsOver.GetPlacedObject() != null))   //  
-            {
-                ShowInfoText showinfoText = ShowInfoText.Create(new Vector3(4f, 5f, 0), cellMouseIsOver.GetPlacedObject(), infoPrefab, canvas);
-                showInfo = showinfoText;
-                Debug.Log("INFO");
-                o += 1;
-            }
-            if ((cellMouseIsOver == null) && (showInfo != null) && (o != 1))   // 
-            {
-                showInfo.DestroySelf();
-                Debug.Log("Destroyed");
-                o = 1;
-            }
+            //if ((cellMouseIsOver != null) && (o == 1) && (cellMouseIsOver.GetPlacedObject() != null))   //  
+            //{
+            //    ShowInfoText showinfoText = ShowInfoText.Create(new Vector3(4f, 5f, 0), cellMouseIsOver.GetPlacedObject(), infoPrefab, canvas);
+            //    showInfo = showinfoText;
+            //    //Debug.Log("INFO");
+            //    o += 1;
+            //}
+            //if ((cellMouseIsOver == null) && (showInfo != null) && (o != 1))   // 
+            //{
+            //    showInfo.DestroySelf();
+            //    //Debug.Log("Destroyed");
+            //    o = 1;
+            //}
 
             UpdateHierarchie();
 
@@ -85,8 +86,8 @@ public class InputManager : MonoBehaviour
             {
                 if (cellMouseIsOver != null)
                 {
-                    GridCell gridCell = cellMouseIsOver;
-                    PlacedObject placedObject = gridCell.GetPlacedObject();
+                    selectedPlacedObjectGrid = cellMouseIsOver;
+                    PlacedObject placedObject = selectedPlacedObjectGrid.GetPlacedObject();
                     if (selectedPlacedObject != null)
                     {
                         selectedPlacedObject.gameObject.transform.position = new Vector3
@@ -107,6 +108,7 @@ public class InputManager : MonoBehaviour
                             (selectedPlacedObject.gameObject.transform.position.x, 1f, selectedPlacedObject.gameObject.transform.position.z);
                     }
                     selectedPlacedObject = null;
+                    selectedPlacedObjectGrid = null;
                     FreezeShop.SetActive(true);
                     Sell.SetActive(false);
                 }
@@ -370,11 +372,11 @@ public class InputManager : MonoBehaviour
             // Sets gold to 100
             if (roundCounter >= 3)
             {
-                gold = 200;
+                gold = 210;
             }
             else
             {
-                gold = 100;
+                gold = 110;
             }
         }
     }

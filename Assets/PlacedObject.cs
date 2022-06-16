@@ -44,6 +44,10 @@ public class PlacedObject : MonoBehaviour
     public int armorTriggerCounter = 0;
     public int rank = 1;
 
+    // ability
+    public string abilityName;
+    public string abilityDescription;
+
     public void DestroySelf()
     {
         Destroy(gameObject);
@@ -70,6 +74,22 @@ public class PlacedObject : MonoBehaviour
         baseAttack = unit.attack;
         baseHealth = unit.health;
         baseLevel = unit.level;
+
+        // ability
+        abilityName = unit.abilityName;
+        if (rank == 2)
+        {
+            abilityDescription= unit.abilityDescription2;
+        }
+        else if(rank == 3)
+        {
+            abilityDescription = unit.abilityDescription3;
+        }
+        else
+        {
+            abilityDescription = unit.abilityDescription1;
+        }
+
 
         if (ability == "coconut")
         {
