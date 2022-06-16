@@ -42,6 +42,7 @@ public class PlacedObject : MonoBehaviour
     public bool firstLvlUp = false;
     public bool secondLvlUp = false;
     public int armorTriggerCounter = 0;
+    public int rank = 1;
 
     public void DestroySelf()
     {
@@ -230,7 +231,7 @@ public class PlacedObject : MonoBehaviour
         if ((level == 4) && (firstLvlUp == false))
         {
             firstLvlUp = true;
-
+            rank = 2;
             // Do things when reaching rank 2
 
             transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
@@ -238,7 +239,7 @@ public class PlacedObject : MonoBehaviour
         else if ((level == 7) && (secondLvlUp == false))
         {
             secondLvlUp = true;
-
+            rank = 3;
             // Do things when reaching rank 3
 
             transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);

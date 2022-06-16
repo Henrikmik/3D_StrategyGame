@@ -40,6 +40,10 @@ public class InputManager : MonoBehaviour
     GameObject FreezeShop;
     public GameObject Sell;
 
+    public ShowInfoText showInfotext;
+    public Transform infoPrefab;
+
+    private int o = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +57,7 @@ public class InputManager : MonoBehaviour
         gold = 100;
     }
 
+    private ShowInfoText showInfo;
     // Update is called once per frame
     void Update()
     {
@@ -60,6 +65,20 @@ public class InputManager : MonoBehaviour
 
         if (battleOn != true)
         {
+            if ((cellMouseIsOver != null) && (o == 1) && (cellMouseIsOver.GetPlacedObject() != null))   //  
+            {
+                ShowInfoText showinfoText = ShowInfoText.Create(new Vector3(4f, 5f, 0), cellMouseIsOver.GetPlacedObject(), infoPrefab, canvas);
+                showInfo = showinfoText;
+                Debug.Log("INFO");
+                o += 1;
+            }
+            if ((cellMouseIsOver == null) && (showInfo != null) && (o != 1))   // 
+            {
+                showInfo.DestroySelf();
+                Debug.Log("Destroyed");
+                o = 1;
+            }
+
             UpdateHierarchie();
 
             if (Input.GetMouseButtonDown(1))
