@@ -12,6 +12,9 @@ public class BattleRound : MonoBehaviour
     public GameObject gameGridEnemy;
     public GameObject unitManager;
     public GameObject enemyManager;
+
+    [SerializeField] private GameObject buytheme;
+    [SerializeField] private GameObject battletheme;
     //public Animator animatorUnit;
 
     public void StartBattle()
@@ -696,8 +699,10 @@ public class BattleRound : MonoBehaviour
         SetUpBuyingPhase();
         inputManager.shop.ShopReroll();
         FindObjectOfType<AudioManager>().Play("Win");
-        
+
         //Deactivate Battletheme, Play Buytheme
+        buytheme.SetActive(true);
+        battletheme.SetActive(false);
     }
 
     private void LoseScreen()

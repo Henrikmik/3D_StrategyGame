@@ -9769,6 +9769,8 @@ MonoBehaviour:
   gameGridEnemy: {fileID: 225948464}
   unitManager: {fileID: 77820170}
   enemyManager: {fileID: 1201775363}
+  buytheme: {fileID: 504695897}
+  battletheme: {fileID: 1483724677}
 --- !u!4 &1089988296
 Transform:
   m_ObjectHideFlags: 0
