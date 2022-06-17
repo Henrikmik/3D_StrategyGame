@@ -243,6 +243,7 @@ public class PlacedObject : MonoBehaviour
 
     public void LevelupStats()
     {
+        FindObjectOfType<AudioManager>().Play("RankUp");
         health += 1;
         baseHealth += 1;
         attack += 1;

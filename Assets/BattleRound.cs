@@ -50,6 +50,7 @@ public class BattleRound : MonoBehaviour
                     yield return new WaitForSeconds(.2f);
 
                     // Unit greift Enemy an
+                    FindObjectOfType<AudioManager>().Play("UnitHit");
                     enemy.GettingDamaged(teamObject.attack);
                     inputManager.UpdateFloatingText(enemy);
                     CheckAbilityAttack(teamObject, enemyManager, true);   // überprüft ability vom Angreifer
@@ -83,6 +84,7 @@ public class BattleRound : MonoBehaviour
                     yield return new WaitForSeconds(.2f);
 
                     // Unit greift Enemy an
+                    FindObjectOfType<AudioManager>().Play("UnitHit");
                     enemy.GettingDamaged(teamObject.attack);
                     inputManager.UpdateFloatingText(enemy);
                     CheckAbilityAttack(teamObject, enemyManager, true);   // überprüft ability vom Angreifer
@@ -117,6 +119,7 @@ public class BattleRound : MonoBehaviour
                     yield return new WaitForSeconds(.2f);
 
                     // Unit greift Enemy an
+                    FindObjectOfType<AudioManager>().Play("UnitHit");
                     enemy.GettingDamaged(teamObject.attack);
                     inputManager.UpdateFloatingText(enemy);
                     CheckAbilityAttack(teamObject, enemyManager, true);   // überprüft ability vom Angreifer
@@ -692,12 +695,16 @@ public class BattleRound : MonoBehaviour
         finalGameState = null;
         SetUpBuyingPhase();
         inputManager.shop.ShopReroll();
+        FindObjectOfType<AudioManager>().Play("Win");
+        
+        //Deactivate Battletheme, Play Buytheme
     }
 
     private void LoseScreen()
     {
         inputManager.canvas.SetActive(false);
         inputManager.canvasLose.transform.GetChild(0).gameObject.SetActive(true);
+        //FindObjectOfType<AudioManager>().Play("Lose");
     }
 
     public string GetAbility(PlacedObject placedObject)

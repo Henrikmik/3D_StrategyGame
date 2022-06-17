@@ -124,12 +124,14 @@ public class Shop : MonoBehaviour
         if (freezedShop == true)
         {
             freezedShop = false;
+            FindObjectOfType<AudioManager>().Play("Unfreeze");
             FreezeButton.sprite = shopFreezed;
             //Debug.Log("Shop is not freezed");
         }
         else if (freezedShop == false)
         {
             freezedShop = true;
+            FindObjectOfType<AudioManager>().Play("Freeze");
             FreezeButton.sprite = shopUnfreezed;
             //Debug.Log("Shop is freezed");
         }
@@ -142,6 +144,7 @@ public class Shop : MonoBehaviour
 
         if (pObj != null)
         {
+            FindObjectOfType<AudioManager>().Play("Sell");
             if (pObj.level >= 4)
             {
                 inputManager.gold += 20;
