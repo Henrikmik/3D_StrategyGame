@@ -59,6 +59,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
             //Debug.Log("OnEndDrag");
 
             GridCell cellMouseIsOver = inputManager.IsMouseOverAGridSpace();
+            PlacedObject hoveredObject = inputManager.IsMouseOverAplacedobject();
             PlacedObject placedObject = transform.GetComponent<PlacedObject>();
 
             if (cellMouseIsOver != null)    // mouse is over a grid cell

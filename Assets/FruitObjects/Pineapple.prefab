@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1649745089383010085}
   - component: {fileID: 1304129499907998188}
   - component: {fileID: -7754157745303644667}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pineapple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,6 +122,9 @@ MonoBehaviour:
   firstLvlUp: 0
   secondLvlUp: 0
   armorTriggerCounter: 0
+  rank: 1
+  abilityName: 
+  abilityDescription: 
 --- !u!114 &-7754157745303644667
 MonoBehaviour:
   m_ObjectHideFlags: 0

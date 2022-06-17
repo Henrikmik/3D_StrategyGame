@@ -38,7 +38,7 @@ public class ShowInfoText : MonoBehaviour
 
     void Update()
     {
-        placedObject = inputManager.IsMouseOverAGridSpace().GetPlacedObject();
+        placedObject = inputManager.IsMouseOverAplacedobject();
 
         if (placedObject != null)
         {

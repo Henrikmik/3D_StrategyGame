@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3005932224415046029}
   - component: {fileID: 1707768290409198012}
   - component: {fileID: 1342793807651892714}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mini Grape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,6 +118,12 @@ MonoBehaviour:
   baseHealth: 0
   baseLevel: 0
   armor: 0
+  firstLvlUp: 0
+  secondLvlUp: 0
+  armorTriggerCounter: 0
+  rank: 1
+  abilityName: 
+  abilityDescription: 
 --- !u!114 &1342793807651892714
 MonoBehaviour:
   m_ObjectHideFlags: 0

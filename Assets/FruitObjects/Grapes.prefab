@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4478137891523396072}
   - component: {fileID: 1154536500315049894}
   - component: {fileID: -7374570280176962377}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Grapes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,6 +118,13 @@ MonoBehaviour:
   baseAttack: 0
   baseHealth: 0
   baseLevel: 0
+  armor: 0
+  firstLvlUp: 0
+  secondLvlUp: 0
+  armorTriggerCounter: 0
+  rank: 1
+  abilityName: 
+  abilityDescription: 
 --- !u!114 &-7374570280176962377
 MonoBehaviour:
   m_ObjectHideFlags: 0

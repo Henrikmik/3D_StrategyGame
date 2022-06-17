@@ -4319,10 +4319,14 @@ MonoBehaviour:
   gameGridEnemyS: {fileID: 225948465}
   mainCamera: {fileID: 963194227}
   canvas: {fileID: 1748904019}
+  canvasLose: {fileID: 1240293291}
   shop: {fileID: 260209896}
   whatIsAGridLayer:
     serializedVersion: 2
     m_Bits: 256
+  whatIsPlacedObjectLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   testTransform: {fileID: 4478137891523396087, guid: b3b77ca658fd6724089033e5234a7c83,
     type: 3}
   unitList:

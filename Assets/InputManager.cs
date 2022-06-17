@@ -14,9 +14,11 @@ public class InputManager : MonoBehaviour
     public GameGridEnemy gameGridEnemyS;
     public Camera mainCamera;
     public GameObject canvas;
+    public GameObject canvasLose;
     public Shop shop;
 
     [SerializeField] private LayerMask whatIsAGridLayer;
+    [SerializeField] private LayerMask whatIsPlacedObjectLayer;
     [SerializeField] private Transform testTransform;
     [SerializeField] public List<Unit> unitList;
     private Unit unit;
@@ -62,23 +64,25 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(IsMouseOverAplacedobject());
         GridCell cellMouseIsOver = IsMouseOverAGridSpace();
+        PlacedObject hoveredObject = IsMouseOverAplacedobject();
 
         if (battleOn != true)
         {
-            //if ((cellMouseIsOver != null) && (o == 1) && (cellMouseIsOver.GetPlacedObject() != null))   //  
-            //{
-            //    ShowInfoText showinfoText = ShowInfoText.Create(new Vector3(4f, 5f, 0), cellMouseIsOver.GetPlacedObject(), infoPrefab, canvas);
-            //    showInfo = showinfoText;
-            //    //Debug.Log("INFO");
-            //    o += 1;
-            //}
-            //if ((cellMouseIsOver == null) && (showInfo != null) && (o != 1))   // 
-            //{
-            //    showInfo.DestroySelf();
-            //    //Debug.Log("Destroyed");
-            //    o = 1;
-            //}
+            if ((hoveredObject != null) && (o == 1))   //  
+            {
+                ShowInfoText showinfoText = ShowInfoText.Create(new Vector3(6.8f, 4.5f, 0), hoveredObject, infoPrefab, canvas);
+                showInfo = showinfoText;
+                //Debug.Log("INFO");
+                o += 1;
+            }
+            if ((hoveredObject == null) && (showInfo != null) && (o != 1))   // 
+            {
+                showInfo.DestroySelf();
+                //Debug.Log("Destroyed");
+                o = 1;
+            }
 
             UpdateHierarchie();
 
@@ -168,6 +172,20 @@ public class InputManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f, whatIsAGridLayer))
         {
             return hitInfo.transform.GetComponent<GridCell>();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    // returns placedobject if mouse is over placed object and returns null if it is not
+    public PlacedObject IsMouseOverAplacedobject()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f, whatIsPlacedObjectLayer))
+        {
+            return hitInfo.transform.GetComponent<PlacedObject>();
         }
         else
         {

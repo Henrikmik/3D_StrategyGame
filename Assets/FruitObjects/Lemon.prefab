@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 84424166884265087}
   - component: {fileID: 7966826403096520690}
   - component: {fileID: 1281969091886593514}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,6 +117,13 @@ MonoBehaviour:
   baseAttack: 0
   baseHealth: 0
   baseLevel: 0
+  armor: 0
+  firstLvlUp: 0
+  secondLvlUp: 0
+  armorTriggerCounter: 0
+  rank: 1
+  abilityName: 
+  abilityDescription: 
 --- !u!114 &1281969091886593514
 MonoBehaviour:
   m_ObjectHideFlags: 0

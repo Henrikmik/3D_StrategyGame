@@ -159,16 +159,43 @@ public class BattleRound : MonoBehaviour
                 }
                 else    // win, lose, draw regel implementieren
                 {
-                    if ((gameState == "Win") || (gameState == "Lose") || (gameState == "Draw"))
+                    if (gameState == "Win")
                     {
                         inputManager.roundCounter += 1;
                         EndOfRound();
                         break;
                     }
+                    else if(gameState == "Lose")
+                    {
+                        inputManager.roundCounter = 1;
+                        LoseScreen();
+                        //EndOfRound();
+                        break;
+                    }
+                    else if(gameState == "Draw")
+                    {
+                        inputManager.draws -= 1;
+
+                        if (inputManager.draws > 0)
+                        {
+                            Debug.Log("Draw Draw");
+                            inputManager.roundCounter += 0;
+                            EndOfRound();
+                            break;
+                        }
+                        else
+                        {
+                            Debug.Log("Draw Draw");
+                            inputManager.roundCounter = 1;
+                            EndOfRound();
+                            break;
+                        }
+                    }
                 }
             }
             if (lane == 2)  // draw resets to same roundCounter // Lose resets to round 1 or main menu
             {
+                // Win
                 if ((gameState == "Win") && (gameState2 == "Win"))
                 {
                     // WIN
@@ -193,6 +220,7 @@ public class BattleRound : MonoBehaviour
                     break;
                 }
 
+                // Draw
                 else if ((gameState == "Draw") && (gameState2 == "Draw"))
                 {
                     // Draw
@@ -213,6 +241,7 @@ public class BattleRound : MonoBehaviour
                     }
                 }
 
+                // Final Battle
                 else if ((gameState == "Win") && (gameState2 == "Lose"))
                 {
                     if (gameState == "Win")
@@ -293,11 +322,13 @@ public class BattleRound : MonoBehaviour
                     }
                 }
 
+                // Lose
                 else if ((gameState == "Lose") && (gameState2 == "Draw"))
                 {
                     // Lose
                     inputManager.roundCounter = 1;
-                    EndOfRound();
+                    LoseScreen();
+                    //EndOfRound();
                     break;
                 }
 
@@ -305,7 +336,8 @@ public class BattleRound : MonoBehaviour
                 {
                     // Lose
                     inputManager.roundCounter = 1;
-                    EndOfRound();
+                    LoseScreen();
+                    //EndOfRound();
                     break;
                 }
 
@@ -313,11 +345,13 @@ public class BattleRound : MonoBehaviour
                 {
                     // Lose
                     inputManager.roundCounter = 1;
-                    EndOfRound();
+                    LoseScreen();
+                    //EndOfRound();
                     break;
                 }
             }
 
+            // Win
             if (finalGameState == "Win")
             {
                 Debug.Log("Winner Winner");
@@ -325,6 +359,7 @@ public class BattleRound : MonoBehaviour
                 EndOfRound();
                 break;
             }
+            // Draw
             else if (finalGameState == "Draw")
             {
                 inputManager.draws -= 1;
@@ -344,11 +379,13 @@ public class BattleRound : MonoBehaviour
                     break;
                 }
             }
+            // Lose
             else if (finalGameState == "Lose")
             {
                 Debug.Log("Lose Lose");
                 inputManager.roundCounter = 1;
-                EndOfRound();
+                LoseScreen();
+                //EndOfRound();
                 break;
             }
 
@@ -655,6 +692,12 @@ public class BattleRound : MonoBehaviour
         finalGameState = null;
         SetUpBuyingPhase();
         inputManager.shop.ShopReroll();
+    }
+
+    private void LoseScreen()
+    {
+        inputManager.canvas.SetActive(false);
+        inputManager.canvasLose.transform.GetChild(0).gameObject.SetActive(true);
     }
 
     public string GetAbility(PlacedObject placedObject)

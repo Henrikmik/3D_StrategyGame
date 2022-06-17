@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3518515591089170245}
   - component: {fileID: 8693775928035125282}
   - component: {fileID: 656621781787043169}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cherry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,3 +129,10 @@ MonoBehaviour:
   baseAttack: 0
   baseHealth: 0
   baseLevel: 0
+  armor: 0
+  firstLvlUp: 0
+  secondLvlUp: 0
+  armorTriggerCounter: 0
+  rank: 1
+  abilityName: 
+  abilityDescription: 

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1580130288240408477}
   - component: {fileID: -5001206808918114785}
   - component: {fileID: 1044724814730304482}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: apple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,6 +121,9 @@ MonoBehaviour:
   firstLvlUp: 0
   secondLvlUp: 0
   armorTriggerCounter: 0
+  rank: 1
+  abilityName: 
+  abilityDescription: 
 --- !u!114 &1044724814730304482
 MonoBehaviour:
   m_ObjectHideFlags: 0

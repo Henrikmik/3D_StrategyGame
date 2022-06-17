@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 431692676410241595}
   - component: {fileID: -5507562072072547105}
   - component: {fileID: -2586299040842700459}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Coconut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,6 +121,9 @@ MonoBehaviour:
   firstLvlUp: 0
   secondLvlUp: 0
   armorTriggerCounter: 0
+  rank: 1
+  abilityName: 
+  abilityDescription: 
 --- !u!114 &-2586299040842700459
 MonoBehaviour:
   m_ObjectHideFlags: 0
