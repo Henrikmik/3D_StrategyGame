@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Apple
   description: 
   ability: apple
-  prefab: {fileID: 1580130288240408480, guid: e00b9c219179e6342a1be01a62f3c178, type: 3}
+  prefab: {fileID: 3539115600778595045, guid: 0c8f73efb8c76c1459e66beed45d651d, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0

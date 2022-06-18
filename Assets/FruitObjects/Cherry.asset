@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Cherry
   description: 
   ability: cherry
-  prefab: {fileID: 1558777792486104257, guid: acc4d1180b5733442b7fdada2c95c9ab, type: 3}
+  prefab: {fileID: 3566707210711495012, guid: 376a717c54c42b54ba2e5c6c293bbb6e, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0

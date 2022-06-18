@@ -447,7 +447,7 @@ public class InputManager : MonoBehaviour
 
     public void DragOnGridCell(GridCell cellMouseIsOver, PlacedObject placedObject)
     {
-        placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 1f, cellMouseIsOver.GetComponent<Transform>().position.z);
+        placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 0.5f, cellMouseIsOver.GetComponent<Transform>().position.z);
         placedObject.transform.position = placementVec;
         placedObject.transform.SetParent(null);
         placedObject.transform.SetParent(unitManager.transform);

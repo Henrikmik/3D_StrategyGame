@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Lemon
   description: 
   ability: lemon
-  prefab: {fileID: 5715541570762819977, guid: 477815f177ca963448f0acf04e9727ad, type: 3}
+  prefab: {fileID: 1148998689261849379, guid: f517c8d30625cca4689762b9e4910219, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0

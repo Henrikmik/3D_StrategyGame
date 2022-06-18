@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Broccoli
   description: 
   ability: 
-  prefab: {fileID: 5435623376016496657, guid: 3a9fdd30cab59a348a6b4b98264e39f3, type: 3}
+  prefab: {fileID: 8655223909985508558, guid: 6b346da67b0744e45964ce748c9f6ad8, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0
@@ -23,3 +23,7 @@ MonoBehaviour:
   health: 2
   level: 0
   cost: 0
+  abilityName: 
+  abilityDescription1: 
+  abilityDescription2: 
+  abilityDescription3: 

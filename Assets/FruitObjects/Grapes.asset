@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Grapes
   description: 
   ability: grapes
-  prefab: {fileID: 4478137891523396087, guid: b3b77ca658fd6724089033e5234a7c83, type: 3}
+  prefab: {fileID: 931780463270229890, guid: d47141ec55da90e49b68e4955b2d1d12, type: 3}
   visual: {fileID: 0}
   width: 1
   height: 1

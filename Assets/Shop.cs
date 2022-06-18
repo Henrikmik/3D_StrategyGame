@@ -44,7 +44,7 @@ public class Shop : MonoBehaviour
 
     public void PlaceUnitInShop(GameObject e, Unit unit)
     {
-        Vector3 pos3 = e.transform.position;
+        Vector3 pos3 = new Vector3 (e.transform.position.x + 0.1f, e.transform.position.y - 0.4f, e.transform.position.z - 0.1f);
         Vector2Int pos2 = new Vector2Int (0, 0);
 
         PlacedObject placedEnemy = PlacedObject.Create(pos3, pos2, Unit.Dir.Down, unit);

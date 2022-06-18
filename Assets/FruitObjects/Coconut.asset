@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Coconut
   description: 
   ability: coconut
-  prefab: {fileID: 2551564352595502732, guid: 2d51aedf40e886a428849e8d19194680, type: 3}
+  prefab: {fileID: 6750558267340285471, guid: e5523792879b55f4cb583c46b6e993a5, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0

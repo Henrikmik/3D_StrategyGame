@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Pineapple
   description: 
   ability: pineapple
-  prefab: {fileID: 2964301075626184737, guid: bce2eeda06623c544b498efbdc9dd134, type: 3}
+  prefab: {fileID: 4867801128135977274, guid: e408b66db3878364db8fac2ca9117589, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0
