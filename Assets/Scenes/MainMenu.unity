@@ -3251,6 +3251,7 @@ GameObject:
   - component: {fileID: 2008594515}
   - component: {fileID: 2008594517}
   - component: {fileID: 2008594516}
+  - component: {fileID: 2008594518}
   m_Layer: 5
   m_Name: DevloperNames
   m_TagString: Untagged
@@ -3300,8 +3301,8 @@ MonoBehaviour:
   m_text: "Hauck Adrian\nHozlinger Kim\nJames Lee Jordan\nKauz Andrej \nKobarg Maurice\nKramer
     Bengt Julian\nKurz Henrik"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 683da7b9c877bfd4481b1e94dc917a25, type: 2}
-  m_sharedMaterial: {fileID: -9089444230276957211, guid: 683da7b9c877bfd4481b1e94dc917a25,
+  m_fontAsset: {fileID: 11400000, guid: 95909190a10e67b4f80441679335c9a6, type: 2}
+  m_sharedMaterial: {fileID: 4461540663127978011, guid: 95909190a10e67b4f80441679335c9a6,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3365,7 +3366,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: -1.9150085}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2008594517
@@ -3376,6 +3377,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008594514}
   m_CullTransparentMesh: 1
+--- !u!114 &2008594518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008594514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2107625678
 GameObject:
   m_ObjectHideFlags: 0
