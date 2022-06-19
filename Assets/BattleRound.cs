@@ -709,6 +709,7 @@ public class BattleRound : MonoBehaviour
     {
         inputManager.canvas.SetActive(false);
         inputManager.canvasLose.transform.GetChild(0).gameObject.SetActive(true);
+        battletheme.SetActive(false);
         //FindObjectOfType<AudioManager>().Play("Lose");
     }
 
@@ -1557,18 +1558,4 @@ public class BattleRound : MonoBehaviour
             }
         }
     }
-
-    //public void GameState(int lane)
-    //{
-    //    string state;
-
-    //    if (lane == 1)
-    //    {
-    //        state = gameState;   
-    //    }
-    //    if (lane == 2)
-    //    {
-    //        state = gameState2;
-    //    }
-    //}
 }

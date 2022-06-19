@@ -198,7 +198,6 @@ public class InputManager : MonoBehaviour
         {
             return null;
         }
-
     }
 
     //public static Vector3 GetMouseWorldPosition() => InputManager.GetMouseWorldPosition_Instance();
