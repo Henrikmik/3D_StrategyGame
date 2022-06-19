@@ -46,6 +46,8 @@ public class InputManager : MonoBehaviour
     public ShowInfoText showInfotext;
     public Transform infoPrefab;
 
+    public Camera c_Cam;
+
     private int o = 1;
     // Start is called before the first frame update
     void Start()
@@ -72,7 +74,7 @@ public class InputManager : MonoBehaviour
         {
             if ((hoveredObject != null) && (o == 1))   //  
             {
-                ShowInfoText showinfoText = ShowInfoText.Create(new Vector3(6.8f, 4.5f, 0), hoveredObject, infoPrefab, canvas);
+                ShowInfoText showinfoText = ShowInfoText.Create(new Vector3(81, 4.5f, 10), hoveredObject, infoPrefab, canvas);
                 showInfo = showinfoText;
                 //Debug.Log("INFO");
                 o += 1;
@@ -183,14 +185,20 @@ public class InputManager : MonoBehaviour
     public PlacedObject IsMouseOverAplacedobject()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray1 = c_Cam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f, whatIsPlacedObjectLayer))
         {
             return hitInfo.transform.GetComponent<PlacedObject>();
+        }
+        else if (Physics.Raycast(ray1, out RaycastHit hitInfo1, 100f, whatIsPlacedObjectLayer))
+        {
+            return hitInfo1.transform.GetComponent<PlacedObject>();
         }
         else
         {
             return null;
         }
+
     }
 
     //public static Vector3 GetMouseWorldPosition() => InputManager.GetMouseWorldPosition_Instance();
@@ -214,20 +222,20 @@ public class InputManager : MonoBehaviour
         float cameraAngley = mainCamera.GetComponent<Transform>().rotation.y;
         float cameraAnglez = mainCamera.GetComponent<Transform>().rotation.z;
 
-        var myNewStats = Instantiate(FloatingTextPrefab, objectPos, Quaternion.Euler(cameraAnglex + 40f, cameraAngley - 60f, -20f), transform);
+        var myNewStats = Instantiate(FloatingTextPrefab, new Vector3 (objectPos.x, objectPos.y + 0.3f, objectPos.z - 0.5f), Quaternion.Euler(0, 0, 0), transform);
         myNewStats.transform.parent = placedObject.transform;
-        myNewStats.GetComponent<TextMesh>().text = myNewStats.GetComponentInParent<PlacedObject>().nameA
-            + "\n Attack: " + myNewStats.GetComponentInParent<PlacedObject>().attack 
-            + "\n Health: " + myNewStats.GetComponentInParent<PlacedObject>().health 
-            + "\n Level: " + myNewStats.GetComponentInParent<PlacedObject>().level;
+        //myNewStats.GetComponent<TextMesh>().text = myNewStats.GetComponentInParent<PlacedObject>().nameA
+        //    + "\n Attack: " + myNewStats.GetComponentInParent<PlacedObject>().attack 
+        //    + "\n Health: " + myNewStats.GetComponentInParent<PlacedObject>().health 
+        //    + "\n Level: " + myNewStats.GetComponentInParent<PlacedObject>().level;
     }
 
     public void UpdateFloatingText(PlacedObject placedObject)
     {
-        placedObject.GetComponentInChildren<TextMesh>().text = placedObject.GetComponentInParent<PlacedObject>().nameA
-            + "\n Attack: " + placedObject.GetComponentInParent<PlacedObject>().attack
-            + "\n Health: " + placedObject.GetComponentInParent<PlacedObject>().health
-            + "\n Level: " + placedObject.GetComponentInParent<PlacedObject>().level;
+        //placedObject.GetComponentInChildren<TextMesh>().text = placedObject.GetComponentInParent<PlacedObject>().nameA
+        //    + "\n Attack: " + placedObject.GetComponentInParent<PlacedObject>().attack
+        //    + "\n Health: " + placedObject.GetComponentInParent<PlacedObject>().health
+        //    + "\n Level: " + placedObject.GetComponentInParent<PlacedObject>().level;
     }
 
     public void StartBattlePhase()

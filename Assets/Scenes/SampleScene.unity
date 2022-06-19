@@ -4878,7 +4878,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4c404f5956750b74d94b6f4dcb66ab57, type: 2}
   - {fileID: 11400000, guid: 6e2e72d8b7d3088479003a903d1b4953, type: 2}
   placementVec: {x: 0, y: 0, z: 0}
-  FloatingTextPrefab: {fileID: 4204849103947666853, guid: d51795a3636726f4dbeef81ff854ff75,
+  FloatingTextPrefab: {fileID: 3497806510893503814, guid: b211846bcdc2d2a48b56ac88b4c90ce7,
     type: 3}
   battleOn: 0
   roundover: 1
@@ -4894,6 +4894,7 @@ MonoBehaviour:
   showInfotext: {fileID: 0}
   infoPrefab: {fileID: 938166262039433980, guid: c63c56ba40b9aee438a3af1b103704f2,
     type: 3}
+  c_Cam: {fileID: 755487999}
 --- !u!4 &486509039
 Transform:
   m_ObjectHideFlags: 0

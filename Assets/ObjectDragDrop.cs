@@ -40,13 +40,10 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
             //transform.parent = gameGrid.transform;
             //Ray R = m_cam.ScreenPointToRay(Input.mousePosition);    // Get the ray from mouse position
-            ////Ray Rc = c_cam.ScreenPointToRay(Input.mousePosition);   // Gets the ray from mouse position in canvas
 
             //Vector3 PO = transform.position;  // Take current position of this draggable object as Plane큦 Origin
             //Vector3 PN = m_cam.transform.forward;   // Take current negative camera큦 forward as Plane큦 Normal
-            ////Vector3 PNc = c_cam.transform.forward;  // Take current negative canvas camera큦 forward as Plane큦 Normal
             //float t = Vector3.Dot(PO - R.origin, PN) / Vector3.Dot(R.direction, PN);    // plane vs. line intersection in algebric form. It finds t as distance from the camera of the new point in the ray큦 direction.
-            ////float tc = Vector3.Dot(PO - Rc.origin, PNc) / Vector3.Dot(Rc.direction, PNc);   // same for canvas camera
 
             //Vector3 P = R.origin + R.direction * t; // Find the new point;
 
@@ -101,6 +98,9 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                             inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
                             origin = transform.position;
                             oldGridCell = cellMouseIsOver;
+
+                            Transform infoStats = placedObject.transform.GetChild(0);
+                            infoStats.position = new Vector3 (infoStats.position.x + 0.4f, infoStats.position.y, infoStats.position.z + 0.2f);
                             inputManager.gold -= 30;
                             //Debug.Log("Aus Shop");
                         }
