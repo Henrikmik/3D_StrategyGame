@@ -54,6 +54,10 @@ public class BattleRound : MonoBehaviour
 
                     // Unit greift Enemy an
                     FindObjectOfType<AudioManager>().Play("UnitHit");
+                    //FindObjectOfType<AudioManager>().Play("UnitDefeat");
+                    //FindObjectOfType<AudioManager>().Play("MoveUnit");
+                    //Check Stats for Hit Sound
+
                     enemy.GettingDamaged(teamObject.attack);
                     inputManager.UpdateFloatingText(enemy);
                     CheckAbilityAttack(teamObject, enemyManager, true);   // überprüft ability vom Angreifer
@@ -698,7 +702,7 @@ public class BattleRound : MonoBehaviour
         finalGameState = null;
         SetUpBuyingPhase();
         inputManager.shop.ShopReroll();
-        FindObjectOfType<AudioManager>().Play("Win");
+        //FindObjectOfType<AudioManager>().Play("Win");
 
         //Deactivate Battletheme, Play Buytheme
         buytheme.SetActive(true);
