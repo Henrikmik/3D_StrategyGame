@@ -12,7 +12,7 @@ public class SceneChanger : MonoBehaviour
     void Update()
     {
         if (SceneManager.GetActiveScene().buildIndex == 1){
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.S))
                     {
                         FadeToNextScene();
                     }
