@@ -142,18 +142,18 @@ public class BattleRound : MonoBehaviour
                     yield return new WaitForSeconds(1f);
                     CheckAllUnitsOnDefeat(lane);
 
-                    yield return new WaitForSeconds(1f);
+                    //yield return new WaitForSeconds(1f);
                     CheckingGridBattle(lane);
 
-                    yield return new WaitForSeconds(1f);
+                    //yield return new WaitForSeconds(1f);
                     CheckingGameState(lane);
                 }
             }
 
-            if (lane == 4)  // final battle on botlane
-            {
+            //if (lane == 4)  // final battle on botlane
+            //{
 
-            }
+            //}
 
             yield return new WaitForSeconds(.5f);
 
@@ -172,6 +172,9 @@ public class BattleRound : MonoBehaviour
                     if (gameState == "Win")
                     {
                         inputManager.roundCounter += 1;
+                        FindObjectOfType<AudioManager>().Play("Win");
+                        yield return new WaitForSeconds(2f);
+
                         EndOfRound();
                         break;
                     }
@@ -190,6 +193,9 @@ public class BattleRound : MonoBehaviour
                         {
                             Debug.Log("Draw Draw");
                             inputManager.roundCounter += 0;
+                            FindObjectOfType<AudioManager>().Play("Draw");
+                            yield return new WaitForSeconds(2f);
+
                             EndOfRound();
                             break;
                         }
@@ -197,6 +203,9 @@ public class BattleRound : MonoBehaviour
                         {
                             Debug.Log("Draw Draw");
                             inputManager.roundCounter = 1;
+                            FindObjectOfType<AudioManager>().Play("Draw");
+                            yield return new WaitForSeconds(2f);
+
                             EndOfRound();
                             break;
                         }
@@ -210,6 +219,9 @@ public class BattleRound : MonoBehaviour
                 {
                     // WIN
                     inputManager.roundCounter += 1;
+                    FindObjectOfType<AudioManager>().Play("Win");
+                    yield return new WaitForSeconds(2f);
+
                     EndOfRound();
                     break;
                 }
@@ -218,6 +230,9 @@ public class BattleRound : MonoBehaviour
                 {
                     // WIN
                     inputManager.roundCounter += 1;
+                    FindObjectOfType<AudioManager>().Play("Win");
+                    yield return new WaitForSeconds(2f);
+
                     EndOfRound();
                     break;
                 }
@@ -226,6 +241,9 @@ public class BattleRound : MonoBehaviour
                 {
                     // WIN
                     inputManager.roundCounter += 1;
+                    FindObjectOfType<AudioManager>().Play("Win");
+                    yield return new WaitForSeconds(2f);
+
                     EndOfRound();
                     break;
                 }
@@ -240,13 +258,18 @@ public class BattleRound : MonoBehaviour
                     if (inputManager.draws > 0)
                     {
                         inputManager.roundCounter += 0;
+                        FindObjectOfType<AudioManager>().Play("Draw");
+                        yield return new WaitForSeconds(2f);
+
                         EndOfRound();
                         break;
                     }
                     else
                     {
                         inputManager.roundCounter = 1;
-                        EndOfRound();
+                        LoseScreen();
+
+                        //EndOfRound();
                         break;
                     }
                 }
@@ -272,47 +295,47 @@ public class BattleRound : MonoBehaviour
                         }
                         lane = 3;
                     }
-                    else if (gameState2 == "Win")
-                    {
-                        // units stay on lane 2
-                        // enemy units go to lane 2
-                        if (inputManager.GetEnemyCell(0).GetComponent<GridCell>().isOccupied == true)
-                        {
-                            UnitMove(0, 3, true);
-                        }
-                        if (inputManager.GetEnemyCell(1).GetComponent<GridCell>().isOccupied == true)
-                        {
-                            UnitMove(1, 4, true);
-                        }
-                        if (inputManager.GetEnemyCell(2).GetComponent<GridCell>().isOccupied == true)
-                        {
-                            UnitMove(2, 5, true);
-                        }
-                        lane = 4;
-                    }
+                    //else if (gameState2 == "Win")
+                    //{
+                    //    // units stay on lane 2
+                    //    // enemy units go to lane 2
+                    //    if (inputManager.GetEnemyCell(0).GetComponent<GridCell>().isOccupied == true)
+                    //    {
+                    //        UnitMove(0, 3, true);
+                    //    }
+                    //    if (inputManager.GetEnemyCell(1).GetComponent<GridCell>().isOccupied == true)
+                    //    {
+                    //        UnitMove(1, 4, true);
+                    //    }
+                    //    if (inputManager.GetEnemyCell(2).GetComponent<GridCell>().isOccupied == true)
+                    //    {
+                    //        UnitMove(2, 5, true);
+                    //    }
+                    //    lane = 4;
+                    //}
                 }
 
                 else if ((gameState == "Lose") && (gameState2 == "Win"))
                 {
-                    if (gameState == "Win")
-                    {
-                        // units stay on lane 1
-                        // enemy units go over to lane 1
-                        if (inputManager.GetEnemyCell(3).GetComponent<GridCell>().isOccupied == true)
-                        {
-                            UnitMove(3, 0, true);
-                        }
-                        if (inputManager.GetEnemyCell(4).GetComponent<GridCell>().isOccupied == true)
-                        {
-                            UnitMove(4, 1, true);
-                        }
-                        if (inputManager.GetEnemyCell(5).GetComponent<GridCell>().isOccupied == true)
-                        {
-                            UnitMove(5, 2, true);
-                        }
-                        lane = 3;
-                    }
-                    else if (gameState2 == "Win")
+                    //if (gameState == "Win")
+                    //{
+                    //    // units stay on lane 1
+                    //    // enemy units go over to lane 1
+                    //    if (inputManager.GetEnemyCell(3).GetComponent<GridCell>().isOccupied == true)
+                    //    {
+                    //        UnitMove(3, 0, true);
+                    //    }
+                    //    if (inputManager.GetEnemyCell(4).GetComponent<GridCell>().isOccupied == true)
+                    //    {
+                    //        UnitMove(4, 1, true);
+                    //    }
+                    //    if (inputManager.GetEnemyCell(5).GetComponent<GridCell>().isOccupied == true)
+                    //    {
+                    //        UnitMove(5, 2, true);
+                    //    }
+                    //    lane = 3;
+                    //}
+                    if (gameState2 == "Win")
                     {
                         // units stay on lane 2
                         // enemy units go to lane 2
@@ -366,6 +389,9 @@ public class BattleRound : MonoBehaviour
             {
                 Debug.Log("Winner Winner");
                 inputManager.roundCounter += 1;
+                FindObjectOfType<AudioManager>().Play("Win");
+                yield return new WaitForSeconds(2f);
+
                 EndOfRound();
                 break;
             }
@@ -378,6 +404,9 @@ public class BattleRound : MonoBehaviour
                 {
                     Debug.Log("Draw Draw");
                     inputManager.roundCounter += 0;
+                    FindObjectOfType<AudioManager>().Play("Draw");
+                    yield return new WaitForSeconds(2f);
+
                     EndOfRound();
                     break;
                 }
@@ -385,7 +414,9 @@ public class BattleRound : MonoBehaviour
                 {
                     Debug.Log("Draw Draw");
                     inputManager.roundCounter = 1;
-                    EndOfRound();
+                    LoseScreen();
+
+                    //EndOfRound();
                     break;
                 }
             }
@@ -702,7 +733,6 @@ public class BattleRound : MonoBehaviour
         finalGameState = null;
         SetUpBuyingPhase();
         inputManager.shop.ShopReroll();
-        //FindObjectOfType<AudioManager>().Play("Win");
 
         //Deactivate Battletheme, Play Buytheme
         buytheme.SetActive(true);
@@ -713,8 +743,8 @@ public class BattleRound : MonoBehaviour
     {
         inputManager.canvas.SetActive(false);
         inputManager.canvasLose.transform.GetChild(0).gameObject.SetActive(true);
-        battletheme.SetActive(false);
-        //FindObjectOfType<AudioManager>().Play("Lose");
+        battletheme.SetActive(false);        
+        FindObjectOfType<AudioManager>().Play("Lose");
     }
 
     public string GetAbility(PlacedObject placedObject)
