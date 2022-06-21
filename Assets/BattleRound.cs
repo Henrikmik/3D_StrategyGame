@@ -56,15 +56,6 @@ public class BattleRound : MonoBehaviour
                     //FindObjectOfType<AudioManager>().Play("MoveUnit");
 
                     enemy.GettingDamaged(teamObject.attack);
-                    //if (enemy.health <= 0)
-                    //{
-                    //    FindObjectOfType<AudioManager>().Play("UnitDefeat");
-                    //}
-                    //else
-                    //{
-                    //    FindObjectOfType<AudioManager>().Play("UnitHit");
-                    //}
-
                     inputManager.UpdateFloatingText(enemy);
                     CheckAbilityAttack(teamObject, enemyManager, true);   // überprüft ability vom Angreifer
                     CheckAbilityDefense(enemy, enemyManager, true);
@@ -82,6 +73,7 @@ public class BattleRound : MonoBehaviour
                         FindObjectOfType<AudioManager>().Play("UnitHit");
                         Debug.Log("Hit");
                     }
+                    inputManager.CameraShake();
 
                     inputManager.UpdateFloatingText(teamObject);
                     CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
@@ -110,15 +102,6 @@ public class BattleRound : MonoBehaviour
                     // Unit greift Enemy an
                     FindObjectOfType<AudioManager>().Play("UnitHit");
                     enemy.GettingDamaged(teamObject.attack);
-                    //if (enemy.health <= 0)
-                    //{
-                    //    FindObjectOfType<AudioManager>().Play("UnitDefeat");
-                    //}
-                    //else
-                    //{
-                    //    FindObjectOfType<AudioManager>().Play("UnitHit");
-                    //}
-
                     inputManager.UpdateFloatingText(enemy);
                     CheckAbilityAttack(teamObject, enemyManager, true);   // überprüft ability vom Angreifer
                     CheckAbilityDefense(enemy, enemyManager, true);
@@ -138,6 +121,7 @@ public class BattleRound : MonoBehaviour
                         FindObjectOfType<AudioManager>().Play("UnitHit");
                         Debug.Log("Hit");
                     }
+                    inputManager.CameraShake();
 
                     inputManager.UpdateFloatingText(teamObject);
                     CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
@@ -166,15 +150,6 @@ public class BattleRound : MonoBehaviour
                     // Unit greift Enemy an
                     FindObjectOfType<AudioManager>().Play("UnitHit");
                     enemy.GettingDamaged(teamObject.attack);
-                    //if (enemy.health <= 0)
-                    //{
-                    //    FindObjectOfType<AudioManager>().Play("UnitDefeat");
-                    //}
-                    //else
-                    //{
-                    //    FindObjectOfType<AudioManager>().Play("UnitHit");
-                    //}
-
                     inputManager.UpdateFloatingText(enemy);
                     CheckAbilityAttack(teamObject, enemyManager, true);   // überprüft ability vom Angreifer
                     CheckAbilityDefense(enemy, enemyManager, true);
@@ -192,6 +167,7 @@ public class BattleRound : MonoBehaviour
                         FindObjectOfType<AudioManager>().Play("UnitHit");
                         Debug.Log("Hit");
                     }
+                    inputManager.CameraShake();
 
                     inputManager.UpdateFloatingText(teamObject);
                     CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer

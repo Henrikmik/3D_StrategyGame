@@ -63,7 +63,7 @@ public class PlacedObject : MonoBehaviour
         Debug.Log(health);
     }
 
-    public void SettingStats()
+    public void SettingStats()    // initialize base stats --> permanent
     {
         attack = unit.attack;
         health = unit.health;
@@ -99,15 +99,34 @@ public class PlacedObject : MonoBehaviour
         {
             armor = false;
         }
-    }   // initialize base stats --> permanent
-
-    public void SetStats()
+    }
+    public void SettingStatsEnemy(int attackv, int healthv, int levelv)
     {
-        attack = baseAttack;
-        health = baseHealth;
-        //level = baseLevel;
-        armor = true;
-        armorTriggerCounter = 0;
+        attack = attackv;
+        health = healthv;
+        level = levelv;
+        nameA = unit.name;
+        ability = unit.ability;
+
+        baseAttack = attackv;
+        baseHealth = healthv;
+        baseLevel = levelv;
+
+        // ability
+        abilityName = unit.abilityName;
+        if (rank == 2)
+        {
+            abilityDescription = unit.abilityDescription2;
+        }
+        else if (rank == 3)
+        {
+            abilityDescription = unit.abilityDescription3;
+        }
+        else
+        {
+            abilityDescription = unit.abilityDescription1;
+        }
+
 
         if (ability == "coconut")
         {
@@ -117,7 +136,40 @@ public class PlacedObject : MonoBehaviour
         {
             armor = false;
         }
-    }   // initialize stats per round -->
+    }
+
+    public void SetStats()  // initialize stats per round -->
+    {
+        attack = baseAttack;
+        health = baseHealth;
+        //level = baseLevel;
+        armor = true;
+        armorTriggerCounter = 0;
+
+        // ability
+        abilityName = unit.abilityName;
+        if (rank == 2)
+        {
+            abilityDescription = unit.abilityDescription2;
+        }
+        else if (rank == 3)
+        {
+            abilityDescription = unit.abilityDescription3;
+        }
+        else
+        {
+            abilityDescription = unit.abilityDescription1;
+        }
+
+        if (ability == "coconut")
+        {
+            armor = true;
+        }
+        else
+        {
+            armor = false;
+        }
+    }
 
     public GameObject AttachedGridCell(bool enemy)  // true -> enemy, false -> unit
     {
