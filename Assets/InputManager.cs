@@ -315,8 +315,8 @@ public class InputManager : MonoBehaviour
         //// Gets the third enemy grid cell
         //GridCell enemyGridCell3 = gameGridEnemyS.transform.GetChild(2).GetComponent<GridCell>();
 
-        //// Updates Canvas
-        //UpdateCanvas(1);
+        // Updates Canvas
+        UpdateCanvas(1);
 
         //// Creates enemy on the first grid cell
         //Unit enemy = unitList[7];
