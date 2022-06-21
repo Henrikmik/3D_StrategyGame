@@ -58,7 +58,8 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     {
         if (inputManager.battleOn != true)
         {
-            oldGridCell = inputManager.IsMouseOverAGridSpace();
+            //oldGridCell = inputManager.IsMouseOverAGridSpace();
+            oldGridCell = transform.GetComponent<PlacedObject>().AssignedGridCell();
             // Do stuff when dragging begins.
             //Debug.Log("OnBeginDrag");
         }
@@ -82,10 +83,10 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                     if (oldGridCell != null)    // was already on the field
                     {
                         inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
+                        PlayPlaceSound();
                         origin = transform.position;
                         oldGridCell.UnstoreObject(placedObject);
                         oldGridCell.ClearTransform();
-
                         oldGridCell = cellMouseIsOver;
                         //Debug.Log("Vom Feld");
 
@@ -96,6 +97,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                         if (inputManager.gold >= 30)
                         {
                             inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
+                            PlayPlaceSound();
                             origin = transform.position;
                             oldGridCell = cellMouseIsOver;
 
@@ -153,6 +155,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                         {
                             // place selected object
                             inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
+                            PlayPlaceSound();
                             origin = transform.position;
 
                             // switch other object
@@ -167,6 +170,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                         if (inputManager.gold >= 30)
                         {
                             inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
+                            PlayPlaceSound();
                             origin = transform.position;
                             oldGridCell = cellMouseIsOver;
                             inputManager.gold -= 30;
@@ -227,5 +231,9 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     {
         transform.position = origin;
         //Debug.Log("Cannot build atm! ");
+    }
+    public void PlayPlaceSound()
+    {
+        FindObjectOfType<AudioManager>().Play("MoveUnit");
     }
 }

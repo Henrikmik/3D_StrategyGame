@@ -266,4 +266,53 @@ public class PlacedObject : MonoBehaviour
             transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         }
     }
+
+    public GridCell AssignedGridCell()
+    {
+        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+
+        if (transform.position.z < -1)  // third line
+        {
+            if (transform.position.x > 0)
+            {
+                // second lane
+                return inputManager.GetGridCell(5).GetComponent<GridCell>();
+            }
+            else
+            {
+                // first lane
+                return inputManager.GetGridCell(2).GetComponent<GridCell>();
+            }
+        }
+        else if ((transform.position.z > -1) && (transform.position.z < 1)) // second line
+        {
+            if (transform.position.x > 0)
+            {
+                // second lane
+                return inputManager.GetGridCell(4).GetComponent<GridCell>();
+            }
+            else
+            {
+                // first lane
+                return inputManager.GetGridCell(1).GetComponent<GridCell>();
+            }
+        }
+        else if ((transform.position.z > 1) && (transform.position.z < 2))  // thrid line
+        {
+            if (transform.position.x > 0)
+            {
+                // second lane
+                return inputManager.GetGridCell(3).GetComponent<GridCell>();
+            }
+            else
+            {
+                // first lane
+                return inputManager.GetGridCell(0).GetComponent<GridCell>();
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

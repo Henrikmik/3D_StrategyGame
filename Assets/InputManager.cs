@@ -72,14 +72,14 @@ public class InputManager : MonoBehaviour
 
         if (battleOn != true)
         {
-            if ((hoveredObject != null) && (o == 1))   //  
+            if ((hoveredObject != null) && (o == 1) && (InPauseMenuOrNot() == false) && (InHelpMenuOrNot() == false))   //  
             {
                 ShowInfoText showinfoText = ShowInfoText.Create(new Vector3(81, 4.5f, 10), hoveredObject, infoPrefab, canvas);
                 showInfo = showinfoText;
                 //Debug.Log("INFO");
                 o += 1;
             }
-            if ((hoveredObject == null) && (showInfo != null) && (o != 1))   // 
+            if ((hoveredObject == null) && (showInfo != null) && (o != 1) && (InPauseMenuOrNot() == false) && (InHelpMenuOrNot() == false))   // 
             {
                 showInfo.DestroySelf();
                 //Debug.Log("Destroyed");
@@ -511,6 +511,32 @@ public class InputManager : MonoBehaviour
                     GetCellObject(5).transform.SetSiblingIndex(5);
                 }
             }
+        }
+    }
+
+    public bool InPauseMenuOrNot()
+    {
+        GameObject canvas_PauseMenu = GameObject.Find("Canvas_PauseMenu");
+        if (canvas_PauseMenu.transform.GetChild(0).gameObject.activeInHierarchy == false)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public bool InHelpMenuOrNot()
+    {
+        GameObject canvas_HelpMenu = GameObject.Find("Canvas_HelpMenu");
+        if (canvas_HelpMenu.transform.GetChild(0).gameObject.activeInHierarchy == false)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 }
