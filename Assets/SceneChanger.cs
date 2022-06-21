@@ -17,7 +17,14 @@ public class SceneChanger : MonoBehaviour
                         FadeToNextScene();
                     }
         }
-        
+
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                SceneManager.LoadScene(0);
+            }
+        }
     }
 
     public void FadeToNextScene()
