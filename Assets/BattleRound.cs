@@ -1020,7 +1020,7 @@ public class BattleRound : MonoBehaviour
                         placedO.ability = "mini grape";
                         placedO.health = 1;
                         placedO.attack = (Mathf.RoundToInt(placedObject.attack * 0.5f));
-                        inputManager.ShowFloatingText(placedO, pos3);
+                        inputManager.ShowFloatingText(placedO, pos3, false);
                         Debug.Log("Summon Pineapple");
                     }
                 }
@@ -1052,7 +1052,7 @@ public class BattleRound : MonoBehaviour
                         placedO.ability = "mini grape";
                         placedO.health = 1;
                         placedO.attack = (Mathf.RoundToInt(placedObject.attack * 0.5f));
-                        inputManager.ShowFloatingText(placedO, pos3);
+                        inputManager.ShowFloatingText(placedO, pos3, false);
                         Debug.Log("Summon Aubergine");
                     }
                 }
@@ -1088,7 +1088,7 @@ public class BattleRound : MonoBehaviour
                         gridCell.StoreObject(placedO);
                         placedO.transform.SetParent(manager.transform);
                         placedO.SettingStats();
-                        inputManager.ShowFloatingText(placedO, pos3);
+                        inputManager.ShowFloatingText(placedO, pos3, false);
                         Debug.Log("spawned mini grape");
                     }
                     else if (placedObject.level < 7)
@@ -1101,7 +1101,7 @@ public class BattleRound : MonoBehaviour
                         placedO.SettingStats();
                         placedO.attack += 2;    // 3 attack
                         placedO.health += 2;    // 3 health
-                        inputManager.ShowFloatingText(placedO, pos3);
+                        inputManager.ShowFloatingText(placedO, pos3.normalized ,false);
                         Debug.Log("spawned mini grape");
 
                         // spawn mini grape 2
@@ -1119,7 +1119,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 2;
                             placedO2.health += 2;
-                            inputManager.ShowFloatingText(placedO2, pos32);
+                            inputManager.ShowFloatingText(placedO2, pos32, false);
                             Debug.Log("spawned mini grape 2");
                         }
                         else if (inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
@@ -1136,7 +1136,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 2;
                             placedO2.health += 2;
-                            inputManager.ShowFloatingText(placedO2, pos32);
+                            inputManager.ShowFloatingText(placedO2, pos32, false);
                             Debug.Log("spawned mini grape 2");
                         }
                         else
@@ -1155,7 +1155,7 @@ public class BattleRound : MonoBehaviour
                         placedO.SettingStats();
                         placedO.attack += 5;    // 6 attack
                         placedO.health += 5;    // 6 health
-                        inputManager.ShowFloatingText(placedO, pos3);
+                        inputManager.ShowFloatingText(placedO, pos3, false);
                         Debug.Log("spawned mini grape");
 
                         // spawn mini grape 2
@@ -1173,7 +1173,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 5;   // 6 attack
                             placedO2.health += 5;   // 6 health
-                            inputManager.ShowFloatingText(placedO2, pos32);
+                            inputManager.ShowFloatingText(placedO2, pos32.normalized, false);
                             Debug.Log("spawned mini grape 2");
                         }
                         else if (inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
@@ -1190,7 +1190,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 5;   // 6 attack
                             placedO2.health += 5;   // 6 health
-                            inputManager.ShowFloatingText(placedO2, pos32);
+                            inputManager.ShowFloatingText(placedO2, pos32, false);
                             Debug.Log("spawned mini grape 2");
                         }
                         else
@@ -1219,7 +1219,7 @@ public class BattleRound : MonoBehaviour
                         gridCell.StoreObject(placedO);
                         placedO.transform.SetParent(manager.transform);
                         placedO.SettingStats();
-                        inputManager.ShowFloatingText(placedO, pos3);
+                        inputManager.ShowFloatingText(placedO, pos3, false);
                         Debug.Log("spawned mini grape");
                     }
                     else if (placedObject.level < 7)
@@ -1232,7 +1232,7 @@ public class BattleRound : MonoBehaviour
                         placedO.SettingStats();
                         placedO.attack += 2;
                         placedO.health += 2;
-                        inputManager.ShowFloatingText(placedO, pos3);
+                        inputManager.ShowFloatingText(placedO, pos3, false);
                         Debug.Log("spawned mini grape");
 
                         // spawn mini grape 2
@@ -1250,7 +1250,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 2;
                             placedO2.health += 2;
-                            inputManager.ShowFloatingText(placedO2, pos32);
+                            inputManager.ShowFloatingText(placedO2, pos32, false);
                             Debug.Log("spawned mini grape 2");
                         }
                         else if (inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
@@ -1267,7 +1267,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 2;
                             placedO2.health += 2;
-                            inputManager.ShowFloatingText(placedO2, pos32);
+                            inputManager.ShowFloatingText(placedO2, pos32, false);
                             Debug.Log("spawned mini grape 2");
                         }
                         else
@@ -1285,7 +1285,7 @@ public class BattleRound : MonoBehaviour
                         placedO.SettingStats();
                         placedO.attack += 5;    // 6 attack
                         placedO.health += 5;    // 6 health
-                        inputManager.ShowFloatingText(placedO, pos3);
+                        inputManager.ShowFloatingText(placedO, pos3, false);
                         Debug.Log("spawned mini grape");
 
                         // spawn mini grape 2
@@ -1303,7 +1303,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 5;   // 6 attack
                             placedO2.health += 5;   // 6 health
-                            inputManager.ShowFloatingText(placedO2, pos32);
+                            inputManager.ShowFloatingText(placedO2, pos32, false);
                             Debug.Log("spawned mini grape 2");
                         }
                         else if (inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
@@ -1320,7 +1320,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 5;   // 6 attack
                             placedO2.health += 5;   // 6 health
-                            inputManager.ShowFloatingText(placedO2, pos32);
+                            inputManager.ShowFloatingText(placedO2, pos32, false);
                             Debug.Log("spawned mini grape 2");
                         }
                         else

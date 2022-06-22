@@ -52,7 +52,7 @@ public class Shop : MonoBehaviour
         placedEnemy.transform.parent = e.transform;
         placedEnemy.transform.localScale += new Vector3 (0.7f, 0.7f, 0.7f);
         placedEnemy.transform.rotation = new Quaternion (0, 0, 0, 0);
-        inputManager.ShowFloatingText(placedEnemy, pos3);
+        inputManager.ShowFloatingText(placedEnemy, pos3, true);
     }
 
     public void ShopReroll()

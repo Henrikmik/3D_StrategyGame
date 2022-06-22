@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class InputManager : MonoBehaviour
 {
@@ -220,26 +221,34 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public void ShowFloatingText(PlacedObject placedObject, Vector3 objectPos)
+    public void ShowFloatingText(PlacedObject placedObject, Vector3 objectPos, bool canvas)
     {
         float cameraAnglex = mainCamera.GetComponent<Transform>().rotation.x;
         float cameraAngley = mainCamera.GetComponent<Transform>().rotation.y;
         float cameraAnglez = mainCamera.GetComponent<Transform>().rotation.z;
 
-        var myNewStats = Instantiate(FloatingTextPrefab, new Vector3 (objectPos.x, objectPos.y + 0.3f, objectPos.z - 0.5f), Quaternion.Euler(0, 0, 0), transform);
-        myNewStats.transform.parent = placedObject.transform;
-        //myNewStats.GetComponent<TextMesh>().text = myNewStats.GetComponentInParent<PlacedObject>().nameA
-        //    + "\n Attack: " + myNewStats.GetComponentInParent<PlacedObject>().attack 
-        //    + "\n Health: " + myNewStats.GetComponentInParent<PlacedObject>().health 
-        //    + "\n Level: " + myNewStats.GetComponentInParent<PlacedObject>().level;
+        if (canvas == true)
+        {
+            var myNewStats = Instantiate(FloatingTextPrefab, new Vector3(objectPos.x, objectPos.y + 0.15f, objectPos.z - 0.5f), Quaternion.Euler(0, 0, 0), transform);
+            myNewStats.transform.parent = placedObject.transform;
+            myNewStats.transform.GetChild(0).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
+            myNewStats.transform.GetChild(1).GetComponentInChildren<TMP_Text>().text = placedObject.health.ToString();
+        }
+        else
+        {
+            var myNewStats = Instantiate(FloatingTextPrefab, new Vector3(objectPos.x + 0.5f, objectPos.y - 0.2f, objectPos.z - 0.5f), Quaternion.Euler(40, -50, 0), transform);
+            myNewStats.transform.parent = placedObject.transform;
+            myNewStats.transform.GetChild(0).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
+            myNewStats.transform.GetChild(1).GetComponentInChildren<TMP_Text>().text = placedObject.health.ToString();
+        }
     }
 
     public void UpdateFloatingText(PlacedObject placedObject)
     {
-        //placedObject.GetComponentInChildren<TextMesh>().text = placedObject.GetComponentInParent<PlacedObject>().nameA
-        //    + "\n Attack: " + placedObject.GetComponentInParent<PlacedObject>().attack
-        //    + "\n Health: " + placedObject.GetComponentInParent<PlacedObject>().health
-        //    + "\n Level: " + placedObject.GetComponentInParent<PlacedObject>().level;
+        placedObject.transform.GetChild(0).GetChild(0).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
+        //Debug.Log(placedObject.attack);
+        placedObject.transform.GetChild(0).GetChild(1).GetComponentInChildren<TMP_Text>().text = placedObject.health.ToString();
+        //Debug.Log(placedObject.health);
     }
 
     public void StartBattlePhase()
@@ -258,101 +267,12 @@ public class InputManager : MonoBehaviour
             gameGridEnemyS.CreateEnemyGrid(2, 1);
             gameGridEnemyS.CreateEnemyGrid(2, 2);
             gameGridEnemyS.CreateEnemyGrid(2, 3);
-
-            //// Gets the first Gric Cell of the second lane
-            //GridCell enemyGridCell4 = gameGridEnemyS.transform.GetChild(3).GetComponent<GridCell>();
-
-            //// Gets the second Grid Cell of the second lane
-            //GridCell enemyGridCell5 = gameGridEnemyS.transform.GetChild(4).GetComponent<GridCell>();
-
-            //// Gets the third Gric Cell of the second lane
-            //GridCell enemyGridCell6 = gameGridEnemyS.transform.GetChild(5).GetComponent<GridCell>();
-
-            //// Creates enemy on second lane, first grid cell
-            //Unit enemy4 = unitList[10];
-            //Vector2Int enemy4Pos = enemyGridCell4.GetPosition();
-            //Vector3 enemy4Pos3 = new Vector3(enemyGridCell4.transform.position.x, 1f, enemyGridCell4.transform.position.z);
-
-            //PlacedObject placedEnemy4 = PlacedObject.Create(enemy4Pos3, enemy4Pos, Unit.Dir.Down, enemy4);
-            //enemyGridCell4.SetPlacedObject(placedEnemy4);
-            //enemyGridCell4.StoreObject(placedEnemy4);
-            //placedEnemy4.transform.SetParent(enemyManager.transform);
-            //placedEnemy4.SettingStats();
-            //ShowFloatingText(placedEnemy4, enemy4Pos3);
-
-            //// Creates enemy on second lane, second grid cell
-            //Unit enemy5 = unitList[11];
-            //Vector2Int enemy5Pos = enemyGridCell5.GetPosition();
-            //Vector3 enemy5Pos3 = new Vector3(enemyGridCell5.transform.position.x, 1f, enemyGridCell5.transform.position.z);
-
-            //PlacedObject placedEnemy5 = PlacedObject.Create(enemy5Pos3, enemy5Pos, Unit.Dir.Down, enemy5);
-            //enemyGridCell5.SetPlacedObject(placedEnemy5);
-            //enemyGridCell5.StoreObject(placedEnemy5);
-            //placedEnemy5.transform.SetParent(enemyManager.transform);
-            //placedEnemy5.SettingStats();
-            //ShowFloatingText(placedEnemy5, enemy5Pos3);
-
-            //// Creates enemy on second lane, third grid cell
-            //Unit enemy6 = unitList[12];
-            //Vector2Int enemy6Pos = enemyGridCell6.GetPosition();
-            //Vector3 enemy6Pos3 = new Vector3(enemyGridCell6.transform.position.x, 1f, enemyGridCell6.transform.position.z);
-
-            //PlacedObject placedEnemy6 = PlacedObject.Create(enemy6Pos3, enemy6Pos, Unit.Dir.Down, enemy6);
-            //enemyGridCell6.SetPlacedObject(placedEnemy6);
-            //enemyGridCell6.StoreObject(placedEnemy6);
-            //placedEnemy6.transform.SetParent(enemyManager.transform);
-            //placedEnemy6.SettingStats();
-            //ShowFloatingText(placedEnemy6, enemy6Pos3);
         }
 
         enemySets.EnemySet();
-        //// Gets the first enemy grid cell
-        //GridCell enemyGridCell = gameGridEnemyS.transform.GetChild(0).GetComponent<GridCell>();
-
-        //// Gets the second enemy grid cell
-        //GridCell enemyGridCell2 = gameGridEnemyS.transform.GetChild(1).GetComponent<GridCell>();
-
-        //// Gets the third enemy grid cell
-        //GridCell enemyGridCell3 = gameGridEnemyS.transform.GetChild(2).GetComponent<GridCell>();
 
         // Updates Canvas
         UpdateCanvas(1);
-
-        //// Creates enemy on the first grid cell
-        //Unit enemy = unitList[7];
-        //Vector2Int enemyPos = enemyGridCell.GetPosition();
-        //Vector3 enemyPos3 = new Vector3(enemyGridCell.transform.position.x, 1f, enemyGridCell.transform.position.z);
-
-        //PlacedObject placedEnemy = PlacedObject.Create(enemyPos3, enemyPos, Unit.Dir.Down, enemy);
-        //enemyGridCell.SetPlacedObject(placedEnemy);
-        //enemyGridCell.StoreObject(placedEnemy);
-        //placedEnemy.transform.SetParent(enemyManager.transform);
-        //placedEnemy.SettingStats();
-        //ShowFloatingText(placedEnemy, enemyPos3);
-
-        //// Creates enemy on second grid cell
-        //Unit enemy2 = unitList[8];
-        //Vector2Int enemy2Pos = enemyGridCell2.GetPosition();
-        //Vector3 enemy2Pos3 = new Vector3(enemyGridCell2.transform.position.x, 1f, enemyGridCell2.transform.position.z);
-
-        //PlacedObject placedEnemy2 = PlacedObject.Create(enemy2Pos3, enemy2Pos, Unit.Dir.Down, enemy2);
-        //enemyGridCell2.SetPlacedObject(placedEnemy2);
-        //enemyGridCell2.StoreObject(placedEnemy2);
-        //placedEnemy2.transform.SetParent(enemyManager.transform);
-        //placedEnemy2.SettingStats();
-        //ShowFloatingText(placedEnemy2, enemy2Pos3);
-
-        //// Creates enemy on third grid cell
-        //Unit enemy3 = unitList[9];
-        //Vector2Int enemy3Pos = enemyGridCell3.GetPosition();
-        //Vector3 enemy3Pos3 = new Vector3(enemyGridCell3.transform.position.x, 1f, enemyGridCell3.transform.position.z);
-
-        //PlacedObject placedEnemy3 = PlacedObject.Create(enemy3Pos3, enemy3Pos, Unit.Dir.Down, enemy3);
-        //enemyGridCell3.SetPlacedObject(placedEnemy3);
-        //enemyGridCell3.StoreObject(placedEnemy3);
-        //placedEnemy3.transform.SetParent(enemyManager.transform);
-        //placedEnemy3.SettingStats();
-        //ShowFloatingText(placedEnemy3, enemy3Pos3);
     }
 
     // Gets grid cell
@@ -361,25 +281,21 @@ public class InputManager : MonoBehaviour
         return gameGrid.transform.GetChild(pos).gameObject;
     }
 
-    // Gets placed object in grid cell
     public PlacedObject GetCellObject(int pos)
     {
         return GetGridCell(pos).GetComponent<GridCell>().GetPlacedObject();
-    }
+    }       // Gets placed object in grid cell
 
-    // Gets enemy grid cell
     public GameObject GetEnemyCell(int pos)
     {
         return gameGridEnemyS.transform.GetChild(pos).gameObject;
-    }
+    }          // Gets enemy grid cell
 
-    // Gets placed object in enemy grid cell
     public PlacedObject GetEnemyObject(int pos)
     {
         return GetEnemyCell(pos).GetComponent<GridCell>().GetPlacedObject();
-    }
+    }      // Gets placed object in enemy grid cell
 
-    // Sets Canvas to Battle Canvas
     public void UpdateCanvas(int scene)
     {
         if (scene == 1)
@@ -410,7 +326,7 @@ public class InputManager : MonoBehaviour
                 gold = 110;
             }
         }
-    }
+    }              // Sets Canvas to Battle Canvas
 
     public void SetRoundoverFalse()
     {
@@ -443,7 +359,7 @@ public class InputManager : MonoBehaviour
                 cellMouseIsOver.StoreObject(placedObject);
                 cellMouseIsOver.SetPlacedObject(placedObject);
                 placedObject.SettingStats();
-                ShowFloatingText(placedObject, placementVec);
+                ShowFloatingText(placedObject, placementVec, false);
                 //foreach (Vector2Int gridPosition in gridPositionList)
                 //{
                 //    gridCell.GetPosition(gridPosition.x, gridPosition.y).SetTransform(builtTransform);

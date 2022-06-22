@@ -23,7 +23,6 @@ public class EnemySets : MonoBehaviour
 
 
         Unit enemy = inputManager.unitList[list];
-        Debug.Log(gridcell);
         Vector2Int enemyPos = gridcell.GetPosition();
         Vector3 enemyPos3 = new Vector3(gridcell.transform.position.x, 1f, gridcell.transform.position.z);
 
@@ -32,7 +31,7 @@ public class EnemySets : MonoBehaviour
         gridcell.StoreObject(placedObject);
         placedObject.transform.SetParent(inputManager.enemyManager.transform);
         placedObject.SettingStatsEnemy(attackv, healthv, levelv);
-        inputManager.ShowFloatingText(placedObject, enemyPos3);
+        inputManager.ShowFloatingText(placedObject, enemyPos3, false);
     }
 
     public void EnemySet()

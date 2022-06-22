@@ -300,6 +300,7 @@ public class PlacedObject : MonoBehaviour
         baseHealth += 1;
         attack += 1;
         baseAttack += 1;
+        Debug.Log(attack + " " + health);
 
         if ((level == 4) && (firstLvlUp == false))
         {
