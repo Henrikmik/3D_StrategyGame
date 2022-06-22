@@ -480,7 +480,7 @@ public class BattleRound : MonoBehaviour
 
             newGridCell.GetComponent<GridCell>().StoreObject(movingPlacedObject);
             newGridCell.GetComponent<GridCell>().SetPlacedObject(movingPlacedObject);
-            movingPlacedObject.transform.position = new Vector3(newGridCell.transform.position.x, 1f, newGridCell.transform.position.z);
+            movingPlacedObject.transform.position = new Vector3(newGridCell.transform.position.x, 0.5f, newGridCell.transform.position.z);
         }
         else
         {
@@ -492,7 +492,7 @@ public class BattleRound : MonoBehaviour
 
             newGridCell.GetComponent<GridCell>().StoreObject(movingPlacedObject);
             newGridCell.GetComponent<GridCell>().SetPlacedObject(movingPlacedObject);
-            movingPlacedObject.transform.position = new Vector3(newGridCell.transform.position.x, 1f, newGridCell.transform.position.z);
+            movingPlacedObject.transform.position = new Vector3(newGridCell.transform.position.x, 0.5f, newGridCell.transform.position.z);
         }
     }
 

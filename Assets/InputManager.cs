@@ -50,12 +50,17 @@ public class InputManager : MonoBehaviour
     public Camera c_Cam;
     public EnemySets enemySets;
     private int o = 1;
+    private Vector3 mainCamPos;
+    private Vector3 mainCamRot;
+
     // Start is called before the first frame update
     void Start()
     {
         gameGrid = FindObjectOfType<GameGrid>();
         FreezeShop = GameObject.Find("FreezeShop");
         enemySets = GameObject.Find("BattleManager").GetComponent<EnemySets>();
+        mainCamPos = mainCamera.transform.parent.position;
+        mainCamRot = mainCamera.transform.parent.eulerAngles;
     }
 
     private void Awake()
@@ -169,11 +174,43 @@ public class InputManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            mainCamera.GetComponent<Animator>().SetBool("CameraSwing", true);
+            //Animator camAnim = mainCamera.GetComponent<Animator>();
+
+            //camAnim.enabled = true;
+            //camAnim.SetBool("CameraSwing", true);
+            //Debug.Log(camAnim.GetCurrentAnimatorStateInfo(0).length > camAnim.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            //if (camAnim.GetCurrentAnimatorStateInfo(0).length > camAnim.GetCurrentAnimatorStateInfo(0).normalizedTime)
+            //{
+            //    camAnim.enabled = false;
+            //    Debug.Log("Animator false");
+            mainCamera.transform.parent.position = new Vector3(mainCamPos.x + 1.2f, mainCamPos.y +  0.3f, mainCamPos.z + 4.3f);
+            mainCamera.transform.parent.eulerAngles =  new Vector3 (mainCamRot.x + -2.5f, mainCamRot.y + -9.8f, mainCamRot.z + 7.9f);
+            //}
+            //float i = 0.0f;
+            //float waitTime = 100.0f;
+            //for (float i = 0.0f;  i <= waitTime; i += Time.deltaTime)
+            //{
+            //    //i += Time.deltaTime;
+            //    Debug.Log(i);
+
+            //    if (i >= waitTime)
+            //    {
+            //        camAnim.enabled = false;
+            //        Debug.Log("i = 65");
+            //        mainCamera.transform.position = new Vector3(1.197856f, 0.3216273f, 4.293736f);
+            //        mainCamera.transform.rotation = new Quaternion(-2.504f, -9.822f, 7.873f, 0);
+            //    }
+            //}
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            mainCamera.GetComponent<Animator>().SetBool("CameraSwing", false);
+            //Animator camAnim = mainCamera.GetComponent<Animator>();
+
+            //camAnim.enabled = true;
+            //camAnim.SetBool("CameraSwing", false);
+            ////camAnim.enabled = false;
+            mainCamera.transform.parent.position = mainCamPos;
+            mainCamera.transform.parent.eulerAngles = mainCamRot;
         }
     }
 

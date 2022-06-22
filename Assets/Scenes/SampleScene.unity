@@ -3197,8 +3197,8 @@ MonoBehaviour:
   shopFreezed: {fileID: 21300000, guid: 66188fc4fafd69840a02e7872e377e3e, type: 3}
   shopUnfreezed: {fileID: 21300000, guid: 2bb888bba5f420747884d6a83ece3252, type: 3}
   FreezeButton: {fileID: 417971166}
-  FreezeImage: {fileID: 1517373755}
-  UnfreezeImage: {fileID: 1724558472}
+  FreezeImage: {fileID: 0}
+  UnfreezeImage: {fileID: 0}
 --- !u!1001 &262606273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9067,7 +9067,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ef64ead6fe1fd134189530e5492c623d, type: 2}
   m_CullingMode: 0
