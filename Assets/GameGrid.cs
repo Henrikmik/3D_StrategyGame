@@ -11,7 +11,9 @@ public class GameGrid : MonoBehaviour
     private int gridCreateX;
     private int gridCreateY;
     InputManager inputManager;
-    private bool createGrid2 = true;
+    public bool createGrid2 = true;
+    public bool created2Grid = true;
+    private bool c2Grid = true;
 
     [SerializeField] private GameObject gridCellPrefab;
     private GameObject gameGrid;
@@ -27,10 +29,16 @@ public class GameGrid : MonoBehaviour
 
     void Update()
     {
-        if ((inputManager.roundCounter == 3) && (createGrid2 == true))
+        if ((inputManager.roundCounter == 3) && (createGrid2 == true) && (inputManager.battleOn == false))
         {
             StartCoroutine(CreateGrid());
             createGrid2 = false;
+        }
+
+        if ((c2Grid == true) && (transform.childCount >= 6))
+        {
+            created2Grid = false;
+            c2Grid = false;
         }
     }
 

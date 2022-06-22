@@ -177,113 +177,97 @@ public class PlacedObject : MonoBehaviour
 
         if (enemy == false)     // BUG DARF nicht in die erste zeile kommen -> wenn grape auf zweiter linie stirbt!!!!!!!!!!!!!!!!!!
         {
-            if ((inputManager.GetCellObject(0).GetComponent<PlacedObject>() != null) && (inputManager.GetCellObject(0).isActiveAndEnabled == true))
+            inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+
+            if (transform.position.z < -1)  // third line
             {
-                if (gameObject.GetComponent<PlacedObject>() == inputManager.GetCellObject(0).GetComponent<PlacedObject>())
+                if (transform.position.x > 0)
                 {
-                    //Debug.Log("erste Zelle");
-                    return inputManager.GetGridCell(0);
-                }
-                if ((inputManager.GetCellObject(1).GetComponent<PlacedObject>() != null) && (inputManager.GetCellObject(1).isActiveAndEnabled == true))
-                {
-                    if (gameObject.GetComponent<PlacedObject>() == inputManager.GetCellObject(1).GetComponent<PlacedObject>())
-                    {
-                        //Debug.Log("zweite Zelle");
-                        return inputManager.GetGridCell(1);
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    // second lane
+                    return inputManager.GetGridCell(5);
                 }
                 else
                 {
-                    return null;
+                    // first lane
+                    return inputManager.GetGridCell(2);
                 }
             }
-            else if((inputManager.GetCellObject(3).GetComponent<PlacedObject>() != null) && (inputManager.GetCellObject(3).isActiveAndEnabled == true))
+            else if ((transform.position.z > -1) && (transform.position.z < 1)) // second line
             {
-                if(gameObject.GetComponent<PlacedObject>() == inputManager.GetCellObject(3).GetComponent<PlacedObject>())
+                if (transform.position.x > 0)
                 {
-                    //Debug.Log("vierte Zelle");
-                    return inputManager.GetGridCell(3);
-                }
-                if ((inputManager.GetCellObject(4).GetComponent<PlacedObject>() != null) && (inputManager.GetCellObject(4).isActiveAndEnabled == true))
-                {
-                    if (gameObject.GetComponent<PlacedObject>() == inputManager.GetCellObject(4).GetComponent<PlacedObject>())
-                    {
-                        //Debug.Log("fünfte Zelle");
-                        return inputManager.GetGridCell(4);
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    // second lane
+                    return inputManager.GetGridCell(4);
                 }
                 else
                 {
-                    return null;
+                    // first lane
+                    return inputManager.GetGridCell(1);
+                }
+            }
+            else if ((transform.position.z > 1) && (transform.position.z < 2))  // thrid line
+            {
+                if (transform.position.x > 0)
+                {
+                    // second lane
+                    return inputManager.GetGridCell(3);
+                }
+                else
+                {
+                    // first lane
+                    return inputManager.GetGridCell(0);
                 }
             }
             else
             {
-                Debug.Log("Keine Zelle gefunden");
                 return null;
             }
         }
-        if (enemy == true)
+        else if (enemy == true)
         {
-            if ((inputManager.GetEnemyObject(0).GetComponent<PlacedObject>() != null) && (inputManager.GetEnemyObject(0).isActiveAndEnabled == true))
+            inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+
+            if (transform.position.z > 6)  // third line
             {
-                if (gameObject.GetComponent<PlacedObject>() == inputManager.GetEnemyObject(0).GetComponent<PlacedObject>())
+                if (transform.position.x > 0)
                 {
-                    //Debug.Log("erste Zelle");
-                    return inputManager.GetEnemyCell(0);
-                }
-                if ((inputManager.GetEnemyObject(1).GetComponent<PlacedObject>() != null) && (inputManager.GetEnemyObject(1).isActiveAndEnabled == true))
-                {
-                    if (gameObject.GetComponent<PlacedObject>() == inputManager.GetEnemyObject(1).GetComponent<PlacedObject>())
-                    {
-                        //Debug.Log("zweite Zelle");
-                        return inputManager.GetEnemyCell(1);
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    // second lane
+                    return inputManager.GetEnemyCell(5);
                 }
                 else
                 {
-                    return null;
+                    // first lane
+                    return inputManager.GetEnemyCell(2);
                 }
             }
-            else if ((inputManager.GetEnemyObject(3).GetComponent<PlacedObject>() != null) && (inputManager.GetEnemyObject(3).isActiveAndEnabled == true))
+            else if ((transform.position.z > 4) && (transform.position.z < 6)) // second line
             {
-                if (gameObject.GetComponent<PlacedObject>() == inputManager.GetEnemyObject(3).GetComponent<PlacedObject>())
+                if (transform.position.x > 0)
                 {
-                    //Debug.Log("vierte Zelle");
-                    return inputManager.GetEnemyCell(3);
-                }
-                if ((inputManager.GetEnemyObject(4).GetComponent<PlacedObject>() != null) && (inputManager.GetEnemyObject(4).isActiveAndEnabled == true))
-                {
-                    if (gameObject.GetComponent<PlacedObject>() == inputManager.GetEnemyObject(4).GetComponent<PlacedObject>())
-                    {
-                        //Debug.Log("fünfte Zelle");
-                        return inputManager.GetEnemyCell(4);
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    // second lane
+                    return inputManager.GetEnemyCell(4);
                 }
                 else
                 {
-                    return null;
+                    // first lane
+                    return inputManager.GetEnemyCell(1);
+                }
+            }
+            else if ((transform.position.z > 3) && (transform.position.z < 4))  // thrid line
+            {
+                if (transform.position.x > 0)
+                {
+                    // second lane
+                    return inputManager.GetEnemyCell(3);
+                }
+                else
+                {
+                    // first lane
+                    return inputManager.GetEnemyCell(0);
                 }
             }
             else
             {
-                Debug.Log("Keine Zelle gefunden");
                 return null;
             }
         }

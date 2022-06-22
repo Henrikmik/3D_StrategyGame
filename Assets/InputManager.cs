@@ -425,7 +425,7 @@ public class InputManager : MonoBehaviour
                 GetCellObject(2).transform.SetSiblingIndex(2);
             }
             // Update Hierarchy lane 2
-            if (roundCounter >= 3)
+            if ((roundCounter >= 3) && (gameGrid.created2Grid == false))
             {
                 if (GetCellObject(3) != null)
                 {

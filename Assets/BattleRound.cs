@@ -798,13 +798,15 @@ public class BattleRound : MonoBehaviour
             if (placedObject.health <= 0)
             {
                 GameObject bufferGridCell = placedObject.AttachedGridCell(enemy);
-                int siblingIndex = placedObject.AttachedGridCell(enemy).transform.GetSiblingIndex();
+                Debug.Log(placedObject.AssignedGridCell());
+                int siblingIndex = placedObject.AssignedGridCell().transform.GetSiblingIndex();
 
                 if (inputManager.roundCounter < 3)  // only one lane pre round 3
                 {
                     if (placedObject.level < 4)
                     {
-                        if (inputManager.GetGridCell(siblingIndex + 1).activeInHierarchy == true)   // buffing the unit behind if active
+                        Debug.Log(inputManager.GetCellObject(siblingIndex + 1));
+                        if ((inputManager.GetCellObject(siblingIndex + 1) != null) && (inputManager.GetCellObject(siblingIndex + 1).gameObject.activeInHierarchy == true))   // buffing the unit behind if active
                         {
                             inputManager.GetCellObject(siblingIndex + 1).baseAttack += 2;
                             inputManager.GetCellObject(siblingIndex + 1).baseHealth += 1;
@@ -816,7 +818,7 @@ public class BattleRound : MonoBehaviour
                     }
                     else if (placedObject.level < 7)
                     {
-                        if (inputManager.GetGridCell(siblingIndex + 1).activeInHierarchy == true)   // buffing the unit behind if active
+                        if ((inputManager.GetCellObject(siblingIndex + 1) != null) && (inputManager.GetCellObject(siblingIndex + 1).gameObject.activeInHierarchy == true))   // buffing the unit behind if active
                         {
                             inputManager.GetCellObject(siblingIndex + 1).baseAttack += 3;
                             inputManager.GetCellObject(siblingIndex + 1).baseHealth += 2;
@@ -827,7 +829,7 @@ public class BattleRound : MonoBehaviour
                         }
                         if (siblingIndex - 1 >= 0)
                         {
-                            if (inputManager.GetGridCell(siblingIndex - 1).activeInHierarchy == true)   // buffing unit in front
+                            if ((inputManager.GetCellObject(siblingIndex - 1) != null) && (inputManager.GetCellObject(siblingIndex - 1).gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
                                 inputManager.GetCellObject(siblingIndex - 1).baseAttack += 3;
                                 inputManager.GetCellObject(siblingIndex - 1).baseHealth += 2;
@@ -844,7 +846,7 @@ public class BattleRound : MonoBehaviour
                     }
                     else if (placedObject.level >= 7)
                     {
-                        if (inputManager.GetGridCell(siblingIndex + 1).activeInHierarchy == true)   // buffing the unit behind if active
+                        if ((inputManager.GetCellObject(siblingIndex + 1) != null) && (inputManager.GetCellObject(siblingIndex + 1).gameObject.activeInHierarchy == true))   // buffing the unit behind if active
                         {
                             inputManager.GetCellObject(siblingIndex + 1).baseAttack += 5;
                             inputManager.GetCellObject(siblingIndex + 1).baseHealth += 4;
@@ -855,7 +857,7 @@ public class BattleRound : MonoBehaviour
                         }
                         if (siblingIndex - 1 >= 0)
                         {
-                            if (inputManager.GetGridCell(siblingIndex - 1).activeInHierarchy == true)   // buffing unit in front
+                            if ((inputManager.GetCellObject(siblingIndex - 1) != null) && (inputManager.GetCellObject(siblingIndex - 1).gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
                                 inputManager.GetCellObject(siblingIndex - 1).baseAttack += 5;
                                 inputManager.GetCellObject(siblingIndex - 1).baseHealth += 4;
@@ -875,7 +877,7 @@ public class BattleRound : MonoBehaviour
                 {
                     if (placedObject.level < 4)
                     {
-                        if (inputManager.GetGridCell(siblingIndex + 1).activeInHierarchy == true)   // buffing the unit behind if active
+                        if ((inputManager.GetCellObject(siblingIndex + 1) != null) && (inputManager.GetCellObject(siblingIndex + 1).gameObject.activeInHierarchy == true))   // buffing the unit behind if active
                         {
                             inputManager.GetCellObject(siblingIndex + 1).baseAttack += 2;
                             inputManager.GetCellObject(siblingIndex + 1).baseHealth += 1;
@@ -887,7 +889,7 @@ public class BattleRound : MonoBehaviour
                     }
                     else if (placedObject.level < 7)
                     {
-                        if (inputManager.GetGridCell(siblingIndex + 1).activeInHierarchy == true)   // buffing the unit behind if active
+                        if ((inputManager.GetCellObject(siblingIndex + 1) != null) && (inputManager.GetCellObject(siblingIndex + 1).gameObject.activeInHierarchy == true))   // buffing the unit behind if active
                         {
                             inputManager.GetCellObject(siblingIndex + 1).baseAttack += 3;
                             inputManager.GetCellObject(siblingIndex + 1).baseHealth += 2;
@@ -898,7 +900,7 @@ public class BattleRound : MonoBehaviour
                         }
                         if (siblingIndex - 1 >= 0)
                         {
-                            if (inputManager.GetGridCell(siblingIndex - 1).activeInHierarchy == true)   // buffing unit in front
+                            if ((inputManager.GetCellObject(siblingIndex - 1) != null) && (inputManager.GetCellObject(siblingIndex - 1).gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
                                 inputManager.GetCellObject(siblingIndex - 1).baseAttack += 3;
                                 inputManager.GetCellObject(siblingIndex - 1).baseHealth += 2;
@@ -910,7 +912,7 @@ public class BattleRound : MonoBehaviour
                         }
                         if (siblingIndex - 3 >= 0)
                         {
-                            if (inputManager.GetGridCell(siblingIndex - 3).activeInHierarchy == true)   // buffing unit in front
+                            if ((inputManager.GetCellObject(siblingIndex - 3) != null) && (inputManager.GetCellObject(siblingIndex - 3).gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
                                 inputManager.GetCellObject(siblingIndex - 3).baseAttack += 3;
                                 inputManager.GetCellObject(siblingIndex - 3).baseHealth += 2;
@@ -922,7 +924,7 @@ public class BattleRound : MonoBehaviour
                         }
                         if (siblingIndex + 3 <= 5)
                         {
-                            if (inputManager.GetGridCell(siblingIndex + 3).activeInHierarchy == true)   // buffing unit in front
+                            if ((inputManager.GetCellObject(siblingIndex + 3) != null) && (inputManager.GetCellObject(siblingIndex + 3).gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
                                 inputManager.GetCellObject(siblingIndex + 3).baseAttack += 3;
                                 inputManager.GetCellObject(siblingIndex + 3).baseHealth += 2;
@@ -939,7 +941,7 @@ public class BattleRound : MonoBehaviour
                     }
                     else if (placedObject.level >= 7)
                     {
-                        if (inputManager.GetGridCell(siblingIndex + 1).activeInHierarchy == true)   // buffing the unit behind if active
+                        if ((inputManager.GetCellObject(siblingIndex + 1) != null) && (inputManager.GetCellObject(siblingIndex + 1).gameObject.activeInHierarchy == true))   // buffing the unit behind if active
                         {
                             inputManager.GetCellObject(siblingIndex + 1).baseAttack += 3;
                             inputManager.GetCellObject(siblingIndex + 1).baseHealth += 2;
@@ -950,7 +952,7 @@ public class BattleRound : MonoBehaviour
                         }
                         if (siblingIndex - 1 >= 0)
                         {
-                            if (inputManager.GetGridCell(siblingIndex - 1).activeInHierarchy == true)   // buffing unit in front
+                            if ((inputManager.GetCellObject(siblingIndex - 1) != null) && (inputManager.GetCellObject(siblingIndex - 1).gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
                                 inputManager.GetCellObject(siblingIndex - 1).baseAttack += 3;
                                 inputManager.GetCellObject(siblingIndex - 1).baseHealth += 2;
@@ -962,7 +964,7 @@ public class BattleRound : MonoBehaviour
                         }
                         if (siblingIndex - 3 >= 0)
                         {
-                            if (inputManager.GetGridCell(siblingIndex - 3).activeInHierarchy == true)   // buffing unit in front
+                            if ((inputManager.GetCellObject(siblingIndex - 3) != null) && (inputManager.GetCellObject(siblingIndex - 3).gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
                                 inputManager.GetCellObject(siblingIndex - 3).baseAttack += 5;
                                 inputManager.GetCellObject(siblingIndex - 3).baseHealth += 4;
@@ -974,7 +976,7 @@ public class BattleRound : MonoBehaviour
                         }
                         if (siblingIndex + 3 <= 5)
                         {
-                            if (inputManager.GetGridCell(siblingIndex + 3).activeInHierarchy == true)   // buffing unit in front
+                            if ((inputManager.GetCellObject(siblingIndex + 3) != null) && (inputManager.GetCellObject(siblingIndex + 3).gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
                                 inputManager.GetCellObject(siblingIndex + 3).baseAttack += 5;
                                 inputManager.GetCellObject(siblingIndex + 3).baseHealth += 4;
