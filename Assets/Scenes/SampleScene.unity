@@ -7694,6 +7694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd5b510f26932c49aeff611b99babdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  createGrid2: 1
+  created2Grid: 1
   gridCellPrefab: {fileID: 5270353549225314760, guid: 41a1f4c6401ff51439f675ffe2dfa154,
     type: 3}
 --- !u!4 &871014132

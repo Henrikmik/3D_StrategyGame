@@ -472,6 +472,7 @@ public class InputManager : MonoBehaviour
     public void CameraShake()
     {
         StartCoroutine(mainCamera.GetComponent<CameraShake>().Shake(.15f, .2f));
+        Debug.Log("SHAKE");
     }
 }
 
