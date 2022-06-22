@@ -169,7 +169,11 @@ public class InputManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-
+            mainCamera.GetComponent<Animator>().SetBool("CameraSwing", true);
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            mainCamera.GetComponent<Animator>().SetBool("CameraSwing", false);
         }
     }
 
@@ -253,6 +257,9 @@ public class InputManager : MonoBehaviour
 
     public void StartBattlePhase()
     {
+        // Updates Canvas
+        UpdateCanvas(1);
+
         // Sets battle variable to true
         battleOn = true;
 
@@ -270,9 +277,6 @@ public class InputManager : MonoBehaviour
         }
 
         enemySets.EnemySet();
-
-        // Updates Canvas
-        UpdateCanvas(1);
     }
 
     // Gets grid cell
@@ -300,6 +304,7 @@ public class InputManager : MonoBehaviour
     {
         if (scene == 1)
         {
+            mainCamera.GetComponent<Animator>().SetBool("CameraSwing", true);
             // Sets Shop in Canvas inactive
             canvas.transform.GetChild(0).gameObject.SetActive(false);
             // Sets battle phase button inactive
@@ -310,12 +315,14 @@ public class InputManager : MonoBehaviour
 
         if (scene == 2)
         {
+            mainCamera.GetComponent<Animator>().SetBool("CameraSwing", false);
             // Sets Shop in Canvas active
             canvas.transform.GetChild(0).gameObject.SetActive(true);
             // Sets battle phase button active
             canvas.transform.GetChild(1).gameObject.SetActive(true);
             // Sets start battle button inactive
             canvas.transform.GetChild(2).gameObject.SetActive(false);
+
             // Sets gold to 100
             if (roundCounter >= 3)
             {
