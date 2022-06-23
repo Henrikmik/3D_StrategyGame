@@ -32,6 +32,8 @@ public class EnemySets : MonoBehaviour
         placedObject.transform.SetParent(inputManager.enemyManager.transform);
         placedObject.SettingStatsEnemy(attackv, healthv, levelv);
         inputManager.ShowFloatingText(placedObject, enemyPos3, false);
+        placedObject.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        placedObject.transform.GetChild(0).GetChild(2).position = new Vector3(placedObject.transform.GetChild(0).GetChild(2).position.x, 2f, placedObject.transform.GetChild(0).GetChild(2).position.z);
     }
 
     public void EnemySet()

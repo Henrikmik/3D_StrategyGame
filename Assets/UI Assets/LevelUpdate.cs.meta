@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 0439b9205e82dda4c90f7ceb07915b42
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - nullLevel: {fileID: 21300000, guid: c117ed8f06176564cbf48dd886f04adc, type: 3}
+  - einsLevel: {fileID: 21300000, guid: 9f70cd8f2cfb7f142b4beeff9df6d4b7, type: 3}
+  - zweiLevel: {fileID: 21300000, guid: 6020960cbd47c9a479fa398b7864f5c4, type: 3}
+  - dreiLevel: {fileID: 21300000, guid: 8d278a1eca782464fbb0823558af559d, type: 3}
+  - vierLevel: {fileID: 21300000, guid: 8fc7c296d0250b64ab940e368d7546f8, type: 3}
+  - "f\xFCnfLevel": {fileID: 21300000, guid: a299b36255c9fd740a3daa578e28ab6d, type: 3}
+  - sechsLevel: {fileID: 21300000, guid: 25059506923516143bd8253873ebcb94, type: 3}
+  - siebenLevel: {fileID: 21300000, guid: 26c185ea48c409d4d9c6770cfe3f70e0, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

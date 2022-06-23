@@ -292,7 +292,7 @@ public class PlacedObject : MonoBehaviour
             rank = 2;
             // Do things when reaching rank 2
 
-            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
         }
         else if ((level == 7) && (secondLvlUp == false))
         {

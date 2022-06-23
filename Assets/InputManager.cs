@@ -22,6 +22,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private LayerMask whatIsPlacedObjectLayer;
     [SerializeField] private Transform testTransform;
     [SerializeField] public List<Unit> unitList;
+    [SerializeField] public LevelUpdate levelUpdate;
     private Unit unit;
 
     private Unit.Dir dir = Unit.Dir.Down;
@@ -290,8 +291,10 @@ public class InputManager : MonoBehaviour
         //Debug.Log(placedObject.attack);
         placedObject.transform.GetChild(0).GetChild(1).GetComponentInChildren<TMP_Text>().text = placedObject.health.ToString();
         //Debug.Log(placedObject.health);
-    }
 
+        // Update level
+        levelUpdate.UpdateLevel(placedObject);
+    }
     public void StartBattlePhase()
     {
         // Updates Canvas
@@ -346,8 +349,10 @@ public class InputManager : MonoBehaviour
             canvas.transform.GetChild(0).gameObject.SetActive(false);
             // Sets battle phase button inactive
             canvas.transform.GetChild(1).gameObject.SetActive(false);
+            // Sets battle phase button inactive
+            canvas.transform.GetChild(2).gameObject.SetActive(false);
             // Sets start battle button active
-            canvas.transform.GetChild(2).gameObject.SetActive(true);
+            canvas.transform.GetChild(3).gameObject.SetActive(true);
         }
 
         if (scene == 2)
@@ -443,6 +448,7 @@ public class InputManager : MonoBehaviour
         cellMouseIsOver.SetPlacedObject(placedObject);
         placedObject.transform.GetChild(0).transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
         placedObject.transform.GetChild(0).transform.rotation = Quaternion.Euler (40, -55, 0);
+        placedObject.transform.GetChild(0).GetChild(2).position = new Vector3 (placedObject.transform.GetChild(0).GetChild(2).position.x, 2f, placedObject.transform.GetChild(0).GetChild(2).position.z);
     }
 
     public void UpdateHierarchie()
