@@ -102,7 +102,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                             oldGridCell = cellMouseIsOver;
 
                             Transform infoStats = placedObject.transform.GetChild(0);
-                            infoStats.position = new Vector3 (infoStats.position.x + 0.4f, infoStats.position.y, infoStats.position.z + 0.2f);
+                            infoStats.position = new Vector3 (infoStats.position.x + 0.4f, infoStats.position.y + 0.2f, infoStats.position.z + 0.2f);
                             inputManager.gold -= 30;
                             //Debug.Log("Aus Shop");
                         }

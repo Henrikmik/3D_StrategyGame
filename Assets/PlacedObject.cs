@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlacedObject : MonoBehaviour
 {
@@ -53,9 +54,11 @@ public class PlacedObject : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void GettingDamaged(int damage)
+    public void GettingDamaged(int damage, PlacedObject placedObject)
     {
         health += -damage;
+        transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
+        transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
     }
 
     public void Print()

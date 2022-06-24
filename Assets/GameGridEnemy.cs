@@ -46,6 +46,7 @@ public class GameGridEnemy : MonoBehaviour
         gameGridEnemy = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, (y + gridOffset) * gridSpaceSize), Quaternion.identity);
         gameGridEnemy.GetComponent<GridCell>().SetPosistion(x, y);
         gameGridEnemy.transform.parent = transform;
+        gameGridEnemy.transform.eulerAngles = new Vector3(270f, 0f, 0f);
         gameGridEnemy.gameObject.name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")";
 
         //yield return new WaitForSeconds(.1f);

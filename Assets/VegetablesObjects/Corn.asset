@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Corn
   description: 
   ability: grapes
-  prefab: {fileID: 3902070204560931205, guid: 8907cb9d1f3d47e41a9fe885fddad8b8, type: 3}
+  prefab: {fileID: 6368708040366632402, guid: 43d6a5b3dd13e984e98a19f2cd5f79e0, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0
@@ -23,3 +23,7 @@ MonoBehaviour:
   health: 2
   level: 0
   cost: 0
+  abilityName: 
+  abilityDescription1: 
+  abilityDescription2: 
+  abilityDescription3: 

@@ -105,12 +105,12 @@ public class InputManager : MonoBehaviour
                     if (selectedPlacedObject != null)
                     {
                         selectedPlacedObject.gameObject.transform.position = new Vector3
-                            (selectedPlacedObject.gameObject.transform.position.x, 1f, selectedPlacedObject.gameObject.transform.position.z);
+                            (selectedPlacedObject.gameObject.transform.position.x, 0f, selectedPlacedObject.gameObject.transform.position.z);
                     }
 
                     selectedPlacedObject = placedObject;
                     selectedPlacedObject.gameObject.transform.position = new Vector3
-                        (selectedPlacedObject.gameObject.transform.position.x, 1.1f, selectedPlacedObject.gameObject.transform.position.z);
+                        (selectedPlacedObject.gameObject.transform.position.x, 0.15f, selectedPlacedObject.gameObject.transform.position.z);
                     FreezeShop.SetActive(false);
                     Sell.SetActive(true);
                 }
@@ -119,7 +119,7 @@ public class InputManager : MonoBehaviour
                     if (selectedPlacedObject != null)
                     {
                         selectedPlacedObject.gameObject.transform.position = new Vector3
-                            (selectedPlacedObject.gameObject.transform.position.x, 1f, selectedPlacedObject.gameObject.transform.position.z);
+                            (selectedPlacedObject.gameObject.transform.position.x, 0f, selectedPlacedObject.gameObject.transform.position.z);
                     }
                     selectedPlacedObject = null;
                     selectedPlacedObjectGrid = null;
@@ -295,6 +295,7 @@ public class InputManager : MonoBehaviour
         // Update level
         levelUpdate.UpdateLevel(placedObject);
     }
+
     public void StartBattlePhase()
     {
         // Updates Canvas
@@ -332,7 +333,14 @@ public class InputManager : MonoBehaviour
 
     public GameObject GetEnemyCell(int pos)
     {
-        return gameGridEnemyS.transform.GetChild(pos).gameObject;
+        if (gameGridEnemyS.transform.childCount > 0)
+        {
+            return gameGridEnemyS.transform.GetChild(pos).gameObject;
+        }
+        else
+        {
+            return null;
+        }
     }          // Gets enemy grid cell
 
     public PlacedObject GetEnemyObject(int pos)
@@ -362,8 +370,10 @@ public class InputManager : MonoBehaviour
             canvas.transform.GetChild(0).gameObject.SetActive(true);
             // Sets battle phase button active
             canvas.transform.GetChild(1).gameObject.SetActive(true);
+            // Sets battle phase button active
+            canvas.transform.GetChild(2).gameObject.SetActive(true);
             // Sets start battle button inactive
-            canvas.transform.GetChild(2).gameObject.SetActive(false);
+            canvas.transform.GetChild(3).gameObject.SetActive(false);
 
             // Sets gold to 100
             if (roundCounter >= 3)
@@ -425,7 +435,7 @@ public class InputManager : MonoBehaviour
 
     public void DragOnGridCell(GridCell cellMouseIsOver, PlacedObject placedObject)
     {
-        placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 0.5f, cellMouseIsOver.GetComponent<Transform>().position.z);
+        placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 0f, cellMouseIsOver.GetComponent<Transform>().position.z);
         placedObject.transform.position = placementVec;
         placedObject.transform.SetParent(null);
         placedObject.transform.SetParent(unitManager.transform);
@@ -448,7 +458,7 @@ public class InputManager : MonoBehaviour
         cellMouseIsOver.SetPlacedObject(placedObject);
         placedObject.transform.GetChild(0).transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
         placedObject.transform.GetChild(0).transform.rotation = Quaternion.Euler (40, -55, 0);
-        placedObject.transform.GetChild(0).GetChild(2).position = new Vector3 (placedObject.transform.GetChild(0).GetChild(2).position.x, 2f, placedObject.transform.GetChild(0).GetChild(2).position.z);
+        placedObject.transform.GetChild(0).GetChild(2).position = new Vector3 (placedObject.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedObject.transform.GetChild(0).GetChild(2).position.z);
     }
 
     public void UpdateHierarchie()

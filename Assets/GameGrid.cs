@@ -67,6 +67,7 @@ public class GameGrid : MonoBehaviour
             gameGrid = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, y * gridSpaceSize), Quaternion.identity);
             gameGrid.GetComponent<GridCell>().SetPosistion(x, y);
             gameGrid.transform.parent = transform;
+            gameGrid.transform.eulerAngles = new Vector3(270f, 0f, 0f);
             gameGrid.gameObject.name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")";
 
             yield return new WaitForSeconds(.1f);

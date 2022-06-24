@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Garlic
   description: 
   ability: cherry
-  prefab: {fileID: 7105608279199947559, guid: 63d88e4d109fba84fb22a5db8b60cba9, type: 3}
+  prefab: {fileID: 2610402589960099400, guid: 89328b6480870b1449600ab5e8235b93, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0
@@ -23,3 +23,7 @@ MonoBehaviour:
   health: 1
   level: 1
   cost: 0
+  abilityName: 
+  abilityDescription1: 
+  abilityDescription2: 
+  abilityDescription3: 

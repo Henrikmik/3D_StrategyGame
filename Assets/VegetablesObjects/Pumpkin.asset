@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Pumpkin
   description: 
   ability: coconut
-  prefab: {fileID: 3091988773037147899, guid: 20d2d7b611f7ec9449bc9227a6253075, type: 3}
+  prefab: {fileID: 3356247820372912602, guid: d4680e6cf6c1ed846ac6b8881c6f26a6, type: 3}
   visual: {fileID: 0}
   width: 0
   height: 0
@@ -23,3 +23,7 @@ MonoBehaviour:
   health: 3
   level: 0
   cost: 0
+  abilityName: 
+  abilityDescription1: 
+  abilityDescription2: 
+  abilityDescription3: 

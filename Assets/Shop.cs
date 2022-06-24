@@ -55,6 +55,8 @@ public class Shop : MonoBehaviour
         placedEnemy.transform.localScale += new Vector3 (0.7f, 0.7f, 0.7f);
         placedEnemy.transform.rotation = new Quaternion (0, 0, 0, 0);
         inputManager.ShowFloatingText(placedEnemy, pos3, true);
+        PlacedObject placedObject = transform.GetComponent<PlacedObject>();
+        inputManager.levelUpdate.UpdateLevel(placedEnemy);
     }
 
     public void ShopReroll()
