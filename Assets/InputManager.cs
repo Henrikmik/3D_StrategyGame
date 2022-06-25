@@ -480,6 +480,7 @@ public class InputManager : MonoBehaviour
             // Update Hierarchy lane 2
             if ((roundCounter >= 3) && (gameGrid.created2Grid == false))
             {
+                //Debug.Log("UPDATEHIERARCHY");
                 if (GetCellObject(3) != null)
                 {
                     GetCellObject(3).transform.SetSiblingIndex(3);

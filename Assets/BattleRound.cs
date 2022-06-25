@@ -186,11 +186,6 @@ public class BattleRound : MonoBehaviour
                 }
             }
 
-            //if (lane == 4)  // final battle on botlane
-            //{
-
-            //}
-
             yield return new WaitForSeconds(.5f);
 
             if (lane == 1)
@@ -718,13 +713,53 @@ public class BattleRound : MonoBehaviour
                 }
             }
         }
+
+        // lane 3
+        if (lane == 3)
+        {
+            if (CheckObjectInGridCell(0, false) == null && CheckObjectInGridCell(1, false) != null)
+            {
+                UnitMove(1, 0, false);
+            }
+
+            if (CheckObjectInGridCell(1, false) == null && CheckObjectInGridCell(2, false) != null)
+            {
+                if (CheckObjectInGridCell(0, false) == null)
+                {
+                    UnitMove(2, 0, false);
+                }
+                else
+                {
+                    UnitMove(2, 1, false);
+                }
+
+            }
+
+            if (CheckObjectInGridCell(0, true) == null && CheckObjectInGridCell(1, true) != null)
+            {
+                UnitMove(1, 0, true);
+            }
+
+            if (CheckObjectInGridCell(1, true) == null && CheckObjectInGridCell(2, true) != null)
+            {
+                if (CheckObjectInGridCell(0, true) == null)
+                {
+                    UnitMove(2, 0, true);
+                }
+                else
+                {
+                    UnitMove(2, 1, true);
+                }
+            }
+        }
     }
 
     public void SetUpBuyingPhase()
     {
         int childNumb = unitManager.transform.childCount;
 
-        for (int i = 0; i < childNumb; i++)
+        // Destroy Mini grapes and pineapples
+        for (int i = 0; i < childNumb; i++) 
         {
             if (unitManager.transform.GetChild(i).name == "Mini Grape(Clone)")
             {
@@ -737,14 +772,17 @@ public class BattleRound : MonoBehaviour
             }
         }
 
+        childNumb = unitManager.transform.childCount;
+
         for (int i = 0; i < childNumb; i++)
         {
             PlacedObject placedTeam = unitManager.transform.GetChild(i).GetComponent<PlacedObject>();
             GridCell gridCell;
 
-            if (placedTeam.transform.position.x >= 2.6f)
+            if (placedTeam.transform.position.x >= 2.5f)
             {
                gridCell = inputManager.GetGridCell(i + 2).GetComponent<GridCell>();
+               //Debug.Log(placedTeam + " " + gridCell);
             }
             else
             {
