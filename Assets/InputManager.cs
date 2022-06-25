@@ -175,14 +175,14 @@ public class InputManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            //Animator camAnim = mainCamera.GetComponent<Animator>();
+            Animator camAnim = mainCamera.GetComponent<Animator>();
 
-            //camAnim.enabled = true;
-            //camAnim.SetBool("CameraSwing", true);
+            camAnim.enabled = true;
+            camAnim.SetBool("CameraSwing", true);
             //Debug.Log(camAnim.GetCurrentAnimatorStateInfo(0).length > camAnim.GetCurrentAnimatorStateInfo(0).normalizedTime);
             //if (camAnim.GetCurrentAnimatorStateInfo(0).length > camAnim.GetCurrentAnimatorStateInfo(0).normalizedTime)
             //{
-            //    camAnim.enabled = false;
+                //camAnim.enabled = false;
             //    Debug.Log("Animator false");
             mainCamera.transform.parent.position = new Vector3(mainCamPos.x + 1.2f, mainCamPos.y +  0.3f, mainCamPos.z + 4.3f);
             mainCamera.transform.parent.eulerAngles =  new Vector3 (mainCamRot.x + -2.5f, mainCamRot.y + -9.8f, mainCamRot.z + 7.9f);

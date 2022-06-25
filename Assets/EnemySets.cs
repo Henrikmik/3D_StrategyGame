@@ -26,15 +26,15 @@ public class EnemySets : MonoBehaviour
         Vector2Int enemyPos = gridcell.GetPosition();
         Vector3 enemyPos3 = new Vector3(gridcell.transform.position.x, 0f, gridcell.transform.position.z);
 
-        PlacedObject placedObject = PlacedObject.Create(enemyPos3, enemyPos, Unit.Dir.Down, enemy);
+        PlacedObject placedObject = PlacedObject.Create(enemyPos3, enemyPos, Unit.Dir.Left, enemy);
         gridcell.SetPlacedObject(placedObject);
         gridcell.StoreObject(placedObject);
         placedObject.transform.SetParent(inputManager.enemyManager.transform);
         placedObject.SettingStatsEnemy(attackv, healthv, levelv);
         inputManager.ShowFloatingText(placedObject, enemyPos3, false);
-        placedObject.transform.GetChild(0).transform.localPosition = new Vector3(0.4f, 0.35f, -0.3f);
-        placedObject.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        placedObject.transform.GetChild(0).GetChild(2).position = new Vector3(placedObject.transform.GetChild(0).GetChild(2).position.x, 2f, placedObject.transform.GetChild(0).GetChild(2).position.z);
+        placedObject.transform.GetChild(0).transform.localPosition = new Vector3 (0.4f, 0.35f, 0.3f);
+        placedObject.transform.GetChild(0).transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
+        placedObject.transform.GetChild(0).GetChild(2).position = new Vector3 (placedObject.transform.GetChild(0).GetChild(2).position.x, 2f, placedObject.transform.GetChild(0).GetChild(2).position.z);
 
         inputManager.levelUpdate.UpdateLevel(placedObject);
     }
@@ -57,7 +57,15 @@ public class EnemySets : MonoBehaviour
             enemyGrid6 = inputManager.gameGridEnemyS.transform.GetChild(5).GetComponent<GridCell>();
         }
 
-        int i = Random.Range(1, 4);
+        int i;
+        if (inputManager.roundCounter == 1)
+        {
+            i = Random.Range(1, 6);
+        }
+        else
+        {
+            i = Random.Range(1, 4);
+        }
 
         if (inputManager.roundCounter == 1) // stage 1
         {
@@ -73,11 +81,23 @@ public class EnemySets : MonoBehaviour
                 CreateEnemy(7, enemyGrid2, 2, 1, 1);
                 CreateEnemy(12, enemyGrid3, 1, 2, 1);
             }
-            else if (i >= 3)     // set 3
+            else if (i == 3)     // set 3
             {
                 CreateEnemy(11, enemyGrid1, 1, 3, 1);
                 CreateEnemy(7, enemyGrid2, 2, 1, 1);
                 CreateEnemy(10, enemyGrid3, 2, 2, 1);   // Corn
+            }
+            else if (i == 4)     // set 3
+            {
+                CreateEnemy(10, enemyGrid1, 2, 2, 1);   // Corn
+                CreateEnemy(11, enemyGrid2, 1, 3, 1);
+                CreateEnemy(9, enemyGrid3, 3, 1, 1);    // Aubergine
+            }
+            else if (i >= 5)     // set 3
+            {
+                CreateEnemy(9, enemyGrid1, 3, 1, 1);    // Aubergine
+                CreateEnemy(7, enemyGrid2, 2, 1, 1);
+                CreateEnemy(8, enemyGrid3, 1, 1, 1);   // Garlic
             }
             else
             {
@@ -100,7 +120,7 @@ public class EnemySets : MonoBehaviour
             }
             else if (i >= 3)    // set 3
             {
-                CreateEnemy(11, enemyGrid1, 6, 4, 1);
+                CreateEnemy(11, enemyGrid1, 2, 6, 1);
                 CreateEnemy(10, enemyGrid2, 4, 4, 1);
                 CreateEnemy(7, enemyGrid3, 4, 2, 1);
             }

@@ -112,6 +112,7 @@ public class BattleRound : MonoBehaviour
                     // Enemy greift Unit an
                     teamObject.GettingDamaged(enemy.attack, enemy);
                     //teamObject.GettingDamaged(enemy.attack);
+
                     if ((teamObject.health <= 0) || (enemy.health <= 0))
                     {
                         FindObjectOfType<AudioManager>().Play("UnitDefeat");
@@ -1064,7 +1065,7 @@ public class BattleRound : MonoBehaviour
                         placedO.attack = (Mathf.RoundToInt(placedObject.attack * 0.5f));
                         inputManager.ShowFloatingText(placedO, pos3, false);
 
-                        placedO.transform.GetChild(0).transform.localPosition = new Vector3(0.4f, 0.35f, -0.3f);
+                        placedO.transform.GetChild(0).transform.localPosition = new Vector3(0.4f, 0.35f, 0.3f);
                         placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                         placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
 
