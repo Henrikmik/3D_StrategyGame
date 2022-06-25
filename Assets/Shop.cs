@@ -12,8 +12,10 @@ public class Shop : MonoBehaviour
     public bool freezedShop = false;
     public GameObject hudPre3;
     public GameObject hudPost3;
-    public Sprite shopFreezed;
-    public Sprite shopUnfreezed;
+    //public Sprite shopFreezed;
+    //public Sprite shopUnfreezed;
+    public GameObject freezeSprite;
+    public GameObject unfreezeSprite;
     public Image FreezeButton;
     public GameObject FreezeImage;
     public GameObject UnfreezeImage;
@@ -135,7 +137,9 @@ public class Shop : MonoBehaviour
             FreezeImage.SetActive(false);
             UnfreezeImage.SetActive(true);
             FindObjectOfType<AudioManager>().Play("Unfreeze");
-            FreezeButton.sprite = shopFreezed;
+            freezeSprite.SetActive(true);
+            unfreezeSprite.SetActive(false);
+            //FreezeButton.sprite = shopFreezed;
             //Debug.Log("Shop is not freezed");
         }
         else if (freezedShop == false)
@@ -144,7 +148,9 @@ public class Shop : MonoBehaviour
             FreezeImage.SetActive(true);
             UnfreezeImage.SetActive(false);
             FindObjectOfType<AudioManager>().Play("Freeze");
-            FreezeButton.sprite = shopUnfreezed;
+            freezeSprite.SetActive(false);
+            unfreezeSprite.SetActive(true);
+            //FreezeButton.sprite = shopUnfreezed;
             //Debug.Log("Shop is freezed");
         }
     }
