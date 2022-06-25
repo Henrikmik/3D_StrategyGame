@@ -14,6 +14,9 @@ public class InputManager : MonoBehaviour
     public GameObject battleStart;
     public GameGridEnemy gameGridEnemyS;
     public Camera mainCamera;
+    public GameObject goldO;
+    public GameObject drawsO;
+
     public GameObject canvas;
     public GameObject canvasLose;
     public Shop shop;
@@ -548,6 +551,11 @@ public class InputManager : MonoBehaviour
     {
         StartCoroutine(mainCamera.GetComponent<CameraShake>().Shake(.15f, .2f));
         //Debug.Log("SHAKE");
+    }
+
+    public void ShakeGold()
+    {
+        StartCoroutine(goldO.GetComponent<Shake>().ShakeObject(.15f, .2f));
     }
 }
 

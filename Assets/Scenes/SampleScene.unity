@@ -557,6 +557,7 @@ GameObject:
   - component: {fileID: 61837456}
   - component: {fileID: 61837458}
   - component: {fileID: 61837457}
+  - component: {fileID: 61837459}
   m_Layer: 5
   m_Name: Gold
   m_TagString: Untagged
@@ -681,6 +682,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61837455}
   m_CullTransparentMesh: 1
+--- !u!114 &61837459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61837455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0748f82373e863d4785b4f7f90c94a9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &65455872
 GameObject:
   m_ObjectHideFlags: 0
@@ -5147,6 +5160,8 @@ MonoBehaviour:
   battleStart: {fileID: 1089988294}
   gameGridEnemyS: {fileID: 225948465}
   mainCamera: {fileID: 963194227}
+  goldO: {fileID: 61837455}
+  drawsO: {fileID: 163168508}
   canvas: {fileID: 1748904019}
   canvasLose: {fileID: 1240293291}
   shop: {fileID: 260209896}

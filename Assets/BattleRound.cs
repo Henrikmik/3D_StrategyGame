@@ -854,6 +854,11 @@ public class BattleRound : MonoBehaviour
         SetUpBuyingPhase();
         inputManager.shop.ShopReroll();
 
+        if (inputManager.draws == 0)
+        {
+            inputManager.drawsO.SetActive(false);
+        }
+
         //Deactivate Battletheme, Play Buytheme
         buytheme.SetActive(true);
         battletheme.SetActive(false);

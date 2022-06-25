@@ -122,6 +122,10 @@ public class Shop : MonoBehaviour
 
             }
         }
+        else
+        {
+            inputManager.ShakeGold();
+        }
     }
     public void FreezeShop()
     {
