@@ -20,7 +20,7 @@ public class Icon_Damage : MonoBehaviour
 
             if (i == 50)
             {
-                Debug.Log("disabled");
+                //Debug.Log("disabled");
                 i = 0;
                 gameObject.SetActive(false);
             }

@@ -54,6 +54,13 @@ public class InputManager : MonoBehaviour
     private Vector3 mainCamPos;
     private Vector3 mainCamRot;
 
+    public PlacedObject pOPosition1;
+    public PlacedObject pOPosition2;
+    public PlacedObject pOPosition3;
+    public PlacedObject pOPosition4;
+    public PlacedObject pOPosition5;
+    public PlacedObject pOPosition6;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -495,6 +502,20 @@ public class InputManager : MonoBehaviour
                 }
             }
         }
+
+        // Test placedobjects to positions
+        if ((gameGrid.transform.childCount > 2) && (gameGrid.transform.GetChild(1).gameObject.activeInHierarchy == true) && (gameGrid.transform.GetChild(2).gameObject.activeInHierarchy == true))
+        {
+            pOPosition1 = GetCellObject(0);
+            pOPosition2 = GetCellObject(1);
+            pOPosition3 = GetCellObject(2);
+            if (gameGrid.transform.childCount >= 4)
+            {
+                pOPosition4 = GetCellObject(3);
+                pOPosition5 = GetCellObject(4);
+                pOPosition6 = GetCellObject(5);
+            }
+        }
     }
 
     public bool InPauseMenuOrNot()
@@ -526,7 +547,7 @@ public class InputManager : MonoBehaviour
     public void CameraShake()
     {
         StartCoroutine(mainCamera.GetComponent<CameraShake>().Shake(.15f, .2f));
-        Debug.Log("SHAKE");
+        //Debug.Log("SHAKE");
     }
 }
 

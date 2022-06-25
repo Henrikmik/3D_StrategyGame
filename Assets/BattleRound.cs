@@ -757,11 +757,12 @@ public class BattleRound : MonoBehaviour
     public void SetUpBuyingPhase()
     {
         int childNumb = unitManager.transform.childCount;
+        Debug.Log("First child count: " + childNumb);
 
         // Destroy Mini grapes and pineapples
         for (int i = 0; i < childNumb; i++) 
         {
-            if (unitManager.transform.GetChild(i).name == "Mini Grape(Clone)")
+            if ((unitManager.transform.GetChild(i).name == "Mini Grape(Clone)") || (unitManager.transform.GetChild(i).GetComponent<PlacedObject>().ability == "mini grapes"))
             {
                 Destroy(unitManager.transform.GetChild(i).gameObject);
                 childNumb -= 1;
@@ -773,22 +774,66 @@ public class BattleRound : MonoBehaviour
         }
 
         childNumb = unitManager.transform.childCount;
+        Debug.Log(childNumb);
 
-        for (int i = 0; i < childNumb; i++)
+        for (int i = 0; i < childNumb - 1; i++)
         {
-            PlacedObject placedTeam = unitManager.transform.GetChild(i).GetComponent<PlacedObject>();
-            GridCell gridCell;
+            //PlacedObject placedTeam = unitManager.transform.GetChild(i).GetComponent<PlacedObject>();
+            //GridCell gridCell;
 
-            if (placedTeam.transform.position.x >= 2.5f)
+            //if (placedTeam.transform.position.x >= 2.5f)
+            //{
+            //   gridCell = inputManager.GetGridCell(i + 2).GetComponent<GridCell>();
+            //   //Debug.Log(placedTeam + " " + gridCell);
+            //}
+            //else
+            //{
+            //   gridCell = inputManager.GetGridCell(i).GetComponent<GridCell>();
+            //}
+
+            //placedTeam.gameObject.SetActive(true);
+            //placedTeam.SetStats();
+            //inputManager.UpdateFloatingText(placedTeam);
+            //placedTeam.transform.position = new Vector3(gridCell.transform.position.x, 0f, gridCell.transform.position.z);
+            //gridCell.StoreObject(placedTeam);
+            //gridCell.SetPlacedObject(placedTeam);
+
+            Debug.Log("I: " + i);
+            GridCell gridCell = inputManager.GetGridCell(i).GetComponent<GridCell>();
+            PlacedObject placedTeam = null;
+
+            if ( i == 0)
             {
-               gridCell = inputManager.GetGridCell(i + 2).GetComponent<GridCell>();
-               //Debug.Log(placedTeam + " " + gridCell);
+                placedTeam = inputManager.pOPosition1;
+                Debug.Log(placedTeam);
             }
-            else
+            else if( i == 1)
             {
-               gridCell = inputManager.GetGridCell(i).GetComponent<GridCell>();
+                placedTeam = inputManager.pOPosition2;
+                Debug.Log(placedTeam);
+            }
+            else if ( i == 2)
+            {
+                placedTeam = inputManager.pOPosition3;
+                Debug.Log(placedTeam);
+            }
+            else if( i == 3)
+            {
+                placedTeam = inputManager.pOPosition4;
+                Debug.Log(placedTeam);
+            }    
+            else if( i == 4)
+            {
+                placedTeam = inputManager.pOPosition5;
+                Debug.Log(placedTeam);
+            }
+            else if( i == 5)
+            {
+                placedTeam = inputManager.pOPosition6;
+                Debug.Log(placedTeam);
             }
 
+            //gridCell.objectInThisGridSpace = placedTeam;
             placedTeam.gameObject.SetActive(true);
             placedTeam.SetStats();
             inputManager.UpdateFloatingText(placedTeam);
