@@ -153,17 +153,17 @@ public class InputManager : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                dir = Unit.GetNextDir(dir);
-                Debug.Log("" + dir);
-            }
+            //if (Input.GetKeyDown(KeyCode.R))
+            //{
+            //    dir = Unit.GetNextDir(dir);
+            //    Debug.Log("" + dir);
+            //}
 
-            if (Input.GetKeyDown(KeyCode.Alpha1)) { unit = unitList[0]; }
-            if (Input.GetKeyDown(KeyCode.Alpha2)) { unit = unitList[1]; }
-            if (Input.GetKeyDown(KeyCode.Alpha3)) { unit = unitList[2]; }
-            if (Input.GetKeyDown(KeyCode.Alpha4)) { unit = unitList[3]; }
-            if (Input.GetKeyDown(KeyCode.Alpha5)) { unit = unitList[4]; }
+            //if (Input.GetKeyDown(KeyCode.Alpha1)) { unit = unitList[0]; }
+            //if (Input.GetKeyDown(KeyCode.Alpha2)) { unit = unitList[1]; }
+            //if (Input.GetKeyDown(KeyCode.Alpha3)) { unit = unitList[2]; }
+            //if (Input.GetKeyDown(KeyCode.Alpha4)) { unit = unitList[3]; }
+            //if (Input.GetKeyDown(KeyCode.Alpha5)) { unit = unitList[4]; }
         }
 
 
@@ -281,7 +281,7 @@ public class InputManager : MonoBehaviour
 
         if (canvas == true)
         {
-            var myNewStats = Instantiate(FloatingTextPrefab, new Vector3(objectPos.x, objectPos.y + 0.15f, objectPos.z - 0.5f), Quaternion.Euler(0, 0, 0), transform);
+            var myNewStats = Instantiate(FloatingTextPrefab, new Vector3(objectPos.x, objectPos.y - 0.1f, objectPos.z - 0.5f), Quaternion.Euler(0, 0, 0), transform);
             myNewStats.transform.parent = placedObject.transform;
             myNewStats.transform.GetChild(0).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
             myNewStats.transform.GetChild(1).GetComponentInChildren<TMP_Text>().text = placedObject.health.ToString();

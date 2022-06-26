@@ -26,23 +26,36 @@ public class Unit : ScriptableObject
     public string abilityDescription3;
 
     // Gets the next Direction
-    public static Dir GetNextDir(Dir dir)
-    {
-        switch (dir)
-        {
-            default:
-            case Dir.Down:      return Dir.Left;
-            case Dir.Left:      return Dir.Up;
-            case Dir.Up:        return Dir.Right;
-            case Dir.Right:     return Dir.Down;
-        }
-    }
+    //public static Dir GetNextDir(Dir dir)
+    //{
+    //    switch (dir)
+    //    {
+    //        default:
+    //        case Dir.Down:      return Dir.Left;
+    //        case Dir.Left:      return Dir.Up;
+    //        case Dir.Up:        return Dir.Right;
+    //        case Dir.Right:     return Dir.Down;
+    //    }
+    //}
     public enum Dir
     {
         Down,
         Left,
         Up,
         Right,
+        Apple,
+        Broccoli,
+        Cherry,
+        Coconut,
+        Corn,
+        Eggplant,
+        Garlic,
+        Grapes,
+        Lemon,
+        MiniGrape,
+        Pineapple,
+        Pumpkin,
+        Tomato,
     }
     public int GetRotationAngle(Dir dir)
     {
@@ -53,6 +66,13 @@ public class Unit : ScriptableObject
             case Dir.Left:      return 90;
             case Dir.Up:        return 180;
             case Dir.Right:     return 270;
+            case Dir.Apple:     return 120;
+            case Dir.Cherry:    return 135;
+            case Dir.Coconut:   return -85;
+            case Dir.Grapes:    return 160;
+            case Dir.Lemon:     return 0;
+            case Dir.MiniGrape: return 0;
+            case Dir.Pineapple: return 235;
         }
     }
 
@@ -84,5 +104,41 @@ public class Unit : ScriptableObject
                 break;
         }
         return gridPositionList;
+    }
+
+    public Dir GetUnitDir()
+    {
+        if (name == "Apple")
+        {
+            return Dir.Apple;
+        }
+        else if (name == "Cherry")
+        {
+            return Dir.Cherry;
+        }
+        else if (name == "Coconut")
+        {
+            return Dir.Coconut;
+        }
+        else if (name == "Grapes")
+        {
+            return Dir.Grapes;
+        }
+        else if (name == "Lemon")
+        {
+            return Dir.Lemon;
+        }
+        else if (name == "Mini Grape")
+        {
+            return Dir.MiniGrape;
+        }
+        else if (name == "Pineapple")
+        {
+            return Dir.Pineapple;
+        }
+        else
+        {
+            return Dir.Down;
+        }
     }
 }
