@@ -92,6 +92,7 @@ public class Shop : MonoBehaviour
 
             if (freezedShop == false)
             {
+                FindObjectOfType<AudioManager>().Play("Reroll");
                 // costs 10 gold
                 inputManager.gold -= 10;
                 // Deleting shop objects
@@ -126,6 +127,7 @@ public class Shop : MonoBehaviour
         }
         else
         {
+            FindObjectOfType<AudioManager>().Play("Error");
             inputManager.ShakeGold();
         }
     }
