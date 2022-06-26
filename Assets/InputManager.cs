@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class InputManager : MonoBehaviour
@@ -88,6 +89,11 @@ public class InputManager : MonoBehaviour
         GridCell cellMouseIsOver = IsMouseOverAGridSpace();
         PlacedObject hoveredObject = IsMouseOverAplacedobject();
 
+        if (roundCounter >= 8)
+        {
+            SceneManager.LoadScene("Outro");
+        }
+
         if (battleOn != true)
         {
             if ((hoveredObject != null) && (o == 1) && (InPauseMenuOrNot() == false) && (InHelpMenuOrNot() == false))   //  
@@ -153,11 +159,10 @@ public class InputManager : MonoBehaviour
                 }
             }
 
-            //if (Input.GetKeyDown(KeyCode.R))
-            //{
-            //    dir = Unit.GetNextDir(dir);
-            //    Debug.Log("" + dir);
-            //}
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                roundCounter = 8;
+            }
 
             //if (Input.GetKeyDown(KeyCode.Alpha1)) { unit = unitList[0]; }
             //if (Input.GetKeyDown(KeyCode.Alpha2)) { unit = unitList[1]; }
@@ -183,6 +188,7 @@ public class InputManager : MonoBehaviour
         {
             CameraShake();
         }
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             Animator camAnim = mainCamera.GetComponent<Animator>();
