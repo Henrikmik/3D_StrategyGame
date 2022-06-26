@@ -776,7 +776,7 @@ public class BattleRound : MonoBehaviour
         childNumb = unitManager.transform.childCount;
         //Debug.Log(childNumb);
 
-        for (int i = 0; i < childNumb - 1; i++)
+        for (int i = 0; i <= childNumb - 1; i++)
         {
             //PlacedObject placedTeam = unitManager.transform.GetChild(i).GetComponent<PlacedObject>();
             //GridCell gridCell;
