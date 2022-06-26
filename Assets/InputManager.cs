@@ -556,6 +556,6 @@ public class InputManager : MonoBehaviour
     public void ShakeGold()
     {
         StartCoroutine(goldO.GetComponent<Shake>().ShakeObject(.15f, .2f));
-    }
+    }   // einfügen bei cant buy unit
 }
 

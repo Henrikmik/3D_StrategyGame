@@ -774,7 +774,7 @@ public class BattleRound : MonoBehaviour
         }
 
         childNumb = unitManager.transform.childCount;
-        Debug.Log(childNumb);
+        //Debug.Log(childNumb);
 
         for (int i = 0; i < childNumb - 1; i++)
         {
@@ -798,24 +798,25 @@ public class BattleRound : MonoBehaviour
             //gridCell.StoreObject(placedTeam);
             //gridCell.SetPlacedObject(placedTeam);
 
-            Debug.Log("I: " + i);
+            //Debug.Log("I: " + i);
+
             GridCell gridCell = inputManager.GetGridCell(i).GetComponent<GridCell>();
             PlacedObject placedTeam = null;
 
             if ( i == 0)
             {
                 placedTeam = inputManager.pOPosition1;
-                Debug.Log(placedTeam);
+                Debug.Log("1 " + placedTeam);
             }
             else if( i == 1)
             {
                 placedTeam = inputManager.pOPosition2;
-                Debug.Log(placedTeam);
+                Debug.Log("2" + placedTeam);
             }
             else if ( i == 2)
             {
                 placedTeam = inputManager.pOPosition3;
-                Debug.Log(placedTeam);
+                Debug.Log("3" + placedTeam);
             }
             else if( i == 3)
             {
@@ -837,7 +838,7 @@ public class BattleRound : MonoBehaviour
             placedTeam.gameObject.SetActive(true);
             placedTeam.SetStats();
             inputManager.UpdateFloatingText(placedTeam);
-            placedTeam.transform.position = new Vector3(gridCell.transform.position.x, 0f, gridCell.transform.position.z);
+            placedTeam.transform.position = new Vector3 (gridCell.transform.position.x, 0f, gridCell.transform.position.z);
             gridCell.StoreObject(placedTeam);
             gridCell.SetPlacedObject(placedTeam);
         }
