@@ -94,6 +94,15 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                             origin = transform.position;
                             oldGridCell = cellMouseIsOver;
 
+                            Transform visualT = placedObject.transform.GetChild(1);
+                            visualT.eulerAngles = new Vector3 (0f, 0f, 0f);
+
+                            if (placedObject.nameA == "Lemon")
+                            {
+                                visualT.eulerAngles = new Vector3(0f, - 180f, 0f);
+                                Debug.Log("LEMON");
+                            }
+
                             Transform infoStats = placedObject.transform.GetChild(0);
                             infoStats.position = new Vector3 (infoStats.position.x + 0.9f, infoStats.position.y + 0.25f, infoStats.position.z + 0.1f);
                             inputManager.gold -= 30;

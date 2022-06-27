@@ -1116,9 +1116,13 @@ public class BattleRound : MonoBehaviour
                         placedO.attack = (Mathf.RoundToInt(placedObject.attack * 0.5f));
                         inputManager.ShowFloatingText(placedO, pos3, false);
 
-                        placedO.transform.GetChild(0).transform.localPosition = new Vector3(0.4f, 0.35f, -0.3f);
-                        placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                        placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+                        Transform floatingStats = placedO.transform.GetChild(0);
+                        Debug.Log(floatingStats);
+                        floatingStats.transform.localPosition = new Vector3(0.4f, 0.35f, -0.3f);
+                        floatingStats.transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
+                        floatingStats.GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+
+                        placedO.transform.GetChild(1).eulerAngles = new Vector3(0f, 0f, 0f);
 
                         inputManager.levelUpdate.UpdateLevel(placedO);
                         Debug.Log("Summon Pineapple");
@@ -1157,6 +1161,8 @@ public class BattleRound : MonoBehaviour
                         placedO.transform.GetChild(0).transform.localPosition = new Vector3(0.4f, 0.35f, 0.3f);
                         placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                         placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+
+                        placedO.transform.GetChild(1).eulerAngles = new Vector3(0f, 0f, 0f);
 
                         inputManager.levelUpdate.UpdateLevel(placedO);
                         Debug.Log("Summon Aubergine");
