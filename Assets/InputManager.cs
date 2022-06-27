@@ -289,6 +289,7 @@ public class InputManager : MonoBehaviour
         {
             var myNewStats = Instantiate(FloatingTextPrefab, new Vector3(objectPos.x, objectPos.y - 0.1f, objectPos.z - 0.5f), Quaternion.Euler(0, 0, 0), transform);
             myNewStats.transform.parent = placedObject.transform;
+            myNewStats.transform.SetAsFirstSibling();
             myNewStats.transform.GetChild(0).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
             myNewStats.transform.GetChild(1).GetComponentInChildren<TMP_Text>().text = placedObject.health.ToString();
         }
@@ -296,6 +297,7 @@ public class InputManager : MonoBehaviour
         {
             var myNewStats = Instantiate(FloatingTextPrefab, new Vector3(objectPos.x + 0.5f, objectPos.y - 0.2f, objectPos.z - 0.5f), Quaternion.Euler(40, -50, 0), transform);
             myNewStats.transform.parent = placedObject.transform;
+            myNewStats.transform.SetAsFirstSibling();
             myNewStats.transform.GetChild(0).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
             myNewStats.transform.GetChild(1).GetComponentInChildren<TMP_Text>().text = placedObject.health.ToString();
         }

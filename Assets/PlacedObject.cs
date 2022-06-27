@@ -7,7 +7,7 @@ public class PlacedObject : MonoBehaviour
 {
     public static PlacedObject Create(Vector3 worldPosition, Vector2Int origin, Unit.Dir dir, Unit unit)
     {
-        dir = unit.GetUnitDir();
+        //dir = unit.GetUnitDir();
         //Debug.Log(unit.GetUnitDir());
         Transform placedObjectTransform = Instantiate(unit.prefab, worldPosition, Quaternion.Euler(0, unit.GetRotationAngle(dir), 0));
 
