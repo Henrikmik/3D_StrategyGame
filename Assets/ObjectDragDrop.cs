@@ -13,6 +13,8 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     Camera c_cam;
     GameObject gameGrid;
 
+    //public Unit unit;
+
     private Vector3 origin;
     private GridCell oldGridCell;
     void Start()
@@ -88,12 +90,14 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                         {
                             inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
                             PlayPlaceSound();
+                            
                             origin = transform.position;
                             oldGridCell = cellMouseIsOver;
 
                             Transform infoStats = placedObject.transform.GetChild(0);
                             infoStats.position = new Vector3 (infoStats.position.x + 0.9f, infoStats.position.y + 0.25f, infoStats.position.z + 0.1f);
                             inputManager.gold -= 30;
+                            PlayUnitSound(placedObject.nameA);
                             //Debug.Log("Aus Shop");
                         }
                         else
@@ -229,5 +233,34 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     public void PlayPlaceSound()
     {
         FindObjectOfType<AudioManager>().Play("MoveUnit");
+    }
+    public void PlayUnitSound(string namee)
+    {
+        if (namee == "Apple")
+        {
+            FindObjectOfType<AudioManager>().Play("Apple");
+        }
+        else if (namee == "Coconut")
+        {
+            FindObjectOfType<AudioManager>().Play("Coconut");
+        }
+        else if (namee == "Cherry")
+        {
+            FindObjectOfType<AudioManager>().Play("Cherry");
+        }
+        else if (namee == "Grapes")
+        {
+            FindObjectOfType<AudioManager>().Play("Grapes");
+        }
+        else if (namee == "Lemon")
+        {
+            FindObjectOfType<AudioManager>().Play("Lemon");
+        }
+        else if (namee == "Pineapple")
+        {
+            FindObjectOfType<AudioManager>().Play("Pineapple");
+
+        }
+
     }
 }
