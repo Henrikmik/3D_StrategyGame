@@ -20,25 +20,6 @@ public class Shop : MonoBehaviour
     public GameObject FreezeImage;
     public GameObject UnfreezeImage;
 
-    private int unfreezeTimer = 0;
-
-
-    //public void FixedUpdate()
-    //{
-    //    if (freezedShop == true)
-    //    {
-    //        unfreezeTimer += 1;
-    //        //Debug.Log("+1");
-
-    //        if (unfreezeTimer == 50)
-    //        {
-    //            //Debug.Log("disabled");
-    //            unfreezeTimer = 0;
-    //            UnfreezeImage.SetActive(false);
-    //        }
-    //    }
-    //}
-
     public void SetShoppingSpace()
     {
         hudPre3.SetActive(true);

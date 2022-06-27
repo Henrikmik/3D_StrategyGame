@@ -98,6 +98,8 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                         }
                         else
                         {
+                            FindObjectOfType<AudioManager>().Play("Error");
+                            inputManager.ShakeGold();
                             ResetPosition();
                         }
                     }
@@ -186,6 +188,8 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                                     }
                                     else
                                     {
+                                        FindObjectOfType<AudioManager>().Play("Error");
+                                        inputManager.ShakeGold();
                                         ResetPosition();
                                     }
                                 }
