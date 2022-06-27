@@ -368,26 +368,34 @@ public class InputManager : MonoBehaviour
     {
         if (scene == 1)
         {
-            mainCamera.GetComponent<Animator>().SetBool("CameraSwing", true);
+            //mainCamera.GetComponent<Animator>().SetBool("CameraSwing", true);
             // Sets Shop in Canvas inactive
             canvas.transform.GetChild(0).gameObject.SetActive(false);
+            shop.UnfreezeImage.SetActive(false);
+
             // Sets battle phase button inactive
+            
             canvas.transform.GetChild(1).gameObject.SetActive(false);
+            
             // Sets battle phase button inactive
             canvas.transform.GetChild(2).gameObject.SetActive(false);
+            
             // Sets start battle button active
             canvas.transform.GetChild(3).gameObject.SetActive(true);
         }
 
         if (scene == 2)
         {
-            mainCamera.GetComponent<Animator>().SetBool("CameraSwing", false);
+            //mainCamera.GetComponent<Animator>().SetBool("CameraSwing", false);
             // Sets Shop in Canvas active
             canvas.transform.GetChild(0).gameObject.SetActive(true);
+            
             // Sets battle phase button active
             canvas.transform.GetChild(1).gameObject.SetActive(true);
+            
             // Sets battle phase button active
             canvas.transform.GetChild(2).gameObject.SetActive(true);
+            
             // Sets start battle button inactive
             canvas.transform.GetChild(3).gameObject.SetActive(false);
 
@@ -518,7 +526,7 @@ public class InputManager : MonoBehaviour
             pOPosition1 = GetCellObject(0);
             pOPosition2 = GetCellObject(1);
             pOPosition3 = GetCellObject(2);
-            if (gameGrid.transform.childCount >= 4)
+            if ((gameGrid.transform.childCount >= 4) && (gameGrid.created2Grid == false))
             {
                 pOPosition4 = GetCellObject(3);
                 pOPosition5 = GetCellObject(4);
