@@ -11,17 +11,27 @@ public class UAnimation : MonoBehaviour
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
     }
 
-    public IEnumerator AnimationMoveForward()
+    public IEnumerator AnimationMoveForward(PlacedObject placedObject)
     {
-        Animator anim = inputManager.GetCellObject(0).transform.GetChild(1).GetComponent<Animator>();
+        Animator anim = placedObject.transform.GetChild(1).GetComponent<Animator>();
         anim.enabled = true;
         anim.Play("MoveForward");
         Debug.Log("MoveForward");
 
         yield return new WaitForSeconds(1f);
-        anim.enabled = false;
 
-        PlacedObject placedObject = inputManager.GetCellObject(0);
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        {
+            anim.enabled = false;
+            Debug.Log("Not playing");
+        }
+        else
+        {
+            Debug.Log("Playing");
+        }
+        
+
+        //PlacedObject placedObject = inputManager.GetCellObject(0);
         placedObject.transform.GetChild(1).eulerAngles = new Vector3(0f, 0f, 0f);
         if (placedObject.nameA == "Lemon")
         {
@@ -46,8 +56,17 @@ public class UAnimation : MonoBehaviour
         Debug.Log("DealDamageENEMY");
 
         // wait time to reset rotation
-        yield return new WaitForSeconds(1f);
-        anim.enabled = false;
+        yield return new WaitForSeconds(1.2f);
+
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        {
+            anim.enabled = false;
+            Debug.Log("Not playing");
+        }
+        else
+        {
+            Debug.Log("Playing");
+        }
 
         PlacedObject placedObject = inputManager.GetCellObject(0);
         placedObject.transform.GetChild(1).eulerAngles = new Vector3(0f, 0f, 0f);
@@ -60,5 +79,12 @@ public class UAnimation : MonoBehaviour
 
         PlacedObject placedObjectE = inputManager.GetCellObject(0);
         placedObjectE.transform.GetChild(1).eulerAngles = new Vector3(0f, 0f, 0f);
+    }
+    public void Attackunit()
+    {
+        Animator anim = inputManager.GetCellObject(0).transform.GetChild(1).GetComponent<Animator>();
+        anim.enabled = true;
+        anim.Play("DealDamage");
+        Debug.Log("DealDamage");
     }
 }

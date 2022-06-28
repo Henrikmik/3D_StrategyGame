@@ -170,7 +170,7 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            StartCoroutine(unitAnimation.AnimationMoveForward());
+            StartCoroutine(unitAnimation.AnimationMoveForward(GetCellObject(0)));
         }
         if (Input.GetKeyDown(KeyCode.N))
         {

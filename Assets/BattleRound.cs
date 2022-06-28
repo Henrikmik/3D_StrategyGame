@@ -40,6 +40,7 @@ public class BattleRound : MonoBehaviour
         {
             //Debug.Log("test 4");
             CheckingGridBattle(lane);
+            yield return new WaitForSeconds(2f);
             //Debug.Log("test 5");
             CheckingGameState(lane);
             //Debug.Log("In while");
@@ -88,7 +89,7 @@ public class BattleRound : MonoBehaviour
                     yield return new WaitForSeconds(1f);
                     CheckingGridBattle(lane);
 
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(2f);
                     CheckingGameState(lane);
                 }
             }
@@ -137,7 +138,7 @@ public class BattleRound : MonoBehaviour
                     yield return new WaitForSeconds(1f);
                     CheckingGridBattle(lane);
 
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(2f);
                     CheckingGameState(lane);
                 }
             }
@@ -180,10 +181,10 @@ public class BattleRound : MonoBehaviour
                     yield return new WaitForSeconds(1f);
                     CheckAllUnitsOnDefeat(lane);
 
-                    //yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(1f);
                     CheckingGridBattle(lane);
 
-                    //yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(2f);
                     CheckingGameState(lane);
                 }
             }
@@ -327,47 +328,12 @@ public class BattleRound : MonoBehaviour
                             UnitMove(5, 2, true);
                         }
                         lane = 3;
+                        yield return new WaitForSeconds(2f);
                     }
-                    //else if (gameState2 == "Win")
-                    //{
-                    //    // units stay on lane 2
-                    //    // enemy units go to lane 2
-                    //    if (inputManager.GetEnemyCell(0).GetComponent<GridCell>().isOccupied == true)
-                    //    {
-                    //        UnitMove(0, 3, true);
-                    //    }
-                    //    if (inputManager.GetEnemyCell(1).GetComponent<GridCell>().isOccupied == true)
-                    //    {
-                    //        UnitMove(1, 4, true);
-                    //    }
-                    //    if (inputManager.GetEnemyCell(2).GetComponent<GridCell>().isOccupied == true)
-                    //    {
-                    //        UnitMove(2, 5, true);
-                    //    }
-                    //    lane = 4;
-                    //}
                 }
 
                 else if ((gameState == "Lose") && (gameState2 == "Win"))
                 {
-                    //if (gameState == "Win")
-                    //{
-                    //    // units stay on lane 1
-                    //    // enemy units go over to lane 1
-                    //    if (inputManager.GetEnemyCell(3).GetComponent<GridCell>().isOccupied == true)
-                    //    {
-                    //        UnitMove(3, 0, true);
-                    //    }
-                    //    if (inputManager.GetEnemyCell(4).GetComponent<GridCell>().isOccupied == true)
-                    //    {
-                    //        UnitMove(4, 1, true);
-                    //    }
-                    //    if (inputManager.GetEnemyCell(5).GetComponent<GridCell>().isOccupied == true)
-                    //    {
-                    //        UnitMove(5, 2, true);
-                    //    }
-                    //    lane = 3;
-                    //}
                     if (gameState2 == "Win")
                     {
                         // units stay on lane 2
@@ -385,6 +351,7 @@ public class BattleRound : MonoBehaviour
                             UnitMove(2, 5, true);
                         }
                         lane = 4;
+                        yield return new WaitForSeconds(2f);
                     }
                 }
 
@@ -474,6 +441,9 @@ public class BattleRound : MonoBehaviour
             PlacedObject movingPlacedObject = inputManager.GetCellObject(oldPos);
             GameObject newGridCell = inputManager.GetGridCell(newPos);
             GameObject oldGridCell = inputManager.GetGridCell(oldPos);
+
+            // animation
+            StartCoroutine(inputManager.unitAnimation.AnimationMoveForward(movingPlacedObject));
 
             oldGridCell.GetComponent<GridCell>().UnstoreObject(movingPlacedObject);
 
