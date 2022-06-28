@@ -23,3 +23,7 @@ MonoBehaviour:
   health: 1
   level: 1
   cost: 0
+  abilityName: 
+  abilityDescription1: 
+  abilityDescription2: 
+  abilityDescription3: 

@@ -65,6 +65,8 @@ public class InputManager : MonoBehaviour
     public PlacedObject pOPosition5;
     public PlacedObject pOPosition6;
 
+    public UnitAnimation unitAnimation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -163,15 +165,17 @@ public class InputManager : MonoBehaviour
             {
                 roundCounter = 8;
             }
-
-            //if (Input.GetKeyDown(KeyCode.Alpha1)) { unit = unitList[0]; }
-            //if (Input.GetKeyDown(KeyCode.Alpha2)) { unit = unitList[1]; }
-            //if (Input.GetKeyDown(KeyCode.Alpha3)) { unit = unitList[2]; }
-            //if (Input.GetKeyDown(KeyCode.Alpha4)) { unit = unitList[3]; }
-            //if (Input.GetKeyDown(KeyCode.Alpha5)) { unit = unitList[4]; }
         }
 
 
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            StartCoroutine(unitAnimation.AnimationMoveForward());
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            StartCoroutine(unitAnimation.AnimationAttack());
+        }
 
         if (Input.GetKeyDown(KeyCode.U))
         {

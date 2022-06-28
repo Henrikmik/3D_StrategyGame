@@ -263,6 +263,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7332151029872358430}
+  - component: {fileID: 210327053870773494}
   m_Layer: 0
   m_Name: FloatingStats
   m_TagString: Untagged
@@ -288,6 +289,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 40, y: -50, z: 0}
+--- !u!114 &210327053870773494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497806510893503814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f0a38ec8c146343866adfb57fec099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputManager: {fileID: 0}
+  shieldNormal: {fileID: 21300000, guid: 68c9dcfb0d0c15b4690afb0661a8f879, type: 3}
+  shieldArmor: {fileID: 21300000, guid: b415133b2e6db544ca1deb436ee0ba8e, type: 3}
 --- !u!1 &3971884537280065172
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,7 +562,7 @@ SpriteRenderer:
   m_Size: {x: 6, y: 6.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &5671476380753585554
