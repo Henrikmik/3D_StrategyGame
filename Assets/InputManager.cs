@@ -65,7 +65,7 @@ public class InputManager : MonoBehaviour
     public PlacedObject pOPosition5;
     public PlacedObject pOPosition6;
 
-    public UnitAnimation unitAnimation;
+    public UAnimation unitAnimation;
 
     // Start is called before the first frame update
     void Start()

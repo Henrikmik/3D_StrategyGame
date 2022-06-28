@@ -52,7 +52,9 @@ public class BattleRound : MonoBehaviour
                 if (teamObject != null && enemy != null)
                 {
                     yield return new WaitForSeconds(.2f);
-
+                    StartCoroutine(inputManager.unitAnimation.AnimationAttack());
+                    yield return new WaitForSeconds(.2f);
+                    
                     // Unit greift Enemy an
                     //FindObjectOfType<AudioManager>().Play("MoveUnit");
 
