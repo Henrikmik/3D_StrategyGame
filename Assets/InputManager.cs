@@ -65,6 +65,8 @@ public class InputManager : MonoBehaviour
     public PlacedObject pOPosition5;
     public PlacedObject pOPosition6;
 
+    public UnitAnimation unitAnimation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -163,15 +165,17 @@ public class InputManager : MonoBehaviour
             {
                 roundCounter = 8;
             }
-
-            //if (Input.GetKeyDown(KeyCode.Alpha1)) { unit = unitList[0]; }
-            //if (Input.GetKeyDown(KeyCode.Alpha2)) { unit = unitList[1]; }
-            //if (Input.GetKeyDown(KeyCode.Alpha3)) { unit = unitList[2]; }
-            //if (Input.GetKeyDown(KeyCode.Alpha4)) { unit = unitList[3]; }
-            //if (Input.GetKeyDown(KeyCode.Alpha5)) { unit = unitList[4]; }
         }
 
 
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            StartCoroutine(unitAnimation.AnimationMoveForward());
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            StartCoroutine(unitAnimation.AnimationAttack());
+        }
 
         if (Input.GetKeyDown(KeyCode.U))
         {
@@ -289,6 +293,7 @@ public class InputManager : MonoBehaviour
         {
             var myNewStats = Instantiate(FloatingTextPrefab, new Vector3(objectPos.x, objectPos.y - 0.1f, objectPos.z - 0.5f), Quaternion.Euler(0, 0, 0), transform);
             myNewStats.transform.parent = placedObject.transform;
+            myNewStats.transform.SetAsFirstSibling();
             myNewStats.transform.GetChild(0).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
             myNewStats.transform.GetChild(1).GetComponentInChildren<TMP_Text>().text = placedObject.health.ToString();
         }
@@ -296,6 +301,7 @@ public class InputManager : MonoBehaviour
         {
             var myNewStats = Instantiate(FloatingTextPrefab, new Vector3(objectPos.x + 0.5f, objectPos.y - 0.2f, objectPos.z - 0.5f), Quaternion.Euler(40, -50, 0), transform);
             myNewStats.transform.parent = placedObject.transform;
+            myNewStats.transform.SetAsFirstSibling();
             myNewStats.transform.GetChild(0).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
             myNewStats.transform.GetChild(1).GetComponentInChildren<TMP_Text>().text = placedObject.health.ToString();
         }

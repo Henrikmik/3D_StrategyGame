@@ -26,15 +26,19 @@ public class EnemySets : MonoBehaviour
         Vector2Int enemyPos = gridcell.GetPosition();
         Vector3 enemyPos3 = new Vector3(gridcell.transform.position.x, 0f, gridcell.transform.position.z);
 
-        PlacedObject placedObject = PlacedObject.Create(enemyPos3, enemyPos, Unit.Dir.Left, enemy);
+        PlacedObject placedObject = PlacedObject.Create(enemyPos3, enemyPos, Unit.Dir.Down, enemy);
         gridcell.SetPlacedObject(placedObject);
         gridcell.StoreObject(placedObject);
         placedObject.transform.SetParent(inputManager.enemyManager.transform);
         placedObject.SettingStatsEnemy(attackv, healthv, levelv);
         inputManager.ShowFloatingText(placedObject, enemyPos3, false);
-        placedObject.transform.GetChild(0).transform.localPosition = new Vector3 (0.4f, 0.35f, 0.3f);
-        placedObject.transform.GetChild(0).transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
-        placedObject.transform.GetChild(0).GetChild(2).position = new Vector3 (placedObject.transform.GetChild(0).GetChild(2).position.x, 2f, placedObject.transform.GetChild(0).GetChild(2).position.z);
+        
+        Transform visualT = placedObject.transform.GetChild(1);
+        Transform statsT = placedObject.transform.GetChild(0);
+        //visualT.eulerAngles = new Vector3(0f, 0f, 0f);
+        statsT.transform.localPosition = new Vector3 (0.7f, 0.15f, - 0.6f);
+        statsT.transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
+        statsT.GetChild(2).position = new Vector3 (placedObject.transform.GetChild(0).GetChild(2).position.x, 2f, placedObject.transform.GetChild(0).GetChild(2).position.z);
 
         inputManager.levelUpdate.UpdateLevel(placedObject);
     }

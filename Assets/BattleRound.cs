@@ -771,35 +771,15 @@ public class BattleRound : MonoBehaviour
             {
 
             }
+            if (i >= childNumb)
+            { Debug.Log("HIHI"); }
         }
 
-        //childNumb = unitManager.transform.childCount;
-        //Debug.Log(childNumb);
+        //int childNumb2 = unitManager.transform.childCount;
+        //Debug.Log(childNumb2);
 
         for (int i = 0; i <= childNumb - 1; i++)
         {
-            //PlacedObject placedTeam = unitManager.transform.GetChild(i).GetComponent<PlacedObject>();
-            //GridCell gridCell;
-
-            //if (placedTeam.transform.position.x >= 2.5f)
-            //{
-            //   gridCell = inputManager.GetGridCell(i + 2).GetComponent<GridCell>();
-            //   //Debug.Log(placedTeam + " " + gridCell);
-            //}
-            //else
-            //{
-            //   gridCell = inputManager.GetGridCell(i).GetComponent<GridCell>();
-            //}
-
-            //placedTeam.gameObject.SetActive(true);
-            //placedTeam.SetStats();
-            //inputManager.UpdateFloatingText(placedTeam);
-            //placedTeam.transform.position = new Vector3(gridCell.transform.position.x, 0f, gridCell.transform.position.z);
-            //gridCell.StoreObject(placedTeam);
-            //gridCell.SetPlacedObject(placedTeam);
-
-            //Debug.Log("I: " + i);
-
             GridCell gridCell = inputManager.GetGridCell(i).GetComponent<GridCell>();
             PlacedObject placedTeam = null;
 
@@ -1116,9 +1096,13 @@ public class BattleRound : MonoBehaviour
                         placedO.attack = (Mathf.RoundToInt(placedObject.attack * 0.5f));
                         inputManager.ShowFloatingText(placedO, pos3, false);
 
-                        placedO.transform.GetChild(0).transform.localPosition = new Vector3(0.4f, 0.35f, -0.3f);
-                        placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                        placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+                        Transform floatingStats = placedO.transform.GetChild(0);
+                        Debug.Log(floatingStats);
+                        floatingStats.transform.localPosition = new Vector3(0.4f, 0.35f, -0.3f);
+                        floatingStats.transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
+                        floatingStats.GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+
+                        placedO.transform.GetChild(1).eulerAngles = new Vector3(0f, 0f, 0f);
 
                         inputManager.levelUpdate.UpdateLevel(placedO);
                         Debug.Log("Summon Pineapple");
@@ -1158,6 +1142,8 @@ public class BattleRound : MonoBehaviour
                         placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                         placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
 
+                        placedO.transform.GetChild(1).eulerAngles = new Vector3(0f, 0f, 0f);
+
                         inputManager.levelUpdate.UpdateLevel(placedO);
                         Debug.Log("Summon Aubergine");
                     }
@@ -1194,9 +1180,9 @@ public class BattleRound : MonoBehaviour
                         gridCell.StoreObject(placedO);
                         placedO.transform.SetParent(manager.transform);
                         placedO.SettingStats();
-                        inputManager.ShowFloatingText(placedO, pos3, false);
+                        inputManager.ShowFloatingText(placedO, new Vector3(pos3.x + 0.4f, pos3.y + 0.35f, pos3.z + 0.1f), false);
                         
-                        placedO.transform.GetChild(0).transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                        placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                         placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
 
                         inputManager.levelUpdate.UpdateLevel(placedO);
@@ -1212,7 +1198,7 @@ public class BattleRound : MonoBehaviour
                         placedO.SettingStats();
                         placedO.attack += 2;    // 3 attack
                         placedO.health += 2;    // 3 health
-                        inputManager.ShowFloatingText(placedO, pos3.normalized ,false);
+                        inputManager.ShowFloatingText(placedO, new Vector3(pos3.x + 0.4f, pos3.y + 0.35f, pos3.z + 0.1f), false);
                         
                         placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                         placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
@@ -1235,7 +1221,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 2;
                             placedO2.health += 2;
-                            inputManager.ShowFloatingText(placedO2, pos32, false);
+                            inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.4f, pos32.y + 0.35f, pos32.z + 0.1f), false);
                             
                             placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                             placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
@@ -1257,7 +1243,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 2;
                             placedO2.health += 2;
-                            inputManager.ShowFloatingText(placedO2, pos32, false);
+                            inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.4f, pos32.y + 0.35f, pos32.z + 0.1f), false);
                             
                             placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                             placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
@@ -1281,7 +1267,7 @@ public class BattleRound : MonoBehaviour
                         placedO.SettingStats();
                         placedO.attack += 5;    // 6 attack
                         placedO.health += 5;    // 6 health
-                        inputManager.ShowFloatingText(placedO, pos3, false);
+                        inputManager.ShowFloatingText(placedO, new Vector3(pos3.x + 0.4f, pos3.y + 0.35f, pos3.z + 0.1f), false);
                         
                         placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                         placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
@@ -1304,7 +1290,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 5;   // 6 attack
                             placedO2.health += 5;   // 6 health
-                            inputManager.ShowFloatingText(placedO2, pos32.normalized, false);
+                            inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.4f, pos32.y + 0.35f, pos32.z + 0.1f), false);
                             
                             placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                             placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
@@ -1326,7 +1312,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 5;   // 6 attack
                             placedO2.health += 5;   // 6 health
-                            inputManager.ShowFloatingText(placedO2, pos32, false);
+                            inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.4f, pos32.y + 0.35f, pos32.z + 0.1f), false);
                             
                             placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                             placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
@@ -1340,9 +1326,9 @@ public class BattleRound : MonoBehaviour
                         }
                     }
                 }
-                else if (manager == enemyManager)   // enemy garlic
+                else if (manager == enemyManager)   // enemy corn
                 {
-                    Unit unit = inputManager.unitList[6];
+                    Unit unit = inputManager.unitList[13];
                     GameObject gridCellGameObject = placedObject.AttachedGridCell(true);
                     GridCell gridCell = gridCellGameObject.GetComponent<GridCell>();
                     Vector2Int pos2 = gridCell.GetPosition();
@@ -1360,7 +1346,7 @@ public class BattleRound : MonoBehaviour
                         gridCell.StoreObject(placedO);
                         placedO.transform.SetParent(manager.transform);
                         placedO.SettingStats();
-                        inputManager.ShowFloatingText(placedO, pos3, false);
+                        inputManager.ShowFloatingText(placedO, new Vector3(pos3.x + 0.3f, pos3.y + 0.35f, pos3.z + 0.1f), false);
                         
                         placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                         placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
@@ -1378,7 +1364,7 @@ public class BattleRound : MonoBehaviour
                         placedO.SettingStats();
                         placedO.attack += 2;
                         placedO.health += 2;
-                        inputManager.ShowFloatingText(placedO, pos3, false);
+                        inputManager.ShowFloatingText(placedO, new Vector3(pos3.x + 0.3f, pos3.y + 0.35f, pos3.z + 0.1f), false);
                         
                         placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                         placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
@@ -1401,7 +1387,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 2;
                             placedO2.health += 2;
-                            inputManager.ShowFloatingText(placedO2, pos32, false);
+                            inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.3f, pos32.y + 0.35f, pos32.z + 0.1f), false);
                             
                             placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                             placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
@@ -1423,7 +1409,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 2;
                             placedO2.health += 2;
-                            inputManager.ShowFloatingText(placedO2, pos32, false);
+                            inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.3f, pos32.y + 0.35f, pos32.z + 0.1f), false);
                             
                             placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                             placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
@@ -1446,7 +1432,7 @@ public class BattleRound : MonoBehaviour
                         placedO.SettingStats();
                         placedO.attack += 5;    // 6 attack
                         placedO.health += 5;    // 6 health
-                        inputManager.ShowFloatingText(placedO, pos3, false);
+                        inputManager.ShowFloatingText(placedO, new Vector3(pos3.x + 0.3f, pos3.y + 0.35f, pos3.z + 0.1f), false);
                         
                         placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                         placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
@@ -1469,7 +1455,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 5;   // 6 attack
                             placedO2.health += 5;   // 6 health
-                            inputManager.ShowFloatingText(placedO2, pos32, false);
+                            inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.3f, pos32.y + 0.35f, pos32.z + 0.1f), false);
                             
                             placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                             placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
@@ -1491,7 +1477,7 @@ public class BattleRound : MonoBehaviour
                             placedO2.SettingStats();
                             placedO2.attack += 5;   // 6 attack
                             placedO2.health += 5;   // 6 health
-                            inputManager.ShowFloatingText(placedO2, pos32, false);
+                            inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.3f, pos32.y + 0.35f, pos32.z + 0.1f), false);
                             
                             placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                             placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
