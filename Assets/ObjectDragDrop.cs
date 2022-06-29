@@ -95,7 +95,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                             oldGridCell = cellMouseIsOver;
 
                             Transform visualHolder = placedObject.transform.GetChild(1);
-                            visualHolder.eulerAngles = new Vector3 (0f, -190f, 0f);
+                            //visualHolder.eulerAngles = new Vector3 (0f, -190f, 0f);
 
                             //if (placedObject.nameA == "Lemon")
                             //{

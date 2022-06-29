@@ -62,6 +62,7 @@ public class Shop : MonoBehaviour
         inputManager.levelUpdate.UpdateLevel(placedEnemy);
 
         placedEnemy.transform.GetChild(1).GetChild(0).GetComponent<Animator>().enabled = false;
+        placedEnemy.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;
     }
 
     public void ShopReroll()

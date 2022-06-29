@@ -173,7 +173,7 @@ public class BattleRound : MonoBehaviour
                     CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
                     CheckAbilityDefense(teamObject, unitManager, false);
 
-                    yield return new WaitForSeconds(2f);
+                    //yield return new WaitForSeconds(2f);
                     CheckAllUnitsOnDefeat(lane);
 
                     yield return new WaitForSeconds(1f);
@@ -202,7 +202,7 @@ public class BattleRound : MonoBehaviour
                     {
                         inputManager.roundCounter += 1;
                         FindObjectOfType<AudioManager>().Play("Win");
-                        yield return new WaitForSeconds(2f);
+                        //yield return new WaitForSeconds(2f);
 
                         EndOfRound();
                         break;
@@ -221,7 +221,7 @@ public class BattleRound : MonoBehaviour
                             Debug.Log("Draw Draw");
                             inputManager.roundCounter += 1;
                             FindObjectOfType<AudioManager>().Play("Draw");
-                            yield return new WaitForSeconds(2f);
+                            //yield return new WaitForSeconds(2f);
 
                             inputManager.draws -= 1;
                             EndOfRound();
@@ -232,7 +232,7 @@ public class BattleRound : MonoBehaviour
                             Debug.Log("Draw Draw");
                             inputManager.roundCounter = 1;
                             FindObjectOfType<AudioManager>().Play("Draw");
-                            yield return new WaitForSeconds(2f);
+                            //yield return new WaitForSeconds(2f);
 
                             inputManager.draws -= 1;
                             LoseScreen();
@@ -249,7 +249,7 @@ public class BattleRound : MonoBehaviour
                     // WIN
                     inputManager.roundCounter += 1;
                     FindObjectOfType<AudioManager>().Play("Win");
-                    yield return new WaitForSeconds(2f);
+                    //yield return new WaitForSeconds(2f);
 
                     EndOfRound();
                     break;
@@ -260,7 +260,7 @@ public class BattleRound : MonoBehaviour
                     // WIN
                     inputManager.roundCounter += 1;
                     FindObjectOfType<AudioManager>().Play("Win");
-                    yield return new WaitForSeconds(2f);
+                    //yield return new WaitForSeconds(2f);
 
                     EndOfRound();
                     break;
@@ -271,7 +271,7 @@ public class BattleRound : MonoBehaviour
                     // WIN
                     inputManager.roundCounter += 1;
                     FindObjectOfType<AudioManager>().Play("Win");
-                    yield return new WaitForSeconds(2f);
+                    //yield return new WaitForSeconds(2f);
 
                     EndOfRound();
                     break;
@@ -285,7 +285,7 @@ public class BattleRound : MonoBehaviour
                     {
                         inputManager.roundCounter += 0;
                         FindObjectOfType<AudioManager>().Play("Draw");
-                        yield return new WaitForSeconds(2f);
+                        //yield return new WaitForSeconds(2f);
 
                         inputManager.draws -= 1;
                         EndOfRound();

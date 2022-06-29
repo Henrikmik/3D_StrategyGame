@@ -16,15 +16,15 @@ public class LockRotation : MonoBehaviour
 
         if (placedObject.nameA == "Apple")
         {
-            fixedRotation = -180;
+            fixedRotation = 180;
         }
         else if (placedObject.nameA == "Coconut")
         {
-
+            fixedRotation = 170;
         }
         else if (placedObject.nameA == "Grapes")
         {
-
+            fixedRotation = 170;
         }
         else if (placedObject.nameA == "Lemon")
         {
@@ -32,11 +32,15 @@ public class LockRotation : MonoBehaviour
         }
         else if (placedObject.nameA == "Mini Grape")
         {
-
+            fixedRotation = 170;
         }
         else if (placedObject.nameA == "Cherry")
         {
-
+            fixedRotation = 170;
+        }
+        else
+        {
+            fixedRotation = 170;
         }
     }
 
