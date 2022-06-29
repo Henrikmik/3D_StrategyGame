@@ -855,6 +855,7 @@ public class BattleRound : MonoBehaviour
                             inputManager.UpdateFloatingText(appleBuffedUnit);
 
                             appleBuffedUnit.transform.GetChild(2).gameObject.SetActive(true);
+                            FindObjectOfType<AudioManager>().Play("Buff2");
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                     }
@@ -870,6 +871,7 @@ public class BattleRound : MonoBehaviour
                             inputManager.UpdateFloatingText(appleBuffedUnit);
 
                             appleBuffedUnit.transform.GetChild(2).gameObject.SetActive(true);
+                            FindObjectOfType<AudioManager>().Play("Buff2");
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                         if (siblingIndex - 1 >= 0)
@@ -904,6 +906,7 @@ public class BattleRound : MonoBehaviour
                             inputManager.UpdateFloatingText(appleBuffedUnit);
 
                             appleBuffedUnit.transform.GetChild(2).gameObject.SetActive(true);
+                            FindObjectOfType<AudioManager>().Play("Buff2");
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                         if (siblingIndex - 1 >= 0)
@@ -941,6 +944,7 @@ public class BattleRound : MonoBehaviour
                             inputManager.UpdateFloatingText(appleBuffedUnit);
 
                             appleBuffedUnit.transform.GetChild(2).gameObject.SetActive(true);
+                            FindObjectOfType<AudioManager>().Play("Buff2");
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                     }
@@ -956,6 +960,7 @@ public class BattleRound : MonoBehaviour
                             inputManager.UpdateFloatingText(appleBuffedUnit);
 
                             appleBuffedUnit.transform.GetChild(2).gameObject.SetActive(true);
+                            FindObjectOfType<AudioManager>().Play("Buff2");
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1) + " !!!!");
                         }
                         if (siblingIndex - 1 >= 0)
@@ -1020,6 +1025,7 @@ public class BattleRound : MonoBehaviour
                             inputManager.UpdateFloatingText(appleBuffedUnit);
 
                             appleBuffedUnit.transform.GetChild(2).gameObject.SetActive(true);
+                            FindObjectOfType<AudioManager>().Play("Buff2");
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                         if (siblingIndex - 1 >= 0)
@@ -1593,6 +1599,7 @@ public class BattleRound : MonoBehaviour
                         inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
 
                         buffedUnit.transform.GetChild(3).gameObject.SetActive(true);
+                        FindObjectOfType<AudioManager>().Play("Buff1");
                         Debug.Log("lemon ability: " + buffedUnit);
                     }
                     if ((placedObject.level >= 4) && (placedObject.level < 7))
@@ -1604,6 +1611,7 @@ public class BattleRound : MonoBehaviour
                         inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
 
                         buffedUnit.transform.GetChild(3).gameObject.SetActive(true);
+                        FindObjectOfType<AudioManager>().Play("Buff1");
                         Debug.Log("lemon ability: " + buffedUnit);
                     }
                     if (placedObject.level >= 7)
@@ -1615,6 +1623,7 @@ public class BattleRound : MonoBehaviour
                         inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
 
                         buffedUnit.transform.GetChild(3).gameObject.SetActive(true);
+                        FindObjectOfType<AudioManager>().Play("Buff1");
                         Debug.Log("lemon ability: " + buffedUnit);
 
                         buffedUnit2.GetComponent<PlacedObject>().baseAttack += 4;
