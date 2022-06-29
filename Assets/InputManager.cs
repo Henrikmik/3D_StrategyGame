@@ -148,71 +148,71 @@ public class InputManager : MonoBehaviour
 
             // Debug Key Inputs
 
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                if (cellMouseIsOver != null)
-                {
-                    GridCell gridCell = cellMouseIsOver;
-                    PlacedObject placedObject = gridCell.GetPlacedObject();
-                    if (placedObject != null)
-                    {
-                        placedObject.DestroySelf();
-                    }
-                }
-            }
+            //if (Input.GetKeyDown(KeyCode.I))
+            //{
+            //    if (cellMouseIsOver != null)
+            //    {
+            //        GridCell gridCell = cellMouseIsOver;
+            //        PlacedObject placedObject = gridCell.GetPlacedObject();
+            //        if (placedObject != null)
+            //        {
+            //            placedObject.DestroySelf();
+            //        }
+            //    }
+            //}
 
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                roundCounter = 8;
-            }
+            //if (Input.GetKeyDown(KeyCode.R))
+            //{
+            //    roundCounter = 8;
+            //}
         }
 
 
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            StartCoroutine(unitAnimation.AnimationMoveForward(GetCellObject(0)));
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            StartCoroutine(unitAnimation.AnimationAttack());
-        }
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    StartCoroutine(unitAnimation.AnimationMoveForward(GetCellObject(0)));
+        //}
+        //if (Input.GetKeyDown(KeyCode.N))
+        //{
+        //    StartCoroutine(unitAnimation.AnimationAttack());
+        //}
 
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            roundCounter = 3;
-            shop.ShopReroll();
-        }
+        //if (Input.GetKeyDown(KeyCode.U))
+        //{
+        //    roundCounter = 3;
+        //    shop.ShopReroll();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            gold += 100;
-        }
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    gold += 100;
+        //}
 
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            CameraShake();
-        }
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    CameraShake();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Animator camAnim = mainCamera.GetComponent<Animator>();
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    Animator camAnim = mainCamera.GetComponent<Animator>();
 
-            camAnim.enabled = true;
-            camAnim.Play("ZoomOut");
+        //    camAnim.enabled = true;
+        //    camAnim.Play("ZoomOut");
 
-            //mainCamera.transform.position = new Vector3(0, 0, 0);
-            //mainCamera.transform.eulerAngles =  new Vector3 (mainCamRot.x + -2.5f, mainCamRot.y + -9.8f, mainCamRot.z + 7.9f);
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Animator camAnim = mainCamera.GetComponent<Animator>();
+        //    //mainCamera.transform.position = new Vector3(0, 0, 0);
+        //    //mainCamera.transform.eulerAngles =  new Vector3 (mainCamRot.x + -2.5f, mainCamRot.y + -9.8f, mainCamRot.z + 7.9f);
+        //}
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
+        //    Animator camAnim = mainCamera.GetComponent<Animator>();
 
-            camAnim.enabled = true;
-            camAnim.Play("ZoomIn");
+        //    camAnim.enabled = true;
+        //    camAnim.Play("ZoomIn");
 
-            //mainCamera.transform.position = new Vector3 (10, 10, 10);
-            //mainCamera.transform.eulerAngles = mainCamRot;
-        }
+        //    //mainCamera.transform.position = new Vector3 (10, 10, 10);
+        //    //mainCamera.transform.eulerAngles = mainCamRot;
+        //}
     }
 
     // Returns the grid cell if mouse is over grid cell and returns null if it is not
