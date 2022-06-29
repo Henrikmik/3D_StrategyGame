@@ -844,43 +844,46 @@ public class BattleRound : MonoBehaviour
                 {
                     if (placedObject.level < 4)
                     {
-                        Debug.Log(inputManager.GetCellObject(siblingIndex + 1));
-                        if ((inputManager.GetCellObject(siblingIndex + 1) != null) && (inputManager.GetCellObject(siblingIndex + 1).gameObject.activeInHierarchy == true))   // buffing the unit behind if active
+                        //Debug.Log(inputManager.GetCellObject(siblingIndex + 1));
+                        PlacedObject appleBuffedUnit = inputManager.GetCellObject(siblingIndex + 1);
+                        if ((appleBuffedUnit != null) && (appleBuffedUnit.gameObject.activeInHierarchy == true))   // buffing the unit behind if active
                         {
-                            inputManager.GetCellObject(siblingIndex + 1).baseAttack += 2;
-                            inputManager.GetCellObject(siblingIndex + 1).baseHealth += 1;
-                            inputManager.GetCellObject(siblingIndex + 1).attack += 2;
-                            inputManager.GetCellObject(siblingIndex + 1).health += 1;
-                            inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+                            appleBuffedUnit.baseAttack += 2;
+                            appleBuffedUnit.baseHealth += 1;
+                            appleBuffedUnit.attack += 2;
+                            appleBuffedUnit.health += 1;
+                            inputManager.UpdateFloatingText(appleBuffedUnit);
 
-                            placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                            appleBuffedUnit.transform.GetChild(2).gameObject.SetActive(true);
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                     }
                     else if (placedObject.level < 7)
                     {
-                        if ((inputManager.GetCellObject(siblingIndex + 1) != null) && (inputManager.GetCellObject(siblingIndex + 1).gameObject.activeInHierarchy == true))   // buffing the unit behind if active
+                        PlacedObject appleBuffedUnit = inputManager.GetCellObject(siblingIndex + 1);
+                        if ((appleBuffedUnit != null) && (appleBuffedUnit.gameObject.activeInHierarchy == true))   // buffing the unit behind if active
                         {
-                            inputManager.GetCellObject(siblingIndex + 1).baseAttack += 3;
-                            inputManager.GetCellObject(siblingIndex + 1).baseHealth += 2;
-                            inputManager.GetCellObject(siblingIndex + 1).attack += 3;
-                            inputManager.GetCellObject(siblingIndex + 1).health += 2;
-                            inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+                            appleBuffedUnit.baseAttack += 3;
+                            appleBuffedUnit.baseHealth += 2;
+                            appleBuffedUnit.attack += 3;
+                            appleBuffedUnit.health += 2;
+                            inputManager.UpdateFloatingText(appleBuffedUnit);
 
-                            placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                            appleBuffedUnit.transform.GetChild(2).gameObject.SetActive(true);
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                         if (siblingIndex - 1 >= 0)
                         {
-                            if ((inputManager.GetCellObject(siblingIndex - 1) != null) && (inputManager.GetCellObject(siblingIndex - 1).gameObject.activeInHierarchy == true))   // buffing unit in front
+                            PlacedObject appleBuffedUnitTwo = inputManager.GetCellObject(siblingIndex - 1);
+                            if ((appleBuffedUnitTwo != null) && (appleBuffedUnitTwo.gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
-                                inputManager.GetCellObject(siblingIndex - 1).baseAttack += 3;
-                                inputManager.GetCellObject(siblingIndex - 1).baseHealth += 2;
-                                inputManager.GetCellObject(siblingIndex - 1).attack += 3;
-                                inputManager.GetCellObject(siblingIndex - 1).health += 2;
-                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 1));
+                                appleBuffedUnitTwo.baseAttack += 3;
+                                appleBuffedUnitTwo.baseHealth += 2;
+                                appleBuffedUnitTwo.attack += 3;
+                                appleBuffedUnitTwo.health += 2;
+                                inputManager.UpdateFloatingText(appleBuffedUnitTwo);
 
-                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                                appleBuffedUnitTwo.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 1));
                             }
                         }
@@ -891,28 +894,30 @@ public class BattleRound : MonoBehaviour
                     }
                     else if (placedObject.level >= 7)
                     {
-                        if ((inputManager.GetCellObject(siblingIndex + 1) != null) && (inputManager.GetCellObject(siblingIndex + 1).gameObject.activeInHierarchy == true))   // buffing the unit behind if active
+                        PlacedObject appleBuffedUnit = inputManager.GetCellObject(siblingIndex + 1);
+                        if ((appleBuffedUnit != null) && (appleBuffedUnit.gameObject.activeInHierarchy == true))   // buffing the unit behind if active
                         {
-                            inputManager.GetCellObject(siblingIndex + 1).baseAttack += 5;
-                            inputManager.GetCellObject(siblingIndex + 1).baseHealth += 4;
-                            inputManager.GetCellObject(siblingIndex + 1).attack += 5;
-                            inputManager.GetCellObject(siblingIndex + 1).health += 4;
-                            inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+                            appleBuffedUnit.baseAttack += 5;
+                            appleBuffedUnit.baseHealth += 4;
+                            appleBuffedUnit.attack += 5;
+                            appleBuffedUnit.health += 4;
+                            inputManager.UpdateFloatingText(appleBuffedUnit);
 
-                            placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                            appleBuffedUnit.transform.GetChild(2).gameObject.SetActive(true);
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                         if (siblingIndex - 1 >= 0)
                         {
-                            if ((inputManager.GetCellObject(siblingIndex - 1) != null) && (inputManager.GetCellObject(siblingIndex - 1).gameObject.activeInHierarchy == true))   // buffing unit in front
+                            PlacedObject appleBuffedUnitTwo = inputManager.GetCellObject(siblingIndex - 1);
+                            if ((appleBuffedUnitTwo != null) && (appleBuffedUnitTwo.gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
-                                inputManager.GetCellObject(siblingIndex - 1).baseAttack += 5;
-                                inputManager.GetCellObject(siblingIndex - 1).baseHealth += 4;
-                                inputManager.GetCellObject(siblingIndex - 1).attack += 5;
-                                inputManager.GetCellObject(siblingIndex - 1).health += 4;
-                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 1));
+                                appleBuffedUnitTwo.baseAttack += 5;
+                                appleBuffedUnitTwo.baseHealth += 4;
+                                appleBuffedUnitTwo.attack += 5;
+                                appleBuffedUnitTwo.health += 4;
+                                inputManager.UpdateFloatingText(appleBuffedUnitTwo);
 
-                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                                appleBuffedUnitTwo.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 1));
                             }
                         }
@@ -926,70 +931,75 @@ public class BattleRound : MonoBehaviour
                 {
                     if (placedObject.level < 4)
                     {
-                        if ((inputManager.GetCellObject(siblingIndex + 1) != null) && (inputManager.GetCellObject(siblingIndex + 1).gameObject.activeInHierarchy == true))   // buffing the unit behind if active
+                        PlacedObject appleBuffedUnit = inputManager.GetCellObject(siblingIndex + 1);
+                        if ((appleBuffedUnit != null) && (appleBuffedUnit.gameObject.activeInHierarchy == true))   // buffing the unit behind if active
                         {
-                            inputManager.GetCellObject(siblingIndex + 1).baseAttack += 2;
-                            inputManager.GetCellObject(siblingIndex + 1).baseHealth += 1;
-                            inputManager.GetCellObject(siblingIndex + 1).attack += 2;
-                            inputManager.GetCellObject(siblingIndex + 1).health += 1;
-                            inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+                            appleBuffedUnit.baseAttack += 2;
+                            appleBuffedUnit.baseHealth += 1;
+                            appleBuffedUnit.attack += 2;
+                            appleBuffedUnit.health += 1;
+                            inputManager.UpdateFloatingText(appleBuffedUnit);
 
-                            placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                            appleBuffedUnit.transform.GetChild(2).gameObject.SetActive(true);
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                     }
                     else if (placedObject.level < 7)
                     {
-                        if ((inputManager.GetCellObject(siblingIndex + 1) != null) && (inputManager.GetCellObject(siblingIndex + 1).gameObject.activeInHierarchy == true))   // buffing the unit behind if active
+                        PlacedObject appleBuffedUnit = inputManager.GetCellObject(siblingIndex + 1);
+                        if ((appleBuffedUnit != null) && (appleBuffedUnit.gameObject.activeInHierarchy == true))   // buffing the unit behind if active
                         {
-                            inputManager.GetCellObject(siblingIndex + 1).baseAttack += 3;
-                            inputManager.GetCellObject(siblingIndex + 1).baseHealth += 2;
-                            inputManager.GetCellObject(siblingIndex + 1).attack += 3;
-                            inputManager.GetCellObject(siblingIndex + 1).health += 2;
-                            inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+                            appleBuffedUnit.baseAttack += 3;
+                            appleBuffedUnit.baseHealth += 2;
+                            appleBuffedUnit.attack += 3;
+                            appleBuffedUnit.health += 2;
+                            inputManager.UpdateFloatingText(appleBuffedUnit);
 
-                            placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                            appleBuffedUnit.transform.GetChild(2).gameObject.SetActive(true);
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1) + " !!!!");
                         }
                         if (siblingIndex - 1 >= 0)
                         {
-                            if ((inputManager.GetCellObject(siblingIndex - 1) != null) && (inputManager.GetCellObject(siblingIndex - 1).gameObject.activeInHierarchy == true))   // buffing unit in front
+                            PlacedObject appleBuffedUnitTwo = inputManager.GetCellObject(siblingIndex - 1);
+                            if ((appleBuffedUnitTwo != null) && (appleBuffedUnitTwo.gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
-                                inputManager.GetCellObject(siblingIndex - 1).baseAttack += 3;
-                                inputManager.GetCellObject(siblingIndex - 1).baseHealth += 2;
-                                inputManager.GetCellObject(siblingIndex - 1).attack += 3;
-                                inputManager.GetCellObject(siblingIndex - 1).health += 2;
-                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 1));
+                                appleBuffedUnitTwo.baseAttack += 3;
+                                appleBuffedUnitTwo.baseHealth += 2;
+                                appleBuffedUnitTwo.attack += 3;
+                                appleBuffedUnitTwo.health += 2;
+                                inputManager.UpdateFloatingText(appleBuffedUnitTwo);
 
-                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                                appleBuffedUnitTwo.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 1));
                             }
                         }
                         if (siblingIndex - 3 >= 0)
                         {
-                            if ((inputManager.GetCellObject(siblingIndex - 3) != null) && (inputManager.GetCellObject(siblingIndex - 3).gameObject.activeInHierarchy == true))   // buffing unit in front
+                            PlacedObject appleBuffedThree = inputManager.GetCellObject(siblingIndex - 3);
+                            if ((appleBuffedThree != null) && (appleBuffedThree.gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
-                                inputManager.GetCellObject(siblingIndex - 3).baseAttack += 3;
-                                inputManager.GetCellObject(siblingIndex - 3).baseHealth += 2;
-                                inputManager.GetCellObject(siblingIndex - 3).attack += 3;
-                                inputManager.GetCellObject(siblingIndex - 3).health += 2;
-                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 3));
+                                appleBuffedThree.baseAttack += 3;
+                                appleBuffedThree.baseHealth += 2;
+                                appleBuffedThree.attack += 3;
+                                appleBuffedThree.health += 2;
+                                inputManager.UpdateFloatingText(appleBuffedThree);
 
-                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                                appleBuffedThree.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 3));
                             }
                         }
                         if (siblingIndex + 3 <= 5)
                         {
-                            if ((inputManager.GetCellObject(siblingIndex + 3) != null) && (inputManager.GetCellObject(siblingIndex + 3).gameObject.activeInHierarchy == true))   // buffing unit in front
+                            PlacedObject appleBuffedUnitFour = inputManager.GetCellObject(siblingIndex + 3);
+                            if ((appleBuffedUnitFour != null) && (appleBuffedUnitFour.gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
-                                inputManager.GetCellObject(siblingIndex + 3).baseAttack += 3;
-                                inputManager.GetCellObject(siblingIndex + 3).baseHealth += 2;
-                                inputManager.GetCellObject(siblingIndex + 3).attack += 3;
-                                inputManager.GetCellObject(siblingIndex + 3).health += 2;
-                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 3));
+                                appleBuffedUnitFour.baseAttack += 3;
+                                appleBuffedUnitFour.baseHealth += 2;
+                                appleBuffedUnitFour.attack += 3;
+                                appleBuffedUnitFour.health += 2;
+                                inputManager.UpdateFloatingText(appleBuffedUnitFour);
 
-                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                                appleBuffedUnitFour.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 3));
                             }
                         }
@@ -1000,56 +1010,60 @@ public class BattleRound : MonoBehaviour
                     }
                     else if (placedObject.level >= 7)
                     {
-                        if ((inputManager.GetCellObject(siblingIndex + 1) != null) && (inputManager.GetCellObject(siblingIndex + 1).gameObject.activeInHierarchy == true))   // buffing the unit behind if active
+                        PlacedObject appleBuffedUnit = inputManager.GetCellObject(siblingIndex + 1);
+                        if ((appleBuffedUnit != null) && (appleBuffedUnit.gameObject.activeInHierarchy == true))   // buffing the unit behind if active
                         {
-                            inputManager.GetCellObject(siblingIndex + 1).baseAttack += 3;
-                            inputManager.GetCellObject(siblingIndex + 1).baseHealth += 2;
-                            inputManager.GetCellObject(siblingIndex + 1).attack += 3;
-                            inputManager.GetCellObject(siblingIndex + 1).health += 2;
-                            inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+                            appleBuffedUnit.baseAttack += 3;
+                            appleBuffedUnit.baseHealth += 2;
+                            appleBuffedUnit.attack += 3;
+                            appleBuffedUnit.health += 2;
+                            inputManager.UpdateFloatingText(appleBuffedUnit);
 
-                            placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                            appleBuffedUnit.transform.GetChild(2).gameObject.SetActive(true);
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                         if (siblingIndex - 1 >= 0)
                         {
-                            if ((inputManager.GetCellObject(siblingIndex - 1) != null) && (inputManager.GetCellObject(siblingIndex - 1).gameObject.activeInHierarchy == true))   // buffing unit in front
+                            PlacedObject appleBuffedUnitTwo = inputManager.GetCellObject(siblingIndex - 1);
+                            if ((appleBuffedUnitTwo != null) && (appleBuffedUnitTwo.gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
-                                inputManager.GetCellObject(siblingIndex - 1).baseAttack += 3;
-                                inputManager.GetCellObject(siblingIndex - 1).baseHealth += 2;
-                                inputManager.GetCellObject(siblingIndex - 1).attack += 3;
-                                inputManager.GetCellObject(siblingIndex - 1).health += 2;
-                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 1));
+                                appleBuffedUnitTwo.baseAttack += 3;
+                                appleBuffedUnitTwo.baseHealth += 2;
+                                appleBuffedUnitTwo.attack += 3;
+                                appleBuffedUnitTwo.health += 2;
+                                inputManager.UpdateFloatingText(appleBuffedUnitTwo);
 
-                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                                appleBuffedUnitTwo.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 1));
                             }
                         }
                         if (siblingIndex - 3 >= 0)
                         {
-                            if ((inputManager.GetCellObject(siblingIndex - 3) != null) && (inputManager.GetCellObject(siblingIndex - 3).gameObject.activeInHierarchy == true))   // buffing unit in front
+                            PlacedObject appleBuffedThree = inputManager.GetCellObject(siblingIndex - 3);
+                            if ((appleBuffedThree != null) && (appleBuffedThree.gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
-                                inputManager.GetCellObject(siblingIndex - 3).baseAttack += 5;
-                                inputManager.GetCellObject(siblingIndex - 3).baseHealth += 4;
-                                inputManager.GetCellObject(siblingIndex - 3).attack += 5;
-                                inputManager.GetCellObject(siblingIndex - 3).health += 4;
-                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 3));
+                                appleBuffedThree.baseAttack += 5;
+                                appleBuffedThree.baseHealth += 4;
+                                appleBuffedThree.attack += 5;
+                                appleBuffedThree.health += 4;
+                                inputManager.UpdateFloatingText(appleBuffedThree);
 
-                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                                appleBuffedThree.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 3));
                             }
                         }
                         if (siblingIndex + 3 <= 5)
                         {
-                            if ((inputManager.GetCellObject(siblingIndex + 3) != null) && (inputManager.GetCellObject(siblingIndex + 3).gameObject.activeInHierarchy == true))   // buffing unit in front
+                            PlacedObject appleBuffedUnitFour = inputManager.GetCellObject(siblingIndex + 3);
+                            if ((appleBuffedUnitFour != null) && (appleBuffedUnitFour.gameObject.activeInHierarchy == true))   // buffing unit in front
                             {
-                                inputManager.GetCellObject(siblingIndex + 3).baseAttack += 5;
-                                inputManager.GetCellObject(siblingIndex + 3).baseHealth += 4;
-                                inputManager.GetCellObject(siblingIndex + 3).attack += 5;
-                                inputManager.GetCellObject(siblingIndex + 3).health += 4;
-                                inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 3));
+                                appleBuffedUnitFour.baseAttack += 5;
+                                appleBuffedUnitFour.baseHealth += 4;
+                                appleBuffedUnitFour.attack += 5;
+                                appleBuffedUnitFour.health += 4;
+                                inputManager.UpdateFloatingText(appleBuffedUnitFour);
 
-                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                                appleBuffedUnitFour.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 3));
                             }
                         }
@@ -1512,7 +1526,7 @@ public class BattleRound : MonoBehaviour
                     placedObject.armor = false;
                     inputManager.UpdateFloatingText(placedObject);
 
-                    placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                    placedObject.transform.GetChild(4).gameObject.SetActive(true);
                     Debug.Log("coconut armor");
                 }
                 if (placedObject.level >= 7)
@@ -1523,7 +1537,7 @@ public class BattleRound : MonoBehaviour
                         inputManager.UpdateFloatingText(placedObject);
                         placedObject.armorTriggerCounter += 1;
 
-                        placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                        placedObject.transform.GetChild(4).gameObject.SetActive(true);
                         Debug.Log("coconut armor");
                     }
                     else if (placedObject.armorTriggerCounter >= 1)
@@ -1533,7 +1547,7 @@ public class BattleRound : MonoBehaviour
                         placedObject.armorTriggerCounter += 1;
                         inputManager.UpdateFloatingText(placedObject);
 
-                        placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                        placedObject.transform.GetChild(4).gameObject.SetActive(true);
                         Debug.Log("coconut armor");
                     }
                 }
@@ -1578,7 +1592,7 @@ public class BattleRound : MonoBehaviour
                         buffedUnit.GetComponent<PlacedObject>().health += 1;
                         inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
 
-                        placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                        buffedUnit.transform.GetChild(3).gameObject.SetActive(true);
                         Debug.Log("lemon ability: " + buffedUnit);
                     }
                     if ((placedObject.level >= 4) && (placedObject.level < 7))
@@ -1589,7 +1603,7 @@ public class BattleRound : MonoBehaviour
                         buffedUnit.GetComponent<PlacedObject>().health += 2;
                         inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
 
-                        placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                        buffedUnit.transform.GetChild(3).gameObject.SetActive(true);
                         Debug.Log("lemon ability: " + buffedUnit);
                     }
                     if (placedObject.level >= 7)
@@ -1600,7 +1614,7 @@ public class BattleRound : MonoBehaviour
                         buffedUnit.GetComponent<PlacedObject>().health += 4;
                         inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
 
-                        placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                        buffedUnit.transform.GetChild(3).gameObject.SetActive(true);
                         Debug.Log("lemon ability: " + buffedUnit);
 
                         buffedUnit2.GetComponent<PlacedObject>().baseAttack += 4;
@@ -1609,7 +1623,7 @@ public class BattleRound : MonoBehaviour
                         buffedUnit2.GetComponent<PlacedObject>().health += 4;
                         inputManager.UpdateFloatingText(buffedUnit2.GetComponent<PlacedObject>());
 
-                        placedObject.transform.GetChild(2).gameObject.SetActive(true);
+                        buffedUnit2.transform.GetChild(3).gameObject.SetActive(true);
                         Debug.Log("lemon ability: " + buffedUnit2);
                     }
                 }

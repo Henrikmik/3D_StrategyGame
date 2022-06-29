@@ -456,14 +456,42 @@ public class InputManager : MonoBehaviour
         }
         else if (placedObject.level < 7)
         {
-            placedObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            placedObject.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
         }
         else
         {
-            placedObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            placedObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         }
 
         placedObject.transform.rotation = new Quaternion (0, 0, 0, 0);
+        cellMouseIsOver.StoreObject(placedObject);
+        cellMouseIsOver.SetPlacedObject(placedObject);
+        //placedObject.transform.GetChild(0).transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
+        //placedObject.transform.GetChild(0).transform.rotation = Quaternion.Euler (40, -55, 0);
+        //placedObject.transform.GetChild(0).GetChild(2).position = new Vector3 (placedObject.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedObject.transform.GetChild(0).GetChild(2).position.z);
+    }
+
+    public void DragOnGridCellFromShop(GridCell cellMouseIsOver, PlacedObject placedObject)
+    {
+        placementVec = new Vector3(cellMouseIsOver.GetComponent<Transform>().position.x, 0f, cellMouseIsOver.GetComponent<Transform>().position.z);
+        placedObject.transform.position = placementVec;
+        placedObject.transform.SetParent(null);
+        placedObject.transform.SetParent(unitManager.transform);
+
+        if (placedObject.level < 4)
+        {
+            placedObject.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (placedObject.level < 7)
+        {
+            placedObject.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
+        }
+        else
+        {
+            placedObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        }
+
+        placedObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         cellMouseIsOver.StoreObject(placedObject);
         cellMouseIsOver.SetPlacedObject(placedObject);
         placedObject.transform.GetChild(0).transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);

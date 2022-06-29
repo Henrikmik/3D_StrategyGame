@@ -88,7 +88,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                     {
                         if (inputManager.gold >= 30)
                         {
-                            inputManager.DragOnGridCell(cellMouseIsOver, placedObject);
+                            inputManager.DragOnGridCellFromShop(cellMouseIsOver, placedObject);
                             PlayPlaceSound();
                             
                             origin = transform.position;
