@@ -438,7 +438,6 @@ public class BattleRound : MonoBehaviour
 
             // animation
             //StartCoroutine(inputManager.unitAnimation.AnimationMoveForward(movingPlacedObject));
-            FindObjectOfType<AudioManager>().Play("MoveUnit");
 
             oldGridCell.GetComponent<GridCell>().UnstoreObject(movingPlacedObject);
 

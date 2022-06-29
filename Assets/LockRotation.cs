@@ -32,7 +32,7 @@ public class LockRotation : MonoBehaviour
         }
         else if (placedObject.nameA == "Mini Grape")
         {
-            fixedRotation = 170;
+            fixedRotation = -160;
         }
         else if (placedObject.nameA == "Cherry")
         {

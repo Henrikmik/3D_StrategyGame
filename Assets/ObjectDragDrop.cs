@@ -102,6 +102,7 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                             //    visualHolder.eulerAngles = new Vector3(0f, - 180f, 0f);
                             //    Debug.Log("LEMON");
                             //}
+                            placedObject.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;
 
                             visualHolder.GetChild(0).GetComponent<Animator>().enabled = true;
 

@@ -320,6 +320,7 @@ public class InputManager : MonoBehaviour
         }
 
         enemySets.EnemySet();
+        SetRoundoverFalse();
     }
 
     // Gets grid cell
@@ -365,9 +366,6 @@ public class InputManager : MonoBehaviour
             
             // Sets battle phase button inactive
             canvas.transform.GetChild(2).gameObject.SetActive(false);
-            
-            // Sets start battle button active
-            canvas.transform.GetChild(3).gameObject.SetActive(true);
         }
 
         if (scene == 2)
@@ -381,9 +379,6 @@ public class InputManager : MonoBehaviour
             
             // Sets battle phase button active
             canvas.transform.GetChild(2).gameObject.SetActive(true);
-            
-            // Sets start battle button inactive
-            canvas.transform.GetChild(3).gameObject.SetActive(false);
 
             // Sets gold to 100
             if (roundCounter >= 3)
