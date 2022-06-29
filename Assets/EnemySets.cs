@@ -33,7 +33,7 @@ public class EnemySets : MonoBehaviour
         placedObject.SettingStatsEnemy(attackv, healthv, levelv);
         inputManager.ShowFloatingText(placedObject, enemyPos3, false);
         
-        Transform visualT = placedObject.transform.GetChild(1);
+        Transform visualT = placedObject.transform.GetChild(1).GetChild(0);
         Transform statsT = placedObject.transform.GetChild(0);
         //visualT.eulerAngles = new Vector3(0f, 0f, 0f);
         statsT.transform.localPosition = new Vector3 (0.7f, 0.15f, - 0.6f);

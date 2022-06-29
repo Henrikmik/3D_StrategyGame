@@ -198,40 +198,20 @@ public class InputManager : MonoBehaviour
             Animator camAnim = mainCamera.GetComponent<Animator>();
 
             camAnim.enabled = true;
-            camAnim.SetBool("CameraSwing", true);
-            //Debug.Log(camAnim.GetCurrentAnimatorStateInfo(0).length > camAnim.GetCurrentAnimatorStateInfo(0).normalizedTime);
-            //if (camAnim.GetCurrentAnimatorStateInfo(0).length > camAnim.GetCurrentAnimatorStateInfo(0).normalizedTime)
-            //{
-                //camAnim.enabled = false;
-            //    Debug.Log("Animator false");
-            mainCamera.transform.parent.position = new Vector3(mainCamPos.x + 1.2f, mainCamPos.y +  0.3f, mainCamPos.z + 4.3f);
-            mainCamera.transform.parent.eulerAngles =  new Vector3 (mainCamRot.x + -2.5f, mainCamRot.y + -9.8f, mainCamRot.z + 7.9f);
-            //}
-            //float i = 0.0f;
-            //float waitTime = 100.0f;
-            //for (float i = 0.0f;  i <= waitTime; i += Time.deltaTime)
-            //{
-            //    //i += Time.deltaTime;
-            //    Debug.Log(i);
+            camAnim.Play("ZoomOut");
 
-            //    if (i >= waitTime)
-            //    {
-            //        camAnim.enabled = false;
-            //        Debug.Log("i = 65");
-            //        mainCamera.transform.position = new Vector3(1.197856f, 0.3216273f, 4.293736f);
-            //        mainCamera.transform.rotation = new Quaternion(-2.504f, -9.822f, 7.873f, 0);
-            //    }
-            //}
+            //mainCamera.transform.position = new Vector3(0, 0, 0);
+            //mainCamera.transform.eulerAngles =  new Vector3 (mainCamRot.x + -2.5f, mainCamRot.y + -9.8f, mainCamRot.z + 7.9f);
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            //Animator camAnim = mainCamera.GetComponent<Animator>();
+            Animator camAnim = mainCamera.GetComponent<Animator>();
 
-            //camAnim.enabled = true;
-            //camAnim.SetBool("CameraSwing", false);
-            ////camAnim.enabled = false;
-            mainCamera.transform.parent.position = mainCamPos;
-            mainCamera.transform.parent.eulerAngles = mainCamRot;
+            camAnim.enabled = true;
+            camAnim.Play("ZoomIn");
+
+            //mainCamera.transform.position = new Vector3 (10, 10, 10);
+            //mainCamera.transform.eulerAngles = mainCamRot;
         }
     }
 

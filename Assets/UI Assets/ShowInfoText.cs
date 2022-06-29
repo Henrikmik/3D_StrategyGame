@@ -31,9 +31,9 @@ public class ShowInfoText : MonoBehaviour
     {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         prefab = inputManager.infoPrefab;
-        oName = transform.GetChild(0).GetComponent<TMP_Text>();
-        abilityName = transform.GetChild(1).GetComponent<TMP_Text>();
-        ability = transform.GetChild(2).GetComponent<TMP_Text>();
+        oName = transform.GetChild(1).GetComponent<TMP_Text>();
+        abilityName = transform.GetChild(2).GetComponent<TMP_Text>();
+        ability = transform.GetChild(3).GetComponent<TMP_Text>();
     }
 
     void Update()

@@ -20,7 +20,6 @@ public class BattleRound : MonoBehaviour
 
     public void StartBattle()
     {
-        //Debug.Log("test");
         HealthManager(3f, 1);
         gameState = null;
         gameState2 = null;
@@ -28,22 +27,16 @@ public class BattleRound : MonoBehaviour
 
     public void HealthManager(float delayTime, int lane)
     {
-        //Debug.Log("Battle Start");
-        //Debug.Log("test 2");
         StartCoroutine(DelayAction(delayTime, lane));
     }
 
     IEnumerator DelayAction(float delayTime, int lane)
     {
-        //Debug.Log("test 3");
         while (true)
         {
-            //Debug.Log("test 4");
             CheckingGridBattle(lane);
-            yield return new WaitForSeconds(2f);
-            //Debug.Log("test 5");
+            yield return new WaitForSeconds(0.5f);
             CheckingGameState(lane);
-            //Debug.Log("In while");
 
             if (lane == 1)
             {
@@ -57,7 +50,6 @@ public class BattleRound : MonoBehaviour
                     yield return new WaitForSeconds(.2f);
                     
                     // Unit greift Enemy an
-                    //FindObjectOfType<AudioManager>().Play("MoveUnit");
 
                     enemy.GettingDamaged(teamObject.attack, teamObject);
                     inputManager.UpdateFloatingText(enemy);
@@ -83,13 +75,13 @@ public class BattleRound : MonoBehaviour
                     CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
                     CheckAbilityDefense(teamObject, unitManager, false);
 
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(2f);
                     CheckAllUnitsOnDefeat(lane);
 
                     yield return new WaitForSeconds(1f);
                     CheckingGridBattle(lane);
 
-                    yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(0.5f);
                     CheckingGameState(lane);
                 }
             }
@@ -102,6 +94,8 @@ public class BattleRound : MonoBehaviour
                 if (teamObject != null && enemy != null)
                 {
                     yield return new WaitForSeconds(.2f);
+                    StartCoroutine(inputManager.unitAnimation.AnimationAttack());
+                    yield return new WaitForSeconds(.2f);
 
                     // Unit greift Enemy an
                     FindObjectOfType<AudioManager>().Play("UnitHit");
@@ -114,7 +108,6 @@ public class BattleRound : MonoBehaviour
 
                     // Enemy greift Unit an
                     teamObject.GettingDamaged(enemy.attack, enemy);
-                    //teamObject.GettingDamaged(enemy.attack);
 
                     if ((teamObject.health <= 0) || (enemy.health <= 0))
                     {
@@ -132,13 +125,13 @@ public class BattleRound : MonoBehaviour
                     CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
                     CheckAbilityDefense(teamObject, unitManager, false);
 
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(2f);
                     CheckAllUnitsOnDefeat(lane);
 
                     yield return new WaitForSeconds(1f);
                     CheckingGridBattle(lane);
 
-                    yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(0.5f);
                     CheckingGameState(lane);
                 }
             }
@@ -150,6 +143,8 @@ public class BattleRound : MonoBehaviour
 
                 if (teamObject != null && enemy != null)
                 {
+                    yield return new WaitForSeconds(.2f);
+                    StartCoroutine(inputManager.unitAnimation.AnimationAttack());
                     yield return new WaitForSeconds(.2f);
 
                     // Unit greift Enemy an
@@ -178,13 +173,13 @@ public class BattleRound : MonoBehaviour
                     CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
                     CheckAbilityDefense(teamObject, unitManager, false);
 
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(2f);
                     CheckAllUnitsOnDefeat(lane);
 
                     yield return new WaitForSeconds(1f);
                     CheckingGridBattle(lane);
 
-                    yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(0.5f);
                     CheckingGameState(lane);
                 }
             }
@@ -443,7 +438,8 @@ public class BattleRound : MonoBehaviour
             GameObject oldGridCell = inputManager.GetGridCell(oldPos);
 
             // animation
-            StartCoroutine(inputManager.unitAnimation.AnimationMoveForward(movingPlacedObject));
+            //StartCoroutine(inputManager.unitAnimation.AnimationMoveForward(movingPlacedObject));
+            FindObjectOfType<AudioManager>().Play("MoveUnit");
 
             oldGridCell.GetComponent<GridCell>().UnstoreObject(movingPlacedObject);
 
@@ -857,6 +853,8 @@ public class BattleRound : MonoBehaviour
                             inputManager.GetCellObject(siblingIndex + 1).attack += 2;
                             inputManager.GetCellObject(siblingIndex + 1).health += 1;
                             inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+
+                            placedObject.transform.GetChild(2).gameObject.SetActive(true);
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                     }
@@ -869,6 +867,8 @@ public class BattleRound : MonoBehaviour
                             inputManager.GetCellObject(siblingIndex + 1).attack += 3;
                             inputManager.GetCellObject(siblingIndex + 1).health += 2;
                             inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+
+                            placedObject.transform.GetChild(2).gameObject.SetActive(true);
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                         if (siblingIndex - 1 >= 0)
@@ -880,6 +880,8 @@ public class BattleRound : MonoBehaviour
                                 inputManager.GetCellObject(siblingIndex - 1).attack += 3;
                                 inputManager.GetCellObject(siblingIndex - 1).health += 2;
                                 inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 1));
+
+                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 1));
                             }
                         }
@@ -897,6 +899,8 @@ public class BattleRound : MonoBehaviour
                             inputManager.GetCellObject(siblingIndex + 1).attack += 5;
                             inputManager.GetCellObject(siblingIndex + 1).health += 4;
                             inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+
+                            placedObject.transform.GetChild(2).gameObject.SetActive(true);
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                         if (siblingIndex - 1 >= 0)
@@ -908,6 +912,8 @@ public class BattleRound : MonoBehaviour
                                 inputManager.GetCellObject(siblingIndex - 1).attack += 5;
                                 inputManager.GetCellObject(siblingIndex - 1).health += 4;
                                 inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 1));
+
+                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 1));
                             }
                         }
@@ -928,6 +934,8 @@ public class BattleRound : MonoBehaviour
                             inputManager.GetCellObject(siblingIndex + 1).attack += 2;
                             inputManager.GetCellObject(siblingIndex + 1).health += 1;
                             inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+
+                            placedObject.transform.GetChild(2).gameObject.SetActive(true);
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                     }
@@ -940,6 +948,8 @@ public class BattleRound : MonoBehaviour
                             inputManager.GetCellObject(siblingIndex + 1).attack += 3;
                             inputManager.GetCellObject(siblingIndex + 1).health += 2;
                             inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+
+                            placedObject.transform.GetChild(2).gameObject.SetActive(true);
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1) + " !!!!");
                         }
                         if (siblingIndex - 1 >= 0)
@@ -951,6 +961,8 @@ public class BattleRound : MonoBehaviour
                                 inputManager.GetCellObject(siblingIndex - 1).attack += 3;
                                 inputManager.GetCellObject(siblingIndex - 1).health += 2;
                                 inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 1));
+
+                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 1));
                             }
                         }
@@ -963,6 +975,8 @@ public class BattleRound : MonoBehaviour
                                 inputManager.GetCellObject(siblingIndex - 3).attack += 3;
                                 inputManager.GetCellObject(siblingIndex - 3).health += 2;
                                 inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 3));
+
+                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 3));
                             }
                         }
@@ -975,6 +989,8 @@ public class BattleRound : MonoBehaviour
                                 inputManager.GetCellObject(siblingIndex + 3).attack += 3;
                                 inputManager.GetCellObject(siblingIndex + 3).health += 2;
                                 inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 3));
+
+                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 3));
                             }
                         }
@@ -992,6 +1008,8 @@ public class BattleRound : MonoBehaviour
                             inputManager.GetCellObject(siblingIndex + 1).attack += 3;
                             inputManager.GetCellObject(siblingIndex + 1).health += 2;
                             inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 1));
+
+                            placedObject.transform.GetChild(2).gameObject.SetActive(true);
                             Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 1));
                         }
                         if (siblingIndex - 1 >= 0)
@@ -1003,6 +1021,8 @@ public class BattleRound : MonoBehaviour
                                 inputManager.GetCellObject(siblingIndex - 1).attack += 3;
                                 inputManager.GetCellObject(siblingIndex - 1).health += 2;
                                 inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 1));
+
+                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 1));
                             }
                         }
@@ -1015,6 +1035,8 @@ public class BattleRound : MonoBehaviour
                                 inputManager.GetCellObject(siblingIndex - 3).attack += 5;
                                 inputManager.GetCellObject(siblingIndex - 3).health += 4;
                                 inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex - 3));
+
+                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex - 3));
                             }
                         }
@@ -1027,6 +1049,8 @@ public class BattleRound : MonoBehaviour
                                 inputManager.GetCellObject(siblingIndex + 3).attack += 5;
                                 inputManager.GetCellObject(siblingIndex + 3).health += 4;
                                 inputManager.UpdateFloatingText(inputManager.GetCellObject(siblingIndex + 3));
+
+                                placedObject.transform.GetChild(2).gameObject.SetActive(true);
                                 Debug.Log("apple: " + inputManager.GetCellObject(siblingIndex + 3));
                             }
                         }
@@ -1074,7 +1098,7 @@ public class BattleRound : MonoBehaviour
                         floatingStats.transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
                         floatingStats.GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
 
-                        placedO.transform.GetChild(1).eulerAngles = new Vector3(0f, 0f, 0f);
+                        //placedO.transform.GetChild(1).eulerAngles = new Vector3(0f, 0f, 0f);
 
                         inputManager.levelUpdate.UpdateLevel(placedO);
                         Debug.Log("Summon Pineapple");
@@ -1114,7 +1138,7 @@ public class BattleRound : MonoBehaviour
                         placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                         placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
 
-                        placedO.transform.GetChild(1).eulerAngles = new Vector3(0f, 0f, 0f);
+                        placedO.transform.GetChild(1).eulerAngles = new Vector3(0f, 270f, 0f);
 
                         inputManager.levelUpdate.UpdateLevel(placedO);
                         Debug.Log("Summon Aubergine");
@@ -1488,6 +1512,8 @@ public class BattleRound : MonoBehaviour
                     placedObject.health = placedObject.baseHealth;
                     placedObject.armor = false;
                     inputManager.UpdateFloatingText(placedObject);
+
+                    placedObject.transform.GetChild(2).gameObject.SetActive(true);
                     Debug.Log("coconut armor");
                 }
                 if (placedObject.level >= 7)
@@ -1497,6 +1523,8 @@ public class BattleRound : MonoBehaviour
                         placedObject.health = placedObject.baseHealth;
                         inputManager.UpdateFloatingText(placedObject);
                         placedObject.armorTriggerCounter += 1;
+
+                        placedObject.transform.GetChild(2).gameObject.SetActive(true);
                         Debug.Log("coconut armor");
                     }
                     else if (placedObject.armorTriggerCounter >= 1)
@@ -1505,6 +1533,8 @@ public class BattleRound : MonoBehaviour
                         placedObject.armor = false;
                         placedObject.armorTriggerCounter += 1;
                         inputManager.UpdateFloatingText(placedObject);
+
+                        placedObject.transform.GetChild(2).gameObject.SetActive(true);
                         Debug.Log("coconut armor");
                     }
                 }
@@ -1548,6 +1578,8 @@ public class BattleRound : MonoBehaviour
                         buffedUnit.GetComponent<PlacedObject>().attack += 1;
                         buffedUnit.GetComponent<PlacedObject>().health += 1;
                         inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
+
+                        placedObject.transform.GetChild(2).gameObject.SetActive(true);
                         Debug.Log("lemon ability: " + buffedUnit);
                     }
                     if ((placedObject.level >= 4) && (placedObject.level < 7))
@@ -1557,6 +1589,8 @@ public class BattleRound : MonoBehaviour
                         buffedUnit.GetComponent<PlacedObject>().attack += 2;
                         buffedUnit.GetComponent<PlacedObject>().health += 2;
                         inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
+
+                        placedObject.transform.GetChild(2).gameObject.SetActive(true);
                         Debug.Log("lemon ability: " + buffedUnit);
                     }
                     if (placedObject.level >= 7)
@@ -1566,6 +1600,8 @@ public class BattleRound : MonoBehaviour
                         buffedUnit.GetComponent<PlacedObject>().attack += 4;
                         buffedUnit.GetComponent<PlacedObject>().health += 4;
                         inputManager.UpdateFloatingText(buffedUnit.GetComponent<PlacedObject>());
+
+                        placedObject.transform.GetChild(2).gameObject.SetActive(true);
                         Debug.Log("lemon ability: " + buffedUnit);
 
                         buffedUnit2.GetComponent<PlacedObject>().baseAttack += 4;
@@ -1573,6 +1609,8 @@ public class BattleRound : MonoBehaviour
                         buffedUnit2.GetComponent<PlacedObject>().attack += 4;
                         buffedUnit2.GetComponent<PlacedObject>().health += 4;
                         inputManager.UpdateFloatingText(buffedUnit2.GetComponent<PlacedObject>());
+
+                        placedObject.transform.GetChild(2).gameObject.SetActive(true);
                         Debug.Log("lemon ability: " + buffedUnit2);
                     }
                 }

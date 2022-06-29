@@ -60,6 +60,8 @@ public class Shop : MonoBehaviour
         inputManager.ShowFloatingText(placedEnemy, pos3, true);
         PlacedObject placedObject = transform.GetComponent<PlacedObject>();
         inputManager.levelUpdate.UpdateLevel(placedEnemy);
+
+        placedEnemy.transform.GetChild(1).GetComponent<Animator>().enabled = false;
     }
 
     public void ShopReroll()
