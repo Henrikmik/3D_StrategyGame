@@ -43,8 +43,8 @@ public class UAnimation : MonoBehaviour
     public IEnumerator AnimationAttack()
     {
         // unit
-        //Animator anim = inputManager.GetCellObject(0).transform.GetChild(1).GetChild(0).GetComponent<Animator>();
-        Animator anim = inputManager.GetCellObject(0).transform.GetChild(1).GetComponent<Animator>();
+        Animator anim = inputManager.GetCellObject(0).transform.GetChild(1).GetChild(0).GetComponent<Animator>();
+        //Animator anim = inputManager.GetCellObject(0).transform.GetChild(1).GetComponent<Animator>();
         anim.enabled = true;
         anim.Play("DealDamage");
         Debug.Log("DealDamage");

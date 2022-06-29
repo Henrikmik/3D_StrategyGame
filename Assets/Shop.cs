@@ -61,7 +61,7 @@ public class Shop : MonoBehaviour
         PlacedObject placedObject = transform.GetComponent<PlacedObject>();
         inputManager.levelUpdate.UpdateLevel(placedEnemy);
 
-        placedEnemy.transform.GetChild(1).GetComponent<Animator>().enabled = false;
+        placedEnemy.transform.GetChild(1).GetChild(0).GetComponent<Animator>().enabled = false;
     }
 
     public void ShopReroll()
