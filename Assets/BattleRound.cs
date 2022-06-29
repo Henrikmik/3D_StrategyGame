@@ -216,15 +216,14 @@ public class BattleRound : MonoBehaviour
                     }
                     else if(gameState == "Draw")
                     {
-                        inputManager.draws -= 1;
-
                         if (inputManager.draws > 0)
                         {
                             Debug.Log("Draw Draw");
-                            inputManager.roundCounter += 0;
+                            inputManager.roundCounter += 1;
                             FindObjectOfType<AudioManager>().Play("Draw");
                             yield return new WaitForSeconds(2f);
 
+                            inputManager.draws -= 1;
                             EndOfRound();
                             break;
                         }
@@ -235,7 +234,8 @@ public class BattleRound : MonoBehaviour
                             FindObjectOfType<AudioManager>().Play("Draw");
                             yield return new WaitForSeconds(2f);
 
-                            EndOfRound();
+                            inputManager.draws -= 1;
+                            LoseScreen();
                             break;
                         }
                     }
@@ -281,15 +281,13 @@ public class BattleRound : MonoBehaviour
                 else if ((gameState == "Draw") && (gameState2 == "Draw"))
                 {
                     // Draw
-
-                    inputManager.draws -= 1;
-
                     if (inputManager.draws > 0)
                     {
                         inputManager.roundCounter += 0;
                         FindObjectOfType<AudioManager>().Play("Draw");
                         yield return new WaitForSeconds(2f);
 
+                        inputManager.draws -= 1;
                         EndOfRound();
                         break;
                     }
@@ -298,6 +296,7 @@ public class BattleRound : MonoBehaviour
                         inputManager.roundCounter = 1;
                         LoseScreen();
 
+                        inputManager.draws -= 1;
                         //EndOfRound();
                         break;
                     }
@@ -393,8 +392,6 @@ public class BattleRound : MonoBehaviour
             // Draw
             else if (finalGameState == "Draw")
             {
-                inputManager.draws -= 1;
-
                 if (inputManager.draws > 0)
                 {
                     Debug.Log("Draw Draw");
@@ -402,6 +399,7 @@ public class BattleRound : MonoBehaviour
                     FindObjectOfType<AudioManager>().Play("Draw");
                     yield return new WaitForSeconds(2f);
 
+                    inputManager.draws -= 1;
                     EndOfRound();
                     break;
                 }
@@ -411,6 +409,7 @@ public class BattleRound : MonoBehaviour
                     inputManager.roundCounter = 1;
                     LoseScreen();
 
+                    inputManager.draws -= 1;
                     //EndOfRound();
                     break;
                 }
