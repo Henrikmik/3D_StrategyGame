@@ -1515,9 +1515,9 @@ public class BattleRound : MonoBehaviour
                         //Debug.Log("spawned mini grape");
 
                         // spawn mini grape 2
-                        if (inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 1).GetComponent<GridCell>().objectInThisGridSpace == null)
+                        if (inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 1).GetComponent<GridCell>().objectInThisGridSpace == null)
                         {
-                            GameObject gridCellGameObject2 = inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 1);
+                            GameObject gridCellGameObject2 = inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 1);
                             GridCell gridCell2 = gridCellGameObject2.GetComponent<GridCell>();
                             Vector2Int pos22 = gridCell2.GetPosition();
                             Vector3 pos32 = new Vector3(gridCellGameObject2.transform.position.x, 0f, gridCellGameObject2.transform.position.z);
@@ -1537,9 +1537,9 @@ public class BattleRound : MonoBehaviour
                             inputManager.levelUpdate.UpdateLevel(placedO);
                             //Debug.Log("spawned mini grape 2");
                         }
-                        else if (inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
+                        else if (inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
                         {
-                            GameObject gridCellGameObject2 = inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2);
+                            GameObject gridCellGameObject2 = inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 2);
                             GridCell gridCell2 = gridCellGameObject2.GetComponent<GridCell>();
                             Vector2Int pos22 = gridCell2.GetPosition();
                             Vector3 pos32 = new Vector3(gridCellGameObject2.transform.position.x, 0f, gridCellGameObject2.transform.position.z);
@@ -1583,9 +1583,9 @@ public class BattleRound : MonoBehaviour
                         //Debug.Log("spawned mini grape");
 
                         // spawn mini grape 2
-                        if (inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 1).GetComponent<GridCell>().objectInThisGridSpace == null)
+                        if (inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 1).GetComponent<GridCell>().objectInThisGridSpace == null)
                         {
-                            GameObject gridCellGameObject2 = inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 1);
+                            GameObject gridCellGameObject2 = inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 1);
                             GridCell gridCell2 = gridCellGameObject2.GetComponent<GridCell>();
                             Vector2Int pos22 = gridCell2.GetPosition();
                             Vector3 pos32 = new Vector3(gridCellGameObject2.transform.position.x, 0f, gridCellGameObject2.transform.position.z);
@@ -1605,9 +1605,9 @@ public class BattleRound : MonoBehaviour
                             inputManager.levelUpdate.UpdateLevel(placedO);
                             //Debug.Log("spawned mini grape 2");
                         }
-                        else if (inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
+                        else if (inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
                         {
-                            GameObject gridCellGameObject2 = inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2);
+                            GameObject gridCellGameObject2 = inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 2);
                             GridCell gridCell2 = gridCellGameObject2.GetComponent<GridCell>();
                             Vector2Int pos22 = gridCell2.GetPosition();
                             Vector3 pos32 = new Vector3(gridCellGameObject2.transform.position.x, 0f, gridCellGameObject2.transform.position.z);

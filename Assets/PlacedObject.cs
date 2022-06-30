@@ -83,17 +83,21 @@ public class PlacedObject : MonoBehaviour
 
         // ability
         abilityName = unit.abilityName;
-        if (rank == 2)
+        if (rank == 1)
         {
-            abilityDescription= unit.abilityDescription2;
+            abilityDescription= unit.abilityDescription1;
         }
-        else if(rank == 3)
+        else if(rank == 2)
+        {
+            abilityDescription = unit.abilityDescription2;
+        }
+        else if (rank == 3)
         {
             abilityDescription = unit.abilityDescription3;
         }
         else
         {
-            abilityDescription = unit.abilityDescription1;
+
         }
 
 
@@ -313,6 +317,24 @@ public class PlacedObject : MonoBehaviour
             // Do things when reaching rank 3
 
             transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        }
+
+        abilityName = unit.abilityName;
+        if (rank == 1)
+        {
+            abilityDescription = unit.abilityDescription1;
+        }
+        else if (rank == 2)
+        {
+            abilityDescription = unit.abilityDescription2;
+        }
+        else if (rank == 3)
+        {
+            abilityDescription = unit.abilityDescription3;
+        }
+        else
+        {
+
         }
     }
 

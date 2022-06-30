@@ -44,6 +44,7 @@ public class ShowInfoText : MonoBehaviour
         {
             oName.text = "Rank: " + placedObject.rank + " " + placedObject.nameA;
             abilityName.text = placedObject.abilityName;
+
             ability.text = placedObject.abilityDescription;
             //Debug.Log("TextUpdate");
         }

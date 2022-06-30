@@ -177,16 +177,17 @@ public class InputManager : MonoBehaviour
         //    StartCoroutine(unitAnimation.AnimationAttack());
         //}
 
-        //if (Input.GetKeyDown(KeyCode.U))
-        //{
-        //    roundCounter = 3;
-        //    shop.ShopReroll();
-        //}
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            roundCounter = 3;
+            shop.ShopReroll();
+        }
 
-        //if (Input.GetKeyDown(KeyCode.G))
-        //{
-        //    gold += 200;
-        //}
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            gold += 200;
+        }
+
         //if (Input.GetKeyDown(KeyCode.T))
         //{
         //    Debug.Log("pO1 " + pOPosition1 + "\n" + "pO2 " + pOPosition2 + "\n" + "pO3 " + pOPosition3 + "\n" + "pO4" + pOPosition4 + "\n" + "pO5" + pOPosition5 + "\n" + "pO6 " + pOPosition6);
