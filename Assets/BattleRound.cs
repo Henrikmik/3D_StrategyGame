@@ -1532,6 +1532,7 @@ public class BattleRound : MonoBehaviour
                     inputManager.UpdateFloatingText(placedObject);
 
                     placedObject.transform.GetChild(4).gameObject.SetActive(true);
+                    FindObjectOfType<AudioManager>().Play("Break");
                     Debug.Log("coconut armor");
                 }
                 if (placedObject.level >= 7)
@@ -1543,6 +1544,7 @@ public class BattleRound : MonoBehaviour
                         placedObject.armorTriggerCounter += 1;
 
                         placedObject.transform.GetChild(4).gameObject.SetActive(true);
+                        FindObjectOfType<AudioManager>().Play("Break");
                         Debug.Log("coconut armor");
                     }
                     else if (placedObject.armorTriggerCounter >= 1)
@@ -1553,6 +1555,7 @@ public class BattleRound : MonoBehaviour
                         inputManager.UpdateFloatingText(placedObject);
 
                         placedObject.transform.GetChild(4).gameObject.SetActive(true);
+                        FindObjectOfType<AudioManager>().Play("Break");
                         Debug.Log("coconut armor");
                     }
                 }
