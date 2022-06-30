@@ -46,7 +46,7 @@ public class BattleRound : MonoBehaviour
                 if (teamObject != null && enemy != null)
                 {
                     yield return new WaitForSeconds(.2f);
-                    StartCoroutine(inputManager.unitAnimation.AnimationAttack());
+                    StartCoroutine(inputManager.unitAnimation.AnimationAttack(1));
                     yield return new WaitForSeconds(.2f);
                     
                     // Unit greift Enemy an
@@ -94,7 +94,7 @@ public class BattleRound : MonoBehaviour
                 if (teamObject != null && enemy != null)
                 {
                     yield return new WaitForSeconds(.2f);
-                    StartCoroutine(inputManager.unitAnimation.AnimationAttack());
+                    StartCoroutine(inputManager.unitAnimation.AnimationAttack(2));
                     yield return new WaitForSeconds(.2f);
 
                     // Unit greift Enemy an
@@ -144,7 +144,7 @@ public class BattleRound : MonoBehaviour
                 if (teamObject != null && enemy != null)
                 {
                     yield return new WaitForSeconds(.2f);
-                    StartCoroutine(inputManager.unitAnimation.AnimationAttack());
+                    StartCoroutine(inputManager.unitAnimation.AnimationAttack(1));
                     yield return new WaitForSeconds(.2f);
 
                     // Unit greift Enemy an
@@ -384,7 +384,7 @@ public class BattleRound : MonoBehaviour
                 Debug.Log("Winner Winner");
                 inputManager.roundCounter += 1;
                 FindObjectOfType<AudioManager>().Play("Win");
-                yield return new WaitForSeconds(2f);
+                //yield return new WaitForSeconds(2f);
 
                 EndOfRound();
                 break;
@@ -397,7 +397,7 @@ public class BattleRound : MonoBehaviour
                     Debug.Log("Draw Draw");
                     inputManager.roundCounter += 0;
                     FindObjectOfType<AudioManager>().Play("Draw");
-                    yield return new WaitForSeconds(2f);
+                    //yield return new WaitForSeconds(2f);
 
                     inputManager.draws -= 1;
                     EndOfRound();
@@ -720,74 +720,154 @@ public class BattleRound : MonoBehaviour
         }
     }
 
-    public void SetUpBuyingPhase()
+    public void SetUpBuyingPhase()  // anders machen
     {
         int childNumb = unitManager.transform.childCount;
         Debug.Log("First child count: " + childNumb);
 
         // Destroy Mini grapes and pineapples
-        for (int i = 0; i < childNumb; i++) 
-        {
-            if ((unitManager.transform.GetChild(i).name == "Mini Grape(Clone)") || (unitManager.transform.GetChild(i).GetComponent<PlacedObject>().ability == "mini grapes"))
-            {
-                Destroy(unitManager.transform.GetChild(i).gameObject);
-                childNumb -= 1;
-            }
-            else
-            {
+        //for (int i = 0; i < childNumb; i++) 
+        //{
+        //    if ((unitManager.transform.GetChild(i).name == "Mini Grape(Clone)") || (unitManager.transform.GetChild(i).GetComponent<PlacedObject>().ability == "mini grapes"))
+        //    {
+        //        Destroy(unitManager.transform.GetChild(i).gameObject);
+        //        childNumb -= 1;
+        //    }
+        //    else
+        //    {
 
-            }
-            if (i >= childNumb)
-            { Debug.Log("HIHI"); }
+        //    }
+        //    if (i >= childNumb)
+        //    { Debug.Log("HIHI"); }
+        //}
+
+        //
+        int childs = unitManager.transform.childCount;
+        for (int i = childs - 1; i > 0; i--)
+        {
+            if ((unitManager.transform.GetChild(i).gameObject.name == "Mini Grape(Clone)") || (unitManager.transform.GetChild(i).GetComponent<PlacedObject>().ability == "mini grapes"))
+                GameObject.Destroy(unitManager.transform.GetChild(i).gameObject);
+        }
+        //
+
+        if (inputManager.pOPosition1 != null)
+        {
+            PlacedObject placeInTeam = inputManager.pOPosition1;
+            GridCell gridCell = inputManager.GetGridCell(0).GetComponent<GridCell>();
+
+            placeInTeam.gameObject.SetActive(true);
+            placeInTeam.SetStats();
+            inputManager.UpdateFloatingText(placeInTeam);
+            placeInTeam.transform.position = new Vector3(gridCell.transform.position.x, 0f, gridCell.transform.position.z);
+            gridCell.StoreObject(placeInTeam);
+            gridCell.SetPlacedObject(placeInTeam);
+        }
+        if (inputManager.pOPosition2 != null)
+        {
+            PlacedObject placeInTeam = inputManager.pOPosition2;
+            GridCell gridCell = inputManager.GetGridCell(1).GetComponent<GridCell>();
+
+            placeInTeam.gameObject.SetActive(true);
+            placeInTeam.SetStats();
+            inputManager.UpdateFloatingText(placeInTeam);
+            placeInTeam.transform.position = new Vector3(gridCell.transform.position.x, 0f, gridCell.transform.position.z);
+            gridCell.StoreObject(placeInTeam);
+            gridCell.SetPlacedObject(placeInTeam);
+        }
+        if (inputManager.pOPosition3 != null)
+        {
+            PlacedObject placeInTeam = inputManager.pOPosition3;
+            GridCell gridCell = inputManager.GetGridCell(2).GetComponent<GridCell>();
+
+            placeInTeam.gameObject.SetActive(true);
+            placeInTeam.SetStats();
+            inputManager.UpdateFloatingText(placeInTeam);
+            placeInTeam.transform.position = new Vector3(gridCell.transform.position.x, 0f, gridCell.transform.position.z);
+            gridCell.StoreObject(placeInTeam);
+            gridCell.SetPlacedObject(placeInTeam);
+        }
+        if (inputManager.pOPosition4 != null)
+        {
+            PlacedObject placeInTeam = inputManager.pOPosition4;
+            GridCell gridCell = inputManager.GetGridCell(3).GetComponent<GridCell>();
+
+            placeInTeam.gameObject.SetActive(true);
+            placeInTeam.SetStats();
+            inputManager.UpdateFloatingText(placeInTeam);
+            placeInTeam.transform.position = new Vector3(gridCell.transform.position.x, 0f, gridCell.transform.position.z);
+            gridCell.StoreObject(placeInTeam);
+            gridCell.SetPlacedObject(placeInTeam);
+        }
+        if (inputManager.pOPosition5 != null)
+        {
+            PlacedObject placeInTeam = inputManager.pOPosition5;
+            GridCell gridCell = inputManager.GetGridCell(4).GetComponent<GridCell>();
+
+            placeInTeam.gameObject.SetActive(true);
+            placeInTeam.SetStats();
+            inputManager.UpdateFloatingText(placeInTeam);
+            placeInTeam.transform.position = new Vector3(gridCell.transform.position.x, 0f, gridCell.transform.position.z);
+            gridCell.StoreObject(placeInTeam);
+            gridCell.SetPlacedObject(placeInTeam);
+        }
+        if (inputManager.pOPosition6 != null)
+        {
+            PlacedObject placeInTeam = inputManager.pOPosition6;
+            GridCell gridCell = inputManager.GetGridCell(5).GetComponent<GridCell>();
+
+            placeInTeam.gameObject.SetActive(true);
+            placeInTeam.SetStats();
+            inputManager.UpdateFloatingText(placeInTeam);
+            placeInTeam.transform.position = new Vector3(gridCell.transform.position.x, 0f, gridCell.transform.position.z);
+            gridCell.StoreObject(placeInTeam);
+            gridCell.SetPlacedObject(placeInTeam);
         }
 
-        //int childNumb2 = unitManager.transform.childCount;
-        //Debug.Log(childNumb2);
+        //
+        //for (int i = 0; i <= childNumb - 1; i++)
+        //{
+        //    GridCell gridCell = inputManager.GetGridCell(i).GetComponent<GridCell>();
+        //    PlacedObject placedTeam = null;
 
-        for (int i = 0; i <= childNumb - 1; i++)
-        {
-            GridCell gridCell = inputManager.GetGridCell(i).GetComponent<GridCell>();
-            PlacedObject placedTeam = null;
+        //    if ( i == 0)
+        //    {
+        //        placedTeam = inputManager.pOPosition1;
+        //        Debug.Log("1 " + placedTeam);
+        //    }
+        //    else if( i == 1)
+        //    {
+        //        placedTeam = inputManager.pOPosition2;
+        //        Debug.Log("2" + placedTeam);
+        //    }
+        //    else if ( i == 2)
+        //    {
+        //        placedTeam = inputManager.pOPosition3;
+        //        Debug.Log("3" + placedTeam);
+        //    }
+        //    else if( i == 3)
+        //    {
+        //        placedTeam = inputManager.pOPosition4;
+        //        Debug.Log(placedTeam);
+        //    }    
+        //    else if( i == 4)
+        //    {
+        //        placedTeam = inputManager.pOPosition5;
+        //        Debug.Log(placedTeam);
+        //    }
+        //    else if( i == 5)
+        //    {
+        //        placedTeam = inputManager.pOPosition6;
+        //        Debug.Log(placedTeam);
+        //    }
 
-            if ( i == 0)
-            {
-                placedTeam = inputManager.pOPosition1;
-                Debug.Log("1 " + placedTeam);
-            }
-            else if( i == 1)
-            {
-                placedTeam = inputManager.pOPosition2;
-                Debug.Log("2" + placedTeam);
-            }
-            else if ( i == 2)
-            {
-                placedTeam = inputManager.pOPosition3;
-                Debug.Log("3" + placedTeam);
-            }
-            else if( i == 3)
-            {
-                placedTeam = inputManager.pOPosition4;
-                Debug.Log(placedTeam);
-            }    
-            else if( i == 4)
-            {
-                placedTeam = inputManager.pOPosition5;
-                Debug.Log(placedTeam);
-            }
-            else if( i == 5)
-            {
-                placedTeam = inputManager.pOPosition6;
-                Debug.Log(placedTeam);
-            }
-
-            //gridCell.objectInThisGridSpace = placedTeam;
-            placedTeam.gameObject.SetActive(true);
-            placedTeam.SetStats();
-            inputManager.UpdateFloatingText(placedTeam);
-            placedTeam.transform.position = new Vector3 (gridCell.transform.position.x, 0f, gridCell.transform.position.z);
-            gridCell.StoreObject(placedTeam);
-            gridCell.SetPlacedObject(placedTeam);
-        }
+        //    //gridCell.objectInThisGridSpace = placedTeam;
+        //    placedTeam.gameObject.SetActive(true);
+        //    placedTeam.SetStats();
+        //    inputManager.UpdateFloatingText(placedTeam);
+        //    placedTeam.transform.position = new Vector3 (gridCell.transform.position.x, 0f, gridCell.transform.position.z);
+        //    gridCell.StoreObject(placedTeam);
+        //    gridCell.SetPlacedObject(placedTeam);
+        //}
     }
 
     public void EndOfRound()
@@ -1117,7 +1197,7 @@ public class BattleRound : MonoBehaviour
                         floatingStats.GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
 
                         // rotate spawned pineapple
-                        placedO.transform.GetChild(1).eulerAngles = new Vector3(0f, -180f, 0f);
+                        placedO.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;
 
                         inputManager.levelUpdate.UpdateLevel(placedO);
                         Debug.Log("Summon Pineapple");
@@ -1153,11 +1233,11 @@ public class BattleRound : MonoBehaviour
                         placedO.attack = (Mathf.RoundToInt(placedObject.attack * 0.5f));
                         inputManager.ShowFloatingText(placedO, pos3, false);
 
-                        placedO.transform.GetChild(0).transform.localPosition = new Vector3(0.4f, 0.35f, 0.3f);
-                        placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                        placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+                        placedO.transform.GetChild(0).transform.localPosition = new Vector3 (0.7f, 0.15f, -0.6f);
+                        placedO.transform.GetChild(0).transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
+                        placedO.transform.GetChild(0).GetChild(2).position = new Vector3 (placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
 
-                        placedO.transform.GetChild(1).eulerAngles = new Vector3(0f, 270f, 0f);
+                        placedO.transform.GetChild(1).eulerAngles = new Vector3 (0f, 0f, 0f);
 
                         inputManager.levelUpdate.UpdateLevel(placedO);
                         Debug.Log("Summon Aubergine");
@@ -1514,11 +1594,11 @@ public class BattleRound : MonoBehaviour
         }
         else if (ability == "mini grapes")
         {
-            if (placedObject.health <= 0)
-            {
-                Destroy(placedObject.gameObject);
-                Debug.Log("Mini grape");
-            }
+            //if (placedObject.health <= 0)
+            //{
+            //    Destroy(placedObject.gameObject);
+            //    Debug.Log("Mini grape");
+            //}
         }
         else if (ability == "coconut")
         {

@@ -46,7 +46,7 @@ public class LevelUpdate : MonoBehaviour
         {
             placedObject.transform.GetChild(0).GetChild(2).GetComponent<SpriteRenderer>().sprite = sechsLevel;
         }
-        else if (placedObject.level == 7)
+        else if (placedObject.level >= 7)
         {
             placedObject.transform.GetChild(0).GetChild(2).GetComponent<SpriteRenderer>().sprite = siebenLevel;
         }

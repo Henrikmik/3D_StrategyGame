@@ -292,6 +292,11 @@ public class PlacedObject : MonoBehaviour
         baseAttack += 1;
         //Debug.Log(attack + " " + health);
 
+        if (level > 7)
+        {
+            level = 7;
+        }
+
         if ((level == 4) && (firstLvlUp == false))
         {
             firstLvlUp = true;
@@ -302,6 +307,7 @@ public class PlacedObject : MonoBehaviour
         }
         else if ((level == 7) && (secondLvlUp == false))
         {
+            Debug.Log(level);
             secondLvlUp = true;
             rank = 3;
             // Do things when reaching rank 3

@@ -177,16 +177,20 @@ public class InputManager : MonoBehaviour
         //    StartCoroutine(unitAnimation.AnimationAttack());
         //}
 
-        //if (Input.GetKeyDown(KeyCode.U))
-        //{
-        //    roundCounter = 3;
-        //    shop.ShopReroll();
-        //}
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            roundCounter = 3;
+            shop.ShopReroll();
+        }
 
-        //if (Input.GetKeyDown(KeyCode.G))
-        //{
-        //    gold += 100;
-        //}
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            gold += 200;
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log("pO1 " + pOPosition1 + "\n" + "pO2 " + pOPosition2 + "\n" + "pO3 " + pOPosition3 + "\n" + "pO4" + pOPosition4 + "\n" + "pO5" + pOPosition5 + "\n" + "pO6 " + pOPosition6);
+        }
 
         //if (Input.GetKeyDown(KeyCode.O))
         //{
@@ -405,6 +409,12 @@ public class InputManager : MonoBehaviour
             GameObject gridDestroy = gameGridEnemyS.transform.GetChild(i).gameObject;
             Destroy(gridDestroy);
         }
+
+        int childs = gameGridEnemyS.transform.childCount;
+        for (int i = childs -1; i > 0; i--)
+        {
+            GameObject.Destroy(gameGridEnemyS.transform.GetChild(i).gameObject);
+        }
     }
 
     public void PlaceOnGridCell(GridCell cellMouseIsOver)
@@ -535,7 +545,7 @@ public class InputManager : MonoBehaviour
             pOPosition1 = GetCellObject(0);
             pOPosition2 = GetCellObject(1);
             pOPosition3 = GetCellObject(2);
-            if ((gameGrid.transform.childCount >= 4) && (gameGrid.created2Grid == false))
+            if (gameGrid.created2Grid == false)
             {
                 pOPosition4 = GetCellObject(3);
                 pOPosition5 = GetCellObject(4);
