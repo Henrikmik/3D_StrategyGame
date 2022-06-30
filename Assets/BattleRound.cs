@@ -75,10 +75,10 @@ public class BattleRound : MonoBehaviour
                     CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
                     CheckAbilityDefense(teamObject, unitManager, false);
 
-                    yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(0.5f);
                     CheckAllUnitsOnDefeat(lane);
 
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(0.5f);
                     CheckingGridBattle(lane);
 
                     yield return new WaitForSeconds(0.5f);
@@ -125,10 +125,10 @@ public class BattleRound : MonoBehaviour
                     CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
                     CheckAbilityDefense(teamObject, unitManager, false);
 
-                    yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(0.5f);
                     CheckAllUnitsOnDefeat(lane);
 
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(0.5f);
                     CheckingGridBattle(lane);
 
                     yield return new WaitForSeconds(0.5f);
@@ -173,10 +173,10 @@ public class BattleRound : MonoBehaviour
                     CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
                     CheckAbilityDefense(teamObject, unitManager, false);
 
-                    //yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(0.5f);
                     CheckAllUnitsOnDefeat(lane);
 
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(0.5f);
                     CheckingGridBattle(lane);
 
                     yield return new WaitForSeconds(0.5f);
@@ -1116,7 +1116,8 @@ public class BattleRound : MonoBehaviour
                         floatingStats.transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
                         floatingStats.GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
 
-                        //placedO.transform.GetChild(1).eulerAngles = new Vector3(0f, 0f, 0f);
+                        // rotate spawned pineapple
+                        placedO.transform.GetChild(1).eulerAngles = new Vector3(0f, -180f, 0f);
 
                         inputManager.levelUpdate.UpdateLevel(placedO);
                         Debug.Log("Summon Pineapple");
@@ -1672,6 +1673,10 @@ public class BattleRound : MonoBehaviour
                 if (placedObject.level < 4)
                 {
                     affectedUnit.health -= 2;
+
+                    affectedUnit.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
+                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
+
                     inputManager.UpdateFloatingText(affectedUnit);
                     CheckAbilityDefense(affectedUnit, manager, enemy);
                     //Debug.Log("LEVEL 1 " + affectedUnit);
@@ -1680,6 +1685,10 @@ public class BattleRound : MonoBehaviour
                 if ((placedObject.level >= 4) && (placedObject.level < 7))
                 {
                     affectedUnit.health -= 6;
+
+                    affectedUnit.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
+                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
+
                     inputManager.UpdateFloatingText(affectedUnit);
                     CheckAbilityDefense(affectedUnit, manager, enemy);
                     //Debug.Log("LEVEL 4");
@@ -1687,6 +1696,10 @@ public class BattleRound : MonoBehaviour
                 if (placedObject.level >= 7)
                 {
                     affectedUnit.health -= 12;
+
+                    affectedUnit.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
+                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
+
                     inputManager.UpdateFloatingText(affectedUnit);
                     CheckAbilityDefense(affectedUnit, manager, enemy);
                     //Debug.Log("LEVEL 7");
@@ -1694,19 +1707,19 @@ public class BattleRound : MonoBehaviour
 
                 Debug.Log("Cherry eingesetzt");
 
-                if ((affectedUnit != null) && (affectedUnit.health <= 0))
-                {
-                    if (manager == unitManager)
-                    {
-                        affectedUnit.gameObject.SetActive(false);
-                        //inputManager.GetGridCell(1).GetComponent<GridCell>().UnstoreObject(affectedUnit); ----- wenn objekt unstored wird entsteht bugg mit mini grape
-                    }
-                    else if (manager == enemyManager)
-                    {
-                        affectedUnit.DestroySelf();
-                        //inputManager.GetEnemyCell(1).GetComponent<GridCell>().UnstoreObject(affectedUnit);
-                    }
-                }
+                //if ((affectedUnit != null) && (affectedUnit.health <= 0))
+                //{
+                //    if (manager == unitManager)
+                //    {
+                //        affectedUnit.gameObject.SetActive(false);
+                //        //inputManager.GetGridCell(1).GetComponent<GridCell>().UnstoreObject(affectedUnit); ----- wenn objekt unstored wird entsteht bugg mit mini grape
+                //    }
+                //    else if (manager == enemyManager)
+                //    {
+                //        affectedUnit.DestroySelf();
+                //        //inputManager.GetEnemyCell(1).GetComponent<GridCell>().UnstoreObject(affectedUnit);
+                //    }
+                //}
             }
             else
             {
