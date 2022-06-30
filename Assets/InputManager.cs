@@ -387,11 +387,26 @@ public class InputManager : MonoBehaviour
             // Sets gold to 100
             if (roundCounter >= 3)
             {
-                gold = 210;
+                if(shop.freezedShop == true)
+                {
+                    gold = 200;
+                }
+                else
+                {
+                    gold = 210;
+                }
+                
             }
             else
             {
-                gold = 110;
+                if (shop.freezedShop == true)
+                {
+                    gold = 100;
+                }
+                else
+                {
+                    gold = 110;
+                }
             }
         }
     }              // Sets Canvas to Battle Canvas

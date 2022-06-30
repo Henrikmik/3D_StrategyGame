@@ -726,20 +726,6 @@ public class BattleRound : MonoBehaviour
         Debug.Log("First child count: " + childNumb);
 
         // Destroy Mini grapes and pineapples
-        //for (int i = 0; i < childNumb; i++) 
-        //{
-        //    if ((unitManager.transform.GetChild(i).name == "Mini Grape(Clone)") || (unitManager.transform.GetChild(i).GetComponent<PlacedObject>().ability == "mini grapes"))
-        //    {
-        //        Destroy(unitManager.transform.GetChild(i).gameObject);
-        //        childNumb -= 1;
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //    if (i >= childNumb)
-        //    { Debug.Log("HIHI"); }
-        //}
 
         //
         int childs = unitManager.transform.childCount;
@@ -822,52 +808,6 @@ public class BattleRound : MonoBehaviour
             gridCell.StoreObject(placeInTeam);
             gridCell.SetPlacedObject(placeInTeam);
         }
-
-        //
-        //for (int i = 0; i <= childNumb - 1; i++)
-        //{
-        //    GridCell gridCell = inputManager.GetGridCell(i).GetComponent<GridCell>();
-        //    PlacedObject placedTeam = null;
-
-        //    if ( i == 0)
-        //    {
-        //        placedTeam = inputManager.pOPosition1;
-        //        Debug.Log("1 " + placedTeam);
-        //    }
-        //    else if( i == 1)
-        //    {
-        //        placedTeam = inputManager.pOPosition2;
-        //        Debug.Log("2" + placedTeam);
-        //    }
-        //    else if ( i == 2)
-        //    {
-        //        placedTeam = inputManager.pOPosition3;
-        //        Debug.Log("3" + placedTeam);
-        //    }
-        //    else if( i == 3)
-        //    {
-        //        placedTeam = inputManager.pOPosition4;
-        //        Debug.Log(placedTeam);
-        //    }    
-        //    else if( i == 4)
-        //    {
-        //        placedTeam = inputManager.pOPosition5;
-        //        Debug.Log(placedTeam);
-        //    }
-        //    else if( i == 5)
-        //    {
-        //        placedTeam = inputManager.pOPosition6;
-        //        Debug.Log(placedTeam);
-        //    }
-
-        //    //gridCell.objectInThisGridSpace = placedTeam;
-        //    placedTeam.gameObject.SetActive(true);
-        //    placedTeam.SetStats();
-        //    inputManager.UpdateFloatingText(placedTeam);
-        //    placedTeam.transform.position = new Vector3 (gridCell.transform.position.x, 0f, gridCell.transform.position.z);
-        //    gridCell.StoreObject(placedTeam);
-        //    gridCell.SetPlacedObject(placedTeam);
-        //}
     }
 
     public void EndOfRound()
@@ -1277,8 +1217,12 @@ public class BattleRound : MonoBehaviour
                         placedO.SettingStats();
                         inputManager.ShowFloatingText(placedO, new Vector3(pos3.x + 0.4f, pos3.y + 0.35f, pos3.z + 0.1f), false);
                         
+                        // floating stats
                         placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                         placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+
+                        // lock rotation
+                        placedO.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;
 
                         inputManager.levelUpdate.UpdateLevel(placedO);
                         Debug.Log("spawned mini grape");
@@ -1297,6 +1241,9 @@ public class BattleRound : MonoBehaviour
                         
                         placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                         placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+
+                        // lock rotation
+                        placedO.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;
 
                         inputManager.levelUpdate.UpdateLevel(placedO);
                         Debug.Log("spawned mini grape");
@@ -1320,7 +1267,10 @@ public class BattleRound : MonoBehaviour
                             
                             placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                             placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
-                            
+
+                            // lock rotation
+                            placedO.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;
+
                             inputManager.levelUpdate.UpdateLevel(placedO);
                             Debug.Log("spawned mini grape 2");
                         }
@@ -1343,6 +1293,9 @@ public class BattleRound : MonoBehaviour
                             placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                             placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
                             
+                            // lock rotation
+                            placedO.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;
+
                             inputManager.levelUpdate.UpdateLevel(placedO);
                             Debug.Log("spawned mini grape 2");
                         }
@@ -1367,6 +1320,9 @@ public class BattleRound : MonoBehaviour
                         placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                         placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
 
+                        // lock rotation
+                        placedO.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;
+
                         inputManager.levelUpdate.UpdateLevel(placedO);
                         Debug.Log("spawned mini grape");
 
@@ -1389,7 +1345,10 @@ public class BattleRound : MonoBehaviour
                             
                             placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                             placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
-                            
+
+                            // lock rotation
+                            placedO.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;
+
                             inputManager.levelUpdate.UpdateLevel(placedO);
                             Debug.Log("spawned mini grape 2");
                         }
@@ -1411,7 +1370,10 @@ public class BattleRound : MonoBehaviour
                             
                             placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                             placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
-    
+
+                            // lock rotation
+                            placedO.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;
+
                             inputManager.levelUpdate.UpdateLevel(placedO);
                             Debug.Log("spawned mini grape 2");
                         }
@@ -1786,20 +1748,6 @@ public class BattleRound : MonoBehaviour
                 }
 
                 Debug.Log("Cherry eingesetzt");
-
-                //if ((affectedUnit != null) && (affectedUnit.health <= 0))
-                //{
-                //    if (manager == unitManager)
-                //    {
-                //        affectedUnit.gameObject.SetActive(false);
-                //        //inputManager.GetGridCell(1).GetComponent<GridCell>().UnstoreObject(affectedUnit); ----- wenn objekt unstored wird entsteht bugg mit mini grape
-                //    }
-                //    else if (manager == enemyManager)
-                //    {
-                //        affectedUnit.DestroySelf();
-                //        //inputManager.GetEnemyCell(1).GetComponent<GridCell>().UnstoreObject(affectedUnit);
-                //    }
-                //}
             }
             else
             {
