@@ -11,7 +11,7 @@ public class SceneChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1){
+        if (SceneManager.GetActiveScene().buildIndex == 0){
             if (Input.GetKeyDown(KeyCode.S))
                     {
                         FadeToNextScene();
@@ -22,7 +22,7 @@ public class SceneChanger : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.S))
             {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(1);
             }
         }
     }
