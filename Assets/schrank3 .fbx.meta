@@ -9,6 +9,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: brown_planks_07.001
     second: {fileID: 2100000, guid: 4182d0c99f2eff044ac027c6d7650f84, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: plywood
+    second: {fileID: 2100000, guid: c245859dc3916a448bc50cf2f31bd0c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood_cabinet_worn_long
+    second: {fileID: 2100000, guid: c245859dc3916a448bc50cf2f31bd0c8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
