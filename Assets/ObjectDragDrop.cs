@@ -62,7 +62,14 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                 }
                 else
                 {
-                    inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.red;
+                    if (oldGridCell != null)
+                    {
+                        inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.green;
+                    }
+                    else
+                    {
+                        inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.red;
+                    }
                 }
             }
             else
