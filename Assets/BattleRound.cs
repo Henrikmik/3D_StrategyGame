@@ -1335,8 +1335,10 @@ public class BattleRound : MonoBehaviour
                         inputManager.ShowFloatingText(placedO, new Vector3(pos3.x + 0.4f, pos3.y + 0.35f, pos3.z + 0.1f), false);
                         
                         // floating stats
-                        placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                        placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+                        placedO.transform.GetChild(0).transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
+                        //placedO.transform.GetChild(0).GetChild(2).position = new Vector3 (placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+                        placedO.transform.GetChild(2).position = new Vector3 (placedO.transform.GetChild(2).position.x, placedO.transform.GetChild(2).position.y + 2f, placedO.transform.GetChild(2).position.z);
+                        // /////////////////////////////////////
 
                         // lock rotation
                         placedO.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;

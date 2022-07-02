@@ -144,11 +144,13 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                             visualHolder.GetChild(0).GetComponent<Animator>().enabled = true;
 
                             Transform infoStats = placedObject.transform.GetChild(0);
-                            infoStats.position = new Vector3 (infoStats.position.x + 0.9f, infoStats.position.y + 0.25f, infoStats.position.z + 0.1f);
+                            infoStats.position = new Vector3 (infoStats.position.x + 0.9f, infoStats.position.y + 0.75f, infoStats.position.z + 0.1f);
+                            infoStats.transform.GetChild(2).position = new Vector3 (infoStats.transform.GetChild(2).position.x, infoStats.transform.GetChild(2).position.y - 0.5f, infoStats.transform.GetChild(2).position.z);
                             inputManager.gold -= 30;
                             PlayUnitSound(placedObject.nameA);
                             //Debug.Log("Aus Shop");
                         }
+
                         else
                         {
                             FindObjectOfType<AudioManager>().Play("Error");

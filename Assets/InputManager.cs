@@ -178,16 +178,22 @@ public class InputManager : MonoBehaviour
         //    StartCoroutine(unitAnimation.AnimationAttack());
         //}
 
-        //if (Input.GetKeyDown(KeyCode.U))
-        //{
-        //    roundCounter = 3;
-        //    shop.ShopReroll();
-        //}
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            roundCounter = 3;
+            shop.ShopReroll();
+        }
 
-        //if (Input.GetKeyDown(KeyCode.G))
-        //{
-        //    gold += 200;
-        //}
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            roundCounter = 7;
+            shop.ShopReroll();
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            gold += 200;
+        }
 
         //if (Input.GetKeyDown(KeyCode.T))
         //{
@@ -478,19 +484,16 @@ public class InputManager : MonoBehaviour
         }
         else if (placedObject.level < 7)
         {
-            placedObject.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
+            placedObject.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
         }
         else
         {
-            placedObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            placedObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         }
 
         placedObject.transform.rotation = new Quaternion (0, 0, 0, 0);
         cellMouseIsOver.StoreObject(placedObject);
         cellMouseIsOver.SetPlacedObject(placedObject);
-        //placedObject.transform.GetChild(0).transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
-        //placedObject.transform.GetChild(0).transform.rotation = Quaternion.Euler (40, -55, 0);
-        //placedObject.transform.GetChild(0).GetChild(2).position = new Vector3 (placedObject.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedObject.transform.GetChild(0).GetChild(2).position.z);
     }
 
     public void DragOnGridCellFromShop(GridCell cellMouseIsOver, PlacedObject placedObject)
