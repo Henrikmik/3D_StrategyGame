@@ -21,7 +21,6 @@ public class EnemySets : MonoBehaviour
     public void CreateEnemy(int list, GridCell gridcell, int attackv, int healthv, int levelv)
     {
 
-
         Unit enemy = inputManager.unitList[list];
         Vector2Int enemyPos = gridcell.GetPosition();
         Vector3 enemyPos3 = new Vector3(gridcell.transform.position.x, 0f, gridcell.transform.position.z);
@@ -77,7 +76,7 @@ public class EnemySets : MonoBehaviour
             {
                 CreateEnemy(7, enemyGrid1, 2, 1, 1);    // Tomato
                 CreateEnemy(12, enemyGrid2, 1, 2, 1);   // Broccoli
-                CreateEnemy(11, enemyGrid3, 1, 3, 1);   // Pumpkin
+                CreateEnemy(11, enemyGrid3, 1, 2, 1);   // Pumpkin
             }
             else if (i == 2)    // set 2
             {
@@ -87,14 +86,14 @@ public class EnemySets : MonoBehaviour
             }
             else if (i == 3)     // set 3
             {
-                CreateEnemy(11, enemyGrid1, 1, 3, 1);
+                CreateEnemy(11, enemyGrid1, 1, 2, 1);
                 CreateEnemy(7, enemyGrid2, 2, 1, 1);
                 CreateEnemy(10, enemyGrid3, 2, 2, 1);   // Corn
             }
             else if (i == 4)     // set 3
             {
                 CreateEnemy(10, enemyGrid1, 2, 2, 1);   // Corn
-                CreateEnemy(11, enemyGrid2, 1, 3, 1);
+                CreateEnemy(11, enemyGrid2, 1, 2, 1);
                 CreateEnemy(9, enemyGrid3, 3, 1, 1);    // Aubergine
             }
             else if (i >= 5)     // set 3
@@ -113,18 +112,18 @@ public class EnemySets : MonoBehaviour
             if (i <= 1)         // set 1
             {
                 CreateEnemy(8, enemyGrid1, 2, 2, 1);
-                CreateEnemy(11, enemyGrid2, 2, 6, 1);
+                CreateEnemy(11, enemyGrid2, 2, 5, 1);
                 CreateEnemy(10, enemyGrid3, 4, 4, 1);
             }
             else if (i == 2)    // set 2
             {
                 CreateEnemy(7, enemyGrid1, 4, 2, 1);
-                CreateEnemy(11, enemyGrid2, 2, 6, 1);
+                CreateEnemy(11, enemyGrid2, 2, 5, 1);
                 CreateEnemy(12, enemyGrid3, 2, 4, 1);
             }
             else if (i >= 3)    // set 3
             {
-                CreateEnemy(11, enemyGrid1, 2, 6, 1);
+                CreateEnemy(11, enemyGrid1, 2, 5, 1);
                 CreateEnemy(10, enemyGrid2, 4, 4, 1);
                 CreateEnemy(7, enemyGrid3, 4, 2, 1);
             }
@@ -142,7 +141,7 @@ public class EnemySets : MonoBehaviour
 
                 CreateEnemy(12, enemyGrid4, 4, 6, 1);
                 CreateEnemy(7, enemyGrid5, 6, 4, 1);
-                CreateEnemy(11, enemyGrid6, 3, 8, 1);
+                CreateEnemy(11, enemyGrid6, 3, 7, 1);
             }
             else if (i == 2)    // set 2
             {
@@ -155,13 +154,13 @@ public class EnemySets : MonoBehaviour
             }
             else if (i >= 3)    // set 3
             {
-                CreateEnemy(11, enemyGrid1, 3, 8, 1);    // Pumpkin
+                CreateEnemy(11, enemyGrid1, 3, 7, 1);    // Pumpkin
                 CreateEnemy(12, enemyGrid2, 4, 6, 1);    // Broccoli
                 CreateEnemy(12, enemyGrid3, 4, 6, 1);
 
                 CreateEnemy(8, enemyGrid4, 5, 5, 1);
                 CreateEnemy(7, enemyGrid5, 6, 4, 1);
-                CreateEnemy(11, enemyGrid6, 3, 8, 1);
+                CreateEnemy(11, enemyGrid6, 3, 7, 1);
             }
             else
             {
@@ -172,7 +171,7 @@ public class EnemySets : MonoBehaviour
         {
             if (i <= 1)         // set 1
             {
-                CreateEnemy(11, enemyGrid1, 5, 10, 1);    // Pumpkin
+                CreateEnemy(11, enemyGrid1, 5, 9, 1);    // Pumpkin
                 CreateEnemy(9, enemyGrid2, 10, 5, 4);    // Eggplant -> stats nachfragen
                 CreateEnemy(7, enemyGrid3, 8, 6, 1);
 
@@ -212,13 +211,13 @@ public class EnemySets : MonoBehaviour
                 CreateEnemy(10, enemyGrid1, 10, 10, 4); // Corn
                 CreateEnemy(9, enemyGrid2, 12, 7, 4);   // Eggplant
 
-                CreateEnemy(11, enemyGrid4, 7, 12, 1);  // Pumpkin
+                CreateEnemy(11, enemyGrid4, 7, 11, 1);  // Pumpkin
                 CreateEnemy(10, enemyGrid5, 10, 10, 4); // Corn
                 CreateEnemy(7, enemyGrid6, 10, 8, 1);   // Tomato
             }
             else if (i == 2)    // set 2
             {
-                CreateEnemy(11, enemyGrid1, 7, 12, 4);
+                CreateEnemy(11, enemyGrid1, 7, 11, 4);
                 CreateEnemy(8, enemyGrid2, 9, 9, 4);    // Garlic
 
                 CreateEnemy(12, enemyGrid4, 8, 10, 1);
@@ -243,7 +242,7 @@ public class EnemySets : MonoBehaviour
         {
             if (i <= 1)         // set 1
             {
-                CreateEnemy(11, enemyGrid1, 9, 14, 7);
+                CreateEnemy(11, enemyGrid1, 9, 13, 7);
                 CreateEnemy(7, enemyGrid2, 12, 10, 1);
                 CreateEnemy(12, enemyGrid3, 10, 12, 1);
 
@@ -258,7 +257,7 @@ public class EnemySets : MonoBehaviour
 
                 CreateEnemy(7, enemyGrid4, 12, 10, 1);
                 CreateEnemy(9, enemyGrid5, 14, 9, 4);
-                CreateEnemy(11, enemyGrid6, 9, 14, 4);
+                CreateEnemy(11, enemyGrid6, 9, 13, 4);
             }
             else if (i >= 3)    // set 3
             {
@@ -280,7 +279,7 @@ public class EnemySets : MonoBehaviour
             {
                 CreateEnemy(9, enemyGrid1, 16, 11, 7);
                 CreateEnemy(10, enemyGrid2, 14, 14, 7);
-                CreateEnemy(11, enemyGrid3, 11, 16, 7);
+                CreateEnemy(11, enemyGrid3, 11, 15, 7);
 
                 CreateEnemy(7, enemyGrid4, 14, 12, 1);
                 CreateEnemy(10, enemyGrid5, 14, 14, 7);
@@ -289,21 +288,21 @@ public class EnemySets : MonoBehaviour
             else if (i == 2)    // set 2
             {
                 CreateEnemy(8, enemyGrid1, 13, 13, 7);
-                CreateEnemy(11, enemyGrid2, 11, 16, 7);
+                CreateEnemy(11, enemyGrid2, 11, 15, 7);
                 CreateEnemy(10, enemyGrid3, 14, 14, 7);
 
                 CreateEnemy(12, enemyGrid4, 12, 14, 1);
                 CreateEnemy(9, enemyGrid5, 16, 11, 7);
-                CreateEnemy(11, enemyGrid6, 11, 16, 7);
+                CreateEnemy(11, enemyGrid6, 11, 15, 7);
             }
             else if (i >= 3)    // set 3
             {
-                CreateEnemy(11, enemyGrid1, 11, 16, 7);
+                CreateEnemy(11, enemyGrid1, 11, 15, 7);
                 CreateEnemy(9, enemyGrid2, 16, 11, 7);
                 CreateEnemy(8, enemyGrid3, 13, 13, 7);
 
                 CreateEnemy(7, enemyGrid4, 14, 12, 1);
-                CreateEnemy(11, enemyGrid5, 11, 16, 7);
+                CreateEnemy(11, enemyGrid5, 11, 15, 7);
                 CreateEnemy(10, enemyGrid6, 14, 14, 7);
             }
             else

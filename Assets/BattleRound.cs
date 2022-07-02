@@ -1209,7 +1209,23 @@ public class BattleRound : MonoBehaviour
                         placedO.name = "Mini Grape(Clone)";
                         placedO.ability = "mini grape";
                         placedO.health = 1;
-                        placedO.attack = (Mathf.RoundToInt(placedObject.attack * 0.5f));
+                        if (placedO.level < 4)
+                        {
+                            placedO.attack = (Mathf.RoundToInt(placedObject.attack * 0.5f));
+                        }
+                        else if (placedO.level < 7)
+                        {
+                            placedO.attack = (Mathf.RoundToInt(placedObject.attack * 1f));
+                        }
+                        else if (placedO.level >= 7)
+                        {
+                            placedO.attack = (Mathf.RoundToInt(placedObject.attack * 1.5f));
+                        }
+                        else    // should not happen
+                        {
+                            placedO.attack = (Mathf.RoundToInt(placedObject.attack * 1f));
+                        }
+
                         inputManager.ShowFloatingText(placedO, pos3, false);
 
                         Transform floatingStats = placedO.transform.GetChild(0);
@@ -1252,7 +1268,23 @@ public class BattleRound : MonoBehaviour
                         placedO.name = "Mini Grape(Clone)";
                         placedO.ability = "mini grape";
                         placedO.health = 1;
-                        placedO.attack = (Mathf.RoundToInt(placedObject.attack * 0.5f));
+                        if (placedO.level < 4)
+                        {
+                            placedO.attack = (Mathf.RoundToInt(placedObject.attack * 0.5f));
+                        }
+                        else if (placedO.level < 7)
+                        {
+                            placedO.attack = (Mathf.RoundToInt(placedObject.attack * 1f));
+                        }
+                        else if (placedO.level >= 7)
+                        {
+                            placedO.attack = (Mathf.RoundToInt(placedObject.attack * 1.5f));
+                        }
+                        else    // should not happen
+                        {
+                            placedO.attack = (Mathf.RoundToInt(placedObject.attack * 1f));
+                        }
+
                         inputManager.ShowFloatingText(placedO, pos3, false);
 
                         placedO.transform.GetChild(0).transform.localPosition = new Vector3 (0.7f, 0.15f, -0.6f);
