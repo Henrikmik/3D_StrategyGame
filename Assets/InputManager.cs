@@ -66,6 +66,7 @@ public class InputManager : MonoBehaviour
     public PlacedObject pOPosition6;
 
     public UAnimation unitAnimation;
+    public Material originGridMat;
 
     // Start is called before the first frame update
     void Start()
@@ -177,16 +178,16 @@ public class InputManager : MonoBehaviour
         //    StartCoroutine(unitAnimation.AnimationAttack());
         //}
 
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            roundCounter = 3;
-            shop.ShopReroll();
-        }
+        //if (Input.GetKeyDown(KeyCode.U))
+        //{
+        //    roundCounter = 3;
+        //    shop.ShopReroll();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            gold += 200;
-        }
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    gold += 200;
+        //}
 
         //if (Input.GetKeyDown(KeyCode.T))
         //{

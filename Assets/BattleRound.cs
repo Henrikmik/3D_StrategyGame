@@ -275,7 +275,7 @@ public class BattleRound : MonoBehaviour
                         else
                         {
                             Debug.Log("Draw Draw");
-                            inputManager.roundCounter = 1;
+                            //inputManager.roundCounter = 1;
                             FindObjectOfType<AudioManager>().Play("Draw");
                             //yield return new WaitForSeconds(2f);
 
@@ -286,7 +286,7 @@ public class BattleRound : MonoBehaviour
                     }
                 }
             }
-            if (lane == 2)  // draw resets to same roundCounter // Lose resets to round 1 or main menu
+            if (lane == 2)  // draw + 1 roundCounter // Lose resets to round 1 or main menu
             {
                 // Win
                 if ((gameState == "Win") && (gameState2 == "Win"))
@@ -328,7 +328,7 @@ public class BattleRound : MonoBehaviour
                     // Draw
                     if (inputManager.draws > 0)
                     {
-                        inputManager.roundCounter += 0;
+                        inputManager.roundCounter += 1;
                         FindObjectOfType<AudioManager>().Play("Draw");
                         //yield return new WaitForSeconds(2f);
 
@@ -338,7 +338,7 @@ public class BattleRound : MonoBehaviour
                     }
                     else
                     {
-                        inputManager.roundCounter = 1;
+                        //inputManager.roundCounter = 1;
                         LoseScreen();
 
                         inputManager.draws -= 1;
@@ -440,7 +440,7 @@ public class BattleRound : MonoBehaviour
                 if (inputManager.draws > 0)
                 {
                     Debug.Log("Draw Draw");
-                    inputManager.roundCounter += 0;
+                    inputManager.roundCounter += 1;
                     FindObjectOfType<AudioManager>().Play("Draw");
                     //yield return new WaitForSeconds(2f);
 
@@ -1391,30 +1391,33 @@ public class BattleRound : MonoBehaviour
                             inputManager.levelUpdate.UpdateLevel(placedO);
                             //Debug.Log("spawned mini grape 2");
                         }
-                        else if (inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
+                        else if (inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2) != null)
                         {
-                            GameObject gridCellGameObject2 = inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2);
-                            GridCell gridCell2 = gridCellGameObject2.GetComponent<GridCell>();
-                            Vector2Int pos22 = gridCell2.GetPosition();
-                            Vector3 pos32 = new Vector3(gridCellGameObject2.transform.position.x, 0f, gridCellGameObject2.transform.position.z);
+                            if (inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
+                            {
+                                GameObject gridCellGameObject2 = inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2);
+                                GridCell gridCell2 = gridCellGameObject2.GetComponent<GridCell>();
+                                Vector2Int pos22 = gridCell2.GetPosition();
+                                Vector3 pos32 = new Vector3(gridCellGameObject2.transform.position.x, 0f, gridCellGameObject2.transform.position.z);
 
-                            PlacedObject placedO2 = PlacedObject.Create(pos32, pos22, Unit.Dir.Down, unit);
-                            gridCell2.SetPlacedObject(placedO2);
-                            gridCell2.StoreObject(placedO2);
-                            placedO2.transform.SetParent(manager.transform);
-                            placedO2.SettingStats();
-                            placedO2.attack += 2;
-                            placedO2.health += 2;
-                            inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.4f, pos32.y + 0.35f, pos32.z + 0.1f), false);
-                            
-                            placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                            placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
-                            
-                            // lock rotation
-                            placedO.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;
+                                PlacedObject placedO2 = PlacedObject.Create(pos32, pos22, Unit.Dir.Down, unit);
+                                gridCell2.SetPlacedObject(placedO2);
+                                gridCell2.StoreObject(placedO2);
+                                placedO2.transform.SetParent(manager.transform);
+                                placedO2.SettingStats();
+                                placedO2.attack += 2;
+                                placedO2.health += 2;
+                                inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.4f, pos32.y + 0.35f, pos32.z + 0.1f), false);
 
-                            inputManager.levelUpdate.UpdateLevel(placedO);
-                            //Debug.Log("spawned mini grape 2");
+                                placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                                placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+
+                                // lock rotation
+                                placedO.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;
+
+                                inputManager.levelUpdate.UpdateLevel(placedO);
+                                //Debug.Log("spawned mini grape 2");
+                            }
                         }
                         else
                         {
@@ -1469,30 +1472,33 @@ public class BattleRound : MonoBehaviour
                             inputManager.levelUpdate.UpdateLevel(placedO);
                             //Debug.Log("spawned mini grape 2");
                         }
-                        else if (inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
+                        else if (inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2) != null)
                         {
-                            GameObject gridCellGameObject2 = inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2);
-                            GridCell gridCell2 = gridCellGameObject2.GetComponent<GridCell>();
-                            Vector2Int pos22 = gridCell2.GetPosition();
-                            Vector3 pos32 = new Vector3(gridCellGameObject2.transform.position.x, 0f, gridCellGameObject2.transform.position.z);
+                            if (inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
+                            {
+                                GameObject gridCellGameObject2 = inputManager.GetGridCell(gridCellGameObject.transform.GetSiblingIndex() + 2);
+                                GridCell gridCell2 = gridCellGameObject2.GetComponent<GridCell>();
+                                Vector2Int pos22 = gridCell2.GetPosition();
+                                Vector3 pos32 = new Vector3(gridCellGameObject2.transform.position.x, 0f, gridCellGameObject2.transform.position.z);
 
-                            PlacedObject placedO2 = PlacedObject.Create(pos32, pos22, Unit.Dir.Down, unit);
-                            gridCell2.SetPlacedObject(placedO2);
-                            gridCell2.StoreObject(placedO2);
-                            placedO2.transform.SetParent(manager.transform);
-                            placedO2.SettingStats();
-                            placedO2.attack += 5;   // 6 attack
-                            placedO2.health += 5;   // 6 health
-                            inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.4f, pos32.y + 0.35f, pos32.z + 0.1f), false);
-                            
-                            placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                            placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+                                PlacedObject placedO2 = PlacedObject.Create(pos32, pos22, Unit.Dir.Down, unit);
+                                gridCell2.SetPlacedObject(placedO2);
+                                gridCell2.StoreObject(placedO2);
+                                placedO2.transform.SetParent(manager.transform);
+                                placedO2.SettingStats();
+                                placedO2.attack += 5;   // 6 attack
+                                placedO2.health += 5;   // 6 health
+                                inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.4f, pos32.y + 0.35f, pos32.z + 0.1f), false);
 
-                            // lock rotation
-                            placedO.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;
+                                placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                                placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
 
-                            inputManager.levelUpdate.UpdateLevel(placedO);
-                            //Debug.Log("spawned mini grape 2");
+                                // lock rotation
+                                placedO.transform.GetChild(1).GetComponent<LockRotation>().enabled = true;
+
+                                inputManager.levelUpdate.UpdateLevel(placedO);
+                                //Debug.Log("spawned mini grape 2");
+                            }
                         }
                         else
                         {
@@ -1569,27 +1575,30 @@ public class BattleRound : MonoBehaviour
                             inputManager.levelUpdate.UpdateLevel(placedO);
                             //Debug.Log("spawned mini grape 2");
                         }
-                        else if (inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
+                        else if (inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 2) != null)
                         {
-                            GameObject gridCellGameObject2 = inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 2);
-                            GridCell gridCell2 = gridCellGameObject2.GetComponent<GridCell>();
-                            Vector2Int pos22 = gridCell2.GetPosition();
-                            Vector3 pos32 = new Vector3(gridCellGameObject2.transform.position.x, 0f, gridCellGameObject2.transform.position.z);
+                            if (inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
+                            {
+                                GameObject gridCellGameObject2 = inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 2);
+                                GridCell gridCell2 = gridCellGameObject2.GetComponent<GridCell>();
+                                Vector2Int pos22 = gridCell2.GetPosition();
+                                Vector3 pos32 = new Vector3(gridCellGameObject2.transform.position.x, 0f, gridCellGameObject2.transform.position.z);
 
-                            PlacedObject placedO2 = PlacedObject.Create(pos32, pos22, Unit.Dir.Down, unit);
-                            gridCell2.SetPlacedObject(placedO2);
-                            gridCell2.StoreObject(placedO2);
-                            placedO2.transform.SetParent(manager.transform);
-                            placedO2.SettingStats();
-                            placedO2.attack += 2;
-                            placedO2.health += 2;
-                            inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.3f, pos32.y + 0.35f, pos32.z + 0.1f), false);
-                            
-                            placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                            placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
-                            
-                            inputManager.levelUpdate.UpdateLevel(placedO);
-                            //Debug.Log("spawned mini grape 2");
+                                PlacedObject placedO2 = PlacedObject.Create(pos32, pos22, Unit.Dir.Down, unit);
+                                gridCell2.SetPlacedObject(placedO2);
+                                gridCell2.StoreObject(placedO2);
+                                placedO2.transform.SetParent(manager.transform);
+                                placedO2.SettingStats();
+                                placedO2.attack += 2;
+                                placedO2.health += 2;
+                                inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.3f, pos32.y + 0.35f, pos32.z + 0.1f), false);
+
+                                placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                                placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+
+                                inputManager.levelUpdate.UpdateLevel(placedO);
+                                //Debug.Log("spawned mini grape 2");
+                            }
                         }
                         else
                         {
@@ -1637,27 +1646,30 @@ public class BattleRound : MonoBehaviour
                             inputManager.levelUpdate.UpdateLevel(placedO);
                             //Debug.Log("spawned mini grape 2");
                         }
-                        else if (inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
+                        else if (inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 2) != null)
                         {
-                            GameObject gridCellGameObject2 = inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 2);
-                            GridCell gridCell2 = gridCellGameObject2.GetComponent<GridCell>();
-                            Vector2Int pos22 = gridCell2.GetPosition();
-                            Vector3 pos32 = new Vector3(gridCellGameObject2.transform.position.x, 0f, gridCellGameObject2.transform.position.z);
+                            if (inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 2).GetComponent<GridCell>().objectInThisGridSpace == null)
+                            {
+                                GameObject gridCellGameObject2 = inputManager.GetEnemyCell(gridCellGameObject.transform.GetSiblingIndex() + 2);
+                                GridCell gridCell2 = gridCellGameObject2.GetComponent<GridCell>();
+                                Vector2Int pos22 = gridCell2.GetPosition();
+                                Vector3 pos32 = new Vector3(gridCellGameObject2.transform.position.x, 0f, gridCellGameObject2.transform.position.z);
 
-                            PlacedObject placedO2 = PlacedObject.Create(pos32, pos22, Unit.Dir.Down, unit);
-                            gridCell2.SetPlacedObject(placedO2);
-                            gridCell2.StoreObject(placedO2);
-                            placedO2.transform.SetParent(manager.transform);
-                            placedO2.SettingStats();
-                            placedO2.attack += 5;   // 6 attack
-                            placedO2.health += 5;   // 6 health
-                            inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.3f, pos32.y + 0.35f, pos32.z + 0.1f), false);
-                            
-                            placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                            placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+                                PlacedObject placedO2 = PlacedObject.Create(pos32, pos22, Unit.Dir.Down, unit);
+                                gridCell2.SetPlacedObject(placedO2);
+                                gridCell2.StoreObject(placedO2);
+                                placedO2.transform.SetParent(manager.transform);
+                                placedO2.SettingStats();
+                                placedO2.attack += 5;   // 6 attack
+                                placedO2.health += 5;   // 6 health
+                                inputManager.ShowFloatingText(placedO2, new Vector3(pos32.x + 0.3f, pos32.y + 0.35f, pos32.z + 0.1f), false);
 
-                            inputManager.levelUpdate.UpdateLevel(placedO);
-                            //Debug.Log("spawned mini grape 2");
+                                placedO.transform.GetChild(0).transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                                placedO.transform.GetChild(0).GetChild(2).position = new Vector3(placedO.transform.GetChild(0).GetChild(2).position.x, 1.5f, placedO.transform.GetChild(0).GetChild(2).position.z);
+
+                                inputManager.levelUpdate.UpdateLevel(placedO);
+                                //Debug.Log("spawned mini grape 2");
+                            }
                         }
                         else
                         {
@@ -1814,11 +1826,10 @@ public class BattleRound : MonoBehaviour
         if (ability == "cherry")
         {
             //Debug.Log("Cherry");
-            int numberOfUnitsOnField = NumberOfUnitsOnField(enemy);
-            //Debug.Log(numberOfUnitsOnField);
-            //if (manager.transform.GetChild(1) != null)
-            if (numberOfUnitsOnField > 1)
-            {
+            //int numberOfUnitsOnField = NumberOfUnitsOnField(enemy);
+
+            //if (numberOfUnitsOnField > 1)
+            //{
                 PlacedObject affectedUnit = null;
 
                 if (manager == unitManager)
@@ -1826,13 +1837,19 @@ public class BattleRound : MonoBehaviour
                     //Debug.Log(placedObject.transform.position.x);
                     if (placedObject.transform.position.x >= 2)
                     {
-                        affectedUnit = inputManager.GetCellObject(4).GetComponent<PlacedObject>();
-                        //Debug.Log("LANE 2");
+                        if (inputManager.GetCellObject(4) != null)
+                        {
+                            affectedUnit = inputManager.GetCellObject(4).GetComponent<PlacedObject>();
+                            //Debug.Log("LANE 2");
+                        }
                     }
                     else
                     {
-                        //Debug.Log("LANE 1");
-                        affectedUnit = inputManager.GetCellObject(1).GetComponent<PlacedObject>();
+                        if (inputManager.GetCellObject(1) != null)
+                        {
+                            //Debug.Log("LANE 1");
+                            affectedUnit = inputManager.GetCellObject(1).GetComponent<PlacedObject>();
+                        }
                     }
                 }
                 else if (manager == enemyManager)
@@ -1840,15 +1857,19 @@ public class BattleRound : MonoBehaviour
                     //Debug.Log(placedObject.transform.position.x);
                     if (placedObject.transform.position.x >= 2)
                     {
+                        if (inputManager.GetEnemyObject(4) != null)
                         //Debug.Log("LANE 2");
                         affectedUnit = inputManager.GetEnemyObject(4).GetComponent<PlacedObject>();
                     }
                     else
                     {
+                        if (inputManager.GetEnemyObject(1) != null)
                         //Debug.Log("LANE 1");
                         affectedUnit = inputManager.GetEnemyObject(1).GetComponent<PlacedObject>();
                     }  
                 }
+                if (affectedUnit != null)
+                {
                 if (placedObject.level < 4)
                 {
                     affectedUnit.health -= 2;
@@ -1883,13 +1904,15 @@ public class BattleRound : MonoBehaviour
                     CheckAbilityDefense(affectedUnit, manager, enemy);
                     //Debug.Log("LEVEL 7");
                 }
+            }
+                
 
                 //Debug.Log("Cherry eingesetzt");
-            }
-            else
-            {
-                //Debug.Log("No Target");
-            }
+            //}
+            //else
+            //{
+            //    //Debug.Log("No Target");
+            //}
         }
         else
         {

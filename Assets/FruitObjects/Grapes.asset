@@ -23,7 +23,7 @@ MonoBehaviour:
   health: 2
   level: 1
   cost: 3
-  abilityName: Got Eaten
+  abilityName: Angry Grape
   abilityDescription1: Summon 1 angry 1/1 single grape
   abilityDescription2: Summon 2 angry 3/3 single grapes
   abilityDescription3: Summon 2 angry 6/6 single grapes

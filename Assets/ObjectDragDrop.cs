@@ -17,6 +17,8 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
     private Vector3 origin;
     private GridCell oldGridCell;
+    private GridCell oldCell;
+
     void Start()
     {
         if (Camera.main.GetComponent<PhysicsRaycaster>() == null)
@@ -44,6 +46,36 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
             //Debug.Log("OnDrag");
         }
+
+        if (inputManager.IsMouseOverAGridSpace() != false)
+        {
+            if (oldCell != null)
+            {
+                oldCell.GetComponent<MeshRenderer>().material.color = Color.black;
+            }
+
+            if (inputManager.IsMouseOverAGridSpace().isOccupied == true)
+            {
+                if ((eventData.button == PointerEventData.InputButton.Right) && (inputManager.IsMouseOverAGridSpace().objectInThisGridSpace.name == transform.GetComponent<PlacedObject>().name))
+                {
+                    inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.yellow;
+                }
+                else
+                {
+                    inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.red;
+                }
+            }
+            else
+            {
+                inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.green;
+            }
+            oldCell = inputManager.IsMouseOverAGridSpace();
+        }
+
+        if (inputManager.IsMouseOverAGridSpace() != oldCell)
+        {
+            oldCell.GetComponent<MeshRenderer>().material.color = Color.black;
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -59,6 +91,11 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (oldCell != null)
+        {
+            oldCell.GetComponent<MeshRenderer>().material.color = Color.black;
+        }
+
         if (inputManager.battleOn != true)
         {
             // Do stuff when draggin ends.
