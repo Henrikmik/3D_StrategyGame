@@ -35,7 +35,7 @@ public class BattleRound : MonoBehaviour
         while (true)
         {
             CheckingGridBattle(lane);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
             CheckingGameState(lane);
 
             if (lane == 1)
@@ -76,9 +76,10 @@ public class BattleRound : MonoBehaviour
                     CheckAbilityDefense(teamObject, unitManager, false);
 
                     yield return new WaitForSeconds(1f);
+                    //yield return new WaitForSeconds(0.8f);
                     CheckAllUnitsOnDefeat(lane);
 
-                    yield return new WaitForSeconds(0.5f);
+                    //yield return new WaitForSeconds(0.5f);
                     CheckingGridBattle(lane);
 
                     CheckingGameState(lane);
@@ -1754,9 +1755,9 @@ public class BattleRound : MonoBehaviour
 
                 //Debug.Log(placedObject.transform.GetSiblingIndex());
 
-                if (numberOfUnitsOnField <= 1)
+                if (numberOfUnitsOnField < 1)
                 {
-                    //Debug.Log("No unit to buff");
+                    Debug.Log("No unit to buff");
                 }
                 else
                 {
@@ -1765,7 +1766,7 @@ public class BattleRound : MonoBehaviour
                         randomOption = Random.Range(0, unitManager.transform.childCount);
                         buffedUnit = unitManager.transform.GetChild(randomOption).gameObject;
                     }
-                    while ((randomOption2 == placedObject.transform.GetSiblingIndex()) || (buffedUnit.activeInHierarchy == false))
+                    while ((randomOption2 == placedObject.transform.GetSiblingIndex()) || (buffedUnit2.activeInHierarchy == false))
                     {
                         randomOption2 = Random.Range(0, unitManager.transform.childCount);
                         buffedUnit2 = unitManager.transform.GetChild(randomOption2).gameObject;
@@ -1816,6 +1817,7 @@ public class BattleRound : MonoBehaviour
                         buffedUnit2.transform.GetChild(3).gameObject.SetActive(true);
                         //Debug.Log("lemon ability: " + buffedUnit2);
                     }
+                    Debug.Log(buffedUnit);
                 }
             }
         }
