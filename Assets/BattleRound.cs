@@ -1882,7 +1882,7 @@ public class BattleRound : MonoBehaviour
                     affectedUnit.health -= 2;
 
                     affectedUnit.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
-                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
+                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = "2";
 
                     inputManager.UpdateFloatingText(affectedUnit);
                     CheckAbilityDefense(affectedUnit, manager, enemy);
@@ -1894,7 +1894,7 @@ public class BattleRound : MonoBehaviour
                     affectedUnit.health -= 6;
 
                     affectedUnit.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
-                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
+                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = "6";
 
                     inputManager.UpdateFloatingText(affectedUnit);
                     CheckAbilityDefense(affectedUnit, manager, enemy);
@@ -1905,7 +1905,7 @@ public class BattleRound : MonoBehaviour
                     affectedUnit.health -= 12;
 
                     affectedUnit.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
-                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = placedObject.attack.ToString();
+                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = "12";
 
                     inputManager.UpdateFloatingText(affectedUnit);
                     CheckAbilityDefense(affectedUnit, manager, enemy);
