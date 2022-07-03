@@ -1755,7 +1755,7 @@ public class BattleRound : MonoBehaviour
 
                 //Debug.Log(placedObject.transform.GetSiblingIndex());
 
-                if (numberOfUnitsOnField < 1)
+                if (numberOfUnitsOnField <= 1)
                 {
                     Debug.Log("No unit to buff");
                 }
@@ -1944,6 +1944,22 @@ public class BattleRound : MonoBehaviour
         if ((CheckObjectInGridCell(2, enemy) != null) && (CheckObjectInGridCell(1, enemy).gameObject.activeInHierarchy == true))
         {
             numberOfUnitsOnField += 1;
+        }
+
+        if (inputManager.roundCounter >= 3)
+        {
+            if ((CheckObjectInGridCell(3, enemy) != null) && (CheckObjectInGridCell(3, enemy).gameObject.activeInHierarchy == true))
+            {
+                numberOfUnitsOnField += 1;
+            }
+            if ((CheckObjectInGridCell(4, enemy) != null) && (CheckObjectInGridCell(4, enemy).gameObject.activeInHierarchy == true))
+            {
+                numberOfUnitsOnField += 1;
+            }
+            if ((CheckObjectInGridCell(5, enemy) != null) && (CheckObjectInGridCell(5, enemy).gameObject.activeInHierarchy == true))
+            {
+                numberOfUnitsOnField += 1;
+            }
         }
         return numberOfUnitsOnField;
     }
