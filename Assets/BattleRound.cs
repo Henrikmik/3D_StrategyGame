@@ -368,6 +368,7 @@ public class BattleRound : MonoBehaviour
                             UnitMove(5, 2, true);
                         }
                         lane = 3;
+                        FindObjectOfType<AudioManager>().Play("WarBrass");
                         yield return new WaitForSeconds(2f);
                     }
                 }
@@ -391,6 +392,7 @@ public class BattleRound : MonoBehaviour
                             UnitMove(2, 5, true);
                         }
                         lane = 4;
+                        FindObjectOfType<AudioManager>().Play("WarBrass");
                         yield return new WaitForSeconds(2f);
                     }
                 }
