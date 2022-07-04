@@ -54,27 +54,63 @@ public class ObjectDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                 oldCell.GetComponent<MeshRenderer>().material.color = Color.black;
             }
 
-            if (inputManager.IsMouseOverAGridSpace().isOccupied == true)
+            if (inputManager.IsMouseOverAGridSpace().isOccupied == true)   // grid is occupied
             {
                 if ((eventData.button == PointerEventData.InputButton.Right) && (inputManager.IsMouseOverAGridSpace().objectInThisGridSpace.name == transform.GetComponent<PlacedObject>().name))
                 {
-                    inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.yellow;
+                    if (oldGridCell != null)    // already on field
+                    {
+                        inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.yellow;
+                        //Debug.Log("Case 1");
+                    }
+                    else    // from shop
+                    {
+                        if (inputManager.gold < 30)
+                        {
+                            inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.red;
+                            //Debug.Log("Case 2");
+                        }
+                        else
+                        {
+                            inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.yellow;
+                            //Debug.Log("Case 3");
+                        }
+                    }
                 }
                 else
                 {
-                    if (oldGridCell != null)
+                    if (oldGridCell != null) // already on field
                     {
                         inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.green;
+                        //Debug.Log("Case 4");
                     }
-                    else
+                    else    // from shop
                     {
                         inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.red;
+                        //Debug.Log("Case 5");
                     }
                 }
             }
-            else
+            else    // grid is not occupied
             {
-                inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.green;
+                if (oldGridCell != null)    // already on field
+                {
+                    inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.green;
+                    //Debug.Log("Case 6");
+                }
+                else
+                {
+                    if (inputManager.gold < 30)
+                    {
+                        inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.red;
+                        //Debug.Log("Case 7");
+                    }
+                    else
+                    {
+                        inputManager.IsMouseOverAGridSpace().GetComponent<MeshRenderer>().material.color = Color.green;
+                        //Debug.Log("Case 8");
+                    }
+                }
             }
             oldCell = inputManager.IsMouseOverAGridSpace();
         }
