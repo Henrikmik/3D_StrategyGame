@@ -75,11 +75,11 @@ public class BattleRound : MonoBehaviour
                     CheckAbilityAttack(enemy, unitManager, false);   // überprüft ability vom Angreifer
                     CheckAbilityDefense(teamObject, unitManager, false);
 
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(1.2f);
                     //yield return new WaitForSeconds(0.8f);
                     CheckAllUnitsOnDefeat(lane);
 
-                    //yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.2f);
                     CheckingGridBattle(lane);
 
                     CheckingGameState(lane);
