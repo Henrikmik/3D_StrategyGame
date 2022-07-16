@@ -24,6 +24,6 @@ MonoBehaviour:
   level: 1
   cost: 3
   abilityName: Sacrifice
-  abilityDescription1: Give Friend behind +2/+1
-  abilityDescription2: Give adjacent friends +3/+2
-  abilityDescription3: Give adjacent friends +5/+4
+  abilityDescription1: 'Got Eaten: Give Friend behind +2/+1'
+  abilityDescription2: 'Got Eaten: Give adjacent friends +3/+2'
+  abilityDescription3: 'Got Eaten: Give adjacent friends +5/+4'

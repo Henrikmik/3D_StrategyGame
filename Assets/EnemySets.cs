@@ -242,7 +242,7 @@ public class EnemySets : MonoBehaviour
         {
             if (i <= 1)         // set 1
             {
-                CreateEnemy(11, enemyGrid1, 9, 13, 7);
+                CreateEnemy(11, enemyGrid1, 9, 13, 4);
                 CreateEnemy(7, enemyGrid2, 12, 10, 1);
                 CreateEnemy(12, enemyGrid3, 10, 12, 1);
 

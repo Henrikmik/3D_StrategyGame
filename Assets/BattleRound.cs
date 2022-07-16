@@ -1883,7 +1883,7 @@ public class BattleRound : MonoBehaviour
                 {
                 if (placedObject.level < 4)
                 {
-                    affectedUnit.health -= 2;
+                    affectedUnit.health -= (Mathf.RoundToInt(placedObject.attack * 0.5f));
 
                     affectedUnit.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
                     affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = "2";
@@ -1895,7 +1895,7 @@ public class BattleRound : MonoBehaviour
                 }
                 if ((placedObject.level >= 4) && (placedObject.level < 7))
                 {
-                    affectedUnit.health -= 6;
+                    affectedUnit.health -= (Mathf.RoundToInt(placedObject.attack * 0.75f));
 
                     affectedUnit.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
                     affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = "6";
@@ -1906,7 +1906,7 @@ public class BattleRound : MonoBehaviour
                 }
                 if (placedObject.level >= 7)
                 {
-                    affectedUnit.health -= 12;
+                    affectedUnit.health -= (Mathf.RoundToInt(placedObject.attack * 1));
 
                     affectedUnit.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
                     affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = "12";
