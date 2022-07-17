@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class BattleRound : MonoBehaviour
@@ -897,23 +898,30 @@ public class BattleRound : MonoBehaviour
 
     public void EndOfRound()
     {
-        inputManager.battleOn = false;
-        inputManager.UpdateCanvas(2);
-        inputManager.DestroyField();
-        gameState = null;
-        gameState2 = null;
-        finalGameState = null;
-        SetUpBuyingPhase();
-        inputManager.shop.ShopReroll();
-
-        if (inputManager.draws == 0)
+        if (inputManager.roundCounter >= 8)
         {
-            inputManager.drawsO.SetActive(false);
+            SceneManager.LoadScene("Outro");
         }
+        else
+        {
+            inputManager.battleOn = false;
+            inputManager.UpdateCanvas(2);
+            inputManager.DestroyField();
+            gameState = null;
+            gameState2 = null;
+            finalGameState = null;
+            SetUpBuyingPhase();
+            inputManager.shop.ShopReroll();
 
-        //Deactivate Battletheme, Play Buytheme
-        buytheme.SetActive(true);
-        battletheme.SetActive(false);
+            if (inputManager.draws == 0)
+            {
+                inputManager.drawsO.SetActive(false);
+            }
+
+            //Deactivate Battletheme, Play Buytheme
+            buytheme.SetActive(true);
+            battletheme.SetActive(false);
+        }
     }
 
     private void LoseScreen()
