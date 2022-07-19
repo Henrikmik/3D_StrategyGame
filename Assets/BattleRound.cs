@@ -1219,22 +1219,25 @@ public class BattleRound : MonoBehaviour
                         placedO.SettingStats();
                         placedO.name = "Mini Grape(Clone)";
                         placedO.ability = "mini grape";
-                        placedO.health = 1;
-                        if (placedO.level < 4)
+                        if (placedObject.level < 4)
                         {
                             placedO.attack = (Mathf.RoundToInt(placedObject.attack * 0.5f));
+                            placedO.health = (Mathf.RoundToInt(placedObject.baseHealth * 0.25f));
                         }
-                        else if (placedO.level < 7)
+                        else if (placedObject.level < 7)
                         {
                             placedO.attack = (Mathf.RoundToInt(placedObject.attack * 1f));
+                            placedO.health = (Mathf.RoundToInt(placedObject.baseHealth * 0.5f));
                         }
-                        else if (placedO.level >= 7)
+                        else if (placedObject.level >= 7)
                         {
-                            placedO.attack = (Mathf.RoundToInt(placedObject.attack * 1.5f));
+                            placedO.attack = (Mathf.RoundToInt(placedObject.attack * 2f));
+                            placedO.health = (Mathf.RoundToInt(placedObject.baseHealth * 1f));
                         }
                         else    // should not happen
                         {
                             placedO.attack = (Mathf.RoundToInt(placedObject.attack * 1f));
+                            placedO.health = (Mathf.RoundToInt(placedObject.baseHealth * 1f));
                         }
 
                         inputManager.ShowFloatingText(placedO, pos3, false);
@@ -1279,21 +1282,25 @@ public class BattleRound : MonoBehaviour
                         placedO.name = "Mini Grape(Clone)";
                         placedO.ability = "mini grape";
                         placedO.health = 1;
-                        if (placedO.level < 4)
+                        if (placedObject.level < 4)
                         {
                             placedO.attack = (Mathf.RoundToInt(placedObject.attack * 0.5f));
+                            placedO.health = (Mathf.RoundToInt(placedObject.baseHealth * 0.25f));
                         }
-                        else if (placedO.level < 7)
+                        else if (placedObject.level < 7)
                         {
                             placedO.attack = (Mathf.RoundToInt(placedObject.attack * 1f));
+                            placedO.health = (Mathf.RoundToInt(placedObject.baseHealth * 0.5f));
                         }
-                        else if (placedO.level >= 7)
+                        else if (placedObject.level >= 7)
                         {
-                            placedO.attack = (Mathf.RoundToInt(placedObject.attack * 1.5f));
+                            placedO.attack = (Mathf.RoundToInt(placedObject.attack * 2f));
+                            placedO.health = (Mathf.RoundToInt(placedObject.baseHealth * 1f));
                         }
                         else    // should not happen
                         {
                             placedO.attack = (Mathf.RoundToInt(placedObject.attack * 1f));
+                            placedO.health = (Mathf.RoundToInt(placedObject.baseHealth * 1f));
                         }
 
                         inputManager.ShowFloatingText(placedO, pos3, false);

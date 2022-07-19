@@ -92,10 +92,6 @@ public class InputManager : MonoBehaviour
         GridCell cellMouseIsOver = IsMouseOverAGridSpace();
         PlacedObject hoveredObject = IsMouseOverAplacedobject();
 
-        if (roundCounter >= 8)
-        {
-            SceneManager.LoadScene("Outro");
-        }
 
         if (battleOn != true)
         {
@@ -190,10 +186,10 @@ public class InputManager : MonoBehaviour
         //    shop.ShopReroll();
         //}
 
-        //if (Input.GetKeyDown(KeyCode.G))
-        //{
-        //    gold += 200;
-        //}
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            gold += 200;
+        }
 
         //if (Input.GetKeyDown(KeyCode.T))
         //{
