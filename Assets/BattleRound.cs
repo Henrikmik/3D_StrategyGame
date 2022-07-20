@@ -1901,7 +1901,7 @@ public class BattleRound : MonoBehaviour
                     affectedUnit.health -= (Mathf.RoundToInt(placedObject.attack * 0.5f));
 
                     affectedUnit.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
-                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = "2";
+                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = (Mathf.RoundToInt(placedObject.attack * 0.5f)).ToString();
 
                     inputManager.UpdateFloatingText(affectedUnit);
                     CheckAbilityDefense(affectedUnit, manager, enemy);
@@ -1913,7 +1913,7 @@ public class BattleRound : MonoBehaviour
                     affectedUnit.health -= (Mathf.RoundToInt(placedObject.attack * 0.75f));
 
                     affectedUnit.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
-                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = "6";
+                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = (Mathf.RoundToInt(placedObject.attack * 0.75f)).ToString();
 
                     inputManager.UpdateFloatingText(affectedUnit);
                     CheckAbilityDefense(affectedUnit, manager, enemy);
@@ -1924,7 +1924,7 @@ public class BattleRound : MonoBehaviour
                     affectedUnit.health -= (Mathf.RoundToInt(placedObject.attack * 1));
 
                     affectedUnit.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
-                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = "12";
+                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = (Mathf.RoundToInt(placedObject.attack * 1f)).ToString();
 
                     inputManager.UpdateFloatingText(affectedUnit);
                     CheckAbilityDefense(affectedUnit, manager, enemy);
@@ -1942,7 +1942,6 @@ public class BattleRound : MonoBehaviour
         }
         else
         {
-            //Debug.Log("No ability");
         }
     }
 

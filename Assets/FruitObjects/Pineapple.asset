@@ -24,9 +24,6 @@ MonoBehaviour:
   level: 1
   cost: 3
   abilityName: Summon
-  abilityDescription1: 'Got Eaten: Summonn this unit at the end of lane with 50%
-    ATK and 1 HP'
-  abilityDescription2: 'Got Eaten: Summon this unit at the end of the lane wiith
-    100% ATK and 1 HP'
-  abilityDescription3: 'Got Eaten: Summon this unit at the end of lane with 200%
-    ATK and 1 HP'
+  abilityDescription1: 'Got Eaten: Summon at end of lane with 50% ATK and 25% HP'
+  abilityDescription2: 'Got Eaten: Summon at end of lane with 100% ATK and 50% HP'
+  abilityDescription3: 'Got Eaten: Summon at end of lane with 200% ATK and 100% HP'
