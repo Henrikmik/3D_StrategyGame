@@ -1898,15 +1898,21 @@ public class BattleRound : MonoBehaviour
                 {
                 if (placedObject.level < 4)
                 {
-                    affectedUnit.health -= (Mathf.RoundToInt(placedObject.attack * 0.5f));
-
                     affectedUnit.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
-                    affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = (Mathf.RoundToInt(placedObject.attack * 0.5f)).ToString();
+
+                    if ((Mathf.RoundToInt(placedObject.attack * 0.5f)) < 1f)
+                    {
+                        affectedUnit.health -= 1;
+                        affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = "1";
+                    }
+                    else
+                    {
+                        affectedUnit.health -= (Mathf.RoundToInt(placedObject.attack * 0.5f));
+                        affectedUnit.transform.GetChild(0).GetChild(3).GetComponentInChildren<TMP_Text>().text = (Mathf.RoundToInt(placedObject.attack * 0.5f)).ToString();
+                    }
 
                     inputManager.UpdateFloatingText(affectedUnit);
                     CheckAbilityDefense(affectedUnit, manager, enemy);
-                    //Debug.Log("LEVEL 1 " + affectedUnit);
-                    //Debug.Log(affectedUnit.health);
                 }
                 if ((placedObject.level >= 4) && (placedObject.level < 7))
                 {
